@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { reactLocalStorage } from 'reactjs-localstorage';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import Icon from '@material-ui/core/Icon';
+import Tooltip from '@material-ui/core/Tooltip';
 import MainLinks from './ListLinks';
 import Logo from '../assets/logo.png';
 
@@ -17,9 +18,11 @@ const styles = theme => ({
     display: 'none'
   },
   drawerPaper: {
-    position: 'fixed',
+    position: 'relative',
     whiteSpace: 'nowrap',
+    height: '100%',
     width: drawerWidth,
+    overflow: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -37,6 +40,18 @@ const styles = theme => ({
     },
   },
   toolbar: {
+    position: 'fixed',
+    overflow: 'hidden',
+    width: theme.typography.pxToRem('72'),
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  toolbarOpen: {
+    width: drawerWidth
+  },
+  toolbarHeader: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'left',
@@ -59,11 +74,12 @@ const styles = theme => ({
 
 class Topbar extends Component {
   state = {
-    open: false
+    isMenuOpen: JSON.parse(reactLocalStorage.get('isMenuOpen', false))
   }
 
   handleDrawerToggle = () => {
-    this.setState({ open: !this.state.open });
+    this.setState({ isMenuOpen: !this.state.isMenuOpen })
+    reactLocalStorage.set('isMenuOpen', !this.state.isMenuOpen)
   }
 
   render() {
@@ -72,22 +88,26 @@ class Topbar extends Component {
     return (
       <Drawer
         variant="permanent"
+        anchor="left"
         classes={{
-          paper: classNames(classes.drawerPaper, !this.state.open && classes.drawerPaperClose),
+          paper: classNames(classes.drawerPaper, !this.state.isMenuOpen && classes.drawerPaperClose),
         }}
-        open={this.state.open}
+        open={this.state.isMenuOpen}
       >
-        <div className={classes.toolbar}>
-          <IconButton disableRipple={!this.state.open && true} onClick={this.handleDrawerToggle} color="inherit" aria-label="toggle drawer" className={classNames(!this.state.open && classes.buttonLogoNormal)}>
-            <Icon className={classNames(!this.state.open && classes.hide)}>chevron_left</Icon>
-            <img src={Logo} alt="logo.png" width="48" className={classNames(this.state.open && classes.hide)} />
-          </IconButton>
-          <Typography variant="subheading" color="inherit" className={classes.toolbarTitle}>
-            Altcoins Sale
-          </Typography>
+        <div className={classNames(classes.toolbar, this.state.isMenuOpen && classes.toolbarOpen)}>
+          <Tooltip title="Expand menu" placement="right">
+            <div className={classes.toolbarHeader}>
+              <IconButton disableRipple onClick={this.handleDrawerToggle} aria-label="toggle drawer" className={classNames(classes.buttonLogoNormal)}>
+                <img src={Logo} alt="logo.png" width="48" />
+              </IconButton>
+              <Typography variant="subheading" className={classes.toolbarTitle}>
+                Altcoins Sale
+              </Typography>
+            </div>
+          </Tooltip>
+          <Divider />
+          <MainLinks />
         </div>
-        <Divider />
-        <MainLinks />
       </Drawer>
     );
   }
@@ -96,6 +116,6 @@ class Topbar extends Component {
 Topbar.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
-};
+}
 
 export default withStyles(styles, { withTheme: true })(Topbar);

@@ -10,7 +10,9 @@
     "react-parallax": "^1.7.0",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
-    "redux": "^4.0.0"
+    "reactjs-localstorage": "^0.0.6",
+    "redux": "^4.0.0",
+    "redux-localstorage": "^0.4.1"
   },
   "scripts": {
     "start": "react-scripts start",

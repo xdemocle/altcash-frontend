@@ -34,16 +34,26 @@ const theme = createMuiTheme({
 
 const styles = theme => ({
   root: {
+    flexGrow: 1,
+  },
+  appFrame: {
     zIndex: 1,
     overflow: 'hidden',
-    position: 'relative'
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+    minHeight: '100vh'
   },
   content: {
+    flexGrow: 1,
     overflow: 'hidden',
-    minHeight: 'calc(100vh - ' + theme.spacing.unit * 3 * 2 + 'px - 36px)',
-    marginLeft: theme.typography.pxToRem('72'),
+    minHeight: 'calc(100vh - 36px)',
+    paddingBottom: theme.typography.pxToRem('36'),
+    // marginLeft: theme.typography.pxToRem('72'),
     [theme.breakpoints.only('xs')]: {
-      marginLeft: 0
+      minHeight: 'calc(100vh - 56px)',
+      paddingBottom: theme.typography.pxToRem('56'),
+      // marginLeft: 0
     },
   },
 })
@@ -57,24 +67,28 @@ class App extends Component {
         <Router>
           <div className={classes.root}>
             <CssBaseline />
-            <Hidden xsDown>
-              <Topbar />
-            </Hidden>
+            <div className={classes.appFrame}>
 
-            <main className={classes.content}>
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route path="/about" component={About} />
-              </Switch>
-            </main>
+              <Hidden xsDown>
+                <Topbar />
+              </Hidden>
 
-            <Hidden xsDown>
-              <Bottombar />
-            </Hidden>
+              <main className={classes.content}>
+                <Switch>
+                  <Route exact path="/" component={Landing} />
+                  <Route path="/about" component={About} />
+                </Switch>
+              </main>
 
-            <Hidden smUp>
-              <BottomNav />
-            </Hidden>
+              <Hidden xsDown>
+                <Bottombar />
+              </Hidden>
+
+              <Hidden smUp>
+                <BottomNav />
+              </Hidden>
+
+            </div>
           </div>
         </Router>
       </MuiThemeProvider>

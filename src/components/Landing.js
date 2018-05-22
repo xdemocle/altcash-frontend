@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import { Parallax } from 'react-parallax';
 import Button from '@material-ui/core/Button';
@@ -16,7 +17,11 @@ const styles = theme => ({
     flexGrow: 1,
   },
   gridContainer: {
-    backgroundColor: '#fff'
+    padding: '6rem 1.5rem',
+    textAlign: 'center',
+    [theme.breakpoints.only('xs')]: {
+      padding: '2rem 1.5rem',
+    },
   },
   gridOverlayItem: {
     backgroundColor: 'rgba(255, 255, 255, 0.85)',
@@ -24,19 +29,24 @@ const styles = theme => ({
     color: '#232323'
   },
   parallaxContent: {
-    padding: 20,
     position: 'absolute',
     top: '50%',
     left: '0',
     width: '100%',
+    padding: '3rem 1.5rem',
     transform: 'translate(0,-50%)',
     color: theme.palette.primary.contrastText,
-    textAlign: 'center'
+    textAlign: 'center',
+    [theme.breakpoints.only('xs')]: {
+      position: 'static',
+      transform: 'none',
+      padding: '2rem 1.5rem',
+    },
   },
   paper: {
     padding: theme.spacing.unit * 2,
-    textAlign: 'center',
     color: theme.palette.text.secondary,
+    textAlign: 'center'
   },
   typographyMainTitle: {
     fontWeight: 700,
@@ -68,7 +78,7 @@ function Landing(props) {
   return (
     <div className={classes.root}>
       <Parallax bgImage={image1} strength={300} bgStyle={{top: '-5%'}}>
-        <div style={{height: '65vh'}}>
+        <div style={{minHeight: '65vh'}}>
           <div className={classes.parallaxContent}>
             <Typography variant="display3" gutterBottom color="inherit" className={classNames(classes.typographyShadow, classes.typographyMainTitle)}>
               Altcoins Sale
@@ -77,7 +87,7 @@ function Landing(props) {
               Buy crypto coins fast and easy in South Africa!
             </Typography>
             <hr className={classes.heroDivider} />
-            <Button variant="raised" color="primary" size="large" className={classes.ctoButton}>
+            <Button variant="raised" color="primary" size="large" className={classes.ctoButton} component={Link} to="/buy">
               Buy Altcoins now
             </Button>
           </div>
@@ -85,17 +95,17 @@ function Landing(props) {
       </Parallax>
 
       <Grid className={classes.gridContainer} container alignContent="center" justify="center">
-        <Grid item xs={12} sm={12} style={{padding: '5rem 1.5rem', textAlign: 'center'}}>
+        <Grid item xs={12}>
           <Typography variant="display1" gutterBottom color="primary" align="center">
             The best way to start investing in crypto currencies!
           </Typography>
           <Typography variant="subheading" gutterBottom color="secondary" align="center">
             A new service for South Africans to buy crypto coins with credit card and bank transfer.
           </Typography>
-          <Typography variant="subheading" color="secondary" align="center">
+          <Typography variant="subheading" gutterBottom color="secondary" align="center">
             Fast, anonymous and easy instant buying.
           </Typography>
-          <Button variant="raised" color="secondary" size="small" className={classes.ctoButton}>
+          <Button variant="raised" color="secondary" size="large" className={classes.ctoButton} component={Link} to="/buy">
             Buy Altcoins now
           </Button>
         </Grid>
@@ -127,10 +137,10 @@ function Landing(props) {
       </Grid>
       
       <Parallax bgImage={image2} strength={300} bgStyle={{top: '-20%'}}>
-        <div style={{height: 450}}>
+        <div style={{minHeight: '45vh'}}>
           <div className={classes.parallaxContent}>
             <Grid container alignContent="center" justify="center">
-              <Grid item xs={10} sm={5} md={4} lg={3} className={classes.gridOverlayItem}>
+              <Grid item xs={12} sm={5} md={4} lg={3} className={classes.gridOverlayItem}>
                 <Typography variant="title" gutterBottom color="primary" align="center">
                   Company info
                 </Typography>
@@ -138,7 +148,7 @@ function Landing(props) {
                   Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
                 </Typography>
               </Grid>
-              <Grid item xs={10} sm={5} md={4} lg={3} className={classes.gridOverlayItem}>
+              <Grid item xs={12} sm={5} md={4} lg={3} className={classes.gridOverlayItem}>
                 <Typography variant="title" gutterBottom color="primary" align="center">
                   Contact Us
                 </Typography>

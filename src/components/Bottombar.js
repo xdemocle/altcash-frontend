@@ -6,20 +6,22 @@ import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
   root: {
-    width: 'auto',
+    // width: 'auto',
     boxShadow: 'none',
     padding: '.5rem 1.5rem',
-    marginLeft: '4.56rem',
-    [theme.breakpoints.only('xs')]: {
-      marginLeft: 0
-    },
+    top: 'auto',
+    bottom: 0
+    // marginLeft: '4.56rem',
+    // [theme.breakpoints.only('xs')]: {
+    //   marginLeft: 0
+    // },
   }
 });
 
 function SimpleAppBar(props) {
   const { classes } = props;
   return (
-    <AppBar position="static" color="secondary" className={classes.root}>
+    <AppBar position="absolute" color="secondary" className={classes.root}>
       <Typography variant="body1" color="inherit" align="right">
         &copy; Alts.sale { new Date().getFullYear() }
       </Typography>

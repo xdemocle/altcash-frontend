@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
@@ -10,16 +11,17 @@ const styles = {
     position: 'fixed',
     bottom: 0,
     width: '100%',
-  },
-};
+  }
+}
 
 class SimpleBottomNavigation extends React.Component {
   state = {
-    value: 0,
+    value: this.props.location.pathname
   };
 
   handleChange = (event, value) => {
-    this.setState({ value });
+    this.props.history.push(value)
+    this.setState({ value })
   };
 
   render() {
@@ -33,9 +35,10 @@ class SimpleBottomNavigation extends React.Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Recents" icon={<Icon>restore</Icon>} />
-        <BottomNavigationAction label="Favorites" icon={<Icon>favorite</Icon>} />
-        <BottomNavigationAction label="Nearby" icon={<Icon>location_on</Icon>} />
+        <BottomNavigationAction label="Home" icon={<Icon>home</Icon>} value="/" />
+        <BottomNavigationAction label="Buy" icon={<Icon>shopping_basket</Icon>} value="/buy" />
+        <BottomNavigationAction label="Support" icon={<Icon>contact_support</Icon>} value="/support" />
+        {/* <BottomNavigationAction label="About" icon={<Icon>people</Icon>} value="/about" /> */}
       </BottomNavigation>
     );
   }
@@ -45,4 +48,5 @@ SimpleBottomNavigation.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(SimpleBottomNavigation);
+export default withStyles(styles)(withRouter(SimpleBottomNavigation));
+
