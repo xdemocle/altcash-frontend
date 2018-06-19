@@ -49,4 +49,3 @@ SimpleBottomNavigation.propTypes = {
 };
 
 export default withStyles(styles)(withRouter(SimpleBottomNavigation));
-

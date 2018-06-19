@@ -4581,6 +4581,10 @@ media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
 
+mediaquery@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/mediaquery/-/mediaquery-0.0.3.tgz#387d61c10aa95ff4d6907f6aabdd22d7a898e03e"
+
 mem@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/mem/-/mem-1.1.0.tgz#5edd52b485ca1d900fe64895505399a0dfa45f76"
@@ -6079,6 +6083,12 @@ reduce-function-call@^1.0.1:
 redux-localstorage@^0.4.1:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/redux-localstorage/-/redux-localstorage-0.4.1.tgz#faf6d719c581397294d811473ffcedee065c933c"
+
+redux-responsive@^4.3.7:
+  version "4.3.7"
+  resolved "https://registry.yarnpkg.com/redux-responsive/-/redux-responsive-4.3.7.tgz#1ee477fb348c16c86e2a86d247ae7280679bbc1f"
+  dependencies:
+    mediaquery "0.0.3"
 
 redux@^4.0.0:
   version "4.0.0"

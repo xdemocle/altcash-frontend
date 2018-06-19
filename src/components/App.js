@@ -8,8 +8,8 @@ import Topbar from './Topbar';
 import BottomNav from './BottomNav';
 import Bottombar from './Bottombar';
 
-import Landing from './Landing';
-import About from './About';
+import Landing from '../components/Landing/Landing';
+import About from '../components/About/About';
 
 const theme = createMuiTheme({
   palette: {

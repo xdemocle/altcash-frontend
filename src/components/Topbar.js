@@ -26,7 +26,7 @@ const styles = theme => ({
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-    }),
+    })
   },
   drawerPaperClose: {
     overflowX: 'hidden',
@@ -37,7 +37,7 @@ const styles = theme => ({
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up('sm')]: {
       width: theme.spacing.unit * 9,
-    },
+    }
   },
   toolbar: {
     position: 'fixed',

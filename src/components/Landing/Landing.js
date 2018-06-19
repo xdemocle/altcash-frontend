@@ -9,8 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import Icon from '@material-ui/core/Icon';
 import Tooltip from '@material-ui/core/Tooltip';
 import Typography from '@material-ui/core/Typography';
-import image1 from '../assets/hero.jpg';
-import image2 from '../assets/section.jpg';
+import image1 from '../../assets/hero.jpg';
+import image2 from '../../assets/section.jpg';
 
 const styles = theme => ({
   root: {
@@ -140,7 +140,7 @@ function Landing(props) {
         <div style={{minHeight: '45vh'}}>
           <div className={classes.parallaxContent}>
             <Grid container alignContent="center" justify="center">
-              <Grid item xs={12} sm={5} md={4} lg={3} className={classes.gridOverlayItem}>
+              <Grid item xs={12} sm={5} lg={4} className={classes.gridOverlayItem}>
                 <Typography variant="title" gutterBottom color="primary" align="center">
                   Company info
                 </Typography>
@@ -148,7 +148,7 @@ function Landing(props) {
                   Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
                 </Typography>
               </Grid>
-              <Grid item xs={12} sm={5} md={4} lg={3} className={classes.gridOverlayItem}>
+              <Grid item xs={12} sm={5} lg={4} className={classes.gridOverlayItem}>
                 <Typography variant="title" gutterBottom color="primary" align="center">
                   Contact Us
                 </Typography>
@@ -158,11 +158,16 @@ function Landing(props) {
                 <Typography variant="body1" color="inherit" align="left">
                   <Tooltip title="ONLY Whatsapp messages" placement="top">
                     <Button variant="flat" size="small" href="https://api.whatsapp.com/send?phone=34604367510&text=Hello%20Alts.sale%20Customer%20Care">
-                      <Icon className={classes.leftIcon}>phone</Icon> +27 777 867 5309
+                      <Icon className={classes.leftIcon}>chat</Icon> Whatsapp: +27 777 867 5309
                     </Button>
                   </Tooltip>
-                  <Button variant="flat" size="small">
-                    <Icon className={classes.leftIcon}>mail</Icon> Send a message
+                  <Tooltip title="Send a message on Telegram" placement="top">
+                    <Button variant="flat" size="small" href="">
+                      <Icon className={classes.leftIcon}>chat</Icon> Telegram: Alts.sale
+                    </Button>
+                  </Tooltip>
+                  <Button variant="flat" size="small" href="">
+                    <Icon className={classes.leftIcon}>mail</Icon> Send e-mail
                   </Button>
                 </Typography>
               </Grid>
