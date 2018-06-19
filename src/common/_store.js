@@ -1,3 +1,6 @@
+/**
+ * Main file for the app store
+ */
 import {createStore} from 'redux'
 import {responsiveStoreEnhancer} from 'redux-responsive'
 import rootReducer from './_reducers'

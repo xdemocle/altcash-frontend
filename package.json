@@ -1,5 +1,6 @@
 {
   "name": "alts-sale",
+  "description": "Alts sale is a platform for selling your crypto currencies directly connected to your exchanger API.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,3 +1,7 @@
+/**
+ * Main file for global styling
+ * (most of styling is per component and not declared here)
+ */
 html,
 body {
   min-height: 100vh
