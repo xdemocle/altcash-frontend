@@ -11,5 +11,5 @@ export default combineReducers({
     medium: 960,
     large: 1280,
     extraLarge: 1920
-}),
+  })
 })
