@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import Topbar from './Topbar';
+import Sidebar from './Sidebar';
 import BottomNav from './BottomNav';
 import Bottombar from './Bottombar';
 
@@ -69,9 +69,7 @@ class App extends Component {
             <CssBaseline />
             <div className={classes.appFrame}>
 
-              <Hidden xsDown>
-                <Topbar />
-              </Hidden>
+              <Sidebar />
 
               <main className={classes.content}>
                 <Switch>
