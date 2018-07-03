@@ -26,18 +26,18 @@ const styles = theme => ({
     overflow: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
+      duration: theme.transitions.duration.enteringScreen
     })
   },
   drawerPaperClose: {
     overflowX: 'hidden',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
+      duration: theme.transitions.duration.leavingScreen
     }),
     width: theme.spacing.unit * 7,
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9,
+      width: theme.spacing.unit * 9
     }
   },
   toolbar: {
@@ -46,8 +46,8 @@ const styles = theme => ({
     width: theme.typography.pxToRem('72'),
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
+      duration: theme.transitions.duration.enteringScreen
+    })
   },
   toolbarOpen: {
     width: drawerWidth
@@ -58,20 +58,20 @@ const styles = theme => ({
     justifyContent: 'left',
     padding: '0 .8rem',
     [theme.breakpoints.only('xs')]: {
-      padding: '0 .2rem',
+      padding: '0 .2rem'
     },
-    ...theme.mixins.toolbar,
+    ...theme.mixins.toolbar
   },
   toolbarTitle: {
     margin: '0 1.2rem',
     [theme.breakpoints.only('xs')]: {
-      margin: '0 1.1rem',
+      margin: '0 1.1rem'
     }
   },
   buttonLogoNormal: {
     backgroundColor: 'transparent !important'
   }
-});
+})
 
 class Sidebar extends Component {
   state = {
@@ -90,7 +90,7 @@ class Sidebar extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes } = this.props
 
     return (
       <Hidden xsDown>
@@ -101,7 +101,7 @@ class Sidebar extends Component {
             paper: classNames(classes.drawerPaper, !this.state.isMenuOpen && classes.drawerPaperClose)
           }}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true // Better open performance on mobile.
           }}
           open={this.state.isMenuOpen}
         >
@@ -121,13 +121,12 @@ class Sidebar extends Component {
           </div>
         </Drawer>
       </Hidden>
-    );
+    )
   }
 }
 
 Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(Sidebar);
+export default withStyles(styles, { withTheme: true })(Sidebar)

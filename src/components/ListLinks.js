@@ -1,15 +1,15 @@
 // This file is shared across the project
-import React from 'react';
+import React from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Icon from '@material-ui/core/Icon';
-import Tooltip from '@material-ui/core/Tooltip';
-import Divider from '@material-ui/core/Divider';
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import Icon from '@material-ui/core/Icon'
+import Tooltip from '@material-ui/core/Tooltip'
+import Divider from '@material-ui/core/Divider'
 
 const styles = {
   // popper: {
@@ -21,7 +21,7 @@ const styles = {
 }
 
 function MainLinks(props) {
-  const { classes } = props;
+  const { classes } = props
 
   return (
     <List component="nav" className={classes.nav}>
@@ -63,11 +63,11 @@ function MainLinks(props) {
         </ListItem>
       </Tooltip>
     </List>
-  );
+  )
 }
 
 MainLinks.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
+  classes: PropTypes.object.isRequired
+}
 
-export default withStyles(styles)(MainLinks);
+export default withStyles(styles)(MainLinks)

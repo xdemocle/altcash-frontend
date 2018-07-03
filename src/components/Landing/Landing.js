@@ -1,27 +1,27 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import { Link } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles';
-import { Parallax } from 'react-parallax';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import Icon from '@material-ui/core/Icon';
-import Tooltip from '@material-ui/core/Tooltip';
-import Typography from '@material-ui/core/Typography';
-import image1 from '../../assets/hero.jpg';
-import image2 from '../../assets/section.jpg';
+import { withStyles } from '@material-ui/core/styles'
+import { Parallax } from 'react-parallax'
+import Button from '@material-ui/core/Button'
+import Grid from '@material-ui/core/Grid'
+import Icon from '@material-ui/core/Icon'
+import Tooltip from '@material-ui/core/Tooltip'
+import Typography from '@material-ui/core/Typography'
+import image1 from '../../assets/hero.jpg'
+import image2 from '../../assets/section.jpg'
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   gridContainer: {
     padding: '6rem 1.5rem',
     textAlign: 'center',
     [theme.breakpoints.only('xs')]: {
-      padding: '2rem 1.5rem',
-    },
+      padding: '2rem 1.5rem'
+    }
   },
   gridOverlayItem: {
     backgroundColor: 'rgba(255, 255, 255, 0.85)',
@@ -40,8 +40,8 @@ const styles = theme => ({
     [theme.breakpoints.only('xs')]: {
       position: 'static',
       transform: 'none',
-      padding: '2rem 1.5rem',
-    },
+      padding: '2rem 1.5rem'
+    }
   },
   paper: {
     padding: theme.spacing.unit * 2,
@@ -68,12 +68,12 @@ const styles = theme => ({
     lineHeight: 'normal'
   },
   leftIcon: {
-    marginRight: theme.spacing.unit,
-  },
-});
+    marginRight: theme.spacing.unit
+  }
+})
 
 function Landing(props) {
-  const { classes } = props;
+  const { classes } = props
 
   return (
     <div className={classes.root}>
@@ -109,31 +109,6 @@ function Landing(props) {
             Buy Altcoins now
           </Button>
         </Grid>
-
-        {/*<Grid item xs={12} sm={3} style={{padding: '1rem'}}>
-          <Typography variant="title" gutterBottom color="inherit" align="center">
-            Material Design
-          </Typography>
-          <Typography variant="body1" gutterBottom color="inherit" align="center">
-            Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={3} style={{padding: '1rem'}}>
-          <Typography variant="title" gutterBottom color="inherit" align="center">
-            Fast development
-          </Typography>
-          <Typography variant="body1" gutterBottom color="inherit" align="center">
-            Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={3} style={{padding: '1rem'}}>
-          <Typography variant="title" gutterBottom color="inherit" align="center">
-            Completely Open Sourced
-          </Typography>
-          <Typography variant="body1" gutterBottom color="inherit" align="center">
-            Cras facilisis mi vitae nunc lobortis pharetra. Nulla volutpat tincidunt ornare. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nullam in aliquet odio. Aliquam eu est vitae tellus bibendum tincidunt. Suspendisse potenti.
-          </Typography>
-        </Grid> */}
       </Grid>
 
       <Parallax bgImage={image2} strength={300} bgStyle={{top: '-20%'}}>
@@ -176,12 +151,11 @@ function Landing(props) {
         </div>
       </Parallax>
     </div>
-  );
+  )
 }
 
 Landing.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
+  classes: PropTypes.object.isRequired
+}
 
-export default withStyles(styles, { withTheme: true })(Landing);
+export default withStyles(styles, { withTheme: true })(Landing)
