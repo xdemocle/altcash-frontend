@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { reactLocalStorage } from 'reactjs-localstorage'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
@@ -74,30 +73,16 @@ const styles = theme => ({
   }
 });
 
-const mapStateToProps = (state) => ({
-  browser: state.browser
-})
-
 class Sidebar extends Component {
   state = {
     isMenuOpen: JSON.parse(reactLocalStorage.get('isMenuOpen', false))
   }
 
-  componentDidMount() {
-    if (this.props.browser.lessThan.large) {
-      this.setState({ isMenuOpen: false })
-    }
-  }
+  // componentDidMount() {
+  // }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.browser.lessThan.large !== prevProps.browser.lessThan.large) {
-      if (this.props.browser.lessThan.large) {
-        this.setState({ isMenuOpen: false })
-      } else {
-        this.setState({ isMenuOpen: true })
-      }
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  // }
 
   handleDrawerToggle = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen })
@@ -145,4 +130,4 @@ Sidebar.propTypes = {
   theme: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles, { withTheme: true })(connect(mapStateToProps) (Sidebar));
+export default withStyles(styles, { withTheme: true })(Sidebar);

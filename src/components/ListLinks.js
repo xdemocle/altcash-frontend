@@ -42,7 +42,7 @@ function MainLinks(props) {
           <ListItemText disableTypography primary="Buy Crypto Coins" />
         </ListItem>
       </Tooltip>
-      
+
       <Divider />
 
       <Tooltip title="About Us" placement="right">
