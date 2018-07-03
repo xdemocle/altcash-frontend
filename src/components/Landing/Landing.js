@@ -53,7 +53,7 @@ const styles = theme => ({
     textTransform: 'uppercase'
   },
   typographyShadow: {
-    textShadow: '1px 1px 1px rgba(0,0,0,0.35)'    
+    textShadow: '1px 1px 1px rgba(0,0,0,0.35)'
   },
   heroDivider: {
     background: '#fff',
@@ -109,7 +109,7 @@ function Landing(props) {
             Buy Altcoins now
           </Button>
         </Grid>
-        
+
         {/*<Grid item xs={12} sm={3} style={{padding: '1rem'}}>
           <Typography variant="title" gutterBottom color="inherit" align="center">
             Material Design
@@ -135,7 +135,7 @@ function Landing(props) {
           </Typography>
         </Grid> */}
       </Grid>
-      
+
       <Parallax bgImage={image2} strength={300} bgStyle={{top: '-20%'}}>
         <div style={{minHeight: '45vh'}}>
           <div className={classes.parallaxContent}>
