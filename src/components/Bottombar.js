@@ -1,8 +1,8 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Typography from '@material-ui/core/Typography';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Typography from '@material-ui/core/Typography'
 
 const styles = theme => ({
   root: {
@@ -16,22 +16,22 @@ const styles = theme => ({
     //   marginLeft: 0
     // },
   }
-});
+})
 
 function SimpleAppBar(props) {
-  const { classes } = props;
+  const { classes } = props
   return (
     <AppBar position="absolute" color="secondary" className={classes.root}>
       <Typography variant="body1" color="inherit" align="right">
-        &copy; Alts.sale { new Date().getFullYear() }
+        &copy Alts.sale { new Date().getFullYear() }
       </Typography>
     </AppBar>
-  );
+  )
 }
 
 SimpleAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired
-};
+  classes: PropTypes.object.isRequired
+  // theme: PropTypes.object.isRequired
+}
 
-export default withStyles(styles, { withTheme: true })(SimpleAppBar);
+export default withStyles(styles, { withTheme: true })(SimpleAppBar)
