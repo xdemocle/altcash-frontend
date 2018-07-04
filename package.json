@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "standard && node scripts/test.js --env=jsdom",
+    "test": "node scripts/test.js --env=jsdom",
+    "standard-eslint": "node_modules/.bin/standard 'src/**/*.js'",
     "graphql-deploy": "cd graphcool && graphcool deploy"
   },
   "dependencies": {
@@ -106,7 +107,12 @@
       "jsx",
       "node",
       "mjs"
-    ]
+    ],
+    "globals": {
+      "window": true,
+      "browser": true,
+      "localStorage": true
+    }
   },
   "babel": {
     "presets": [
