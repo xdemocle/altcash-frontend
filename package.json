@@ -3,6 +3,7 @@
   "description": "Alts sale is a platform for selling your crypto currencies directly connected to your exchanger API.",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "https://rocco.me/stealth-stack/",
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
