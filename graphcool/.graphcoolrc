@@ -1,0 +1,3 @@
+targets:
+  sandbox: shared-eu-west-1/cjj71t3v94zjs0110qulaqo8n
+  default: sandbox

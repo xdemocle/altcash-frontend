@@ -12,6 +12,7 @@ import ReactDOM from 'react-dom'
 import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { persistCache } from 'apollo-cache-persist'
 import { withClientState } from 'apollo-link-state'
 import { HttpLink } from 'apollo-link-http'
 import { onError } from 'apollo-link-error'
@@ -23,9 +24,16 @@ import './index.css'
 import App from './components/App'
 import registerServiceWorker from './registerServiceWorker'
 
-// This is the same cache you pass into new ApolloClient
+// This is the same cache you pass into new ApolloClient and we going to use
+// it also for local state.
 const cache = new InMemoryCache()
 
+persistCache({
+  cache,
+  storage: window.localStorage
+})
+
+// Initialize the local state manager
 const stateLink = withClientState({
   cache,
   resolvers: {
@@ -44,6 +52,7 @@ const stateLink = withClientState({
   }
 })
 
+// Initialize Apollo client with cache and state
 const client = new ApolloClient({
   cache,
   link: ApolloLink.from([
@@ -63,8 +72,7 @@ const client = new ApolloClient({
       }
     }),
     new HttpLink({
-      uri: 'https://api.graph.cool/simple/v1/cjivxqlm74emw0117gxlsnhuh'
-      // credentials: 'same-origin'
+      uri: 'https://api.graph.cool/simple/v1/cjj71t3v94zjs0110qulaqo8n'
     })
   ])
 })
@@ -73,7 +81,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <App />
   </ApolloProvider>,
-  document.getElementById('app')
+  document.getElementById('root')
 )
 
 registerServiceWorker()
