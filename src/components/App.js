@@ -65,7 +65,7 @@ class App extends Component {
 
     return (
       <MuiThemeProvider theme={theme}>
-        <Router>
+        <Router basename={'/stealth-stack'}>
           <div className={classes.root}>
             <CssBaseline />
             <div className={classes.appFrame}>
