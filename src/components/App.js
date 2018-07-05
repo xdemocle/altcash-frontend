@@ -1,6 +1,9 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { ApolloProvider } from 'react-apollo'
+import apolloClient from '../graphql/apollo-client'
+import { persistCacheInstance } from '../graphql/apollo-cache'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -60,37 +63,59 @@ const styles = theme => ({
 })
 
 class App extends Component {
+  state = {
+    loaded: false
+  }
+
+  async componentDidMount() {
+    try {
+      await persistCacheInstance
+    } catch (error) {
+      console.error('Error restoring Apollo cache', error)
+    }
+
+    this.setState({
+      loaded: true
+    })
+  }
+
   render() {
     const { classes } = this.props
 
+    if (!this.state.loaded) {
+      return <div>Loading...</div>
+    }
+
     return (
-      <MuiThemeProvider theme={theme}>
-        <Router basename={'/stealth-stack'}>
-          <div className={classes.root}>
-            <CssBaseline />
-            <div className={classes.appFrame}>
+      <ApolloProvider client={apolloClient}>
+        <MuiThemeProvider theme={theme}>
+          <Router basename={'/stealth-stack'}>
+            <div className={classes.root}>
+              <CssBaseline />
+              <div className={classes.appFrame}>
 
-              <Sidebar />
+                <Sidebar />
 
-              <main className={classes.content}>
-                <Switch>
-                  <Route exact path="/" component={Landing} />
-                  <Route path="/about" component={About} />
-                </Switch>
-              </main>
+                <main className={classes.content}>
+                  <Switch>
+                    <Route exact path="/" component={Landing} />
+                    <Route path="/about" component={About} />
+                  </Switch>
+                </main>
 
-              <Hidden xsDown>
-                <Bottombar />
-              </Hidden>
+                <Hidden xsDown>
+                  <Bottombar />
+                </Hidden>
 
-              <Hidden smUp>
-                <BottomNav />
-              </Hidden>
+                <Hidden smUp>
+                  <BottomNav />
+                </Hidden>
 
+              </div>
             </div>
-          </div>
-        </Router>
-      </MuiThemeProvider>
+          </Router>
+        </MuiThemeProvider>
+      </ApolloProvider>
     )
   }
 }

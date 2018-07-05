@@ -1,14 +1,19 @@
+/* eslint-disable no-debugger */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { reactLocalStorage } from 'reactjs-localstorage'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
+import compose from 'recompose/compose'
+import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
 import Drawer from '@material-ui/core/Drawer'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Hidden from '@material-ui/core/Hidden'
 import Tooltip from '@material-ui/core/Tooltip'
+import { graphql } from 'react-apollo'
+import { UPDATE_IS_SIDEBAR_OPEN } from '../graphql/mutations.js'
+import { GET_APP } from '../graphql/queries.js'
 import MainLinks from './ListLinks'
 import Logo from '../assets/logo.png'
 
@@ -74,19 +79,24 @@ const styles = theme => ({
 })
 
 class Sidebar extends Component {
-  state = {
-    isMenuOpen: JSON.parse(reactLocalStorage.get('isMenuOpen', false))
+  componentDidMount() {
+    if (isWidthDown('md', this.props.width)) {
+      this.props.updateIsSidebarOpen(false)
+    }
   }
 
-  // componentDidMount() {
-  // }
-
-  // componentDidUpdate(prevProps) {
-  // }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.width !== nextProps.width) {
+      if (isWidthDown('md', nextProps.width)) {
+        this.props.updateIsSidebarOpen(false)
+      } else {
+        this.props.updateIsSidebarOpen(true)
+      }
+    }
+  }
 
   handleDrawerToggle = () => {
-    this.setState({ isMenuOpen: !this.state.isMenuOpen })
-    reactLocalStorage.set('isMenuOpen', !this.state.isMenuOpen)
+    this.props.updateIsSidebarOpen(!this.props.app.isSidebarOpen)
   }
 
   render() {
@@ -98,15 +108,15 @@ class Sidebar extends Component {
           variant="permanent"
           anchor="left"
           classes={{
-            paper: classNames(classes.drawerPaper, !this.state.isMenuOpen && classes.drawerPaperClose)
+            paper: classNames(classes.drawerPaper, !this.props.app.isSidebarOpen && classes.drawerPaperClose)
           }}
           ModalProps={{
             keepMounted: true // Better open performance on mobile.
           }}
-          open={this.state.isMenuOpen}
+          open={this.props.app.isSidebarOpen}
         >
-          <div className={classNames(classes.toolbar, this.state.isMenuOpen && classes.toolbarOpen)}>
-            <Tooltip title={`${this.state.isMenuOpen ? 'Collapse' : 'Expand'} sidebar`} placement="right">
+          <div className={classNames(classes.toolbar, this.props.app.isSidebarOpen && classes.toolbarOpen)}>
+            <Tooltip title={`${this.props.app.isSidebarOpen ? 'Collapse' : 'Expand'} sidebar`} placement="right">
               <div className={classes.toolbarHeader}>
                 <IconButton disableRipple onClick={this.handleDrawerToggle} aria-label="toggle drawer" className={classNames(classes.buttonLogoNormal)}>
                   <img src={Logo} alt="logo.png" width="48" />
@@ -126,7 +136,27 @@ class Sidebar extends Component {
 }
 
 Sidebar.propTypes = {
-  classes: PropTypes.object.isRequired
+  updateIsSidebarOpen: PropTypes.func.isRequired,
+  app: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
+  width: PropTypes.string.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(Sidebar)
+const SidebarEnhanced = compose(
+  withWidth(),
+  withStyles(styles, { withTheme: true }),
+  graphql(UPDATE_IS_SIDEBAR_OPEN, {
+    props: ({ mutate }) => ({
+      updateIsSidebarOpen: isSidebarOpen => mutate({ variables: { isSidebarOpen } })
+    })
+  }),
+  graphql(GET_APP, {
+    props: ({ data: { app } }) => {
+      return {
+        app
+      }
+    }
+  })
+)(Sidebar)
+
+export default SidebarEnhanced
