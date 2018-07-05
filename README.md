@@ -2,6 +2,8 @@
 
 Alts sale is a platform for selling your crypto currencies directly connected to your exchanger API.
 
+[![Build Status](https://semaphoreci.com/api/v1/xdemocle/stealth-stack/branches/with-apollo/badge.svg)](https://semaphoreci.com/xdemocle/stealth-stack)
+
 # Project disclaimer
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) but is hardly modified by Rocco to use redux for store management and to host a more large scale app architecture.
