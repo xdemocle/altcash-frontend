@@ -14,7 +14,7 @@ class About extends Component {
 
     return (
       <div className={classes.root}>
-        <h1 className="display-3">About Me</h1>
+        <h1 className="display-3">About</h1>
         <p>kblhb bhk bhk bhbh  bhb l bk kb </p>
         <p>kblhb bhk bhk bhbh  bhb l bk kb </p>
         <p>kblhb bhk bhk bhbh  bhb l bk kb </p>

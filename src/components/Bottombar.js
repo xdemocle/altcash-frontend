@@ -23,7 +23,7 @@ function SimpleAppBar(props) {
   return (
     <AppBar position="absolute" color="secondary" className={classes.root}>
       <Typography variant="body1" color="inherit" align="right">
-        &copy Alts.sale { new Date().getFullYear() }
+        &copy; Alts.sale { new Date().getFullYear() }
       </Typography>
     </AppBar>
   )
@@ -31,7 +31,6 @@ function SimpleAppBar(props) {
 
 SimpleAppBar.propTypes = {
   classes: PropTypes.object.isRequired
-  // theme: PropTypes.object.isRequired
 }
 
 export default withStyles(styles, { withTheme: true })(SimpleAppBar)
