@@ -1,5 +1,5 @@
 {
-  "name": "altssale-backend",
+  "name": "stealth-stack-backend",
   "version": "1.0.0",
-  "description": "Graphcool service for altssale web application"
+  "description": "Graphcool service for stealth-stack web application"
 }
