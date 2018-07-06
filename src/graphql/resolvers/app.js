@@ -20,7 +20,13 @@ const updateIsSidebarOpen = (_, { isSidebarOpen }, { cache }) => {
   return null
 }
 
-export {
-  app,
-  updateIsSidebarOpen
+export default {
+  defaults: {
+    app
+  },
+  resolvers: {
+    Mutation: {
+      updateIsSidebarOpen
+    }
+  }
 }
