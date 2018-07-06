@@ -20,7 +20,13 @@ const updateNetworkStatus = (_, { isConnected }, { cache }) => {
   return null
 }
 
-export {
-  networkStatus,
-  updateNetworkStatus
+export default {
+  defaults: {
+    networkStatus
+  },
+  resolvers: {
+    Mutation: {
+      updateNetworkStatus
+    }
+  }
 }
