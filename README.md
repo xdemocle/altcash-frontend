@@ -6,7 +6,7 @@ Showcase of React+Apollo+GraphQL+Graphcool Web Application.
 
 # Project disclaimer
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) but is hardly modified by Rocco to use redux for store management and to host a more large scale app architecture.
+This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app) but is hardly modified by Rocco to use Apollo and GraphQL for store management and to host a more large scale app architecture.
 
 Below you will find some information on how to perform common tasks.<br>
 You can find the most recent version of this guide [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).

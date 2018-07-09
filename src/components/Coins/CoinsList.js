@@ -4,14 +4,9 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import compose from 'recompose/compose'
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemAvatar from '@material-ui/core/ListItemAvatar'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
-import IconButton from '@material-ui/core/IconButton'
-import Icon from '@material-ui/core/Icon'
+import Divider from '@material-ui/core/Divider'
 import { graphql } from 'react-apollo'
+import CoinItem from './CoinItem'
 import { GET_COINS_LIST } from '../../graphql/queries.js'
 
 const styles = theme => ({
@@ -29,32 +24,20 @@ class CoinsList extends Component {
   }
 
   render() {
-    const { coins, classes, theme } = this.props
+    const { coins, classes } = this.props
     const { dense } = this.state
-
-    console.log(theme.palette)
 
     return (
       <div className={classes.root}>
-        <h1 className={styles.primaryText}>Coins available</h1>
+        <h1 className={classes.primaryText}>Coins available</h1>
         <List dense={dense}>
-          {coins.map((coin, index) => (
-            <ListItem button>
-              <ListItemAvatar>
-                <Avatar>
-                  <Icon>folder</Icon>
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText
-                primary={coin.name}
-                secondary={coin.symbol}
-              />
-              <ListItemSecondaryAction>
-                <IconButton aria-label="Add cart">
-                  <Icon>shopping_cart</Icon>
-                </IconButton>
-              </ListItemSecondaryAction>
-            </ListItem>
+          {coins.map((coin) => (
+            <React.Fragment key={coin.id}>
+              <CoinItem coin={coin} />
+              <li>
+                <Divider inset />
+              </li>
+            </React.Fragment>
           ))}
         </List>
       </div>
@@ -64,7 +47,6 @@ class CoinsList extends Component {
 
 CoinsList.propTypes = {
   classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
   coins: PropTypes.array.isRequired
 }
 
