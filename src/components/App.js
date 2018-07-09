@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ApolloProvider } from 'react-apollo'
 import apolloClient from '../graphql/apollo-client'
-import { persistCacheInstance } from '../graphql/apollo-cache'
+// import { persistCacheInstance } from '../graphql/apollo-cache'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -14,6 +14,7 @@ import Bottombar from './Bottombar'
 
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
+import CoinsList from '../components/Coins/CoinsList'
 
 const theme = createMuiTheme({
   palette: {
@@ -24,7 +25,6 @@ const theme = createMuiTheme({
     },
     secondary: {
       main: '#5A7684'
-      // main: '#F1C40F'
     }
   },
   typography: {
@@ -68,11 +68,18 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    try {
-      await persistCacheInstance
-    } catch (error) {
-      console.error('Error restoring Apollo cache', error)
-    }
+    /**
+     * Enabling the snippet of code below we would activate the cache at first
+     * stage of app bootstrap. At moment is deactivated and data is written only
+     * after bootstrap and first relevant action, since i'm trying to temporary
+     * overcome the current limitation of apollo-cache-persist and have fresh
+     * data each reload of the browser.
+     */
+    // try {
+    //   await persistCacheInstance
+    // } catch (error) {
+    //   console.error('Error restoring Apollo cache', error)
+    // }
 
     this.setState({
       loaded: true
@@ -100,6 +107,7 @@ class App extends Component {
                   <Switch>
                     <Route exact path="/" component={Landing} />
                     <Route path="/about" component={About} />
+                    <Route path="/buy" component={CoinsList} />
                   </Switch>
                 </main>
 
