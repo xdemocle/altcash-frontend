@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const GET_APP = gql`
+export const GET_APP = gql`
   query {
     app @client {
       isSidebarOpen
@@ -8,6 +8,13 @@ const GET_APP = gql`
   }
 `
 
-export {
-  GET_APP
-}
+export const GET_COINS_LIST = gql`
+  query {
+    allCoins {
+      id
+      name
+      symbol
+      # homepage
+    }
+  }
+`

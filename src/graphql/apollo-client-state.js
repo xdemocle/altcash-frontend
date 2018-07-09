@@ -1,7 +1,7 @@
 /**
  * apollo-client-state.js
  */
-import merge from 'lodash.merge'
+import { merge } from 'lodash'
 import { withClientState } from 'apollo-link-state'
 import { cache } from './apollo-cache'
 

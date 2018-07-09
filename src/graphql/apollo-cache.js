@@ -16,6 +16,7 @@ const persistCacheInstance = persistCache({
   storage: window.localStorage
 })
 
-// This is the same cache you pass into new ApolloClient and we going to use
-// it also for local state.
-export { cache, persistCacheInstance }
+export {
+  cache,
+  persistCacheInstance
+}
