@@ -1,5 +1,12 @@
 {
   "name": "stealth-stack-backend",
   "version": "1.0.0",
-  "description": "Graphcool service for stealth-stack web application"
+  "description": "Graphcool service for stealth-stack web application",
+  "private": true,
+  "scripts": {
+    "deploy": "node_modules/.bin/graphcool deploy"
+  },
+  "devDependencies": {
+    "graphcool": "^0.11.6"
+  }
 }
