@@ -1,66 +1,87 @@
 /* eslint-disable no-debugger */
+import { filter } from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
+import ReactSVG from 'react-svg'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
-import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import Icon from '@material-ui/core/Icon'
+import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   avatar: {
-    width: 32,
-    height: 32,
+    width: '2rem',
+    height: '2rem',
+    padding: 0,
+    verticalAlign: 'middle',
     overflow: 'visible'
-  },
-  bigAvatar: {
-    padding: 0
   },
   column: {
     flexBasis: 0
   }
 })
 
-const svgIcons = require.context('../../../node_modules/cryptocoins-icons/SVG', true, /.*\.svg$/)
-const svgPathHelper = (name) => svgIcons(name, true)
+const svgCoinIcons = require.context('../../../node_modules/cryptocoins-icons/SVG', true, /.*\.svg$/)
+const svgCoinPathHelper = (name) => svgCoinIcons(name, true)
+const isCoinActiveHelper = (markets) => {
+  const actives = filter(markets, (market) => {
+    return market.isActive
+  })
+
+  return actives.length > 0
+}
 
 const CoinItem = ({ classes, coin }) => {
-  let svgPath = null
+  let coinSymbol = null
+  let svgCoinPath = null
+  const isCoinActive = isCoinActiveHelper(coin.markets)
+
+  if (!isCoinActive) {
+    return null
+  }
 
   try {
-    svgPath = svgPathHelper(`./${coin.symbol.toUpperCase()}.svg`)
+    coinSymbol = coin.symbol.toUpperCase()
+    svgCoinPath = svgCoinPathHelper(`./${coinSymbol}.svg`)
   } catch (err) {
-    svgPath = svgPathHelper(`./BTC-alt.svg`)
+    coinSymbol = 'cc-default'
+    svgCoinPath = svgCoinPathHelper(`./BTC-alt.svg`)
   }
 
   return (
-    <ListItem button>
-      <ListItemIcon>
-        <Avatar
-          src={svgPath}
-          className={classNames(classes.avatar, classes.bigAvatar)}
+    <React.Fragment>
+      <ListItem button>
+        <ListItemIcon>
+          <ReactSVG
+            path={svgCoinPath}
+            svgClassName={classNames(classes.avatar, coinSymbol)}
+          />
+        </ListItemIcon>
+        <ListItemText
+          primary={coin.name}
+          secondary={coin.symbol.toUpperCase()}
+          className={classes.column}
         />
-      </ListItemIcon>
-      <ListItemText
-        primary={coin.name}
-        secondary={coin.symbol.toUpperCase()}
-        className={classes.column}
-      />
-      <ListItemText
-        primary="R1502"
-        secondary="Live Price"
-        className={classes.column}
-      />
-      <ListItemSecondaryAction>
-        <IconButton aria-label="Add cart">
-          <Icon>shopping_cart</Icon>
-        </IconButton>
-      </ListItemSecondaryAction>
-    </ListItem>
+        <ListItemText
+          primary="R1502"
+          secondary={`Live Price - isCoinActive: ${isCoinActive}`}
+          className={classes.column}
+        />
+        <ListItemSecondaryAction>
+          <IconButton aria-label="Add cart">
+            <Icon>shopping_cart</Icon>
+          </IconButton>
+        </ListItemSecondaryAction>
+      </ListItem>
+      <li>
+        <Divider inset />
+      </li>
+    </React.Fragment>
   )
 }
 

@@ -1,24 +1,19 @@
 # The following types define the data model of the example service
 # based on which the GraphQL API is generated
 
-type User @model {
-  id: ID! @isUnique
-  name: String
-}
-
 
 type Coin @model {
   id: ID! @isUnique
   name: String!
-  symbol: String!
-  homepage: String
-  symbols: [ExchangeSymbol!]! @relation(name: "CoinExchangeSymbol")
+  symbol: String! @isUnique
+  markets: [ExchangeMarket!]! @relation(name: "CoinExchangeMarket")
 }
 
 
-type ExchangeSymbol @model {
+type ExchangeMarket @model {
   id: ID! @isUnique
-  symbol: String!
+  market: String!
   exchanger: String!
-  coin: Coin @relation(name: "CoinExchangeSymbol")
+  isActive: Boolean!
+  coin: Coin @relation(name: "CoinExchangeMarket")
 }

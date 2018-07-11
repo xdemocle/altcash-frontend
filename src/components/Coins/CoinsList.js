@@ -4,10 +4,9 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import compose from 'recompose/compose'
 import List from '@material-ui/core/List'
-import Divider from '@material-ui/core/Divider'
 import { graphql } from 'react-apollo'
 import CoinItem from './CoinItem'
-import { GET_COINS_LIST } from '../../graphql/queries.js'
+import { GET_COINS_LIST_WITH_SYMBOLS } from '../../graphql/queries.js'
 
 const styles = theme => ({
   root: {
@@ -32,12 +31,7 @@ class CoinsList extends Component {
         <h1 className={classes.primaryText}>Coins available</h1>
         <List dense={dense}>
           {coins.map((coin) => (
-            <React.Fragment key={coin.id}>
-              <CoinItem coin={coin} />
-              <li>
-                <Divider inset />
-              </li>
-            </React.Fragment>
+            <CoinItem key={coin.id} coin={coin} />
           ))}
         </List>
       </div>
@@ -52,7 +46,7 @@ CoinsList.propTypes = {
 
 const CoinsListWithData = compose(
   withStyles(styles, { withTheme: true }),
-  graphql(GET_COINS_LIST, {
+  graphql(GET_COINS_LIST_WITH_SYMBOLS, {
     props: ({ data }) => {
       if (data.loading || data.error) return { coins: [] }
       return {
