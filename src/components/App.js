@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ApolloProvider } from 'react-apollo'
@@ -8,6 +7,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
+import ScrollToTop from './ScrollToTop'
 import Sidebar from './Sidebar'
 import BottomNav from './BottomNav'
 import Bottombar from './Bottombar'
@@ -97,30 +97,32 @@ class App extends Component {
       <ApolloProvider client={apolloClient}>
         <MuiThemeProvider theme={theme}>
           <Router basename={'/stealth-stack'}>
-            <div className={classes.root}>
-              <CssBaseline />
-              <div className={classes.appFrame}>
+            <ScrollToTop>
+              <div className={classes.root}>
+                <CssBaseline />
+                <div className={classes.appFrame}>
 
-                <Sidebar />
+                  <Sidebar />
 
-                <main className={classes.content}>
-                  <Switch>
-                    <Route exact path="/" component={Landing} />
-                    <Route path="/about" component={About} />
-                    <Route path="/buy" component={CoinsList} />
-                  </Switch>
-                </main>
+                  <main className={classes.content}>
+                    <Switch>
+                      <Route exact path="/" component={Landing} />
+                      <Route path="/about" component={About} />
+                      <Route path="/buy" component={CoinsList} />
+                    </Switch>
+                  </main>
 
-                <Hidden xsDown>
-                  <Bottombar />
-                </Hidden>
+                  <Hidden xsDown>
+                    <Bottombar />
+                  </Hidden>
 
-                <Hidden smUp>
-                  <BottomNav />
-                </Hidden>
+                  <Hidden smUp>
+                    <BottomNav />
+                  </Hidden>
 
+                </div>
               </div>
-            </div>
+            </ScrollToTop>
           </Router>
         </MuiThemeProvider>
       </ApolloProvider>
