@@ -18,7 +18,7 @@ export const GET_COINS_LIST = gql`
   }
 `
 
-export const GET_COINS_LIST_WITH_SYMBOLS = gql`
+export const GET_COINS_LIST_WITH_MARKETS = gql`
   query {
     allCoins (orderBy: name_ASC) {
       id
