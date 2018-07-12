@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { ApolloProvider } from 'react-apollo'
 import apolloClient from '../graphql/apollo-client'
-// import { persistCacheInstance } from '../graphql/apollo-cache'
+import { persistCacheInstance } from '../graphql/apollo-cache'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -75,11 +75,11 @@ class App extends Component {
      * overcome the current limitation of apollo-cache-persist and have fresh
      * data each reload of the browser.
      */
-    // try {
-    //   await persistCacheInstance
-    // } catch (error) {
-    //   console.error('Error restoring Apollo cache', error)
-    // }
+    try {
+      await persistCacheInstance
+    } catch (error) {
+      console.error('Error restoring Apollo cache', error)
+    }
 
     this.setState({
       loaded: true
