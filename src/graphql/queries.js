@@ -9,8 +9,8 @@ export const GET_APP = gql`
 `
 
 export const GET_COINS_LIST = gql`
-  query {
-    allCoins {
+  query allCoins($offset: Int, $limit: Int) {
+    allCoins(orderBy: name_ASC, skip: $offset, first: $limit) {
       id
       name
       symbol
@@ -19,8 +19,8 @@ export const GET_COINS_LIST = gql`
 `
 
 export const GET_COINS_LIST_WITH_MARKETS = gql`
-  query {
-    allCoins (orderBy: name_ASC) {
+  query allCoins($offset: Int, $limit: Int) {
+    allCoins(orderBy: name_ASC, skip: $offset, first: $limit) {
       id
       name
       symbol

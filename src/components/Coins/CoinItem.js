@@ -69,7 +69,7 @@ const CoinItem = ({ classes, coin }) => {
         />
         <ListItemText
           primary="R1502"
-          secondary={`Live Price - isCoinActive: ${isCoinActive}`}
+          secondary="Live Price"
           className={classes.column}
         />
         <ListItemSecondaryAction>
