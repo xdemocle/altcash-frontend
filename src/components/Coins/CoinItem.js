@@ -74,12 +74,12 @@ const CoinItem = ({ classes, coin }) => {
         />
         <ListItemSecondaryAction>
           <IconButton aria-label="Add cart">
-            <Icon>shopping_cart</Icon>
+            <Icon>favorite</Icon>
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
       <li>
-        <Divider inset />
+        <Divider />
       </li>
     </React.Fragment>
   )

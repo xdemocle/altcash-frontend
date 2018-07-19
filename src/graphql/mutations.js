@@ -12,7 +12,14 @@ const UPDATE_IS_SIDEBAR_OPEN = gql`
   }
 `
 
+const UPDATE_COIN_PAGE_NEEDLE = gql`
+  mutation updateCoinPageNeedle($needle: String) {
+    updateCoinPageNeedle(coinPageNeedle: $needle) @client
+  }
+`
+
 export {
   UPDATE_NETWORK_STATUS,
-  UPDATE_IS_SIDEBAR_OPEN
+  UPDATE_IS_SIDEBAR_OPEN,
+  UPDATE_COIN_PAGE_NEEDLE
 }
