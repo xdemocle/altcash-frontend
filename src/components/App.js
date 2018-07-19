@@ -5,6 +5,8 @@ import apolloClient from '../graphql/apollo-client'
 import { persistCacheInstance } from '../graphql/apollo-cache'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
+import green from '@material-ui/core/colors/green'
+import blueGrey from '@material-ui/core/colors/blueGrey'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
 import ScrollToTop from './ScrollToTop'
@@ -21,12 +23,17 @@ const theme = createMuiTheme({
     // type: 'light',
     // type: 'dark',
     primary: {
-      main: '#28a745'
+      // main: '#28a745'
+      main: green[600]
     },
     secondary: {
-      main: '#5A7684'
+      // main: '#5A7684'
+      main: blueGrey[500]
     }
   },
+  // spacing: {
+  //   unit: 8
+  // },
   typography: {
     fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif',
     fontSize: 14,

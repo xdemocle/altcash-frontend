@@ -7,11 +7,7 @@ body {
   min-height: 100vh
 }
 
-body {
-  font-family: "Montserrat", "Helvetica", "Arial", sans-serif;
-}
-
-.cc-default { fill: #28a745; }
+.cc-default { fill: #43A047; }
 .ADA { fill: #3CC8C8; }
 .ADC { fill: #3CB0E5; }
 .AEON { fill: #164450; }

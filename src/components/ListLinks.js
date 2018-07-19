@@ -30,7 +30,7 @@ function MainLinks(props) {
           <ListItemIcon>
             <Icon>home</Icon>
           </ListItemIcon>
-          <ListItemText disableTypography primary="Home" />
+          <ListItemText primary="Home" />
         </ListItem>
       </Tooltip>
 
@@ -39,7 +39,7 @@ function MainLinks(props) {
           <ListItemIcon>
             <Icon>shopping_basket</Icon>
           </ListItemIcon>
-          <ListItemText disableTypography primary="Buy Crypto Coins" />
+          <ListItemText primary="Buy Crypto Coins" />
         </ListItem>
       </Tooltip>
 
@@ -50,7 +50,7 @@ function MainLinks(props) {
           <ListItemIcon>
             <Icon>people</Icon>
           </ListItemIcon>
-          <ListItemText disableTypography primary="About Us" />
+          <ListItemText primary="About Us" />
         </ListItem>
       </Tooltip>
 
@@ -59,7 +59,7 @@ function MainLinks(props) {
           <ListItemIcon>
             <Icon>contact_support</Icon>
           </ListItemIcon>
-          <ListItemText disableTypography primary="Support" />
+          <ListItemText primary="Support" />
         </ListItem>
       </Tooltip>
     </List>

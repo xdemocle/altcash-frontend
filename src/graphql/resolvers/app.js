@@ -3,7 +3,8 @@
  */
 const app = {
   __typename: 'app',
-  isSidebarOpen: true
+  isSidebarOpen: true,
+  coinPageNeedle: ''
 }
 
 /**
@@ -20,13 +21,25 @@ const updateIsSidebarOpen = (_, { isSidebarOpen }, { cache }) => {
   return null
 }
 
+const updateCoinPageNeedle = (_, { coinPageNeedle }, { cache }) => {
+  const data = {
+    app: {
+      __typename: 'app',
+      coinPageNeedle
+    }
+  }
+  cache.writeData({ data })
+  return null
+}
+
 export default {
   defaults: {
     app
   },
   resolvers: {
     Mutation: {
-      updateIsSidebarOpen
+      updateIsSidebarOpen,
+      updateCoinPageNeedle
     }
   }
 }
