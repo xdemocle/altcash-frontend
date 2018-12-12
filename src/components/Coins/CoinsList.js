@@ -14,8 +14,8 @@ import Tab from '@material-ui/core/Tab'
 import { graphql, compose } from 'react-apollo'
 import HeaderFabButtons from './HeaderFabButtons'
 import CoinItem from './CoinItem'
-import { GET_APP, GET_COINS_LIST_WITH_MARKETS } from '../../graphql/queries.js'
-import { UPDATE_COIN_PAGE_NEEDLE } from '../../graphql/mutations.js'
+import { GET_APP, GET_COINS_LIST_WITH_MARKETS } from '../../graphql/queries'
+import { UPDATE_COIN_PAGE_NEEDLE } from '../../graphql/mutations'
 
 const styles = theme => ({
   root: {
@@ -120,7 +120,7 @@ class CoinsPage extends Component {
 
         {this.state.tab === 0 && <div>
           {error && msgError(error)}
-          {(!allCoins.length && networkStatus === 7) && msgEmptyCoinslist}
+          {(allCoins && !allCoins.length && networkStatus === 7) && msgEmptyCoinslist}
           {(loading && (!allCoins || networkStatus === 4)) && msgLoadingCoinslist}
           {((networkStatus !== 4 && allCoins)) && CoinsList(allCoins)}
 

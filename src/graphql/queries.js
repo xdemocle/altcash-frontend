@@ -35,6 +35,7 @@ export const GET_COINS_LIST_WITH_MARKETS = gql`
         isActive
         exchanger
         market
+        askPrice
       }
     }
     _allCoinsMeta (filter: {
@@ -48,3 +49,12 @@ export const GET_COINS_LIST_WITH_MARKETS = gql`
     }
   }
 `
+
+// export const GET_COIN_PRICE = gql`
+//   query {
+//     app @client {
+//       isSidebarOpen
+//       coinPageNeedle
+//     }
+//   }
+// `
