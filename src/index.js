@@ -3,7 +3,6 @@
  *
  * Description: root file of our React app with Apollo/GraphQL support.
  */
-import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
 

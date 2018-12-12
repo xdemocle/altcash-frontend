@@ -10,10 +10,10 @@ import IconButton from '@material-ui/core/IconButton'
 import Hidden from '@material-ui/core/Hidden'
 import Tooltip from '@material-ui/core/Tooltip'
 import { graphql, compose } from 'react-apollo'
-import { UPDATE_IS_SIDEBAR_OPEN } from '../graphql/mutations.js'
-import { GET_APP } from '../graphql/queries.js'
+import { UPDATE_IS_SIDEBAR_OPEN } from '../../graphql/mutations.js'
+import { GET_APP } from '../../graphql/queries.js'
 import MainLinks from './ListLinks'
-import Logo from '../assets/logo.png'
+import Logo from '../../assets/logo.png'
 
 const drawerWidth = '17rem'
 

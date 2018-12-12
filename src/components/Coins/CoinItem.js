@@ -1,4 +1,3 @@
-/* eslint-disable no-debugger */
 import { filter } from 'lodash'
 import React from 'react'
 import PropTypes from 'prop-types'
@@ -12,6 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import Icon from '@material-ui/core/Icon'
 import Divider from '@material-ui/core/Divider'
+import CoinTicker from '../../common/CoinTicker'
 
 const styles = theme => ({
   avatar: {
@@ -29,11 +29,11 @@ const styles = theme => ({
 const svgCoinIcons = require.context('../../../node_modules/cryptocoins-icons/SVG', true, /.*\.svg$/)
 const svgCoinPathHelper = (name) => svgCoinIcons(name, true)
 const isCoinActiveHelper = (markets) => {
-  const actives = filter(markets, (market) => {
+  const activeMarkets = filter(markets, (market) => {
     return market.isActive
   })
 
-  return actives.length > 0
+  return activeMarkets
 }
 
 const CoinItem = ({ classes, coin }) => {
@@ -41,7 +41,7 @@ const CoinItem = ({ classes, coin }) => {
   let svgCoinPath = null
   const isCoinActive = isCoinActiveHelper(coin.markets)
 
-  if (!isCoinActive) {
+  if (!isCoinActive.length > 0) {
     return null
   }
 
@@ -68,7 +68,7 @@ const CoinItem = ({ classes, coin }) => {
           className={classes.column}
         />
         <ListItemText
-          primary="R1502"
+          primary={<CoinTicker coin={isCoinActive} />}
           secondary="Live Price"
           className={classes.column}
         />

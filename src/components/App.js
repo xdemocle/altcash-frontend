@@ -9,10 +9,11 @@ import green from '@material-ui/core/colors/green'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
-import ScrollToTop from './ScrollToTop'
-import Sidebar from './Sidebar'
-import BottomNav from './BottomNav'
-import Bottombar from './Bottombar'
+import ScrollToTop from '../common/ScrollToTop'
+import Sidebar from './Layout/Sidebar'
+import BottomNav from './Layout/BottomNav'
+import Bottombar from './Layout/Bottombar'
+import TickersLivePrice from '../common/TickersLivePrice'
 
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
@@ -106,6 +107,7 @@ class App extends Component {
           <Router basename={'/stealth-stack'}>
             <ScrollToTop>
               <div className={classes.root}>
+                <TickersLivePrice />
                 <CssBaseline />
                 <div className={classes.appFrame}>
 
