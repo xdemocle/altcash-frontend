@@ -87,8 +87,8 @@ function Landing(props) {
               Buy crypto coins fast and easy in South Africa!
             </Typography>
             <hr className={classes.heroDivider} />
-            <Button variant="raised" color="primary" size="large" className={classes.ctoButton} component={Link} to="/buy">
-              Buy Altcoins now
+            <Button variant="raised" color="primary" size="large" className={classes.ctoButton} component={Link} to="/login">
+              Login To Buy
             </Button>
           </div>
         </div>
@@ -105,8 +105,8 @@ function Landing(props) {
           <Typography variant="subheading" gutterBottom color="secondary" align="center">
             Fast, anonymous and easy instant buying.
           </Typography>
-          <Button variant="raised" color="secondary" size="large" className={classes.ctoButton} component={Link} to="/buy">
-            Buy Altcoins now
+          <Button variant="raised" color="secondary" size="large" className={classes.ctoButton} component={Link} to="/login">
+            Login To Buy
           </Button>
         </Grid>
       </Grid>

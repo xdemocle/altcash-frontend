@@ -6,7 +6,7 @@ import { ApolloLink } from 'apollo-link'
 import { HttpLink } from 'apollo-link-http'
 import stateLink from './apollo-client-state'
 
-const uri = 'https://api.graph.cool/simple/v1/cjj71t3v94zjs0110qulaqo8n'
+const uri = 'https://api.graph.cool/simple/v1/cjqnphxf13jgp0123cba1kp7f'
 
 export default ApolloLink.from([
   stateLink,

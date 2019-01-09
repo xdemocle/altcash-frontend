@@ -18,6 +18,8 @@ import TickersLivePrice from '../common/TickersLivePrice'
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
 import CoinsList from '../components/Coins/CoinsList'
+import Login from './Login/Login'
+import Register from './Register/Register'
 
 const theme = createMuiTheme({
   palette: {
@@ -111,13 +113,15 @@ class App extends Component {
                 <CssBaseline />
                 <div className={classes.appFrame}>
 
-                  <Sidebar />
+                  {/* <Sidebar /> */}
 
                   <main className={classes.content}>
                     <Switch>
                       <Route exact path="/" component={Landing} />
                       <Route path="/about" component={About} />
                       <Route path="/buy" component={CoinsList} />
+                      <Route path="/login" component={Login} />
+                      <Route path="/register" component={Register} />
                     </Switch>
                   </main>
 

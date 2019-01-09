@@ -49,7 +49,31 @@ export const GET_COINS_LIST_WITH_MARKETS = gql`
     }
   }
 `
+export const LOGIN_USER = gql`
+  query user($email: String, $password: String) {
+    User(email: $email, password: $password) {
+      id
+      name
+    }
+  }
+`
 
+export const FETCH_CART_ITEM_FOR_USER = gql`
+  query fetchCartItemForUser($user: User) {
+    Cart(user: $user) {
+      id
+      coins
+    }
+  }
+`
+
+export const FETCH_WISHLIST_FOR_USER = gql`
+  query fetchWishListForUser($user: User) {
+    WishList(user: $user) {
+      coins
+    }
+  }
+`
 // export const GET_COIN_PRICE = gql`
 //   query {
 //     app @client {

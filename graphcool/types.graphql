@@ -1,12 +1,10 @@
-# The following types define the data model of the example service
-# based on which the GraphQL API is generated
-
-
 type Coin @model {
   id: ID! @isUnique
   name: String!
   symbol: String! @isUnique
   markets: [ExchangeMarket!]! @relation(name: "CoinExchangeMarket")
+  wishList: [WishList!]! @relation(name: "Coins")
+  cartItem: [CartItem!]! @relation(name: "Item")
 }
 
 
@@ -16,4 +14,32 @@ type ExchangeMarket @model {
   exchanger: String!
   isActive: Boolean!
   coin: Coin @relation(name: "CoinExchangeMarket")
+}
+
+type User @model {
+  id: ID! @isUnique
+  name: String!
+  email: String! @isUnique
+  password: String!
+  cart: Cart @relation(name: "Purchaser")
+  wishList: WishList @relation(name: "Wisher")
+}
+
+type Cart @model {
+ id: ID! @isUnique
+ user: User! @relation(name: "Purchaser")
+ coins: [CartItem!]! @relation(name: "CartItem")
+}
+
+type CartItem @model {
+  id: ID! @isUnique
+  coin: Coin! @relation(name: "Item")
+  quantity: Int,
+  parentCarts: [Cart!]! @relation(name: "CartItem")
+}
+
+type WishList @model {
+  id: ID! @isUnique
+  user: User! @relation(name: "Wisher")
+  coins: [Coin!]! @relation(name: "Coins")
 }

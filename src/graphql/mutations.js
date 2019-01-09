@@ -24,9 +24,17 @@ const UPDATE_COIN_PAGE_NEEDLE = gql`
   }
 `
 
+const CREATE_USER = gql`
+  mutation CreateUser($name: String!, $email: String!, $password: String!) {
+    createUser(email: $email, name: $name, password: $password) {
+      id
+    }
+  }
+`
 export {
   UPDATE_NETWORK_STATUS,
   UPDATE_MARKET,
   UPDATE_IS_SIDEBAR_OPEN,
-  UPDATE_COIN_PAGE_NEEDLE
+  UPDATE_COIN_PAGE_NEEDLE,
+  CREATE_USER
 }
