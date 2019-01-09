@@ -12,10 +12,10 @@ import Icon from '@material-ui/core/Icon'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 import { EMAIL_REGEX } from '../../constants/constants'
-import { LOGIN_USER } from '../../graphql/queries'
+import { LOGIN_USER } from '../../graphql/mutations'
 
 const styles = theme => ({
   main: {
@@ -56,16 +56,16 @@ class Login extends Component {
       email: '',
       password: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleUserInput = this.handleUserInput.bind(this)
-    this.isFormValid = this.isFormValid.bind(this)
+    this._handleSubmit = this._handleSubmit.bind(this)
+    this._handleUserInput = this._handleUserInput.bind(this)
+    this._isFormValid = this._isFormValid.bind(this)
   }
 
   /**
    * Update the state as per user input
    * @param inputEvent
    */
-  handleUserInput(inputEvent) {
+  _handleUserInput(inputEvent) {
     const name = inputEvent.target.name
     const value = inputEvent.target.value
     this.setState({ [name]: value })
@@ -79,7 +79,7 @@ class Login extends Component {
    * c. Email address is valid
    * @returns {boolean}
    */
-  isFormValid() {
+  _isFormValid() {
     const { email, password } = this.state
     return email && password && EMAIL_REGEX.test(email)
   }
@@ -87,8 +87,17 @@ class Login extends Component {
   /**
    * Submit User details for new user creation
    */
-  handleSubmit = () => {
-    console.log(this.props)
+  _handleSubmit = async(event) => {
+    event.preventDefault()
+    const { name, email, password } = this.state
+    try {
+      // TODO: Add call for login mutation
+      // TODO: Add global success handler, to show toast notification to user
+      this.props.history.push('/buy')
+    } catch (e) {
+      // TODO: Add global error handler, to show toast notification to user
+      console.log(e)
+    }
   }
 
   render() {
@@ -110,7 +119,7 @@ class Login extends Component {
                 id="email"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => this.handleUserInput(e)}
+                onChange={(e) => this._handleUserInput(e)}
                 autoFocus />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -120,7 +129,7 @@ class Login extends Component {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                onChange={(e) => this.handleUserInput(e)}
+                onChange={(e) => this._handleUserInput(e)}
               />
             </FormControl>
             <FormControlLabel
@@ -128,13 +137,13 @@ class Login extends Component {
               label="Remember me"
             />
             <Button
-              type="button"
+              type="submit"
               fullWidth
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={this.handleSubmit()}
-              disabled={!this.isFormValid()}
+              onClick={(e) => this._handleSubmit(e)}
+              disabled={!this._isFormValid()}
             >
               Sign in
             </Button>
@@ -156,10 +165,13 @@ class Login extends Component {
 }
 
 Login.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  // mutate: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const LoginPage = compose(
+  withRouter,
   withStyles(styles, { withTheme: true }),
   graphql(LOGIN_USER)
 )(Login)

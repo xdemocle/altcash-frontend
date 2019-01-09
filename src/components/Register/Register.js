@@ -10,7 +10,7 @@ import Icon from '@material-ui/core/Icon'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
 import withStyles from '@material-ui/core/styles/withStyles'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { graphql, compose } from 'react-apollo'
 import { EMAIL_REGEX } from '../../constants/constants'
 import { CREATE_USER } from '../../graphql/mutations'
@@ -56,16 +56,16 @@ class Register extends Component {
       password: '',
       confirmPassword: ''
     }
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleUserInput = this.handleUserInput.bind(this)
-    this.isFormValid = this.isFormValid.bind(this)
+    this._handleSubmit = this._handleSubmit.bind(this)
+    this._handleUserInput = this._handleUserInput.bind(this)
+    this._isFormValid = this._isFormValid.bind(this)
   }
 
   /**
    * Update the state as per user input
    * @param inputEvent
    */
-  handleUserInput(inputEvent) {
+  _handleUserInput(inputEvent) {
     const name = inputEvent.target.name
     const value = inputEvent.target.value
     this.setState({ [name]: value })
@@ -79,7 +79,7 @@ class Register extends Component {
    * c. Email address is valid
    * @returns {boolean}
    */
-  isFormValid() {
+  _isFormValid() {
     const { name, email, password, confirmPassword } = this.state
     return name && email && password && confirmPassword && (password === confirmPassword) && EMAIL_REGEX.test(email)
   }
@@ -87,7 +87,7 @@ class Register extends Component {
   /**
    * Submit User details for new user creation
    */
-  handleSubmit = async(event) => {
+  _handleSubmit = async(event) => {
     event.preventDefault()
     const { name, email, password } = this.state
     try {
@@ -99,7 +99,7 @@ class Register extends Component {
         }
       })
       // TODO: Add global success handler, to show toast notification to user
-      history.push('/login')
+      this.props.history.push('/buy')
     } catch (e) {
       // TODO: Add global error handler, to show toast notification to user
     }
@@ -128,7 +128,7 @@ class Register extends Component {
                 id="name"
                 name="name"
                 autoComplete="name"
-                onChange={(e) => this.handleUserInput(e)}
+                onChange={(e) => this._handleUserInput(e)}
                 autoFocus
               />
             </FormControl>
@@ -139,7 +139,7 @@ class Register extends Component {
                 type="email"
                 name="email"
                 autoComplete="email"
-                onChange={(e) => this.handleUserInput(e)}
+                onChange={(e) => this._handleUserInput(e)}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -148,7 +148,7 @@ class Register extends Component {
                 name="password"
                 type="password"
                 id="password"
-                onChange={(e) => this.handleUserInput(e)}
+                onChange={(e) => this._handleUserInput(e)}
               />
             </FormControl>
             <FormControl margin="normal" required fullWidth>
@@ -157,7 +157,7 @@ class Register extends Component {
                 name="confirmPassword"
                 type="password"
                 id="confirmPassword"
-                onChange={(e) => this.handleUserInput(e)}
+                onChange={(e) => this._handleUserInput(e)}
               />
             </FormControl>
             <Button
@@ -166,8 +166,8 @@ class Register extends Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              disabled={!this.isFormValid()}
-              onClick={(e) => this.handleSubmit(e)}
+              disabled={!this._isFormValid()}
+              onClick={(e) => this._handleSubmit(e)}
             >
               Register
             </Button>
@@ -191,10 +191,12 @@ class Register extends Component {
 
 Register.propTypes = {
   classes: PropTypes.object.isRequired,
-  mutate: PropTypes.func.isRequired
+  mutate: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired
 }
 
 const RegisterPage = compose(
+  withRouter,
   withStyles(styles, { withTheme: true }),
   graphql(CREATE_USER)
 )(Register)

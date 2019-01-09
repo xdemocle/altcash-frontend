@@ -31,10 +31,19 @@ const CREATE_USER = gql`
     }
   }
 `
+
+const LOGIN_USER = gql`
+  mutation LoginUser($user: User) {
+    createLogin(user: $user) {
+      id
+    }
+  }
+`
 export {
   UPDATE_NETWORK_STATUS,
   UPDATE_MARKET,
   UPDATE_IS_SIDEBAR_OPEN,
   UPDATE_COIN_PAGE_NEEDLE,
-  CREATE_USER
+  CREATE_USER,
+  LOGIN_USER
 }
