@@ -74,7 +74,7 @@ const CoinItem = ({ classes, coin }) => {
         />
         <ListItemSecondaryAction>
           <IconButton aria-label="Add cart">
-            <Icon>favorite</Icon>
+            <Icon>cart</Icon>
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>

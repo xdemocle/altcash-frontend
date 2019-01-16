@@ -18,11 +18,12 @@ type ExchangeMarket @model {
 
 type User @model {
   id: ID! @isUnique
-  name: String!
+  name: String
   email: String! @isUnique
   password: String!
   cart: Cart @relation(name: "Purchaser")
   wishList: WishList @relation(name: "Wisher")
+  isLoggedIn: Login @relation(name: "LoggedInUser")
 }
 
 type Cart @model {
@@ -42,4 +43,9 @@ type WishList @model {
   id: ID! @isUnique
   user: User! @relation(name: "Wisher")
   coins: [Coin!]! @relation(name: "Coins")
+}
+
+type Login @model {
+  id: ID! @isUnique
+  user: User! @relation(name: "LoggedInUser")
 }

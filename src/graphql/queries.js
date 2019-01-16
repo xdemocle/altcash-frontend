@@ -35,7 +35,6 @@ export const GET_COINS_LIST_WITH_MARKETS = gql`
         isActive
         exchanger
         market
-        askPrice
       }
     }
     _allCoinsMeta (filter: {
