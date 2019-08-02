@@ -1,9 +1,9 @@
 {
-  "name": "stealth-stack",
+  "name": "altssale-frontend",
   "description": "Showcase of React+Apollo+GraphQL+Graphcool Web Application",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rocco.me/stealth-stack/",
+  "homepage": "https://rocco.me/altssale-frontend/",
   "scripts": {
     "start": "node scripts/start.js",
     "websocket": "node scripts/websocket.js",

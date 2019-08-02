@@ -1,8 +1,8 @@
-# stealth-stack
+# altssale-frontend
 
 Showcase of React+Apollo+GraphQL+Graphcool Web Application.
 
-[![Build Status](https://semaphoreci.com/api/v1/xdemocle/stealth-stack/branches/with-apollo/badge.svg)](https://semaphoreci.com/xdemocle/stealth-stack)
+[![Build Status](https://semaphoreci.com/api/v1/xdemocle/altssale-frontend/branches/with-apollo/badge.svg)](https://semaphoreci.com/xdemocle/altssale-frontend)
 
 # Project disclaimer
 

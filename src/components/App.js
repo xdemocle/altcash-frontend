@@ -104,7 +104,7 @@ class App extends Component {
     return (
       <ApolloProvider client={apolloClient}>
         <MuiThemeProvider theme={theme}>
-          <Router basename={'/stealth-stack'}>
+          <Router basename={'/altssale-frontend'}>
             <ScrollToTop>
               <div className={classes.root}>
                 <TickersLivePrice />
