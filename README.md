@@ -2,7 +2,7 @@
 
 Showcase of React+Apollo+GraphQL+Graphcool Web Application.
 
-[![Build Status](https://semaphoreci.com/api/v1/xdemocle/altssale-frontend/branches/with-apollo/badge.svg)](https://semaphoreci.com/xdemocle/altssale-frontend)
+[![Build Status](https://semaphoreci.com/api/v1/projects/e59f15ca-4f1a-413b-921a-5751032c7292/2846511/badge.svg)](https://semaphoreci.com/xdemocle/altssale-frontend)
 
 ## Project disclaimer
 
