@@ -1,0 +1,9 @@
+{
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact"
+  ],
+  "prettier.eslintIntegration": true,
+  "editor.formatOnSave": false,
+  "eslint.autoFixOnSave": false
+}
