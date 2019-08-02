@@ -10,10 +10,8 @@ blocks:
   - name: Node.js example
     task:
       jobs:
-        - name: Install deps
+        - name: Install deps & Make new build
           commands:
             - yarn install
-        - name: Make new build
-          commands:
             - yarn run build
 
