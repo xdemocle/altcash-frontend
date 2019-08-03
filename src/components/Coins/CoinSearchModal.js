@@ -11,13 +11,13 @@ import Icon from '@material-ui/core/Icon'
 
 const styles = theme => ({
   root: {
-    top: `50%`,
-    left: `50%`,
-    transform: `translate(-50%, -50%)`,
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
     position: 'absolute',
     width: '90%',
     maxWidth: theme.spacing(50),
-    backgroundColor: `rgba(255, 255, 255, 0.8)`,
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
     borderRadius: '1rem',
@@ -82,7 +82,10 @@ class CoinsSearchModal extends Component {
               placeholder="Type the coin name"
               fullWidth
               autoFocus
-              onChange={debounceEventHandler(this._textFieldHandler.bind(this), 300)}
+              onChange={debounceEventHandler(
+                this._textFieldHandler.bind(this),
+                300
+              )}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
