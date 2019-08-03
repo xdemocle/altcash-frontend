@@ -38,9 +38,9 @@ const styles = theme => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: theme.spacing.unit * 7,
+    width: theme.spacing(7),
     [theme.breakpoints.up('sm')]: {
-      width: theme.spacing.unit * 9
+      width: theme.spacing(9)
     }
   },
   toolbar: {
@@ -72,6 +72,7 @@ const styles = theme => ({
     }
   },
   buttonLogoNormal: {
+    padding: 0,
     backgroundColor: 'transparent !important'
   }
 })
@@ -119,13 +120,13 @@ class Sidebar extends Component {
                 <IconButton disableRipple onClick={this.handleDrawerToggle} aria-label="toggle drawer" className={classNames(classes.buttonLogoNormal)}>
                   <img src={Logo} alt="logo.png" width="48" />
                 </IconButton>
-                <Typography variant="subheading" className={classes.toolbarTitle}>
+                <Typography variant="subtitle1" className={classes.toolbarTitle}>
                   Altcoins Sale
                 </Typography>
               </div>
             </Tooltip>
             <Divider />
-            <MainLinks />
+            <MainLinks {...this.props.app} />
           </div>
         </Drawer>
       </Hidden>

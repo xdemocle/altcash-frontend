@@ -12,8 +12,8 @@ import CoinSearchModal from './CoinSearchModal'
 const styles = theme => ({
   root: {
     position: 'absolute',
-    top: theme.spacing.unit * 3,
-    right: theme.spacing.unit * 3,
+    top: theme.spacing(3),
+    right: theme.spacing(3),
     [theme.breakpoints.only('xs')]: {
       position: 'relative',
       top: 'auto',
@@ -25,7 +25,7 @@ const styles = theme => ({
   fabButtons: {
     display: 'inline-block',
     position: 'relative',
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   fabProgress: {
     color: theme.palette.primary.main,

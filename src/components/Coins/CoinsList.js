@@ -19,9 +19,9 @@ import { UPDATE_COIN_PAGE_NEEDLE } from '../../graphql/mutations'
 
 const styles = theme => ({
   root: {
-    padding: theme.typography.pxToRem(theme.spacing.unit * 3),
+    padding: theme.typography.pxToRem(theme.spacing(3)),
     [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing.unit * 1.5)
+      padding: theme.typography.pxToRem(theme.spacing(1.5))
     }
   },
   title: {
@@ -33,7 +33,7 @@ const styles = theme => ({
     margin: '0 auto'
   },
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing(1)
   },
   buttonProgress: {
     color: green[500],
@@ -46,7 +46,7 @@ const styles = theme => ({
   bottomListWrapper: {
     position: 'relative',
     textAlign: 'center',
-    margin: theme.spacing.unit
+    margin: theme.spacing(1)
   },
   paper: {
     margin: '1rem 0'
@@ -60,8 +60,8 @@ const styles = theme => ({
   }
 })
 
-const msgLoadingCoinslist = <Typography variant="subheading">Loading coins list...</Typography>
-const msgEmptyCoinslist = <Typography variant="title">No results...</Typography>
+const msgLoadingCoinslist = <Typography variant="subtitle2">Loading coins list...</Typography>
+const msgEmptyCoinslist = <Typography variant="subtitle1">No results...</Typography>
 const msgError = (error) => <Typography>Error! {error.message}</Typography>
 const CoinsList = (coins) => <List>{coins.map((coin) => <CoinItem key={coin.id} coin={coin} />)}</List>
 
@@ -99,7 +99,7 @@ class CoinsPage extends Component {
 
     return (
       <div className={classes.root}>
-        <Typography color="primary" variant="display1" gutterBottom className={classes.title}>
+        <Typography color="primary" variant="h4" gutterBottom className={classes.title}>
           Coins available
         </Typography>
 

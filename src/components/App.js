@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { ApolloProvider } from 'react-apollo'
-import apolloClient from '../graphql/apollo-client'
 import { persistCacheInstance } from '../graphql/apollo-cache'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { MuiThemeProvider, createMuiTheme, withStyles } from '@material-ui/core/styles'
+import { Route, Switch } from 'react-router-dom'
+import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import green from '@material-ui/core/colors/green'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -19,7 +17,10 @@ import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
 import CoinsList from '../components/Coins/CoinsList'
 
-const theme = createMuiTheme({
+export const routerBasename =
+  process.env.NODE_ENV === 'production' ? '/altssale-frontend' : '/'
+
+export const theme = createMuiTheme({
   palette: {
     // type: 'light',
     // type: 'dark',
@@ -102,34 +103,28 @@ class App extends Component {
     }
 
     return (
-      <ApolloProvider client={apolloClient}>
-        <MuiThemeProvider theme={theme}>
-          <Router basename={'/altssale-frontend'}>
-            <ScrollToTop>
-              <div className={classes.root}>
-                <TickersLivePrice />
-                <CssBaseline />
-                <div className={classes.appFrame}>
-                  <Sidebar />
-                  <main className={classes.content}>
-                    <Switch>
-                      <Route exact path="/" component={Landing} />
-                      <Route path="/about" component={About} />
-                      <Route path="/buy" component={CoinsList} />
-                    </Switch>
-                  </main>
-                  <Hidden xsDown>
-                    <Bottombar />
-                  </Hidden>
-                  <Hidden smUp>
-                    <BottomNav />
-                  </Hidden>
-                </div>
-              </div>
-            </ScrollToTop>
-          </Router>
-        </MuiThemeProvider>
-      </ApolloProvider>
+      <ScrollToTop>
+        <div className={classes.root}>
+          <TickersLivePrice />
+          <CssBaseline />
+          <div className={classes.appFrame}>
+            <Sidebar />
+            <main className={classes.content}>
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route path="/about" component={About} />
+                <Route path="/buy" component={CoinsList} />
+              </Switch>
+            </main>
+            <Hidden xsDown>
+              <Bottombar />
+            </Hidden>
+            <Hidden smUp>
+              <BottomNav />
+            </Hidden>
+          </div>
+        </div>
+      </ScrollToTop>
     )
   }
 }

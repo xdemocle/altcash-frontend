@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
-    padding: theme.spacing.unit * 3
+    padding: theme.spacing(3)
   }
 })
 

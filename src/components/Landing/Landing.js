@@ -44,7 +44,7 @@ const styles = theme => ({
     }
   },
   paper: {
-    padding: theme.spacing.unit * 2,
+    padding: theme.spacing(2),
     color: theme.palette.text.secondary,
     textAlign: 'center'
   },
@@ -62,13 +62,13 @@ const styles = theme => ({
     width: '65%'
   },
   ctoButton: {
-    margin: theme.typography.pxToRem(theme.spacing.unit * 2),
-    padding: '.9rem ' + theme.typography.pxToRem(theme.spacing.unit * 4),
+    margin: theme.typography.pxToRem(theme.spacing(2)),
+    padding: '.9rem ' + theme.typography.pxToRem(theme.spacing(4)),
     minHeight: 'auto',
     lineHeight: 'normal'
   },
   leftIcon: {
-    marginRight: theme.spacing.unit
+    marginRight: theme.spacing(1)
   }
 })
 
@@ -80,14 +80,14 @@ function Landing(props) {
       <Parallax bgImage={image1} strength={300} bgStyle={{top: '-5%'}}>
         <div style={{minHeight: '65vh'}}>
           <div className={classes.parallaxContent}>
-            <Typography variant="display3" gutterBottom color="inherit" className={classNames(classes.typographyShadow, classes.typographyMainTitle)}>
+            <Typography variant="h2" gutterBottom color="inherit" className={classNames(classes.typographyShadow, classes.typographyMainTitle)}>
               Altcoins Sale
             </Typography>
-            <Typography variant="display1" gutterBottom color="inherit" className={classes.typographyShadow}>
+            <Typography variant="h4" gutterBottom color="inherit" className={classes.typographyShadow}>
               Buy crypto coins fast and easy in South Africa!
             </Typography>
             <hr className={classes.heroDivider} />
-            <Button variant="raised" color="primary" size="large" className={classes.ctoButton} component={Link} to="/buy">
+            <Button variant="contained" color="primary" size="large" className={classes.ctoButton} component={Link} to="/buy">
               Buy Altcoins now
             </Button>
           </div>
@@ -96,16 +96,16 @@ function Landing(props) {
 
       <Grid className={classes.gridContainer} container alignContent="center" justify="center">
         <Grid item xs={12}>
-          <Typography variant="display1" gutterBottom color="primary" align="center">
+          <Typography variant="h4" gutterBottom color="primary" align="center">
             The best way to start investing in crypto currencies!
           </Typography>
-          <Typography variant="subheading" gutterBottom color="secondary" align="center">
+          <Typography variant="subtitle1" gutterBottom color="secondary" align="center">
             A new service for South Africans to buy crypto coins with credit card and bank transfer.
           </Typography>
-          <Typography variant="subheading" gutterBottom color="secondary" align="center">
+          <Typography variant="subtitle2" gutterBottom color="secondary" align="center">
             Fast, anonymous and easy instant buying.
           </Typography>
-          <Button variant="raised" color="secondary" size="large" className={classes.ctoButton} component={Link} to="/buy">
+          <Button variant="contained" color="secondary" size="large" className={classes.ctoButton} component={Link} to="/buy">
             Buy Altcoins now
           </Button>
         </Grid>
@@ -116,7 +116,7 @@ function Landing(props) {
           <div className={classes.parallaxContent}>
             <Grid container alignContent="center" justify="center">
               <Grid item xs={12} sm={5} lg={4} className={classes.gridOverlayItem}>
-                <Typography variant="title" gutterBottom color="primary" align="center">
+                <Typography variant="subtitle1" gutterBottom color="primary" align="center">
                   Company info
                 </Typography>
                 <Typography variant="body1" color="inherit" align="left">
@@ -124,7 +124,7 @@ function Landing(props) {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={5} lg={4} className={classes.gridOverlayItem}>
-                <Typography variant="title" gutterBottom color="primary" align="center">
+                <Typography variant="subtitle1" gutterBottom color="primary" align="center">
                   Contact Us
                 </Typography>
                 <Typography variant="body1" gutterBottom color="inherit" align="left">
@@ -132,16 +132,16 @@ function Landing(props) {
                 </Typography>
                 <Typography variant="body1" color="inherit" align="left">
                   <Tooltip title="ONLY Whatsapp messages" placement="top">
-                    <Button variant="flat" size="small" href="https://api.whatsapp.com/send?phone=34604367510&text=Hello%20Alts.sale%20Customer%20Care">
+                    <Button variant="text" size="small" href="https://api.whatsapp.com/send?phone=34604367510&text=Hello%20Alts.sale%20Customer%20Care">
                       <Icon className={classes.leftIcon}>chat</Icon> Whatsapp: +27 777 867 5309
                     </Button>
                   </Tooltip>
                   <Tooltip title="Send a message on Telegram" placement="top">
-                    <Button variant="flat" size="small" href="">
+                    <Button variant="text" size="small" href="">
                       <Icon className={classes.leftIcon}>chat</Icon> Telegram: Alts.sale
                     </Button>
                   </Tooltip>
-                  <Button variant="flat" size="small" href="">
+                  <Button variant="text" size="small" href="">
                     <Icon className={classes.leftIcon}>mail</Icon> Send e-mail
                   </Button>
                 </Typography>

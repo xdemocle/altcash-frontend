@@ -16,10 +16,10 @@ const styles = theme => ({
     transform: `translate(-50%, -50%)`,
     position: 'absolute',
     width: '90%',
-    maxWidth: theme.spacing.unit * 50,
+    maxWidth: theme.spacing(50),
     backgroundColor: `rgba(255, 255, 255, 0.8)`,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: theme.spacing(4),
     borderRadius: '1rem',
     outline: 'none'
   },
@@ -66,7 +66,6 @@ class CoinsSearchModal extends Component {
       >
         <div className={classes.root}>
           <Button
-            variant="fab"
             color="primary"
             className={classes.fabButton}
             aria-label="Close search coins popup"
