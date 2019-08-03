@@ -110,9 +110,7 @@ class App extends Component {
                 <TickersLivePrice />
                 <CssBaseline />
                 <div className={classes.appFrame}>
-
                   <Sidebar />
-
                   <main className={classes.content}>
                     <Switch>
                       <Route exact path="/" component={Landing} />
@@ -120,15 +118,12 @@ class App extends Component {
                       <Route path="/buy" component={CoinsList} />
                     </Switch>
                   </main>
-
                   <Hidden xsDown>
                     <Bottombar />
                   </Hidden>
-
                   <Hidden smUp>
                     <BottomNav />
                   </Hidden>
-
                 </div>
               </div>
             </ScrollToTop>
