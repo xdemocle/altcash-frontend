@@ -9,7 +9,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
-import Icon from '@material-ui/core/Icon'
+import { Favorite } from '@material-ui/icons'
 import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../../common/CoinTicker'
 
@@ -19,17 +19,28 @@ const styles = theme => ({
     height: '2rem',
     padding: 0,
     verticalAlign: 'middle',
-    overflow: 'visible'
+    overflow: 'visible',
+    '& svg': {
+      width: '2rem',
+      height: '2rem',
+      padding: 0,
+      verticalAlign: 'middle',
+      overflow: 'visible'
+    }
   },
   column: {
     flexBasis: 0
   }
 })
 
-const svgCoinIcons = require.context('../../../node_modules/cryptocoins-icons/SVG', true, /.*\.svg$/)
-const svgCoinPathHelper = (name) => svgCoinIcons(name, true)
-const isCoinActiveHelper = (markets) => {
-  const activeMarkets = filter(markets, (market) => {
+const svgCoinIcons = require.context(
+  '../../../node_modules/cryptocoins-icons/SVG',
+  true,
+  /.*\.svg$/
+)
+const svgCoinPathHelper = name => svgCoinIcons(name, true)
+const isCoinActiveHelper = markets => {
+  const activeMarkets = filter(markets, market => {
     return market.isActive
   })
 
@@ -50,7 +61,7 @@ const CoinItem = ({ classes, coin }) => {
     svgCoinPath = svgCoinPathHelper(`./${coinSymbol}.svg`)
   } catch (err) {
     coinSymbol = 'cc-default'
-    svgCoinPath = svgCoinPathHelper(`./BTC-alt.svg`)
+    svgCoinPath = svgCoinPathHelper('./BTC-alt.svg')
   }
 
   return (
@@ -58,8 +69,8 @@ const CoinItem = ({ classes, coin }) => {
       <ListItem button>
         <ListItemIcon>
           <ReactSVG
-            path={svgCoinPath}
-            svgClassName={classNames(classes.avatar, coinSymbol)}
+            src={svgCoinPath}
+            className={classNames(classes.avatar, coinSymbol)}
           />
         </ListItemIcon>
         <ListItemText
@@ -74,7 +85,7 @@ const CoinItem = ({ classes, coin }) => {
         />
         <ListItemSecondaryAction>
           <IconButton aria-label="Add cart">
-            <Icon>favorite</Icon>
+            <Favorite />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>

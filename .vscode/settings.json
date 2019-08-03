@@ -1,7 +1,8 @@
 {
   "eslint.validate": [
     "javascript",
-    "javascriptreact"
+    "javascriptreact",
+    "html"
   ],
   "prettier.eslintIntegration": true,
   "editor.formatOnSave": false,

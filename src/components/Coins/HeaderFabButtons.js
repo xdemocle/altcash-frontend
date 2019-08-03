@@ -1,12 +1,9 @@
-/* eslint-disable no-debugger */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import Button from '@material-ui/core/Button'
-import Icon from '@material-ui/core/Icon'
+import { CircularProgress, Fab, Tooltip } from '@material-ui/core'
+import { Refresh, Close, Search } from '@material-ui/icons'
 import CoinSearchModal from './CoinSearchModal'
 
 const styles = theme => ({
@@ -62,65 +59,54 @@ class HeaderfabButtons extends Component {
         <div className={classes.root}>
           <Tooltip title="Reset search results">
             <div className={classes.fabButtons}>
-              <Button
-                mini
-                variant="fab"
+              <Fab
                 color="primary"
+                size="small"
                 aria-label="Reset search results"
                 disabled={loading}
                 onClick={() => updateNeedle('')}
                 className={classNames(!coinPageNeedle && classes.hide)}
               >
-                <Icon>close</Icon>
-              </Button>
+                <Close />
+              </Fab>
             </div>
           </Tooltip>
 
           <Tooltip title="Find coins">
             <div className={classes.fabButtons}>
-              <Button
-                mini
-                variant="fab"
+              <Fab
                 color="primary"
+                size="small"
                 aria-label="Find coins"
                 onClick={this.handleModalOpen}
               >
-                <Icon>search</Icon>
-              </Button>
+                <Search />
+              </Fab>
             </div>
           </Tooltip>
 
-          {/* <Tooltip title="Your favourite coins">
-            <div className={classes.fabButtons}>
-              <Button
-                mini
-                variant="fab"
-                color="primary"
-                aria-label="Your favourite coins"
-                className={classes.fabButtons}
-              >
-                <Icon>star</Icon>
-              </Button>
-            </div>
-          </Tooltip> */}
-
           <Tooltip title="Retrieve an updated list">
             <div className={classes.fabButtons}>
-              <Button
-                mini
-                variant="fab"
+              <Fab
                 color="primary"
+                size="small"
                 aria-label="Retrieve an updated list"
                 disabled={loading}
                 onClick={() => updateNeedle('')}
               >
-                <Icon>refresh</Icon>
-              </Button>
-              {loading && <CircularProgress size={52} className={classes.fabProgress} />}
+                <Refresh />
+              </Fab>
+              {loading && (
+                <CircularProgress size={52} className={classes.fabProgress} />
+              )}
             </div>
           </Tooltip>
         </div>
-        <CoinSearchModal open={modalOpen} handleClose={this.handleModalClose} updateNeedle={updateNeedle} />
+        <CoinSearchModal
+          open={modalOpen}
+          handleClose={this.handleModalClose}
+          updateNeedle={updateNeedle}
+        />
       </React.Fragment>
     )
   }

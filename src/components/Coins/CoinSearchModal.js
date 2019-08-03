@@ -7,7 +7,7 @@ import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
-import Icon from '@material-ui/core/Icon'
+import { Close, Search } from '@material-ui/icons'
 
 const styles = theme => ({
   root: {
@@ -72,7 +72,7 @@ class CoinsSearchModal extends Component {
             onClick={handleClose}
             disableRipple
           >
-            <Icon className={classes.iconSmall}>close</Icon>
+            <Close />
           </Button>
           <div>
             <TextField
@@ -89,7 +89,7 @@ class CoinsSearchModal extends Component {
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
-                    <Icon>search</Icon>
+                    <Search />
                   </InputAdornment>
                 )
               }}

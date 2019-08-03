@@ -4,7 +4,12 @@ import { withRouter } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
-import Icon from '@material-ui/core/Icon'
+import {
+  ContactSupport,
+  Home,
+  // People,
+  ShoppingBasket
+} from '@material-ui/icons'
 
 const styles = {
   root: {
@@ -35,10 +40,22 @@ class SimpleBottomNavigation extends React.Component {
         showLabels
         className={classes.root}
       >
-        <BottomNavigationAction label="Home" icon={<Icon>home</Icon>} value="/" />
-        <BottomNavigationAction label="Buy" icon={<Icon>shopping_basket</Icon>} value="/buy" />
-        <BottomNavigationAction label="Support" icon={<Icon>contact_support</Icon>} value="/support" />
-        {/* <BottomNavigationAction label="About" icon={<Icon>people</Icon>} value="/about" /> */}
+        <BottomNavigationAction label="Home" icon={<Home />} value="/" />
+        <BottomNavigationAction
+          label="Buy"
+          icon={<ShoppingBasket />}
+          value="/buy"
+        />
+        <BottomNavigationAction
+          label="Support"
+          icon={<ContactSupport />}
+          value="/support"
+        />
+        {/* <BottomNavigationAction
+          label="About"
+          icon={<People />}
+          value="/about"
+        /> */}
       </BottomNavigation>
     )
   }

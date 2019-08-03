@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import Button from '@material-ui/core/Button'
-import Icon from '@material-ui/core/Icon'
+import { ArrowDownward, Favorite, List as ListIcon } from '@material-ui/icons'
 import green from '@material-ui/core/colors/green'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import Paper from '@material-ui/core/Paper'
@@ -60,11 +60,6 @@ const styles = theme => ({
   }
 })
 
-const msgLoadingCoinslist = <Typography variant="subtitle2">Loading coins list...</Typography>
-const msgEmptyCoinslist = <Typography variant="subtitle1">No results...</Typography>
-const msgError = (error) => <Typography>Error! {error.message}</Typography>
-const CoinsList = (coins) => <List>{coins.map((coin) => <CoinItem key={coin.id} coin={coin} />)}</List>
-
 class CoinsPage extends Component {
   state = {
     tab: 0
@@ -75,10 +70,22 @@ class CoinsPage extends Component {
   }
 
   render() {
-    const { classes, data: { loading, error, refetch, fetchMore, networkStatus,
-      allCoins, _allCoinsMeta }, app, updateCoinPageNeedle } = this.props
+    const {
+      classes,
+      data: {
+        loading,
+        error,
+        refetch,
+        fetchMore,
+        networkStatus,
+        allCoins,
+        _allCoinsMeta
+      },
+      app,
+      updateCoinPageNeedle
+    } = this.props
 
-    const updateNeedle = (needle) => {
+    const updateNeedle = needle => {
       updateCoinPageNeedle(needle)
       refetch()
     }
@@ -89,7 +96,9 @@ class CoinsPage extends Component {
           offset: allCoins.length
         },
         updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) return prev
+          if (!fetchMoreResult) {
+            return prev
+          }
           return Object.assign({}, prev, {
             allCoins: [...prev.allCoins, ...fetchMoreResult.allCoins]
           })
@@ -97,47 +106,80 @@ class CoinsPage extends Component {
       })
     }
 
+    const showLoadMoreButton =
+      allCoins &&
+      allCoins.length < _allCoinsMeta.count &&
+      allCoins &&
+      networkStatus !== 4
+
     return (
       <div className={classes.root}>
-        <Typography color="primary" variant="h4" gutterBottom className={classes.title}>
+        <Typography
+          color="primary"
+          variant="h4"
+          gutterBottom
+          className={classes.title}
+        >
           Coins available
         </Typography>
 
-        <HeaderFabButtons loading={loading} app={app} updateNeedle={updateNeedle} />
+        <HeaderFabButtons
+          loading={loading}
+          app={app}
+          updateNeedle={updateNeedle}
+        />
 
         <Paper className={classes.paper}>
           <Tabs
             value={this.state.tab}
             onChange={this.handleChange}
-            fullWidth
             indicatorColor="primary"
             textColor="primary"
           >
-            <Tab icon={<Icon>list</Icon>} classes={{ root: classes.tabRoot }} />
-            <Tab icon={<Icon>favorite</Icon>} classes={{ root: classes.tabRoot }} />
+            <Tab icon={<ListIcon />} classes={{ root: classes.tabRoot }} />
+            <Tab icon={<Favorite />} classes={{ root: classes.tabRoot }} />
           </Tabs>
         </Paper>
 
-        {this.state.tab === 0 && <div>
-          {error && msgError(error)}
-          {(allCoins && !allCoins.length && networkStatus === 7) && msgEmptyCoinslist}
-          {(loading && (!allCoins || networkStatus === 4)) && msgLoadingCoinslist}
-          {((networkStatus !== 4 && allCoins)) && CoinsList(allCoins)}
+        {this.state.tab === 0 && (
+          <div>
+            {error && <Typography>Error! {error.message}</Typography>}
+            {allCoins && !allCoins.length && networkStatus === 7 && (
+              <Typography variant="subtitle1">No results...</Typography>
+            )}
+            {loading && (!allCoins || networkStatus === 4) && (
+              <Typography variant="subtitle2">Loading coins list...</Typography>
+            )}
+            {networkStatus !== 4 && allCoins && (
+              <List>
+                {allCoins.map(coin => (
+                  <CoinItem key={coin.id} coin={coin} />
+                ))}
+              </List>
+            )}
 
-          {allCoins && (allCoins.length < _allCoinsMeta.count) && (allCoins && networkStatus !== 4) && <div className={classes.bottomListWrapper}>
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.buttonLoadMore}
-              onClick={onLoadMore}
-              disabled={loading}
-            >
-              Load more
-              <Icon className={classes.rightIcon}>arrow_downward</Icon>
-            </Button>
-            {loading && <CircularProgress size={24} className={classes.buttonProgress} />}
-          </div>}
-        </div>}
+            {showLoadMoreButton && (
+              <div className={classes.bottomListWrapper}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  className={classes.buttonLoadMore}
+                  onClick={onLoadMore}
+                  disabled={loading}
+                >
+                  Load more
+                  <ArrowDownward className={classes.rightIcon} />
+                </Button>
+                {loading && (
+                  <CircularProgress
+                    size={24}
+                    className={classes.buttonProgress}
+                  />
+                )}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     )
   }
@@ -165,10 +207,10 @@ const CoinsPageEnhanced = compose(
     }
   }),
   graphql(GET_COINS_LIST_WITH_MARKETS, {
-    props: (data) => {
+    props: data => {
       return data
     },
-    options: (ownProps) => ({
+    options: ownProps => ({
       fetchPolicy: 'cache-first',
       notifyOnNetworkStatusChange: true,
       variables: {
