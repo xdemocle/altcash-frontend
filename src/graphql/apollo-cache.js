@@ -6,17 +6,20 @@
  */
 import { persistCache } from 'apollo-cache-persist'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import localforage from 'localforage'
 
 // This is the same cache you pass into new ApolloClient and we going to use
 // it also for persisting the cache locally.
 const cache = new InMemoryCache()
 
-const persistCacheInstance = persistCache({
-  cache,
-  storage: window.localStorage
+// This will use a different driver order.
+localforage.config({
+  driver: [localforage.WEBSQL, localforage.INDEXEDDB]
 })
 
-export {
+const persistCacheInstance = persistCache({
   cache,
-  persistCacheInstance
-}
+  storage: localforage
+})
+
+export { cache, persistCacheInstance }
