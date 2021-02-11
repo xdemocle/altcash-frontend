@@ -60,39 +60,23 @@ const styles = (theme) => ({
   }
 })
 
-// const CoinsPageEnhanced = compose(
-//   withStyles(styles, { withTheme: true }),
-//   graphql(GET_COINS_LIST_WITH_MARKETS, {
-//     props: (data) => {
-//       return data
-//     },
-//     options: (ownProps) => ({
-//       fetchPolicy: 'cache-first',
-//       notifyOnNetworkStatusChange: true,
-//       variables: {
-//         offset: 0,
-//         limit: 20,
-//         needle: ownProps.app.coinPageNeedle
-//       }
-//     })
-//   })
-// )(CoinsPage)
-
-const CoinsPage = (props) => {
+const CoinsList = (props) => {
   const { classes } = props
   const [globalState, globalActions] = useGlobal()
   const [tab, setTab] = useState(0)
   const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
-    GET_COINS_LIST
-    // {
-    //   variables: { offset: 0, limit: 20, needle: globalState.coinPageNeedle }
-    // }
+    GET_COINS_LIST,
+    {
+      variables: {
+        offset: 0,
+        limit: 20,
+        needle: globalState.coinPageNeedle
+      }
+    }
   )
 
-  console.log('data', data)
-
   const handleChange = (event, tab) => {
-    setTab({ tab })
+    setTab(tab)
   }
 
   const updateNeedle = (needle) => {
@@ -100,27 +84,27 @@ const CoinsPage = (props) => {
     refetch()
   }
 
-  // const onLoadMore = () => {
-  //   fetchMore({
-  //     variables: {
-  //       offset: allCoins.length
-  //     },
-  //     // updateQuery: (prev, { fetchMoreResult }) => {
-  //     //   if (!fetchMoreResult) {
-  //     //     return prev
-  //     //   }
-  //     //   return Object.assign({}, prev, {
-  //     //     allCoins: [...prev.allCoins, ...fetchMoreResult.allCoins]
-  //     //   })
-  //     // }
-  //   })
-  // }
+  const onLoadMore = () => {
+    fetchMore({
+      variables: {
+        offset: data && data.coins.length
+      }
+      // updateQuery: (prev, { fetchMoreResult }) => {
+      //   if (!fetchMoreResult) {
+      //     return prev
+      //   }
+      //   return Object.assign({}, prev, {
+      //     data.coins: [...prev.data.coins, ...fetchMoreResult.data.coins]
+      //   })
+      // }
+    })
+  }
 
-  // const showLoadMoreButton =
-  //   allCoins &&
-  //   allCoins.length < data._allCoinsMeta.count &&
-  //   allCoins &&
-  //   networkStatus !== 4
+  const showLoadMoreButton =
+    data &&
+    data.coins &&
+    // data.coins.length < data._allCoinsMeta.count &&
+    networkStatus !== 4
 
   return (
     <div className={classes.root}>
@@ -150,20 +134,20 @@ const CoinsPage = (props) => {
           <Tab icon={<Favorite />} classes={{ root: classes.tabRoot }} />
         </Tabs>
       </Paper>
-      {/*
+
       {tab === 0 && (
         <div>
           {error && <Typography>Error! {error.message}</Typography>}
-          {allCoins && !allCoins.length && networkStatus === 7 && (
+          {data && data.coins && !data.coins.length && networkStatus === 7 && (
             <Typography variant="subtitle1">No results...</Typography>
           )}
-          {loading && (!allCoins || networkStatus === 4) && (
+          {loading && ((data && !data.coins) || networkStatus === 4) && (
             <Typography variant="subtitle2">Loading coins list...</Typography>
           )}
-          {networkStatus !== 4 && allCoins && (
+          {networkStatus !== 4 && data && data.coins && (
             <List>
-              {allCoins.map((coin) => (
-                <CoinItem key={coin.id} coin={coin} />
+              {data.coins.map((coin, ix) => (
+                <CoinItem key={`${coin.name}${ix}`} coin={coin} />
               ))}
             </List>
           )}
@@ -189,14 +173,13 @@ const CoinsPage = (props) => {
             </div>
           )}
         </div>
-      )} */}
+      )}
     </div>
   )
 }
 
-CoinsPage.propTypes = {
-  classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired
+CoinsList.propTypes = {
+  classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { withTheme: true })(CoinsPage)
+export default withStyles(styles, { withTheme: true })(CoinsList)

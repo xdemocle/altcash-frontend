@@ -1,10 +1,10 @@
 import { gql } from '@apollo/client'
 
 export const GET_COINS_LIST = gql`
-  query AllCoins {
-    allCoins {
-      id
+  query allCoins($offset: Int, $limit: Int, $needle: String) {
+    coins(offset: $offset, limit: $limit, coin: $needle) {
       name
+      symbol
     }
   }
 `

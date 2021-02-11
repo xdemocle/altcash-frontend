@@ -1,5 +1,0 @@
-mutation {lb}{br}
-    {f3}: createCoin(name: "{f3}"; symbol: "{f1}"; symbols: [{ exchanger: "bittrex"; market:"{f6}"; isActive: "{f7}" }]) {lb}
-        id
-    {rb}
-{rb}

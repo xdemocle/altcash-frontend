@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Launch all dev tasks",
+      "detail": "Launch all development consoles",
+      "dependsOn": ["server", "bundler:watch"],
+      "group": "build"
+    },
+    {
+      "type": "shell",
+      "command": "yarn server",
+      "label": "server",
+      "isBackground": false,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    },
+    {
+      "type": "shell",
+      "command": "yarn start",
+      "label": "bundler:watch",
+      "isBackground": false,
+      "problemMatcher": [],
+      "group": "build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+    // {
+    //   "type": "shell",
+    //   "command": "make types:watch",
+    //   "label": "types:watch",
+    //   "isBackground": false,
+    //   "detail": "",
+    //   "problemMatcher": [],
+    //   "group": "build",
+    //   "presentation": {
+    //     "reveal": "always",
+    //     "panel": "new"
+    //   }
+    // },
+    // {
+    //   "type": "shell",
+    //   "command": "make tests:watch",
+    //   "label": "tests:watch",
+    //   "isBackground": false,
+    //   "detail": "",
+    //   "problemMatcher": [],
+    //   "group": "build",
+    //   "presentation": {
+    //     "reveal": "always",
+    //     "panel": "new"
+    //   }
+    // }
+  ]
+}
