@@ -1,13 +1,4 @@
-import gql from 'graphql-tag'
-
-export const GET_APP = gql`
-  query {
-    app @client {
-      isSidebarOpen
-      coinPageNeedle
-    }
-  }
-`
+import { gql } from '@apollo/client'
 
 export const GET_COINS_LIST = gql`
   query allCoins($offset: Int, $limit: Int) {

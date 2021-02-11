@@ -11,10 +11,10 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import { graphql, compose } from 'react-apollo'
+import { graphql, compose } from '@apollo/client'
 import HeaderFabButtons from './HeaderFabButtons'
 import CoinItem from './CoinItem'
-import { GET_APP, GET_COINS_LIST_WITH_MARKETS } from '../../graphql/queries'
+import { GET_COINS_LIST_WITH_MARKETS } from '../../graphql/queries'
 import { UPDATE_COIN_PAGE_NEEDLE } from '../../graphql/mutations'
 
 const styles = (theme) => ({
@@ -198,13 +198,6 @@ const CoinsPageEnhanced = compose(
     props: ({ mutate }) => ({
       updateCoinPageNeedle: (needle) => mutate({ variables: { needle } })
     })
-  }),
-  graphql(GET_APP, {
-    props: ({ data: { app } }) => {
-      return {
-        app
-      }
-    }
   }),
   graphql(GET_COINS_LIST_WITH_MARKETS, {
     props: (data) => {

@@ -1,4 +1,4 @@
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 
 const UPDATE_NETWORK_STATUS = gql`
   mutation updateNetworkStatus($isConnected: Boolean) {

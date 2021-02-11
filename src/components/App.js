@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-// import { persistCacheInstance } from '../graphql/apollo-cache'
+import { persistCacheInstance } from '../graphql/apollo-cache'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import green from '@material-ui/core/colors/green'
@@ -76,24 +76,24 @@ class App extends Component {
     loaded: false
   }
 
-  // async componentDidMount() {
-  //   /**
-  //    * Enabling the snippet of code below we would activate the cache at first
-  //    * stage of app bootstrap. At moment is deactivated and data is written only
-  //    * after bootstrap and first relevant action, since i'm trying to temporary
-  //    * overcome the current limitation of apollo-cache-persist and have fresh
-  //    * data each reload of the browser.
-  //    */
-  //   try {
-  //     await persistCacheInstance
-  //   } catch (error) {
-  //     console.error('Error restoring Apollo cache', error)
-  //   }
+  async componentDidMount() {
+    /**
+     * Enabling the snippet of code below we would activate the cache at first
+     * stage of app bootstrap. At moment is deactivated and data is written only
+     * after bootstrap and first relevant action, since i'm trying to temporary
+     * overcome the current limitation of apollo-cache-persist and have fresh
+     * data each reload of the browser.
+     */
+    try {
+      await persistCacheInstance
+    } catch (error) {
+      console.error('Error restoring Apollo cache', error)
+    }
 
-  //   this.setState({
-  //     loaded: true
-  //   })
-  // }
+    this.setState({
+      loaded: true
+    })
+  }
 
   render() {
     const { classes } = this.props

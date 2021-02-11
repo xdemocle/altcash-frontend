@@ -4,8 +4,8 @@
  * Todo: add apollo-link-persisted-queries cache for very large queries that can
  *       become bottlenecks for client performance.
  */
+import { InMemoryCache } from '@apollo/client'
 import { persistCache } from 'apollo-cache-persist'
-import { InMemoryCache } from 'apollo-cache-inmemory'
 import localforage from 'localforage'
 
 // This is the same cache you pass into new ApolloClient and we going to use

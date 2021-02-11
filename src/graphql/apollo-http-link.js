@@ -1,26 +1,57 @@
 /**
  * apollo-http-link.js
  */
-import { onError } from 'apollo-link-error'
-import { ApolloLink } from 'apollo-link'
-import { HttpLink } from 'apollo-link-http'
-import stateLink from './apollo-client-state'
+import { ApolloLink } from '@apollo/client'
+import { onError } from '@apollo/client/link/error'
+import AWSAppSyncClient from 'aws-appsync'
+import { createAuthLink } from 'aws-appsync-auth-link'
+import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link'
+// import Auth from '@aws-amplify/auth'
+import appSyncConfig from '../aws-exports'
 
-const uri = 'https://api.graph.cool/simple/v1/cjj71t3v94zjs0110qulaqo8n'
+const config = new AWSAppSyncClient({
+  url: appSyncConfig.aws_appsync_graphqlEndpoint,
+  region: appSyncConfig.aws_appsync_region,
+  auth: {
+    type: appSyncConfig.aws_appsync_authenticationType,
+    apiKey: appSyncConfig.aws_appsync_apiKey
+    // jwtToken: async () =>
+    //   (await Auth.currentSession()).getIdToken().getJwtToken()
+  }
+  // cacheOptions: {
+  //   dataIdFromObject: (obj) => {
+  //     let id = defaultDataIdFromObject(obj)
+
+  //     if (!id) {
+  //       const { __typename: typename } = obj
+  //       switch (typename) {
+  //         case 'Comment':
+  //           return `${typename}:${obj.commentId}`
+  //         default:
+  //           return id
+  //       }
+  //     }
+
+  //     return id
+  //   }
+  // }
+})
 
 export default ApolloLink.from([
-  stateLink,
+  createAuthLink(config),
+  createSubscriptionHandshakeLink(config),
   onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
       graphQLErrors.map(({ message, locations, path }) =>
+        // eslint-disable-next-line no-console
         console.log(
           `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
         )
       )
     }
     if (networkError) {
+      // eslint-disable-next-line no-console
       console.log(`[Network error]: ${networkError}`)
     }
-  }),
-  new HttpLink({ uri })
+  })
 ])
