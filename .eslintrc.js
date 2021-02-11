@@ -17,7 +17,7 @@ module.exports = {
         allow: ['warn', 'error', 'debug', 'group', 'groupEnd']
       }
     ],
-    'no-unused-vars': ['error'],
+    'no-unused-vars': ['warn'],
     semi: ['warn', 'never'],
     'no-extra-semi': 'warn',
     'semi-spacing': 'warn',

@@ -13,6 +13,7 @@
     "aws-appsync-auth-link": "^3.0.3",
     "aws-appsync-subscription-link": "^3.0.5",
     "cryptocoins-icons": "^2.9.0",
+    "graphql": "^15.5.0",
     "localforage": "^1.9.0",
     "lodash": "^4.17.20",
     "react": "^17.0.1",

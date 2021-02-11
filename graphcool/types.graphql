@@ -1,14 +1,12 @@
 # The following types define the data model of the example service
 # based on which the GraphQL API is generated
 
-
 type Coin @model {
   id: ID! @isUnique
   name: String!
   symbol: String! @isUnique
   markets: [ExchangeMarket!]! @relation(name: "CoinExchangeMarket")
 }
-
 
 type ExchangeMarket @model {
   id: ID! @isUnique
