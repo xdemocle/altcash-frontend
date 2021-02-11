@@ -7,7 +7,8 @@ import { cache } from './apollo-cache'
 // Initialize Apollo client with cache and state
 export default new ApolloClient({
   cache,
-  uri: 'http://localhost:4000/graphql',
+  // uri: 'http://localhost:4000/graphql',
+  uri: '/graphql',
   // headers: {
   //   authorization: localStorage.getItem('token') || '',
   //   'client-name': 'Space Explorer [web]',

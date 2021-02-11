@@ -42,6 +42,7 @@
     "websocket": "node websocket.js",
     "fix-code": "prettier-eslint --write $PWD/'src/**/*.{js,jsx}' "
   },
+  "proxy": "http://localhost:4000",
   "browserslist": {
     "production": [
       ">0.2%",
