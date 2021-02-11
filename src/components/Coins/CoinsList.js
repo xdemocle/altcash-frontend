@@ -83,10 +83,10 @@ const CoinsPage = (props) => {
   const [globalState, globalActions] = useGlobal()
   const [tab, setTab] = useState(0)
   const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
-    GET_COINS_LIST,
-    {
-      variables: { offset: 0, limit: 20, needle: globalState.coinPageNeedle }
-    }
+    GET_COINS_LIST
+    // {
+    //   variables: { offset: 0, limit: 20, needle: globalState.coinPageNeedle }
+    // }
   )
 
   console.log('data', data)

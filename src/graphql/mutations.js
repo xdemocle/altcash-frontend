@@ -30,3 +30,52 @@ export {
   UPDATE_IS_SIDEBAR_OPEN,
   UPDATE_COIN_PAGE_NEEDLE
 }
+
+/* eslint-disable */
+// this is an auto generated file. This will be overwritten
+
+export const createCoin = /* GraphQL */ `
+  mutation CreateCoin($input: CreateCoinInput!) {
+    createCoin(input: $input) {
+      id
+      name
+      symbol
+      markets {
+        id
+        market
+        exchanger
+        isActive
+      }
+    }
+  }
+`
+export const updateCoin = /* GraphQL */ `
+  mutation UpdateCoin($input: UpdateCoinInput!) {
+    updateCoin(input: $input) {
+      id
+      name
+      symbol
+      markets {
+        id
+        market
+        exchanger
+        isActive
+      }
+    }
+  }
+`
+export const deleteCoin = /* GraphQL */ `
+  mutation DeleteCoin($input: DeleteCoinInput!) {
+    deleteCoin(input: $input) {
+      id
+      name
+      symbol
+      markets {
+        id
+        market
+        exchanger
+        isActive
+      }
+    }
+  }
+`

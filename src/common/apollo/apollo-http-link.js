@@ -7,7 +7,7 @@ import AWSAppSyncClient from 'aws-appsync'
 import { createAuthLink } from 'aws-appsync-auth-link'
 import { createSubscriptionHandshakeLink } from 'aws-appsync-subscription-link'
 // import Auth from '@aws-amplify/auth'
-import appSyncConfig from '../aws-exports'
+import appSyncConfig from '../../aws-exports'
 
 const config = new AWSAppSyncClient({
   url: appSyncConfig.aws_appsync_graphqlEndpoint,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { persistCacheInstance } from '../graphql/apollo-cache'
+import { persistCacheInstance } from '../common/apollo/apollo-cache'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import green from '@material-ui/core/colors/green'
