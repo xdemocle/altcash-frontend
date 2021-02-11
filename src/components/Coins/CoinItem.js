@@ -33,17 +33,11 @@ const styles = (theme) => ({
   }
 })
 
-// const svgCoinIcons = import(
-//   '../../../node_modules/cryptocurrency-icons/svg/color',
-//   true,
-//   /.*\.svg$/
-// )
+const svgCoinPathHelper = (name) => {
+  return require(`../../../node_modules/cryptocurrency-icons/svg/color/${name}.svg`)
+    .default
+}
 
-// const svgCoinPathHelper = (icon) =>
-//   import(`../../../node_modules/cryptocurrency-icons/svg/color/${icon}.svg`)
-// import(`cryptocurrency-icons/svg/color/${icon}.svg`)
-
-// const svgCoinPathHelper = (name) => svgCoinIcons(name, true)
 const isCoinActiveHelper = (markets) => {
   const activeMarkets = filter(markets, (market) => {
     return market.isActive
@@ -53,7 +47,6 @@ const isCoinActiveHelper = (markets) => {
 }
 
 const CoinItem = ({ classes, coin }) => {
-  // let coinSymbol = null
   let coinSymbol = coin.symbol.toLowerCase()
   let svgCoinPath = null
   const isCoinActive = isCoinActiveHelper(coin.markets)
@@ -62,25 +55,13 @@ const CoinItem = ({ classes, coin }) => {
   //   return null
   // }
 
-  // try {
-  //   coinSymbol = coin.symbol.toLowerCase()
-  //   svgCoinPath = svgCoinPathHelper(coinSymbol)
-  // } catch (err) {
-  //   coinSymbol = 'default'
-  //   svgCoinPath = svgCoinPathHelper('btc')
-  // }
-
-  // useEffect(() => {
-  // }, [])
-  // import(
-  //   /* webpackMode: "eager" */ `../../../node_modules/cryptocurrency-icons/svg/color/${coinSymbol}.svg`
-  // )
-  //   .then((getIcon) => getIcon.default(this.props.icon))
-  //   .then((res) => {
-  //     svgCoinPath = res.default
-  //   })
-
-  // console.log(svgCoinPath)
+  try {
+    coinSymbol = coin.symbol.toLowerCase()
+    svgCoinPath = svgCoinPathHelper(coinSymbol)
+  } catch (err) {
+    coinSymbol = 'cc-default'
+    svgCoinPath = svgCoinPathHelper('btc')
+  }
 
   return (
     <React.Fragment>
