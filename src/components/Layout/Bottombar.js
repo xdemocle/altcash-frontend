@@ -4,7 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     // width: 'auto',
     boxShadow: 'none',
@@ -23,7 +23,7 @@ function SimpleAppBar(props) {
   return (
     <AppBar position="absolute" color="secondary" className={classes.root}>
       <Typography variant="body1" color="inherit" align="right">
-        &copy; Alts.sale { new Date().getFullYear() }
+        &copy; Alts.sale {new Date().getFullYear()}
       </Typography>
     </AppBar>
   )

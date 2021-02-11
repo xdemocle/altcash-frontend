@@ -9,7 +9,7 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import Button from '@material-ui/core/Button'
 import { Close, Search } from '@material-ui/icons'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     top: '50%',
     left: '50%',

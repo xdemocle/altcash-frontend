@@ -6,7 +6,7 @@ import { CircularProgress, Fab, Tooltip } from '@material-ui/core'
 import { Refresh, Close, Search } from '@material-ui/icons'
 import CoinSearchModal from './CoinSearchModal'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     position: 'absolute',
     top: theme.spacing(3),

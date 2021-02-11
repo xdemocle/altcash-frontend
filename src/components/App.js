@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { persistCacheInstance } from '../graphql/apollo-cache'
+// import { persistCacheInstance } from '../graphql/apollo-cache'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, withStyles } from '@material-ui/core/styles'
 import green from '@material-ui/core/colors/green'
@@ -11,7 +11,7 @@ import ScrollToTop from '../common/ScrollToTop'
 import Sidebar from './Layout/Sidebar'
 import BottomNav from './Layout/BottomNav'
 import Bottombar from './Layout/Bottombar'
-import TickersLivePrice from '../common/TickersLivePrice'
+// import TickersLivePrice from '../common/TickersLivePrice'
 
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
@@ -45,7 +45,7 @@ export const theme = createMuiTheme({
   }
 })
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     flexGrow: 1
   },
@@ -76,24 +76,24 @@ class App extends Component {
     loaded: false
   }
 
-  async componentDidMount() {
-    /**
-     * Enabling the snippet of code below we would activate the cache at first
-     * stage of app bootstrap. At moment is deactivated and data is written only
-     * after bootstrap and first relevant action, since i'm trying to temporary
-     * overcome the current limitation of apollo-cache-persist and have fresh
-     * data each reload of the browser.
-     */
-    try {
-      await persistCacheInstance
-    } catch (error) {
-      console.error('Error restoring Apollo cache', error)
-    }
+  // async componentDidMount() {
+  //   /**
+  //    * Enabling the snippet of code below we would activate the cache at first
+  //    * stage of app bootstrap. At moment is deactivated and data is written only
+  //    * after bootstrap and first relevant action, since i'm trying to temporary
+  //    * overcome the current limitation of apollo-cache-persist and have fresh
+  //    * data each reload of the browser.
+  //    */
+  //   try {
+  //     await persistCacheInstance
+  //   } catch (error) {
+  //     console.error('Error restoring Apollo cache', error)
+  //   }
 
-    this.setState({
-      loaded: true
-    })
-  }
+  //   this.setState({
+  //     loaded: true
+  //   })
+  // }
 
   render() {
     const { classes } = this.props
@@ -105,7 +105,7 @@ class App extends Component {
     return (
       <ScrollToTop>
         <div className={classes.root}>
-          <TickersLivePrice />
+          {/* <TickersLivePrice /> */}
           <CssBaseline />
           <div className={classes.appFrame}>
             <Sidebar />

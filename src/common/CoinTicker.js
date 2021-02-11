@@ -9,9 +9,7 @@ class CoinTicker extends React.Component {
   // }
 
   render() {
-    return (
-      `R1500`
-    )
+    return 'R1500'
   }
 }
 

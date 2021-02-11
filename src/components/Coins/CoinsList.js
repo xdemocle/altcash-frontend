@@ -17,7 +17,7 @@ import CoinItem from './CoinItem'
 import { GET_APP, GET_COINS_LIST_WITH_MARKETS } from '../../graphql/queries'
 import { UPDATE_COIN_PAGE_NEEDLE } from '../../graphql/mutations'
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
     padding: theme.typography.pxToRem(theme.spacing(3)),
     [theme.breakpoints.only('xs')]: {
@@ -85,7 +85,7 @@ class CoinsPage extends Component {
       updateCoinPageNeedle
     } = this.props
 
-    const updateNeedle = needle => {
+    const updateNeedle = (needle) => {
       updateCoinPageNeedle(needle)
       refetch()
     }
@@ -152,7 +152,7 @@ class CoinsPage extends Component {
             )}
             {networkStatus !== 4 && allCoins && (
               <List>
-                {allCoins.map(coin => (
+                {allCoins.map((coin) => (
                   <CoinItem key={coin.id} coin={coin} />
                 ))}
               </List>
@@ -196,7 +196,7 @@ const CoinsPageEnhanced = compose(
   withStyles(styles, { withTheme: true }),
   graphql(UPDATE_COIN_PAGE_NEEDLE, {
     props: ({ mutate }) => ({
-      updateCoinPageNeedle: needle => mutate({ variables: { needle } })
+      updateCoinPageNeedle: (needle) => mutate({ variables: { needle } })
     })
   }),
   graphql(GET_APP, {
@@ -207,10 +207,10 @@ const CoinsPageEnhanced = compose(
     }
   }),
   graphql(GET_COINS_LIST_WITH_MARKETS, {
-    props: data => {
+    props: (data) => {
       return data
     },
-    options: ownProps => ({
+    options: (ownProps) => ({
       fetchPolicy: 'cache-first',
       notifyOnNetworkStatusChange: true,
       variables: {

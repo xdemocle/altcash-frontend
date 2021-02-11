@@ -17,7 +17,4 @@ const socketConnect = (callback) => {
   return socket
 }
 
-export {
-  socket,
-  socketConnect
-}
+export { socket, socketConnect }

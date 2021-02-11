@@ -25,7 +25,7 @@ class TickersLivePrice extends React.Component {
 
   updateMarkets(markets) {
     const { updateMarket } = this.props
-    markets.forEach(market => updateMarket(market))
+    markets.forEach((market) => updateMarket(market))
   }
 
   componentWillUnmount() {
@@ -46,7 +46,7 @@ TickersLivePrice.propTypes = {
 const TickersLivePriceEnhanced = compose(
   graphql(UPDATE_MARKET, {
     props: ({ mutate }) => ({
-      updateMarket: market => mutate({ variables: { market } })
+      updateMarket: (market) => mutate({ variables: { market } })
     })
   })
 )(TickersLivePrice)

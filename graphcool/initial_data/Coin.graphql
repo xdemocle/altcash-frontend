@@ -2,1407 +2,1630 @@ mutation {
   twoGIVE: createCoin(
     name: "2GIVE"
     symbol: "2GIVE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-2GIVE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-2GIVE", isActive: true }]
   ) {
     id
   }
   ABY: createCoin(
     name: "ArtByte"
     symbol: "ABY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ABY", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ABY", isActive: true }]
   ) {
     id
   }
   ADA: createCoin(
     name: "Ada"
     symbol: "ADA"
-    symbols: [{ exchanger: "bittrex", market: "USDT-ADA", isActive: true },{ exchanger: "bittrex", market: "BTC-ADA", isActive: true },{ exchanger: "bittrex", market: "ETH-ADA", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "USDT-ADA", isActive: true }
+      { exchanger: "bittrex", market: "BTC-ADA", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ADA", isActive: true }
+    ]
   ) {
     id
   }
   ADT: createCoin(
     name: "adToken"
     symbol: "ADT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ADT", isActive: true },{ exchanger: "bittrex", market: "ETH-ADT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-ADT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ADT", isActive: true }
+    ]
   ) {
     id
   }
   ADX: createCoin(
     name: "AdEx"
     symbol: "ADX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ADX", isActive: true },{ exchanger: "bittrex", market: "ETH-ADX", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-ADX", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ADX", isActive: true }
+    ]
   ) {
     id
   }
   AEON: createCoin(
     name: "Aeon"
     symbol: "AEON"
-    symbols: [{ exchanger: "bittrex", market: "BTC-AEON", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-AEON", isActive: true }]
   ) {
     id
   }
   AID: createCoin(
     name: "AidCoin"
     symbol: "AID"
-    symbols: [{ exchanger: "bittrex", market: "BTC-AID", isActive: true },{ exchanger: "bittrex", market: "ETH-AID", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-AID", isActive: true }
+      { exchanger: "bittrex", market: "ETH-AID", isActive: true }
+    ]
   ) {
     id
   }
   AMP: createCoin(
     name: "AMP"
     symbol: "AMP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-AMP", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-AMP", isActive: true }]
   ) {
     id
   }
   ANT: createCoin(
     name: "Aragon"
     symbol: "ANT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ANT", isActive: true },{ exchanger: "bittrex", market: "ETH-ANT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-ANT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ANT", isActive: true }
+    ]
   ) {
     id
   }
   ARDR: createCoin(
     name: "Ardor"
     symbol: "ARDR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ARDR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ARDR", isActive: true }]
   ) {
     id
   }
   ARK: createCoin(
     name: "Ark"
     symbol: "ARK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ARK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ARK", isActive: true }]
   ) {
     id
   }
   AUR: createCoin(
     name: "AuroraCoin"
     symbol: "AUR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-AUR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-AUR", isActive: true }]
   ) {
     id
   }
   BAT: createCoin(
     name: "Basic Attention Token"
     symbol: "BAT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BAT", isActive: true },{ exchanger: "bittrex", market: "ETH-BAT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-BAT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-BAT", isActive: true }
+    ]
   ) {
     id
   }
   BAY: createCoin(
     name: "BitBay"
     symbol: "BAY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BAY", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BAY", isActive: true }]
   ) {
     id
   }
   BCH: createCoin(
     name: "Bitcoin Cash"
     symbol: "BCH"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BCH", isActive: true },{ exchanger: "bittrex", market: "ETH-BCH", isActive: true },{ exchanger: "bittrex", market: "USDT-BCH", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-BCH", isActive: true }
+      { exchanger: "bittrex", market: "ETH-BCH", isActive: true }
+      { exchanger: "bittrex", market: "USDT-BCH", isActive: true }
+    ]
   ) {
     id
   }
   BCPT: createCoin(
     name: "BlockMason Credit Protocol"
     symbol: "BCPT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BCPT", isActive: true },{ exchanger: "bittrex", market: "ETH-BCPT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-BCPT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-BCPT", isActive: true }
+    ]
   ) {
     id
   }
   BCY: createCoin(
     name: "BitCrystals"
     symbol: "BCY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BCY", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BCY", isActive: true }]
   ) {
     id
   }
   BITB: createCoin(
     name: "BitBean"
     symbol: "BITB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BITB", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BITB", isActive: true }]
   ) {
     id
   }
   BITS: createCoin(
     name: "Bitswift"
     symbol: "BITS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BITS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BITS", isActive: true }]
   ) {
     id
   }
   BKX: createCoin(
     name: "Bankex"
     symbol: "BKX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BKX", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BKX", isActive: true }]
   ) {
     id
   }
   BLK: createCoin(
     name: "BlackCoin"
     symbol: "BLK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BLK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BLK", isActive: true }]
   ) {
     id
   }
   BLOCK: createCoin(
     name: "Blocknet"
     symbol: "BLOCK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BLOCK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BLOCK", isActive: true }]
   ) {
     id
   }
   BLT: createCoin(
     name: "Bloom"
     symbol: "BLT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BLT", isActive: true },{ exchanger: "bittrex", market: "ETH-BLT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-BLT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-BLT", isActive: true }
+    ]
   ) {
     id
   }
   BNT: createCoin(
     name: "Bancor"
     symbol: "BNT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BNT", isActive: true },{ exchanger: "bittrex", market: "ETH-BNT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-BNT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-BNT", isActive: true }
+    ]
   ) {
     id
   }
   BRK: createCoin(
     name: "Breakout"
     symbol: "BRK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BRK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BRK", isActive: true }]
   ) {
     id
   }
   BRX: createCoin(
     name: "Breakout Stake"
     symbol: "BRX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BRX", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BRX", isActive: true }]
   ) {
     id
   }
   BSD: createCoin(
     name: "BitSend"
     symbol: "BSD"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BSD", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BSD", isActive: true }]
   ) {
     id
   }
   BTG: createCoin(
     name: "Bitcoin Gold"
     symbol: "BTG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BTG", isActive: true },{ exchanger: "bittrex", market: "USDT-BTG", isActive: true },{ exchanger: "bittrex", market: "ETH-BTG", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-BTG", isActive: true }
+      { exchanger: "bittrex", market: "USDT-BTG", isActive: true }
+      { exchanger: "bittrex", market: "ETH-BTG", isActive: true }
+    ]
   ) {
     id
   }
   BURST: createCoin(
     name: "BURSTCoin"
     symbol: "BURST"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BURST", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BURST", isActive: true }]
   ) {
     id
   }
   BYC: createCoin(
     name: "Bytecent"
     symbol: "BYC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-BYC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-BYC", isActive: true }]
   ) {
     id
   }
   CANN: createCoin(
     name: "CannabisCoin"
     symbol: "CANN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CANN", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CANN", isActive: true }]
   ) {
     id
   }
   CBC: createCoin(
     name: "CashBet"
     symbol: "CBC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CBC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CBC", isActive: true }]
   ) {
     id
   }
   CFI: createCoin(
     name: "Cofound.it"
     symbol: "CFI"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CFI", isActive: true },{ exchanger: "bittrex", market: "ETH-CFI", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-CFI", isActive: true }
+      { exchanger: "bittrex", market: "ETH-CFI", isActive: true }
+    ]
   ) {
     id
   }
   CLAM: createCoin(
     name: "CLAMs"
     symbol: "CLAM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CLAM", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CLAM", isActive: true }]
   ) {
     id
   }
   CLOAK: createCoin(
     name: "CloakCoin"
     symbol: "CLOAK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CLOAK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CLOAK", isActive: true }]
   ) {
     id
   }
   CMCT: createCoin(
     name: "Crowd Machine"
     symbol: "CMCT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CMCT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CMCT", isActive: true }]
   ) {
     id
   }
   COVAL: createCoin(
     name: "Circuits of Value"
     symbol: "COVAL"
-    symbols: [{ exchanger: "bittrex", market: "BTC-COVAL", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-COVAL", isActive: true }]
   ) {
     id
   }
   CRB: createCoin(
     name: "CreditBit"
     symbol: "CRB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CRB", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CRB", isActive: true }]
   ) {
     id
   }
   CRW: createCoin(
     name: "Crown"
     symbol: "CRW"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CRW", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CRW", isActive: true }]
   ) {
     id
   }
   CURE: createCoin(
     name: "CureCoin"
     symbol: "CURE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CURE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-CURE", isActive: true }]
   ) {
     id
   }
   CVC: createCoin(
     name: "Civic"
     symbol: "CVC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-CVC", isActive: true },{ exchanger: "bittrex", market: "ETH-CVC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-CVC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-CVC", isActive: true }
+    ]
   ) {
     id
   }
   DASH: createCoin(
     name: "Dash"
     symbol: "DASH"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DASH", isActive: true },{ exchanger: "bittrex", market: "USDT-DASH", isActive: true },{ exchanger: "bittrex", market: "ETH-DASH", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-DASH", isActive: true }
+      { exchanger: "bittrex", market: "USDT-DASH", isActive: true }
+      { exchanger: "bittrex", market: "ETH-DASH", isActive: true }
+    ]
   ) {
     id
   }
   DCR: createCoin(
     name: "Decred"
     symbol: "DCR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DCR", isActive: true },{ exchanger: "bittrex", market: "USDT-DCR", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-DCR", isActive: true }
+      { exchanger: "bittrex", market: "USDT-DCR", isActive: true }
+    ]
   ) {
     id
   }
   DCT: createCoin(
     name: "DECENT"
     symbol: "DCT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DCT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-DCT", isActive: true }]
   ) {
     id
   }
   DGB: createCoin(
     name: "Digibyte"
     symbol: "DGB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DGB", isActive: true },{ exchanger: "bittrex", market: "ETH-DGB", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-DGB", isActive: true }
+      { exchanger: "bittrex", market: "ETH-DGB", isActive: true }
+    ]
   ) {
     id
   }
   DMD: createCoin(
     name: "Diamond"
     symbol: "DMD"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DMD", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-DMD", isActive: true }]
   ) {
     id
   }
   DMT: createCoin(
     name: "DMarket"
     symbol: "DMT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DMT", isActive: true },{ exchanger: "bittrex", market: "ETH-DMT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-DMT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-DMT", isActive: true }
+    ]
   ) {
     id
   }
   DNT: createCoin(
     name: "district0x"
     symbol: "DNT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DNT", isActive: true },{ exchanger: "bittrex", market: "ETH-DNT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-DNT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-DNT", isActive: true }
+    ]
   ) {
     id
   }
   DOGE: createCoin(
     name: "Dogecoin"
     symbol: "DOGE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DOGE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-DOGE", isActive: true }]
   ) {
     id
   }
   DOPE: createCoin(
     name: "DopeCoin"
     symbol: "DOPE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DOPE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-DOPE", isActive: true }]
   ) {
     id
   }
   DTB: createCoin(
     name: "Databits"
     symbol: "DTB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DTB", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-DTB", isActive: true }]
   ) {
     id
   }
   DYN: createCoin(
     name: "Dynamic"
     symbol: "DYN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-DYN", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-DYN", isActive: true }]
   ) {
     id
   }
   EBST: createCoin(
     name: "eBoost"
     symbol: "EBST"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EBST", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EBST", isActive: true }]
   ) {
     id
   }
   EDG: createCoin(
     name: "Edgeless"
     symbol: "EDG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EDG", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EDG", isActive: true }]
   ) {
     id
   }
   EFL: createCoin(
     name: "ElectronicGulden"
     symbol: "EFL"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EFL", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EFL", isActive: true }]
   ) {
     id
   }
   EGC: createCoin(
     name: "EverGreenCoin"
     symbol: "EGC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EGC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EGC", isActive: true }]
   ) {
     id
   }
   EMC: createCoin(
     name: "EmerCoin"
     symbol: "EMC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EMC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EMC", isActive: true }]
   ) {
     id
   }
   EMC2: createCoin(
     name: "Einsteinium"
     symbol: "EMC2"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EMC2", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EMC2", isActive: true }]
   ) {
     id
   }
   ENG: createCoin(
     name: "Enigma"
     symbol: "ENG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ENG", isActive: true },{ exchanger: "bittrex", market: "ETH-ENG", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-ENG", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ENG", isActive: true }
+    ]
   ) {
     id
   }
   ENRG: createCoin(
     name: "EnergyCoin"
     symbol: "ENRG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ENRG", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ENRG", isActive: true }]
   ) {
     id
   }
   ERC: createCoin(
     name: "EuropeCoin"
     symbol: "ERC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ERC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ERC", isActive: true }]
   ) {
     id
   }
   ETC: createCoin(
     name: "Ethereum Classic"
     symbol: "ETC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ETC", isActive: true },{ exchanger: "bittrex", market: "USDT-ETC", isActive: true },{ exchanger: "bittrex", market: "ETH-ETC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-ETC", isActive: true }
+      { exchanger: "bittrex", market: "USDT-ETC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ETC", isActive: true }
+    ]
   ) {
     id
   }
   EXCL: createCoin(
     name: "ExclusiveCoin"
     symbol: "EXCL"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EXCL", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EXCL", isActive: true }]
   ) {
     id
   }
   EXP: createCoin(
     name: "Expanse"
     symbol: "EXP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-EXP", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-EXP", isActive: true }]
   ) {
     id
   }
   FCT: createCoin(
     name: "Factom"
     symbol: "FCT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-FCT", isActive: true },{ exchanger: "bittrex", market: "ETH-FCT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-FCT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-FCT", isActive: true }
+    ]
   ) {
     id
   }
   FLDC: createCoin(
     name: "FoldingCoin"
     symbol: "FLDC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-FLDC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-FLDC", isActive: true }]
   ) {
     id
   }
   FLO: createCoin(
     name: "Florin"
     symbol: "FLO"
-    symbols: [{ exchanger: "bittrex", market: "BTC-FLO", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-FLO", isActive: true }]
   ) {
     id
   }
   FTC: createCoin(
     name: "Feathercoin"
     symbol: "FTC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-FTC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-FTC", isActive: true }]
   ) {
     id
   }
   GAM: createCoin(
     name: "Gambit"
     symbol: "GAM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GAM", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GAM", isActive: true }]
   ) {
     id
   }
   GAME: createCoin(
     name: "GameCredits"
     symbol: "GAME"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GAME", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GAME", isActive: true }]
   ) {
     id
   }
   GBG: createCoin(
     name: "GBG"
     symbol: "GBG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GBG", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GBG", isActive: true }]
   ) {
     id
   }
   GBYTE: createCoin(
     name: "Bytes"
     symbol: "GBYTE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GBYTE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GBYTE", isActive: true }]
   ) {
     id
   }
   GEO: createCoin(
     name: "GeoCoin"
     symbol: "GEO"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GEO", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GEO", isActive: true }]
   ) {
     id
   }
   GLD: createCoin(
     name: "GoldCoin"
     symbol: "GLD"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GLD", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GLD", isActive: true }]
   ) {
     id
   }
   GNO: createCoin(
     name: "Gnosis"
     symbol: "GNO"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GNO", isActive: true },{ exchanger: "bittrex", market: "ETH-GNO", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-GNO", isActive: true }
+      { exchanger: "bittrex", market: "ETH-GNO", isActive: true }
+    ]
   ) {
     id
   }
   GNT: createCoin(
     name: "Golem"
     symbol: "GNT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GNT", isActive: true },{ exchanger: "bittrex", market: "ETH-GNT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-GNT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-GNT", isActive: true }
+    ]
   ) {
     id
   }
   GOLOS: createCoin(
     name: "Golos"
     symbol: "GOLOS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GOLOS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GOLOS", isActive: true }]
   ) {
     id
   }
   GRC: createCoin(
     name: "GridCoin"
     symbol: "GRC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GRC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GRC", isActive: true }]
   ) {
     id
   }
   GRS: createCoin(
     name: "Groestlcoin"
     symbol: "GRS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GRS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-GRS", isActive: true }]
   ) {
     id
   }
   GTO: createCoin(
     name: "Gifto"
     symbol: "GTO"
-    symbols: [{ exchanger: "bittrex", market: "BTC-GTO", isActive: true },{ exchanger: "bittrex", market: "ETH-GTO", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-GTO", isActive: true }
+      { exchanger: "bittrex", market: "ETH-GTO", isActive: true }
+    ]
   ) {
     id
   }
   HMQ: createCoin(
     name: "Humaniq"
     symbol: "HMQ"
-    symbols: [{ exchanger: "bittrex", market: "BTC-HMQ", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-HMQ", isActive: true }]
   ) {
     id
   }
   IGNIS: createCoin(
     name: "Ignis"
     symbol: "IGNIS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-IGNIS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-IGNIS", isActive: true }]
   ) {
     id
   }
   INCNT: createCoin(
     name: "Incent"
     symbol: "INCNT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-INCNT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-INCNT", isActive: true }]
   ) {
     id
   }
   IOC: createCoin(
     name: "I/OCoin"
     symbol: "IOC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-IOC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-IOC", isActive: true }]
   ) {
     id
   }
   ION: createCoin(
     name: "Ion"
     symbol: "ION"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ION", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ION", isActive: true }]
   ) {
     id
   }
   IOP: createCoin(
     name: "Internet Of People"
     symbol: "IOP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-IOP", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-IOP", isActive: true }]
   ) {
     id
   }
   KMD: createCoin(
     name: "Komodo"
     symbol: "KMD"
-    symbols: [{ exchanger: "bittrex", market: "BTC-KMD", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-KMD", isActive: true }]
   ) {
     id
   }
   KORE: createCoin(
     name: "Kore"
     symbol: "KORE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-KORE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-KORE", isActive: true }]
   ) {
     id
   }
   LBC: createCoin(
     name: "LBRY Credits"
     symbol: "LBC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-LBC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-LBC", isActive: true }]
   ) {
     id
   }
   LMC: createCoin(
     name: "Lomocoin"
     symbol: "LMC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-LMC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-LMC", isActive: true }]
   ) {
     id
   }
   LRC: createCoin(
     name: "Loopring"
     symbol: "LRC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-LRC", isActive: true },{ exchanger: "bittrex", market: "ETH-LRC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-LRC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-LRC", isActive: true }
+    ]
   ) {
     id
   }
   LSK: createCoin(
     name: "Lisk"
     symbol: "LSK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-LSK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-LSK", isActive: true }]
   ) {
     id
   }
   LUN: createCoin(
     name: "Lunyr"
     symbol: "LUN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-LUN", isActive: true },{ exchanger: "bittrex", market: "ETH-LUN", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-LUN", isActive: true }
+      { exchanger: "bittrex", market: "ETH-LUN", isActive: true }
+    ]
   ) {
     id
   }
   MANA: createCoin(
     name: "Decentraland"
     symbol: "MANA"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MANA", isActive: true },{ exchanger: "bittrex", market: "ETH-MANA", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-MANA", isActive: true }
+      { exchanger: "bittrex", market: "ETH-MANA", isActive: true }
+    ]
   ) {
     id
   }
   MCO: createCoin(
     name: "Monaco"
     symbol: "MCO"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MCO", isActive: true },{ exchanger: "bittrex", market: "ETH-MCO", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-MCO", isActive: true }
+      { exchanger: "bittrex", market: "ETH-MCO", isActive: true }
+    ]
   ) {
     id
   }
   MEME: createCoin(
     name: "Memetic"
     symbol: "MEME"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MEME", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-MEME", isActive: true }]
   ) {
     id
   }
   MER: createCoin(
     name: "Mercury"
     symbol: "MER"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MER", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-MER", isActive: true }]
   ) {
     id
   }
   MLN: createCoin(
     name: "Melon"
     symbol: "MLN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MLN", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-MLN", isActive: true }]
   ) {
     id
   }
   MONA: createCoin(
     name: "MonaCoin"
     symbol: "MONA"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MONA", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-MONA", isActive: true }]
   ) {
     id
   }
   MORE: createCoin(
     name: "More"
     symbol: "MORE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MORE", isActive: true },{ exchanger: "bittrex", market: "ETH-MORE", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-MORE", isActive: true }
+      { exchanger: "bittrex", market: "ETH-MORE", isActive: true }
+    ]
   ) {
     id
   }
   MUE: createCoin(
     name: "MonetaryUnit"
     symbol: "MUE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MUE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-MUE", isActive: true }]
   ) {
     id
   }
   MUSIC: createCoin(
     name: "Musicoin"
     symbol: "MUSIC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-MUSIC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-MUSIC", isActive: true }]
   ) {
     id
   }
   NAV: createCoin(
     name: "NAVCoin"
     symbol: "NAV"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NAV", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NAV", isActive: true }]
   ) {
     id
   }
   NBT: createCoin(
     name: "Nubits"
     symbol: "NBT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NBT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NBT", isActive: true }]
   ) {
     id
   }
   NEOS: createCoin(
     name: "NeosCoin"
     symbol: "NEOS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NEOS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NEOS", isActive: true }]
   ) {
     id
   }
   NGC: createCoin(
     name: "Naga"
     symbol: "NGC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NGC", isActive: true },{ exchanger: "bittrex", market: "ETH-NGC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-NGC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-NGC", isActive: true }
+    ]
   ) {
     id
   }
   NLC2: createCoin(
     name: "NoLimitCoin"
     symbol: "NLC2"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NLC2", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NLC2", isActive: true }]
   ) {
     id
   }
   NLG: createCoin(
     name: "Gulden"
     symbol: "NLG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NLG", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NLG", isActive: true }]
   ) {
     id
   }
   NMR: createCoin(
     name: "Numeraire"
     symbol: "NMR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NMR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NMR", isActive: true }]
   ) {
     id
   }
   NXC: createCoin(
     name: "Nexium"
     symbol: "NXC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NXC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NXC", isActive: true }]
   ) {
     id
   }
   NXS: createCoin(
     name: "Nexus"
     symbol: "NXS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NXS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-NXS", isActive: true }]
   ) {
     id
   }
   NXT: createCoin(
     name: "NXT"
     symbol: "NXT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-NXT", isActive: true },{ exchanger: "bittrex", market: "USDT-NXT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-NXT", isActive: true }
+      { exchanger: "bittrex", market: "USDT-NXT", isActive: true }
+    ]
   ) {
     id
   }
   OCN: createCoin(
     name: "Odyssey"
     symbol: "OCN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-OCN", isActive: true },{ exchanger: "bittrex", market: "ETH-OCN", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-OCN", isActive: true }
+      { exchanger: "bittrex", market: "ETH-OCN", isActive: true }
+    ]
   ) {
     id
   }
   OK: createCoin(
     name: "OkCash"
     symbol: "OK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-OK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-OK", isActive: true }]
   ) {
     id
   }
   OMG: createCoin(
     name: "OmiseGO"
     symbol: "OMG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-OMG", isActive: true },{ exchanger: "bittrex", market: "USDT-OMG", isActive: true },{ exchanger: "bittrex", market: "ETH-OMG", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-OMG", isActive: true }
+      { exchanger: "bittrex", market: "USDT-OMG", isActive: true }
+      { exchanger: "bittrex", market: "ETH-OMG", isActive: true }
+    ]
   ) {
     id
   }
   OMNI: createCoin(
     name: "OMNI"
     symbol: "OMNI"
-    symbols: [{ exchanger: "bittrex", market: "BTC-OMNI", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-OMNI", isActive: true }]
   ) {
     id
   }
   PART: createCoin(
     name: "Particl"
     symbol: "PART"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PART", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-PART", isActive: true }]
   ) {
     id
   }
   PAY: createCoin(
     name: "TenX Pay Token"
     symbol: "PAY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PAY", isActive: true },{ exchanger: "bittrex", market: "ETH-PAY", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-PAY", isActive: true }
+      { exchanger: "bittrex", market: "ETH-PAY", isActive: true }
+    ]
   ) {
     id
   }
   PINK: createCoin(
     name: "PinkCoin"
     symbol: "PINK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PINK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-PINK", isActive: true }]
   ) {
     id
   }
   PIVX: createCoin(
     name: "Pivx"
     symbol: "PIVX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PIVX", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-PIVX", isActive: true }]
   ) {
     id
   }
   POT: createCoin(
     name: "PotCoin"
     symbol: "POT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-POT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-POT", isActive: true }]
   ) {
     id
   }
   PPC: createCoin(
     name: "Peercoin"
     symbol: "PPC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PPC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-PPC", isActive: true }]
   ) {
     id
   }
   PRO: createCoin(
     name: "Propy"
     symbol: "PRO"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PRO", isActive: true },{ exchanger: "bittrex", market: "ETH-PRO", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-PRO", isActive: true }
+      { exchanger: "bittrex", market: "ETH-PRO", isActive: true }
+    ]
   ) {
     id
   }
   PTC: createCoin(
     name: "PesetaCoin "
     symbol: "PTC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PTC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-PTC", isActive: true }]
   ) {
     id
   }
   PTOY: createCoin(
     name: "Patientory"
     symbol: "PTOY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-PTOY", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-PTOY", isActive: true }]
   ) {
     id
   }
   QRL: createCoin(
     name: "Quantum Resistant Ledger"
     symbol: "QRL"
-    symbols: [{ exchanger: "bittrex", market: "BTC-QRL", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-QRL", isActive: true }]
   ) {
     id
   }
   QTUM: createCoin(
     name: "Qtum"
     symbol: "QTUM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-QTUM", isActive: true },{ exchanger: "bittrex", market: "ETH-QTUM", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-QTUM", isActive: true }
+      { exchanger: "bittrex", market: "ETH-QTUM", isActive: true }
+    ]
   ) {
     id
   }
   QWARK: createCoin(
     name: "Qwark"
     symbol: "QWARK"
-    symbols: [{ exchanger: "bittrex", market: "BTC-QWARK", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-QWARK", isActive: true }]
   ) {
     id
   }
   RADS: createCoin(
     name: "Radium"
     symbol: "RADS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-RADS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-RADS", isActive: true }]
   ) {
     id
   }
   RBY: createCoin(
     name: "RubyCoin"
     symbol: "RBY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-RBY", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-RBY", isActive: true }]
   ) {
     id
   }
   RCN: createCoin(
     name: "Ripio Credit Network"
     symbol: "RCN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-RCN", isActive: true },{ exchanger: "bittrex", market: "ETH-RCN", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-RCN", isActive: true }
+      { exchanger: "bittrex", market: "ETH-RCN", isActive: true }
+    ]
   ) {
     id
   }
   RDD: createCoin(
     name: "ReddCoin"
     symbol: "RDD"
-    symbols: [{ exchanger: "bittrex", market: "BTC-RDD", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-RDD", isActive: true }]
   ) {
     id
   }
   REP: createCoin(
     name: "Augur"
     symbol: "REP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-REP", isActive: true },{ exchanger: "bittrex", market: "ETH-REP", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-REP", isActive: true }
+      { exchanger: "bittrex", market: "ETH-REP", isActive: true }
+    ]
   ) {
     id
   }
   RVR: createCoin(
     name: "RevolutionVR"
     symbol: "RVR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-RVR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-RVR", isActive: true }]
   ) {
     id
   }
   SBD: createCoin(
     name: "SteemDollars"
     symbol: "SBD"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SBD", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SBD", isActive: true }]
   ) {
     id
   }
   SC: createCoin(
     name: "Siacoin"
     symbol: "SC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SC", isActive: true },{ exchanger: "bittrex", market: "USDT-SC", isActive: true },{ exchanger: "bittrex", market: "ETH-SC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-SC", isActive: true }
+      { exchanger: "bittrex", market: "USDT-SC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-SC", isActive: true }
+    ]
   ) {
     id
   }
   SEQ: createCoin(
     name: "Sequence"
     symbol: "SEQ"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SEQ", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SEQ", isActive: true }]
   ) {
     id
   }
   SHIFT: createCoin(
     name: "Shift"
     symbol: "SHIFT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SHIFT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SHIFT", isActive: true }]
   ) {
     id
   }
   SIB: createCoin(
     name: "Siberian Chervonets"
     symbol: "SIB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SIB", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SIB", isActive: true }]
   ) {
     id
   }
   SLR: createCoin(
     name: "SolarCoin"
     symbol: "SLR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SLR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SLR", isActive: true }]
   ) {
     id
   }
   SLS: createCoin(
     name: "SaluS"
     symbol: "SLS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SLS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SLS", isActive: true }]
   ) {
     id
   }
   SNT: createCoin(
     name: "Status Network Token"
     symbol: "SNT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SNT", isActive: true },{ exchanger: "bittrex", market: "ETH-SNT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-SNT", isActive: true }
+      { exchanger: "bittrex", market: "ETH-SNT", isActive: true }
+    ]
   ) {
     id
   }
   SPHR: createCoin(
     name: "Sphere"
     symbol: "SPHR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SPHR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SPHR", isActive: true }]
   ) {
     id
   }
   SPR: createCoin(
     name: "SpreadCoin"
     symbol: "SPR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SPR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SPR", isActive: true }]
   ) {
     id
   }
   STEEM: createCoin(
     name: "STEEM"
     symbol: "STEEM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-STEEM", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-STEEM", isActive: true }]
   ) {
     id
   }
   STORJ: createCoin(
     name: "Storj"
     symbol: "STORJ"
-    symbols: [{ exchanger: "bittrex", market: "BTC-STORJ", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-STORJ", isActive: true }]
   ) {
     id
   }
   SWT: createCoin(
     name: "Swarm City Token"
     symbol: "SWT"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SWT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SWT", isActive: true }]
   ) {
     id
   }
   SYNX: createCoin(
     name: "Syndicate"
     symbol: "SYNX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SYNX", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SYNX", isActive: true }]
   ) {
     id
   }
   SYS: createCoin(
     name: "SysCoin"
     symbol: "SYS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-SYS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-SYS", isActive: true }]
   ) {
     id
   }
   THC: createCoin(
     name: "HempCoin"
     symbol: "THC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-THC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-THC", isActive: true }]
   ) {
     id
   }
   TKS: createCoin(
     name: "Tokes"
     symbol: "TKS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-TKS", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-TKS", isActive: true }]
   ) {
     id
   }
   TRUST: createCoin(
     name: "TrustPlus"
     symbol: "TRUST"
-    symbols: [{ exchanger: "bittrex", market: "BTC-TRUST", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-TRUST", isActive: true }]
   ) {
     id
   }
   TRX: createCoin(
     name: "TRON"
     symbol: "TRX"
-    symbols: [{ exchanger: "bittrex", market: "ETH-TRX", isActive: true },{ exchanger: "bittrex", market: "BTC-TRX", isActive: true },{ exchanger: "bittrex", market: "USDT-TRX", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-TRX", isActive: true }
+      { exchanger: "bittrex", market: "BTC-TRX", isActive: true }
+      { exchanger: "bittrex", market: "USDT-TRX", isActive: true }
+    ]
   ) {
     id
   }
   TUBE: createCoin(
     name: "BitTube"
     symbol: "TUBE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-TUBE", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-TUBE", isActive: true }]
   ) {
     id
   }
   TX: createCoin(
     name: "TransferCoin"
     symbol: "TX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-TX", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-TX", isActive: true }]
   ) {
     id
   }
   UBQ: createCoin(
     name: "Ubiq"
     symbol: "UBQ"
-    symbols: [{ exchanger: "bittrex", market: "BTC-UBQ", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-UBQ", isActive: true }]
   ) {
     id
   }
   UNB: createCoin(
     name: "UnbreakableCoin"
     symbol: "UNB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-UNB", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-UNB", isActive: true }]
   ) {
     id
   }
   UP: createCoin(
     name: "UpToken"
     symbol: "UP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-UP", isActive: true },{ exchanger: "bittrex", market: "ETH-UP", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-UP", isActive: true }
+      { exchanger: "bittrex", market: "ETH-UP", isActive: true }
+    ]
   ) {
     id
   }
   VEE: createCoin(
     name: "BLOCKv"
     symbol: "VEE"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VEE", isActive: true },{ exchanger: "bittrex", market: "ETH-VEE", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-VEE", isActive: true }
+      { exchanger: "bittrex", market: "ETH-VEE", isActive: true }
+    ]
   ) {
     id
   }
   VIA: createCoin(
     name: "ViaCoin "
     symbol: "VIA"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VIA", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-VIA", isActive: true }]
   ) {
     id
   }
   VIB: createCoin(
     name: "Viberate"
     symbol: "VIB"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VIB", isActive: true },{ exchanger: "bittrex", market: "ETH-VIB", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-VIB", isActive: true }
+      { exchanger: "bittrex", market: "ETH-VIB", isActive: true }
+    ]
   ) {
     id
   }
   VRC: createCoin(
     name: "VeriCoin"
     symbol: "VRC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VRC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-VRC", isActive: true }]
   ) {
     id
   }
   VRM: createCoin(
     name: "Verium"
     symbol: "VRM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VRM", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-VRM", isActive: true }]
   ) {
     id
   }
   VTC: createCoin(
     name: "Vertcoin"
     symbol: "VTC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VTC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-VTC", isActive: true }]
   ) {
     id
   }
   VTR: createCoin(
     name: "vTorrent"
     symbol: "VTR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-VTR", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-VTR", isActive: true }]
   ) {
     id
   }
   WAVES: createCoin(
     name: "Waves"
     symbol: "WAVES"
-    symbols: [{ exchanger: "bittrex", market: "BTC-WAVES", isActive: true },{ exchanger: "bittrex", market: "ETH-WAVES", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-WAVES", isActive: true }
+      { exchanger: "bittrex", market: "ETH-WAVES", isActive: true }
+    ]
   ) {
     id
   }
   WAX: createCoin(
     name: "Worldwide Asset Exchange"
     symbol: "WAX"
-    symbols: [{ exchanger: "bittrex", market: "BTC-WAX", isActive: true },{ exchanger: "bittrex", market: "ETH-WAX", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-WAX", isActive: true }
+      { exchanger: "bittrex", market: "ETH-WAX", isActive: true }
+    ]
   ) {
     id
   }
   WINGS: createCoin(
     name: "Wings DAO"
     symbol: "WINGS"
-    symbols: [{ exchanger: "bittrex", market: "BTC-WINGS", isActive: true },{ exchanger: "bittrex", market: "ETH-WINGS", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-WINGS", isActive: true }
+      { exchanger: "bittrex", market: "ETH-WINGS", isActive: true }
+    ]
   ) {
     id
   }
   XCP: createCoin(
     name: "Counterparty"
     symbol: "XCP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XCP", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XCP", isActive: true }]
   ) {
     id
   }
   XDN: createCoin(
     name: "DigitalNote"
     symbol: "XDN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XDN", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XDN", isActive: true }]
   ) {
     id
   }
   XEL: createCoin(
     name: "Elastic"
     symbol: "XEL"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XEL", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XEL", isActive: true }]
   ) {
     id
   }
   XEM: createCoin(
     name: "NEM"
     symbol: "XEM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XEM", isActive: true },{ exchanger: "bittrex", market: "ETH-XEM", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-XEM", isActive: true }
+      { exchanger: "bittrex", market: "ETH-XEM", isActive: true }
+    ]
   ) {
     id
   }
   XLM: createCoin(
     name: "Lumen"
     symbol: "XLM"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XLM", isActive: true },{ exchanger: "bittrex", market: "ETH-XLM", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-XLM", isActive: true }
+      { exchanger: "bittrex", market: "ETH-XLM", isActive: true }
+    ]
   ) {
     id
   }
   XMG: createCoin(
     name: "Magi"
     symbol: "XMG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XMG", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XMG", isActive: true }]
   ) {
     id
   }
   XMR: createCoin(
     name: "Monero"
     symbol: "XMR"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XMR", isActive: true },{ exchanger: "bittrex", market: "ETH-XMR", isActive: true },{ exchanger: "bittrex", market: "USDT-XMR", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-XMR", isActive: true }
+      { exchanger: "bittrex", market: "ETH-XMR", isActive: true }
+      { exchanger: "bittrex", market: "USDT-XMR", isActive: true }
+    ]
   ) {
     id
   }
   XMY: createCoin(
     name: "Myriad"
     symbol: "XMY"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XMY", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XMY", isActive: true }]
   ) {
     id
   }
   XRP: createCoin(
     name: "Ripple"
     symbol: "XRP"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XRP", isActive: true },{ exchanger: "bittrex", market: "ETH-XRP", isActive: true },{ exchanger: "bittrex", market: "USDT-XRP", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-XRP", isActive: true }
+      { exchanger: "bittrex", market: "ETH-XRP", isActive: true }
+      { exchanger: "bittrex", market: "USDT-XRP", isActive: true }
+    ]
   ) {
     id
   }
   XST: createCoin(
     name: "Stealth"
     symbol: "XST"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XST", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XST", isActive: true }]
   ) {
     id
   }
   XVG: createCoin(
     name: "Verge"
     symbol: "XVG"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XVG", isActive: true },{ exchanger: "bittrex", market: "USDT-XVG", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-XVG", isActive: true }
+      { exchanger: "bittrex", market: "USDT-XVG", isActive: true }
+    ]
   ) {
     id
   }
   XWC: createCoin(
     name: "WhiteCoin"
     symbol: "XWC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XWC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XWC", isActive: true }]
   ) {
     id
   }
   XZC: createCoin(
     name: "ZCoin"
     symbol: "XZC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-XZC", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-XZC", isActive: true }]
   ) {
     id
   }
   ZCL: createCoin(
     name: "Zclassic"
     symbol: "ZCL"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ZCL", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ZCL", isActive: true }]
   ) {
     id
   }
   ZEC: createCoin(
     name: "Zcash"
     symbol: "ZEC"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ZEC", isActive: true },{ exchanger: "bittrex", market: "USDT-ZEC", isActive: true },{ exchanger: "bittrex", market: "ETH-ZEC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "BTC-ZEC", isActive: true }
+      { exchanger: "bittrex", market: "USDT-ZEC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-ZEC", isActive: true }
+    ]
   ) {
     id
   }
   ZEN: createCoin(
     name: "Zencash"
     symbol: "ZEN"
-    symbols: [{ exchanger: "bittrex", market: "BTC-ZEN", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "BTC-ZEN", isActive: true }]
   ) {
     id
   }
   GUP: createCoin(
     name: "Guppy"
     symbol: "GUP"
-    symbols: [{ exchanger: "bittrex", market: "ETH-GUP", isActive: true },{ exchanger: "bittrex", market: "BTC-GUP", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-GUP", isActive: true }
+      { exchanger: "bittrex", market: "BTC-GUP", isActive: true }
+    ]
   ) {
     id
   }
   NEO: createCoin(
     name: "Neo"
     symbol: "NEO"
-    symbols: [{ exchanger: "bittrex", market: "ETH-NEO", isActive: true },{ exchanger: "bittrex", market: "BTC-NEO", isActive: true },{ exchanger: "bittrex", market: "USDT-NEO", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-NEO", isActive: true }
+      { exchanger: "bittrex", market: "BTC-NEO", isActive: true }
+      { exchanger: "bittrex", market: "USDT-NEO", isActive: true }
+    ]
   ) {
     id
   }
   POLY: createCoin(
     name: "Polymath"
     symbol: "POLY"
-    symbols: [{ exchanger: "bittrex", market: "ETH-POLY", isActive: true },{ exchanger: "bittrex", market: "BTC-POLY", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-POLY", isActive: true }
+      { exchanger: "bittrex", market: "BTC-POLY", isActive: true }
+    ]
   ) {
     id
   }
   POWR: createCoin(
     name: "PowerLedger"
     symbol: "POWR"
-    symbols: [{ exchanger: "bittrex", market: "ETH-POWR", isActive: true },{ exchanger: "bittrex", market: "BTC-POWR", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-POWR", isActive: true }
+      { exchanger: "bittrex", market: "BTC-POWR", isActive: true }
+    ]
   ) {
     id
   }
   RLC: createCoin(
     name: "iEx.ec"
     symbol: "RLC"
-    symbols: [{ exchanger: "bittrex", market: "ETH-RLC", isActive: true },{ exchanger: "bittrex", market: "BTC-RLC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-RLC", isActive: true }
+      { exchanger: "bittrex", market: "BTC-RLC", isActive: true }
+    ]
   ) {
     id
   }
   SALT: createCoin(
     name: "Salt"
     symbol: "SALT"
-    symbols: [{ exchanger: "bittrex", market: "ETH-SALT", isActive: true },{ exchanger: "bittrex", market: "BTC-SALT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-SALT", isActive: true }
+      { exchanger: "bittrex", market: "BTC-SALT", isActive: true }
+    ]
   ) {
     id
   }
   SRN: createCoin(
     name: "Sirin Token"
     symbol: "SRN"
-    symbols: [{ exchanger: "bittrex", market: "ETH-SRN", isActive: true },{ exchanger: "bittrex", market: "BTC-SRN", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-SRN", isActive: true }
+      { exchanger: "bittrex", market: "BTC-SRN", isActive: true }
+    ]
   ) {
     id
   }
   STORM: createCoin(
     name: "Storm"
     symbol: "STORM"
-    symbols: [{ exchanger: "bittrex", market: "ETH-STORM", isActive: true },{ exchanger: "bittrex", market: "BTC-STORM", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-STORM", isActive: true }
+      { exchanger: "bittrex", market: "BTC-STORM", isActive: true }
+    ]
   ) {
     id
   }
   STRAT: createCoin(
     name: "Stratis"
     symbol: "STRAT"
-    symbols: [{ exchanger: "bittrex", market: "ETH-STRAT", isActive: true },{ exchanger: "bittrex", market: "BTC-STRAT", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-STRAT", isActive: true }
+      { exchanger: "bittrex", market: "BTC-STRAT", isActive: true }
+    ]
   ) {
     id
   }
   TIX: createCoin(
     name: "Blocktix"
     symbol: "TIX"
-    symbols: [{ exchanger: "bittrex", market: "ETH-TIX", isActive: true },{ exchanger: "bittrex", market: "BTC-TIX", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-TIX", isActive: true }
+      { exchanger: "bittrex", market: "BTC-TIX", isActive: true }
+    ]
   ) {
     id
   }
   UKG: createCoin(
     name: "UnikoinGold"
     symbol: "UKG"
-    symbols: [{ exchanger: "bittrex", market: "ETH-UKG", isActive: true },{ exchanger: "bittrex", market: "BTC-UKG", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-UKG", isActive: true }
+      { exchanger: "bittrex", market: "BTC-UKG", isActive: true }
+    ]
   ) {
     id
   }
   ZRX: createCoin(
     name: "0x Protocol"
     symbol: "ZRX"
-    symbols: [{ exchanger: "bittrex", market: "ETH-ZRX", isActive: true },{ exchanger: "bittrex", market: "BTC-ZRX", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "ETH-ZRX", isActive: true }
+      { exchanger: "bittrex", market: "BTC-ZRX", isActive: true }
+    ]
   ) {
     id
   }
   BTC: createCoin(
     name: "Bitcoin"
     symbol: "BTC"
-    symbols: [{ exchanger: "bittrex", market: "USD-BTC", isActive: true },{ exchanger: "bittrex", market: "USDT-BTC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "USD-BTC", isActive: true }
+      { exchanger: "bittrex", market: "USDT-BTC", isActive: true }
+    ]
   ) {
     id
   }
   TUSD: createCoin(
     name: "TrueUSD"
     symbol: "TUSD"
-    symbols: [{ exchanger: "bittrex", market: "USD-TUSD", isActive: true },{ exchanger: "bittrex", market: "USDT-TUSD", isActive: true },{ exchanger: "bittrex", market: "ETH-TUSD", isActive: true },{ exchanger: "bittrex", market: "BTC-TUSD", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "USD-TUSD", isActive: true }
+      { exchanger: "bittrex", market: "USDT-TUSD", isActive: true }
+      { exchanger: "bittrex", market: "ETH-TUSD", isActive: true }
+      { exchanger: "bittrex", market: "BTC-TUSD", isActive: true }
+    ]
   ) {
     id
   }
   USDT: createCoin(
     name: "Tether"
     symbol: "USDT"
-    symbols: [{ exchanger: "bittrex", market: "USD-USDT", isActive: true }]
+    markets: [{ exchanger: "bittrex", market: "USD-USDT", isActive: true }]
   ) {
     id
   }
   ETH: createCoin(
     name: "Ethereum"
     symbol: "ETH"
-    symbols: [{ exchanger: "bittrex", market: "USDT-ETH", isActive: true },{ exchanger: "bittrex", market: "USD-ETH", isActive: true },{ exchanger: "bittrex", market: "BTC-ETH", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "USDT-ETH", isActive: true }
+      { exchanger: "bittrex", market: "USD-ETH", isActive: true }
+      { exchanger: "bittrex", market: "BTC-ETH", isActive: true }
+    ]
   ) {
     id
   }
   LTC: createCoin(
     name: "Litecoin"
     symbol: "LTC"
-    symbols: [{ exchanger: "bittrex", market: "USDT-LTC", isActive: true },{ exchanger: "bittrex", market: "ETH-LTC", isActive: true },{ exchanger: "bittrex", market: "BTC-LTC", isActive: true }]
+    markets: [
+      { exchanger: "bittrex", market: "USDT-LTC", isActive: true }
+      { exchanger: "bittrex", market: "ETH-LTC", isActive: true }
+      { exchanger: "bittrex", market: "BTC-LTC", isActive: true }
+    ]
   ) {
     id
   }

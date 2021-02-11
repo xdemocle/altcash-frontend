@@ -3,19 +3,52 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from 'react-apollo'
 import { MuiThemeProvider } from '@material-ui/core/styles'
-import apolloClient from './graphql/apollo-client'
+// import apolloClient from './graphql/apollo-client'
 import App, { routerBasename, theme } from './components/App'
 import * as serviceWorker from './serviceWorker'
 import './index.css'
 
-const render = Component => {
+import appSyncConfig from './aws-exports'
+import AWSAppSyncClient, { defaultDataIdFromObject } from 'aws-appsync'
+import { Rehydrated } from 'aws-appsync-react'
+
+const client = new AWSAppSyncClient({
+  url: appSyncConfig.aws_appsync_graphqlEndpoint,
+  region: appSyncConfig.aws_appsync_region,
+  auth: {
+    type: appSyncConfig.aws_appsync_authenticationType,
+    apiKey: appSyncConfig.aws_appsync_apiKey
+  },
+  cacheOptions: {
+    dataIdFromObject: (obj) => {
+      let id = defaultDataIdFromObject(obj)
+
+      if (!id) {
+        const { __typename: typename } = obj
+        switch (typename) {
+          case 'Comment':
+            return `${typename}:${obj.commentId}`
+          default:
+            return id
+        }
+      }
+
+      return id
+    }
+  }
+})
+
+const render = (Component) => {
+  // eslint-disable-next-line react/no-render-return-value
   return ReactDOM.render(
-    <ApolloProvider client={apolloClient}>
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter basename={routerBasename}>
-          <Component />
-        </BrowserRouter>
-      </MuiThemeProvider>
+    <ApolloProvider client={client}>
+      <Rehydrated>
+        <MuiThemeProvider theme={theme}>
+          <BrowserRouter basename={routerBasename}>
+            <Component />
+          </BrowserRouter>
+        </MuiThemeProvider>
+      </Rehydrated>
     </ApolloProvider>,
     document.getElementById('root')
   )

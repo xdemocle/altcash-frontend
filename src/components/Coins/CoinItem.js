@@ -3,7 +3,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
-import ReactSVG from 'react-svg'
+import { ReactSVG } from 'react-svg'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
@@ -13,7 +13,7 @@ import { Favorite } from '@material-ui/icons'
 import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../../common/CoinTicker'
 
-const styles = theme => ({
+const styles = (theme) => ({
   avatar: {
     width: '2rem',
     height: '2rem',
@@ -38,9 +38,9 @@ const svgCoinIcons = require.context(
   true,
   /.*\.svg$/
 )
-const svgCoinPathHelper = name => svgCoinIcons(name, true)
-const isCoinActiveHelper = markets => {
-  const activeMarkets = filter(markets, market => {
+const svgCoinPathHelper = (name) => svgCoinIcons(name, true)
+const isCoinActiveHelper = (markets) => {
+  const activeMarkets = filter(markets, (market) => {
     return market.isActive
   })
 

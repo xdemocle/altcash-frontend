@@ -21,13 +21,12 @@ export const GET_COINS_LIST = gql`
 
 export const GET_COINS_LIST_WITH_MARKETS = gql`
   query coins($offset: Int, $limit: Int, $needle: String) {
-    allCoins(orderBy: name_ASC, skip: $offset, first: $limit, filter: {
-      OR: [{
-        name_contains: $needle,
-      }, {
-        symbol_contains: $needle
-      }]
-    }) {
+    allCoins(
+      orderBy: name_ASC
+      skip: $offset
+      first: $limit
+      filter: { OR: [{ name_contains: $needle }, { symbol_contains: $needle }] }
+    ) {
       id
       name
       symbol
@@ -38,13 +37,9 @@ export const GET_COINS_LIST_WITH_MARKETS = gql`
         askPrice
       }
     }
-    _allCoinsMeta (filter: {
-      OR: [{
-        name_contains: $needle,
-      }, {
-        symbol_contains: $needle
-      }]
-    }) {
+    _allCoinsMeta(
+      filter: { OR: [{ name_contains: $needle }, { symbol_contains: $needle }] }
+    ) {
       count
     }
   }

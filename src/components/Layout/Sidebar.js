@@ -1,23 +1,22 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
-import withWidth, { isWidthDown } from '@material-ui/core/withWidth'
+import { useTheme, withStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { isWidthDown } from '@material-ui/core/withWidth'
 import Drawer from '@material-ui/core/Drawer'
 import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Hidden from '@material-ui/core/Hidden'
 import Tooltip from '@material-ui/core/Tooltip'
-import { graphql, compose } from 'react-apollo'
-import { UPDATE_IS_SIDEBAR_OPEN } from '../../graphql/mutations.js'
-import { GET_APP } from '../../graphql/queries.js'
 import MainLinks from './ListLinks'
 import Logo from '../../assets/logo.png'
+import useGlobal from '../../common/globalStateHook'
 
 const drawerWidth = '17rem'
 
-const styles = theme => ({
+const styles = (theme) => ({
   hide: {
     display: 'none'
   },
@@ -77,85 +76,88 @@ const styles = theme => ({
   }
 })
 
-class Sidebar extends Component {
-  componentDidMount() {
-    if (isWidthDown('md', this.props.width)) {
-      this.props.updateIsSidebarOpen(false)
+function useWidth() {
+  const theme = useTheme()
+  const keys = [...theme.breakpoints.keys].reverse()
+  return (
+    keys.reduce((output, key) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const matches = useMediaQuery(theme.breakpoints.up(key))
+      return !output && matches ? key : output
+    }, null) || 'xs'
+  )
+}
+
+const Sidebar = (props) => {
+  const { classes } = props
+  const width = useWidth()
+  const [globalState, globalActions] = useGlobal()
+
+  useEffect(() => {
+    if (isWidthDown('md', width)) {
+      globalActions.updateIsSidebarOpen(false)
+    } else {
+      globalActions.updateIsSidebarOpen(true)
     }
+  }, [globalActions, width])
+
+  const handleDrawerToggle = () => {
+    globalActions.updateIsSidebarOpen(!globalState.isSidebarOpen)
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (this.props.width !== nextProps.width) {
-      if (isWidthDown('md', nextProps.width)) {
-        this.props.updateIsSidebarOpen(false)
-      } else {
-        this.props.updateIsSidebarOpen(true)
-      }
-    }
-  }
-
-  handleDrawerToggle = () => {
-    this.props.updateIsSidebarOpen(!this.props.app.isSidebarOpen)
-  }
-
-  render() {
-    const { classes } = this.props
-
-    return (
-      <Hidden xsDown>
-        <Drawer
-          variant="permanent"
-          anchor="left"
-          classes={{
-            paper: classNames(classes.drawerPaper, !this.props.app.isSidebarOpen && classes.drawerPaperClose)
-          }}
-          ModalProps={{
-            keepMounted: true // Better open performance on mobile.
-          }}
-          open={this.props.app.isSidebarOpen}
+  return (
+    <Hidden xsDown>
+      <Drawer
+        variant="permanent"
+        anchor="left"
+        classes={{
+          paper: classNames(
+            classes.drawerPaper,
+            !globalState.isSidebarOpen && classes.drawerPaperClose
+          )
+        }}
+        ModalProps={{
+          // Better open performance on mobile.
+          keepMounted: true
+        }}
+        open={globalState.isSidebarOpen}
+      >
+        <div
+          className={classNames(
+            classes.toolbar,
+            globalState.isSidebarOpen && classes.toolbarOpen
+          )}
         >
-          <div className={classNames(classes.toolbar, this.props.app.isSidebarOpen && classes.toolbarOpen)}>
-            <Tooltip title={`${this.props.app.isSidebarOpen ? 'Collapse' : 'Expand'} sidebar`} placement="right">
-              <div className={classes.toolbarHeader}>
-                <IconButton disableRipple onClick={this.handleDrawerToggle} aria-label="toggle drawer" className={classNames(classes.buttonLogoNormal)}>
-                  <img src={Logo} alt="logo.png" width="48" />
-                </IconButton>
-                <Typography variant="subtitle1" className={classes.toolbarTitle}>
-                  Altcoins Sale
-                </Typography>
-              </div>
-            </Tooltip>
-            <Divider />
-            <MainLinks {...this.props.app} />
-          </div>
-        </Drawer>
-      </Hidden>
-    )
-  }
+          <Tooltip
+            title={`${
+              globalState.isSidebarOpen ? 'Collapse' : 'Expand'
+            } sidebar`}
+            placement="right"
+          >
+            <div className={classes.toolbarHeader}>
+              <IconButton
+                disableRipple
+                onClick={handleDrawerToggle}
+                aria-label="toggle drawer"
+                className={classNames(classes.buttonLogoNormal)}
+              >
+                <img src={Logo} alt="logo.png" width="48" />
+              </IconButton>
+              <Typography variant="subtitle1" className={classes.toolbarTitle}>
+                Altcash
+              </Typography>
+            </div>
+          </Tooltip>
+          <Divider />
+          <MainLinks isSidebarOpen={globalState.isSidebarOpen} />
+        </div>
+      </Drawer>
+    </Hidden>
+  )
 }
 
 Sidebar.propTypes = {
-  updateIsSidebarOpen: PropTypes.func.isRequired,
-  app: PropTypes.object.isRequired,
-  classes: PropTypes.object.isRequired,
-  width: PropTypes.string.isRequired
+  classes: PropTypes.object.isRequired
 }
 
-const SidebarEnhanced = compose(
-  withWidth(),
-  withStyles(styles, { withTheme: true }),
-  graphql(UPDATE_IS_SIDEBAR_OPEN, {
-    props: ({ mutate }) => ({
-      updateIsSidebarOpen: isSidebarOpen => mutate({ variables: { isSidebarOpen } })
-    })
-  }),
-  graphql(GET_APP, {
-    props: ({ data: { app } }) => {
-      return {
-        app
-      }
-    }
-  })
-)(Sidebar)
-
-export default SidebarEnhanced
+export default withStyles(styles, { withTheme: true })(Sidebar)
