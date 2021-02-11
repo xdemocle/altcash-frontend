@@ -34,8 +34,7 @@ const styles = (theme) => ({
 })
 
 const svgCoinPathHelper = (name) => {
-  return require(`../../../node_modules/cryptocurrency-icons/svg/color/${name}.svg`)
-    .default
+  return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
 }
 
 const isCoinActiveHelper = (markets) => {
