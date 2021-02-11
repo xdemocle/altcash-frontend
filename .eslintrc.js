@@ -5,17 +5,11 @@ module.exports = {
     node: true
   },
 
-  extends: [
-    'prettier',
-    'plugin:prettier/recommended',
-    'react-app',
-    'plugin:react/recommended'
-  ],
+  extends: ['plugin:react/recommended', 'react-app', 'prettier'],
 
-  plugins: ['prettier', 'react'],
+  plugins: ['react'],
 
   rules: {
-    'prettier/prettier': ['error'],
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-console': [
       process.env.NODE_ENV === 'production' ? 'error' : 'warn',
@@ -24,10 +18,11 @@ module.exports = {
       }
     ],
     'no-unused-vars': ['error'],
-    'semi': ['warn', 'never'],
+    semi: ['warn', 'never'],
     'no-extra-semi': 'warn',
     'semi-spacing': 'warn',
-    'camelcase': 'warn',
+    camelcase: 'warn',
+    'space-before-function-paren': ['error', 'never'],
     'comma-dangle': ['warn', 'never'],
     quotes: ['warn', 'single'],
     indent: [
@@ -49,14 +44,6 @@ module.exports = {
     'no-lonely-if': 'error',
     'brace-style': 'error',
     'arrow-spacing': 'error',
-    'space-before-function-paren': [
-      'error',
-      {
-        anonymous: 'never',
-        named: 'never',
-        asyncArrow: 'never'
-      }
-    ],
     'spaced-comment': [
       'error',
       'always',

@@ -1,11 +1,17 @@
 {
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "html"
-  ],
-  "prettier.eslintIntegration": true,
-  "editor.formatOnSave": false,
-  "eslint.autoFixOnSave": false,
-  "eslint.enable": true
+  "editor.rulers": [80, 100],
+  "eslint.packageManager": "yarn",
+  "eslint.validate": ["javascript", "vue"],
+  "files.trimTrailingWhitespace": true,
+  "search.exclude": {
+    "**/node_modules": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnPaste": false, // Sometimes makes more mess than being helpful
+  "editor.formatOnSave": true,
+  "editor.wordWrap": "off",
+  "editor.autoIndent": "keep",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": false
+  }
 }
