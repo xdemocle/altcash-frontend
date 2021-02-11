@@ -50,8 +50,7 @@ class HeaderfabButtons extends Component {
   }
 
   render() {
-    const { classes, loading, updateNeedle } = this.props
-    const { coinPageNeedle } = this.props.app
+    const { classes, loading, updateNeedle, coinPageNeedle } = this.props
     const { modalOpen } = this.state
 
     return (
@@ -115,7 +114,7 @@ class HeaderfabButtons extends Component {
 HeaderfabButtons.propTypes = {
   classes: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  app: PropTypes.object.isRequired,
+  coinPageNeedle: PropTypes.string.isRequired,
   updateNeedle: PropTypes.func.isRequired
 }
 

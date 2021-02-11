@@ -1,5 +1,5 @@
 /* eslint-disable no-debugger */
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
 import { withStyles } from '@material-ui/core/styles'
@@ -11,11 +11,11 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
-import { graphql, compose } from '@apollo/client'
+import { useQuery } from '@apollo/client'
 import HeaderFabButtons from './HeaderFabButtons'
 import CoinItem from './CoinItem'
-import { GET_COINS_LIST_WITH_MARKETS } from '../../graphql/queries'
-import { UPDATE_COIN_PAGE_NEEDLE } from '../../graphql/mutations'
+import { GET_COINS_LIST } from '../../graphql/queries'
+import useGlobal from '../../common/globalStateHook'
 
 const styles = (theme) => ({
   root: {
@@ -60,159 +60,143 @@ const styles = (theme) => ({
   }
 })
 
-class CoinsPage extends Component {
-  state = {
-    tab: 0
+// const CoinsPageEnhanced = compose(
+//   withStyles(styles, { withTheme: true }),
+//   graphql(GET_COINS_LIST_WITH_MARKETS, {
+//     props: (data) => {
+//       return data
+//     },
+//     options: (ownProps) => ({
+//       fetchPolicy: 'cache-first',
+//       notifyOnNetworkStatusChange: true,
+//       variables: {
+//         offset: 0,
+//         limit: 20,
+//         needle: ownProps.app.coinPageNeedle
+//       }
+//     })
+//   })
+// )(CoinsPage)
+
+const CoinsPage = (props) => {
+  const { classes } = props
+  const [globalState, globalActions] = useGlobal()
+  const [tab, setTab] = useState(0)
+  const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
+    GET_COINS_LIST,
+    {
+      variables: { offset: 0, limit: 20, needle: globalState.coinPageNeedle }
+    }
+  )
+
+  console.log('data', data)
+
+  const handleChange = (event, tab) => {
+    setTab({ tab })
   }
 
-  handleChange = (event, tab) => {
-    this.setState({ tab })
+  const updateNeedle = (needle) => {
+    globalActions.updateCoinPageNeedle(needle)
+    refetch()
   }
 
-  render() {
-    const {
-      classes,
-      data: {
-        loading,
-        error,
-        refetch,
-        fetchMore,
-        networkStatus,
-        allCoins,
-        _allCoinsMeta
-      },
-      app,
-      updateCoinPageNeedle
-    } = this.props
+  // const onLoadMore = () => {
+  //   fetchMore({
+  //     variables: {
+  //       offset: allCoins.length
+  //     },
+  //     // updateQuery: (prev, { fetchMoreResult }) => {
+  //     //   if (!fetchMoreResult) {
+  //     //     return prev
+  //     //   }
+  //     //   return Object.assign({}, prev, {
+  //     //     allCoins: [...prev.allCoins, ...fetchMoreResult.allCoins]
+  //     //   })
+  //     // }
+  //   })
+  // }
 
-    const updateNeedle = (needle) => {
-      updateCoinPageNeedle(needle)
-      refetch()
-    }
+  // const showLoadMoreButton =
+  //   allCoins &&
+  //   allCoins.length < data._allCoinsMeta.count &&
+  //   allCoins &&
+  //   networkStatus !== 4
 
-    const onLoadMore = () => {
-      fetchMore({
-        variables: {
-          offset: allCoins.length
-        },
-        updateQuery: (prev, { fetchMoreResult }) => {
-          if (!fetchMoreResult) {
-            return prev
-          }
-          return Object.assign({}, prev, {
-            allCoins: [...prev.allCoins, ...fetchMoreResult.allCoins]
-          })
-        }
-      })
-    }
+  return (
+    <div className={classes.root}>
+      <Typography
+        color="primary"
+        variant="h4"
+        gutterBottom
+        className={classes.title}
+      >
+        Coins available
+      </Typography>
 
-    const showLoadMoreButton =
-      allCoins &&
-      allCoins.length < _allCoinsMeta.count &&
-      allCoins &&
-      networkStatus !== 4
+      <HeaderFabButtons
+        loading={loading}
+        coinPageNeedle={globalState.coinPageNeedle}
+        updateNeedle={updateNeedle}
+      />
 
-    return (
-      <div className={classes.root}>
-        <Typography
-          color="primary"
-          variant="h4"
-          gutterBottom
-          className={classes.title}
+      <Paper className={classes.paper}>
+        <Tabs
+          value={tab}
+          onChange={handleChange}
+          indicatorColor="primary"
+          textColor="primary"
         >
-          Coins available
-        </Typography>
+          <Tab icon={<ListIcon />} classes={{ root: classes.tabRoot }} />
+          <Tab icon={<Favorite />} classes={{ root: classes.tabRoot }} />
+        </Tabs>
+      </Paper>
+      {/*
+      {tab === 0 && (
+        <div>
+          {error && <Typography>Error! {error.message}</Typography>}
+          {allCoins && !allCoins.length && networkStatus === 7 && (
+            <Typography variant="subtitle1">No results...</Typography>
+          )}
+          {loading && (!allCoins || networkStatus === 4) && (
+            <Typography variant="subtitle2">Loading coins list...</Typography>
+          )}
+          {networkStatus !== 4 && allCoins && (
+            <List>
+              {allCoins.map((coin) => (
+                <CoinItem key={coin.id} coin={coin} />
+              ))}
+            </List>
+          )}
 
-        <HeaderFabButtons
-          loading={loading}
-          app={app}
-          updateNeedle={updateNeedle}
-        />
-
-        <Paper className={classes.paper}>
-          <Tabs
-            value={this.state.tab}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="primary"
-          >
-            <Tab icon={<ListIcon />} classes={{ root: classes.tabRoot }} />
-            <Tab icon={<Favorite />} classes={{ root: classes.tabRoot }} />
-          </Tabs>
-        </Paper>
-
-        {this.state.tab === 0 && (
-          <div>
-            {error && <Typography>Error! {error.message}</Typography>}
-            {allCoins && !allCoins.length && networkStatus === 7 && (
-              <Typography variant="subtitle1">No results...</Typography>
-            )}
-            {loading && (!allCoins || networkStatus === 4) && (
-              <Typography variant="subtitle2">Loading coins list...</Typography>
-            )}
-            {networkStatus !== 4 && allCoins && (
-              <List>
-                {allCoins.map((coin) => (
-                  <CoinItem key={coin.id} coin={coin} />
-                ))}
-              </List>
-            )}
-
-            {showLoadMoreButton && (
-              <div className={classes.bottomListWrapper}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  className={classes.buttonLoadMore}
-                  onClick={onLoadMore}
-                  disabled={loading}
-                >
-                  Load more
-                  <ArrowDownward className={classes.rightIcon} />
-                </Button>
-                {loading && (
-                  <CircularProgress
-                    size={24}
-                    className={classes.buttonProgress}
-                  />
-                )}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    )
-  }
+          {showLoadMoreButton && (
+            <div className={classes.bottomListWrapper}>
+              <Button
+                variant="contained"
+                color="primary"
+                className={classes.buttonLoadMore}
+                onClick={onLoadMore}
+                disabled={loading}
+              >
+                Load more
+                <ArrowDownward className={classes.rightIcon} />
+              </Button>
+              {loading && (
+                <CircularProgress
+                  size={24}
+                  className={classes.buttonProgress}
+                />
+              )}
+            </div>
+          )}
+        </div>
+      )} */}
+    </div>
+  )
 }
 
 CoinsPage.propTypes = {
   classes: PropTypes.object.isRequired,
-  data: PropTypes.object.isRequired,
-  app: PropTypes.object.isRequired,
-  updateCoinPageNeedle: PropTypes.func.isRequired
+  data: PropTypes.object.isRequired
 }
 
-const CoinsPageEnhanced = compose(
-  withStyles(styles, { withTheme: true }),
-  graphql(UPDATE_COIN_PAGE_NEEDLE, {
-    props: ({ mutate }) => ({
-      updateCoinPageNeedle: (needle) => mutate({ variables: { needle } })
-    })
-  }),
-  graphql(GET_COINS_LIST_WITH_MARKETS, {
-    props: (data) => {
-      return data
-    },
-    options: (ownProps) => ({
-      fetchPolicy: 'cache-first',
-      notifyOnNetworkStatusChange: true,
-      variables: {
-        offset: 0,
-        limit: 20,
-        needle: ownProps.app.coinPageNeedle
-      }
-    })
-  })
-)(CoinsPage)
-
-export default CoinsPageEnhanced
+export default withStyles(styles, { withTheme: true })(CoinsPage)

@@ -38,8 +38,6 @@ const config = new AWSAppSyncClient({
 })
 
 export default ApolloLink.from([
-  createAuthLink(config),
-  createSubscriptionHandshakeLink(config),
   onError(({ graphQLErrors, networkError }) => {
     if (graphQLErrors) {
       graphQLErrors.map(({ message, locations, path }) =>
@@ -53,5 +51,7 @@ export default ApolloLink.from([
       // eslint-disable-next-line no-console
       console.log(`[Network error]: ${networkError}`)
     }
-  })
+  }),
+  createAuthLink(config),
+  createSubscriptionHandshakeLink(config)
 ])
