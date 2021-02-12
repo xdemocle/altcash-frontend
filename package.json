@@ -26,6 +26,7 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-react": "^7.22.0",
+    "http-proxy-middleware": "^1.0.6",
     "prettier": "^2.2.1",
     "prettier-eslint": "^12.0.0",
     "prettier-eslint-cli": "^5.0.0",
@@ -42,7 +43,6 @@
     "websocket": "node websocket.js",
     "fix-code": "prettier-eslint --write $PWD/'src/**/*.{js,jsx}' "
   },
-  "proxy": "http://localhost:4000",
   "browserslist": {
     "production": [
       ">0.2%",
