@@ -30,11 +30,17 @@ const resolvers = {
     // eslint-disable-next-line space-before-function-paren
     count: async (parent, { limit }, { dataSources }) => {
       const counts = []
-      let coins = await dataSources.coinsAPI.getAllMarkets()
+      let markets = await dataSources.coinsAPI.getAllMarkets()
+      const activeMarkets = filter(markets, { status: 'ONLINE' })
 
       counts.push({
-        name: 'coins',
-        count: coins.length
+        name: 'markets',
+        count: markets.length
+      })
+
+      counts.push({
+        name: 'activeMarkets',
+        count: activeMarkets.length
       })
 
       return counts
