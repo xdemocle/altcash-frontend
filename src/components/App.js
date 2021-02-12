@@ -11,14 +11,11 @@ import ScrollToTop from './Common/ScrollToTop'
 import Sidebar from './Layout/Sidebar'
 import BottomNav from './Layout/BottomNav'
 import Bottombar from './Layout/Bottombar'
-// import TickersLivePrice from './components/Common/TickersLivePrice'
+// import TickersLivePrice from './Common/TickersLivePrice'
 
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
-import CoinsList from '../components/Coins/CoinsList'
-
-export const routerBasename =
-  process.env.NODE_ENV === 'production' ? '/altssale-frontend' : '/'
+import BuyTabPage from '../components/Coins/BuyTabPage'
 
 export const theme = createMuiTheme({
   palette: {
@@ -113,7 +110,7 @@ class App extends Component {
               <Switch>
                 <Route exact path="/" component={Landing} />
                 <Route path="/about" component={About} />
-                <Route path="/buy" component={CoinsList} />
+                <Route path="/buy" component={BuyTabPage} />
               </Switch>
             </main>
             <Hidden xsDown>

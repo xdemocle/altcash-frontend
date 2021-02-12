@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
 import { MuiThemeProvider } from '@material-ui/core/styles'
 import apolloClient from './common/apollo/apollo-client'
-import App, { routerBasename, theme } from './components/App'
+import App, { theme } from './components/App'
 import * as serviceWorker from './serviceWorker'
 import './index.css'
 
@@ -13,7 +13,7 @@ const render = (Component) => {
   return ReactDOM.render(
     <ApolloProvider client={apolloClient}>
       <MuiThemeProvider theme={theme}>
-        <BrowserRouter basename={routerBasename}>
+        <BrowserRouter>
           <Component />
         </BrowserRouter>
       </MuiThemeProvider>
