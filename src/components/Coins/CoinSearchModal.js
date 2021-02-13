@@ -51,7 +51,7 @@ class CoinsSearchModal extends Component {
 
     function debounceEventHandler(...args) {
       const debounced = debounce(...args)
-      return function(e) {
+      return (e) => {
         e.persist()
         return debounced(e)
       }

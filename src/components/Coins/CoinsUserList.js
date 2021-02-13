@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
+import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import { useQuery } from '@apollo/client'
 import { GET_COINS_LIST } from '../../graphql/queries'
-import List from '@material-ui/core/List'
 import CoinItem from './CoinItem'
 import useGlobal from '../../common/globalStateHook'
 
@@ -37,36 +38,40 @@ const styles = (theme) => ({
   }
 })
 
-const CoinsUserFavourites = () => {
-  const [globalState, globalActions] = useGlobal()
-  const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
-    GET_COINS_LIST,
-    {
-      variables: {
-        offset: 0,
-        limit: 20,
-        symbols: globalState.userCoinFavourites.join('|')
-      }
+const CoinsUserFavourites = (props) => {
+  const [globalState] = useGlobal()
+  const { data, networkStatus } = useQuery(GET_COINS_LIST, {
+    variables: {
+      offset: 0,
+      limit: 20,
+      needle: globalState.coinPageNeedle,
+      symbols: props.predefined
+        ? props.predefined.join('|')
+        : globalState.userCoinFavourites.join('|')
     }
-  )
+  })
 
   return (
-    <div>
-      <List>
-        {data &&
-          data.coins.map((coin, ix) => (
+    <Fragment>
+      {data && data.coins && !data.coins.length && networkStatus === 7 && (
+        <Typography variant="subtitle1">
+          No starred coins. Add some first.
+        </Typography>
+      )}
+      {data && data.coins && (
+        <List>
+          {data.coins.map((coin, ix) => (
             <CoinItem key={`${coin.name}${ix}`} coin={coin} />
           ))}
-      </List>
-      {/* {globalState.userCoinFavourites.map((userCoinSymbol) => {
-        return userCoinSymbol + ', '
-      })} */}
-    </div>
+        </List>
+      )}
+    </Fragment>
   )
 }
 
 CoinsUserFavourites.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
+  predefined: PropTypes.array
 }
 
 export default withStyles(styles, { withTheme: true })(CoinsUserFavourites)

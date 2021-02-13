@@ -1,4 +1,4 @@
-const { each, filter, find, orderBy } = require('lodash')
+const { each, filter, find } = require('lodash')
 const { RESTDataSource } = require('apollo-datasource-rest')
 const names = require('./names')
 
@@ -40,7 +40,21 @@ class CoinsAPI extends RESTDataSource {
     })
 
     // Order by name
-    response = orderBy(response, 'name', 'asc')
+    response.sort((a, b) => {
+      // ignore upper and lowercase
+      const nameA = a.name.toUpperCase()
+      const nameB = b.name.toUpperCase()
+
+      if (nameA < nameB) {
+        return -1
+      }
+      if (nameA > nameB) {
+        return 1
+      }
+
+      // names must be equal
+      return 0
+    })
 
     // Prepare array of missing names stringified
     each(missingNames, (name) => {

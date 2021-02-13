@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
-import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import Paper from '@material-ui/core/Paper'
 import Tabs from '@material-ui/core/Tabs'
 import Tab from '@material-ui/core/Tab'
 import green from '@material-ui/core/colors/green'
-import { Favorite, List as ListIcon } from '@material-ui/icons'
+import { Star, List as ListIcon } from '@material-ui/icons'
+import NewReleasesIcon from '@material-ui/icons/NewReleases'
 // import useGlobal from '../../common/globalStateHook'
 import CoinsList from './CoinsList'
-import CoinsUserFavourites from './CoinsUserFavourites'
+import CoinsUserList from './CoinsUserList'
 
 const styles = (theme) => ({
   root: {
@@ -60,6 +60,8 @@ const BuyTabPage = (props) => {
   // const [globalState, globalActions] = useGlobal()
   const [tab, setTab] = useState(0)
 
+  const symbolsFeatured = ['ZRX', 'ANT', 'POT', 'STORJ']
+
   const handleChange = (event, tab) => {
     setTab(tab)
   }
@@ -83,20 +85,26 @@ const BuyTabPage = (props) => {
           textColor="primary"
         >
           <Tab
-            label="Coin List"
+            label="Featured"
+            icon={<NewReleasesIcon />}
+            classes={{ root: classes.tabRoot }}
+          />
+          <Tab
+            label="All Coins"
             icon={<ListIcon />}
             classes={{ root: classes.tabRoot }}
           />
           <Tab
             label="Favourite"
-            icon={<Favorite />}
+            icon={<Star />}
             classes={{ root: classes.tabRoot }}
           />
         </Tabs>
       </Paper>
 
-      {tab === 0 && <CoinsList />}
-      {tab === 1 && <CoinsUserFavourites />}
+      {tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
+      {tab === 1 && <CoinsList />}
+      {tab === 2 && <CoinsUserList />}
     </div>
   )
 }

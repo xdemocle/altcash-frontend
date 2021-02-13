@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
+// import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import { CircularProgress, Fab, Tooltip } from '@material-ui/core'
 import { Refresh, Close, Search } from '@material-ui/icons'
@@ -56,20 +56,22 @@ class HeaderfabButtons extends Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-          <Tooltip title="Reset search results">
-            <div className={classes.fabButtons}>
-              <Fab
-                color="primary"
-                size="small"
-                aria-label="Reset search results"
-                disabled={loading}
-                onClick={() => updateNeedle('')}
-                className={classNames(!coinPageNeedle && classes.hide)}
-              >
-                <Close />
-              </Fab>
-            </div>
-          </Tooltip>
+          {coinPageNeedle && (
+            <Tooltip title="Reset search results">
+              <div className={classes.fabButtons}>
+                <Fab
+                  color="primary"
+                  size="small"
+                  aria-label="Reset search results"
+                  disabled={loading}
+                  onClick={() => updateNeedle('')}
+                  // className={classNames(!coinPageNeedle && classes.hide)}
+                >
+                  <Close />
+                </Fab>
+              </div>
+            </Tooltip>
+          )}
 
           <Tooltip title="Find coins">
             <div className={classes.fabButtons}>

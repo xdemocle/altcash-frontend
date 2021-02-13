@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button'
 import { ArrowDownward } from '@material-ui/icons'
 import green from '@material-ui/core/colors/green'
 import CircularProgress from '@material-ui/core/CircularProgress'
+// import Pagination from '@material-ui/lab/Pagination'
 import CoinItem from './CoinItem'
 import HeaderFabButtons from './HeaderFabButtons'
 import { GET_COINS_LIST } from '../../graphql/queries'
@@ -33,7 +34,7 @@ const styles = (theme) => ({
     marginLeft: theme.spacing(1)
   },
   buttonProgress: {
-    color: green[500],
+    color: green[100],
     position: 'absolute',
     top: '50%',
     left: '50%',
@@ -45,35 +46,25 @@ const styles = (theme) => ({
     textAlign: 'center',
     margin: theme.spacing(1)
   },
-  paper: {
-    margin: '1rem 0'
-  },
-  tabRoot: {
-    maxWidth: 'none',
-    minWidth: 'auto',
-    flexGrow: 1,
-    flexShrink: 1,
-    flexBasis: 0
+  pagination: {
+    textAlign: 'center',
+    margin: '1rem 2rem'
   }
 })
 
 const CoinsList = (props) => {
   const { classes } = props
   const [globalState, globalActions] = useGlobal()
-  const useQueryOptions = {
-    variables: {
-      offset: 0,
-      limit: 20
-    }
-  }
-
-  if (globalState.coinPageNeedle.length) {
-    useQueryOptions.needle = globalState.coinPageNeedle
-  }
-
+  // const [page, setPage] = useState(1)
   const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
     GET_COINS_LIST,
-    useQueryOptions
+    {
+      variables: {
+        offset: 0,
+        limit: 30,
+        term: globalState.coinPageNeedle
+      }
+    }
   )
 
   const coinsTotal =
@@ -92,8 +83,21 @@ const CoinsList = (props) => {
     })
   }
 
+  // const handleChange = (event, value) => {
+  //   setPage(value)
+  //   fetchMore({
+  //     variables: {
+  //       offset: 20 * value
+  //     }
+  //   })
+  // }
+
   const showLoadMoreButton =
-    data && data.coins && data.coins.length < coinsTotal && networkStatus !== 4
+    data &&
+    data.coins &&
+    data.coins.length < coinsTotal &&
+    networkStatus !== 4 &&
+    !globalState.coinPageNeedle
 
   return (
     <Fragment>
@@ -117,6 +121,18 @@ const CoinsList = (props) => {
         </List>
       )}
 
+      {/* <div className={classes.pagination}>
+        <Pagination
+          count={coinsTotal / 20}
+          size="large"
+          color="primary"
+          page={page}
+          defaultPage={1}
+          siblingCount={6}
+          onChange={handleChange}
+        />
+      </div> */}
+
       {showLoadMoreButton && (
         <div className={classes.bottomListWrapper}>
           <Button
@@ -128,10 +144,10 @@ const CoinsList = (props) => {
           >
             Load more
             <ArrowDownward className={classes.rightIcon} />
+            {loading && (
+              <CircularProgress size={24} className={classes.buttonProgress} />
+            )}
           </Button>
-          {loading && (
-            <CircularProgress size={24} className={classes.buttonProgress} />
-          )}
         </div>
       )}
     </Fragment>

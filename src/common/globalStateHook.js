@@ -41,6 +41,6 @@ const actions = {
 export default globalHook(React, initialState, actions)
 
 function persistCoinFavourites(coins) {
-  console.log('userCoinFavourites', coins)
+  // console.log('userCoinFavourites', coins)
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins))
 }

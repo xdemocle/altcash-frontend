@@ -11,7 +11,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
 import StarBorderIcon from '@material-ui/icons/StarBorder'
 import StarIcon from '@material-ui/icons/Star'
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+// import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../Common/CoinTicker'
 import useGlobal from '../../common/globalStateHook'
@@ -77,11 +77,11 @@ const CoinItem = ({ classes, coin }) => {
           className={classNames(classes.column, coin.status)}
         />
         <ListItemSecondaryAction>
-          <Tooltip title="Add to your cart" placement="bottom">
+          {/* <Tooltip title="Add to your cart" placement="bottom">
             <IconButton aria-label="Add to your cart">
               <AddShoppingCartIcon />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
           <Tooltip title="Add to your favourite" placement="bottom">
             <IconButton
               aria-label="Add to your favourite"
