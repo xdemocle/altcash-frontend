@@ -11,7 +11,8 @@ import ScrollToTop from './Common/ScrollToTop'
 import Sidebar from './Layout/Sidebar'
 import BottomNav from './Layout/BottomNav'
 import Bottombar from './Layout/Bottombar'
-// import TickersLivePrice from './Common/TickersLivePrice'
+import TickersLivePrice from './Common/TickersLivePrice'
+import BitcoinRandLivePrice from './Common/BitcoinRandLivePrice'
 
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
@@ -102,8 +103,9 @@ class App extends Component {
     return (
       <ScrollToTop>
         <div className={classes.root}>
-          {/* <TickersLivePrice /> */}
           <CssBaseline />
+          <BitcoinRandLivePrice />
+          <TickersLivePrice />
           <div className={classes.appFrame}>
             <Sidebar />
             <main className={classes.content}>

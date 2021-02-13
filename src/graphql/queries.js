@@ -1,22 +1,68 @@
 import { gql } from '@apollo/client'
 
+// https://www.apollographql.com/docs/react/v2/caching/cache-interaction/#the-connection-directive
+// @connection(key: "feed", filter: ["type"])
+
 export const GET_COINS_LIST = gql`
-  query allCoins($offset: Int, $limit: Int, $term: String, $symbols: String) {
+  query Coins($offset: Int, $limit: Int, $term: String, $symbols: String) {
     coins(offset: $offset, limit: $limit, term: $term, symbols: $symbols) {
+      id
       name
-      baseCurrencySymbol
+      symbol
       status
     }
-    count {
-      name
-      count
+  }
+`
+
+export const GET_SUMMARIES = gql`
+  query Summaries {
+    summaries {
+      id
+      symbol
+      high
+      percentChange
+    }
+  }
+`
+
+export const GET_SUMMARY = gql`
+  query Summary($id: String) {
+    summary(id: $id) {
+      id
+      symbol
+      high
+      percentChange
+    }
+  }
+`
+
+export const GET_TICKERS = gql`
+  query Tickers {
+    tickers {
+      id
+      symbol
+      lastTradeRate
+      bidRate
+      askRate
+    }
+  }
+`
+
+export const GET_TICKER = gql`
+  query Ticker($id: String) {
+    ticker(id: $id) {
+      id
+      symbol
+      lastTradeRate
+      bidRate
+      askRate
     }
   }
 `
 
 export const GET_COUNT = gql`
-  query counts {
-    counts {
+  query Counts {
+    count {
       name
       count
     }

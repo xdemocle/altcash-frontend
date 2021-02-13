@@ -1,53 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-// import { graphql, compose } from '@apollo/client'
-// import { UPDATE_MARKET } from '../../graphql/mutations.js'
-import { socket, socketConnect } from '../../common/BittrexWebsocketClient'
+import React, { Fragment } from 'react'
+import { useQuery } from '@apollo/client'
+import { GET_TICKERS } from '../../graphql/queries'
 
-class TickersLivePrice extends React.Component {
-  componentDidMount() {
-    // const that = this
+const TickersLivePrice = () => {
+  const { data, networkStatus, refetch } = useQuery(GET_TICKERS, {
+    pollInterval: 30000
+  })
 
-    socketConnect(() => {
-      socket.on('connected', (isConnected) => {
-        if (isConnected) {
-          socket.on('m', (data) => {
-            console.log('m', data)
-            // if (data.markets) {
-            //   that.updateMarkets(data.markets)
-            // }
-          })
-        }
-      })
-    })
-  }
+  // console.log('summaries', data)
 
-  updateMarkets(markets) {
-    const { updateMarket } = this.props
-    markets.forEach((market) => updateMarket(market))
-  }
-
-  componentWillUnmount() {
-    if (socket && socket.disconnect) {
-      socket.disconnect()
-    }
-  }
-
-  render() {
-    return null
-  }
+  return <Fragment />
 }
-
-TickersLivePrice.propTypes = {
-  updateMarket: PropTypes.func.isRequired
-}
-
-// const TickersLivePriceEnhanced = compose(
-//   graphql(UPDATE_MARKET, {
-//     props: ({ mutate }) => ({
-//       updateMarket: (market) => mutate({ variables: { market } })
-//     })
-//   })
-// )(TickersLivePrice)
 
 export default TickersLivePrice
