@@ -1,4 +1,5 @@
 import React from 'react'
+import axios from 'axios'
 import globalHook from 'use-global-hook'
 
 const initialState = {
@@ -6,7 +7,10 @@ const initialState = {
   coinPageNeedle: '',
   userCoinFavourites: window.localStorage.getItem('userCoinFavourites')
     ? JSON.parse(window.localStorage.getItem('userCoinFavourites'))
-    : []
+    : [],
+  bitcoinRandPrice: window.localStorage.getItem('bitcoinRandPrice')
+    ? JSON.parse(window.localStorage.getItem('bitcoinRandPrice'))
+    : 0
 }
 
 const actions = {
@@ -35,12 +39,22 @@ const actions = {
     persistCoinFavourites(userCoinFavourites)
 
     store.setState({ userCoinFavourites })
+  },
+  updateBitcoinRandPrice: async (store) => {
+    const response = await axios.get('/api/1/ticker?pair=XBTZAR')
+
+    persistBitcoinRandPrice(response.data.ask)
+
+    store.setState({ bitcoinRandPrice: response.data.ask })
   }
 }
 
 export default globalHook(React, initialState, actions)
 
 function persistCoinFavourites(coins) {
-  // console.log('userCoinFavourites', coins)
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins))
+}
+
+function persistBitcoinRandPrice(price) {
+  window.localStorage.setItem('bitcoinRandPrice', JSON.stringify(price))
 }
