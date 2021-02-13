@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
+import { useQuery } from '@apollo/client'
+import { GET_COUNT } from '../../graphql/queries'
 
 const styles = (theme) => ({
   root: {
@@ -20,10 +22,19 @@ const styles = (theme) => ({
 
 function SimpleAppBar(props) {
   const { classes } = props
+  const { data } = useQuery(GET_COUNT)
+
   return (
     <AppBar position="absolute" color="secondary" className={classes.root}>
       <Typography variant="body1" color="inherit" align="right">
-        &copy; Alts.sale {new Date().getFullYear()}
+        {data &&
+          data.count &&
+          data.count.map((count, ix) => (
+            <span key={`${count}${ix}`}>
+              {count.name}: {count.count} -{' '}
+            </span>
+          ))}{' '}
+        &copy; Altcash {new Date().getFullYear()}
       </Typography>
     </AppBar>
   )
