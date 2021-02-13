@@ -219,7 +219,7 @@ function Landing(props) {
                   <Tooltip title="Send a message on Telegram" placement="top">
                     <Button variant="text" size="small" href="">
                       <Icon className={classes.leftIcon}>chat</Icon> Telegram:
-                      Alts.sale
+                      Altcash
                     </Button>
                   </Tooltip>
                   <Button variant="text" size="small" href="">
