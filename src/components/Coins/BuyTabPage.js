@@ -95,7 +95,7 @@ const BuyTabPage = (props) => {
             classes={{ root: classes.tabRoot }}
           />
           <Tab
-            label="Favourite"
+            label="Yuor Favourite"
             icon={<Star />}
             classes={{ root: classes.tabRoot }}
           />
