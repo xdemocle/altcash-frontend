@@ -1,9 +1,8 @@
-import React, { Fragment } from 'react'
+import React, { Fragment /* , useState */ } from 'react'
 import { find } from 'lodash'
-import PropTypes from 'prop-types'
 import { useQuery } from '@apollo/client'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import Button from '@material-ui/core/Button'
 import { ArrowDownward } from '@material-ui/icons'
@@ -12,10 +11,10 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 // import Pagination from '@material-ui/lab/Pagination'
 import CoinItem from './CoinItem'
 import HeaderFabButtons from './HeaderFabButtons'
-import { GET_COINS_LIST } from '../../graphql/queries'
+import { GET_COINS_LIST, GET_COUNT } from '../../graphql/queries'
 import useGlobal from '../../common/globalStateHook'
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.typography.pxToRem(theme.spacing(3)),
     [theme.breakpoints.only('xs')]: {
@@ -50,12 +49,13 @@ const styles = (theme) => ({
     textAlign: 'center',
     margin: '1rem 2rem'
   }
-})
+}))
 
-const CoinsList = (props) => {
-  const { classes } = props
+const CoinsList = () => {
+  const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   // const [page, setPage] = useState(1)
+  const { data: dataCount } = useQuery(GET_COUNT)
   const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
     GET_COINS_LIST,
     {
@@ -68,7 +68,9 @@ const CoinsList = (props) => {
   )
 
   const coinsTotal =
-    data && data.count ? find(data.count, { name: 'markets' }).count : 0
+    dataCount && dataCount.count
+      ? find(dataCount.count, { name: 'markets' }).count
+      : 0
 
   const updateNeedle = (needle) => {
     globalActions.updateCoinPageNeedle(needle)
@@ -87,7 +89,8 @@ const CoinsList = (props) => {
   //   setPage(value)
   //   fetchMore({
   //     variables: {
-  //       offset: 20 * value
+  //       offset: 30 * value,
+  //       limit: 30
   //     }
   //   })
   // }
@@ -115,15 +118,15 @@ const CoinsList = (props) => {
       )}
       {networkStatus !== 4 && data && data.coins && (
         <List>
-          {data.coins.map((coin, ix) => (
-            <CoinItem key={`${coin.name}${ix}`} coin={coin} />
-          ))}
+          {data.coins.map((coin, ix) => {
+            return coin && <CoinItem key={`${coin.name}${ix}`} coin={coin} />
+          })}
         </List>
       )}
 
       {/* <div className={classes.pagination}>
         <Pagination
-          count={coinsTotal / 20}
+          count={coinsTotal / 30}
           size="large"
           color="primary"
           page={page}
@@ -154,8 +157,4 @@ const CoinsList = (props) => {
   )
 }
 
-CoinsList.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { withTheme: true })(CoinsList)
+export default CoinsList
