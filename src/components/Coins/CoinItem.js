@@ -63,7 +63,7 @@ const CoinItem = ({ coin }) => {
 
   return (
     <React.Fragment>
-      <ListItem button>
+      <ListItem button onClick={() => console.log('goto coin page')}>
         <ListItemIcon>
           <ReactSVG
             src={svgCoinPath}

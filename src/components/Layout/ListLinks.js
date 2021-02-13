@@ -15,6 +15,8 @@ import {
   People,
   ShoppingBasket
 } from '@material-ui/icons'
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
+import StoreIcon from '@material-ui/icons/Store'
 
 const styles = {
   nav: {
@@ -50,9 +52,37 @@ function MainLinks(props) {
       >
         <ListItem component={Link} to="/buy" button>
           <ListItemIcon>
-            <ShoppingBasket className={classes.icons} />
+            <MonetizationOnIcon className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Buy Crypto Coins" />
+        </ListItem>
+      </Tooltip>
+
+      <Divider />
+
+      <Tooltip
+        title="Your overview"
+        placement="right"
+        enterDelay={isSidebarOpen ? 2000 : 50}
+      >
+        <ListItem component={Link} to="/overview" button>
+          <ListItemIcon>
+            <StoreIcon className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary="Overview" />
+        </ListItem>
+      </Tooltip>
+
+      <Tooltip
+        title="Your cart"
+        placement="right"
+        enterDelay={isSidebarOpen ? 2000 : 50}
+      >
+        <ListItem component={Link} to="/cart" button>
+          <ListItemIcon>
+            <ShoppingBasket className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary="Cart" />
         </ListItem>
       </Tooltip>
 
@@ -70,7 +100,6 @@ function MainLinks(props) {
           <ListItemText primary="About Us" />
         </ListItem>
       </Tooltip>
-
       <Tooltip
         title="Support"
         placement="right"
