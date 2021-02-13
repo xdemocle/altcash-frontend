@@ -22,7 +22,14 @@ module.exports = {
     'no-extra-semi': 'warn',
     'semi-spacing': 'warn',
     camelcase: 'warn',
-    'space-before-function-paren': ['error', 'never'],
+    'space-before-function-paren': [
+      'error',
+      {
+        anonymous: 'ignore',
+        named: 'ignore',
+        asyncArrow: 'ignore'
+      }
+    ],
     'comma-dangle': ['warn', 'never'],
     quotes: ['warn', 'single'],
     indent: [
