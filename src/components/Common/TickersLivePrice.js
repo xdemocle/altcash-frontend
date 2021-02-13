@@ -1,22 +1,21 @@
-/* eslint-disable no-debugger */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { graphql, compose } from '@apollo/client'
-import { UPDATE_MARKET } from '../graphql/mutations.js'
-import { socket, socketConnect } from './BittrexWebsocketClient'
+// import { graphql, compose } from '@apollo/client'
+// import { UPDATE_MARKET } from '../../graphql/mutations.js'
+import { socket, socketConnect } from '../../common/BittrexWebsocketClient'
 
 class TickersLivePrice extends React.Component {
   componentDidMount() {
-    const that = this
+    // const that = this
 
     socketConnect(() => {
       socket.on('connected', (isConnected) => {
         if (isConnected) {
           socket.on('m', (data) => {
             console.log('m', data)
-            if (data.markets) {
-              that.updateMarkets(data.markets)
-            }
+            // if (data.markets) {
+            //   that.updateMarkets(data.markets)
+            // }
           })
         }
       })
@@ -43,12 +42,12 @@ TickersLivePrice.propTypes = {
   updateMarket: PropTypes.func.isRequired
 }
 
-const TickersLivePriceEnhanced = compose(
-  graphql(UPDATE_MARKET, {
-    props: ({ mutate }) => ({
-      updateMarket: (market) => mutate({ variables: { market } })
-    })
-  })
-)(TickersLivePrice)
+// const TickersLivePriceEnhanced = compose(
+//   graphql(UPDATE_MARKET, {
+//     props: ({ mutate }) => ({
+//       updateMarket: (market) => mutate({ variables: { market } })
+//     })
+//   })
+// )(TickersLivePrice)
 
-export default TickersLivePriceEnhanced
+export default TickersLivePrice

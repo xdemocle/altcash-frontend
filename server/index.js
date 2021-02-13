@@ -29,7 +29,7 @@ const typeDefs = gql`
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. In this
   type Query {
-    coins(offset: Int, limit: Int, term: String): [Coin!]
+    coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
     count: [Count!]
   }
 `

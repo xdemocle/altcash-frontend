@@ -1,17 +1,20 @@
 import React from 'react'
-import { filter } from 'lodash'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
 import { ReactSVG } from 'react-svg'
+import Tooltip from '@material-ui/core/Tooltip'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
 import IconButton from '@material-ui/core/IconButton'
-import { Favorite } from '@material-ui/icons'
+import StarBorderIcon from '@material-ui/icons/StarBorder'
+import StarIcon from '@material-ui/icons/Star'
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../Common/CoinTicker'
+import useGlobal from '../../common/globalStateHook'
 
 const styles = (theme) => ({
   avatar: {
@@ -37,30 +40,22 @@ const svgCoinPathHelper = (name) => {
   return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
 }
 
-const isCoinActiveHelper = (markets) => {
-  const activeMarkets = filter(markets, (market) => {
-    return market.isActive
-  })
-
-  return activeMarkets
-}
-
 const CoinItem = ({ classes, coin }) => {
-  let coinSymbol = coin.symbol.toLowerCase()
+  const [globalState, globalActions] = useGlobal()
+  const isCoinActive = coin.status === 'ONLINE'
+  let coinSymbol = coin.baseCurrencySymbol.toLowerCase()
   let svgCoinPath = null
-  const isCoinActive = isCoinActiveHelper(coin.markets)
-
-  // if (!isCoinActive.length > 0) {
-  //   return null
-  // }
 
   try {
-    coinSymbol = coin.symbol.toLowerCase()
     svgCoinPath = svgCoinPathHelper(coinSymbol)
   } catch (err) {
     coinSymbol = 'cc-default'
     svgCoinPath = svgCoinPathHelper('btc')
   }
+
+  const isStarred = globalState.userCoinFavourites.includes(
+    coin.baseCurrencySymbol
+  )
 
   return (
     <React.Fragment>
@@ -73,23 +68,39 @@ const CoinItem = ({ classes, coin }) => {
         </ListItemIcon>
         <ListItemText
           primary={coin.name}
-          secondary={coin.symbol.toUpperCase()}
+          secondary={coin.baseCurrencySymbol.toUpperCase()}
           className={classes.column}
         />
         <ListItemText
           primary={<CoinTicker coin={isCoinActive} />}
           secondary="Live Price"
-          className={classes.column}
+          className={classNames(classes.column, coin.status)}
         />
         <ListItemSecondaryAction>
-          <IconButton aria-label="Add cart">
-            <Favorite />
-          </IconButton>
+          <Tooltip title="Add to your cart" placement="bottom">
+            <IconButton aria-label="Add to your cart">
+              <AddShoppingCartIcon />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Add to your favourite" placement="bottom">
+            <IconButton
+              aria-label="Add to your favourite"
+              onClick={() => {
+                if (isStarred) {
+                  globalActions.removeUserCoinFavourites(
+                    coin.baseCurrencySymbol
+                  )
+                } else {
+                  globalActions.addUserCoinFavourites(coin.baseCurrencySymbol)
+                }
+              }}
+            >
+              {isStarred ? <StarIcon /> : <StarBorderIcon />}
+            </IconButton>
+          </Tooltip>
         </ListItemSecondaryAction>
       </ListItem>
-      <li>
-        <Divider />
-      </li>
+      <Divider />
     </React.Fragment>
   )
 }
