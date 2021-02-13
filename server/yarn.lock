@@ -475,6 +475,15 @@ apollo-server-plugin-base@^0.10.4:
   dependencies:
     apollo-server-types "^0.6.3"
 
+apollo-server-plugin-response-cache@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.npmjs.org/apollo-server-plugin-response-cache/-/apollo-server-plugin-response-cache-0.6.0.tgz#b8735951665e01428fbf22f36aafd12953b350c9"
+  integrity sha512-Yjwec1VXINmNV6tmZLv+J9+iPb/4oKPcVA2YwF05o3Lf/oO+T5/9DP1yHxxjB117KDYlepKeIPuzAcqFZW/l8g==
+  dependencies:
+    apollo-cache-control "^0.11.6"
+    apollo-server-caching "^0.5.3"
+    apollo-server-plugin-base "^0.10.4"
+
 apollo-server-types@^0.6.3:
   version "0.6.3"
   resolved "https://registry.npmjs.org/apollo-server-types/-/apollo-server-types-0.6.3.tgz#f7aa25ff7157863264d01a77d7934aa6e13399e8"

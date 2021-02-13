@@ -36,7 +36,9 @@ class CoinsAPI extends RESTDataSource {
         }
       }
 
+      coin.id = coin.baseCurrencySymbol
       coin.name = nameCoin && nameCoin.name
+      coin.symbol = coin.symbol.replace('-BTC', '')
     })
 
     // Order by name
@@ -73,7 +75,32 @@ class CoinsAPI extends RESTDataSource {
   }
 
   async getAllSummaries() {
-    const response = await this.get('summaries')
+    let response = await this.get('markets/summaries')
+
+    // Removing not needed markets
+    response = filter(response, (coin) => {
+      return coin.symbol.search('-BTC') !== -1
+    })
+
+    each(response, (coin) => {
+      coin.id = coin.symbol = coin.symbol.replace('-BTC', '')
+    })
+
+    return response
+  }
+
+  async getAllTickers() {
+    let response = await this.get('markets/tickers')
+
+    // Removing not needed markets
+    response = filter(response, (coin) => {
+      return coin.symbol.search('-BTC') !== -1
+    })
+
+    each(response, (coin) => {
+      coin.id = coin.symbol = coin.symbol.replace('-BTC', '')
+    })
+
     return response
   }
 

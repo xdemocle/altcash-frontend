@@ -1,5 +1,4 @@
-/* eslint-disable space-before-function-paren */
-const { filter, isUndefined } = require('lodash')
+const { filter, find, isUndefined } = require('lodash')
 
 const queryCoins = async (
   parent,
@@ -27,7 +26,7 @@ const queryCoins = async (
     coins = filter(coins, (coin) => {
       return (
         coin.name.toLowerCase().search(term) !== -1 ||
-        coin.baseCurrencySymbol.toLowerCase().search(term) !== -1
+        coin.baseCurrencySymbol.toLowerCase().search(term.toLowerCase()) !== -1
       )
     })
   }
@@ -38,6 +37,48 @@ const queryCoins = async (
   }
 
   return coins
+}
+
+const querySummaries = async (parent, { symbols }, { dataSources }) => {
+  let summaries = await dataSources.coinsAPI.getAllSummaries()
+
+  // Search feature or symbols one
+  if (!isUndefined(symbols)) {
+    symbols = symbols.split('|')
+
+    summaries = filter(summaries, (coin) => {
+      return symbols.includes(coin.symbol)
+    })
+  }
+
+  return summaries
+}
+
+const querySummary = async (parent, { id }, { dataSources }) => {
+  const summaries = await dataSources.coinsAPI.getAllSummaries()
+
+  return find(summaries, { id })
+}
+
+const queryTickers = async (parent, { symbols }, { dataSources }) => {
+  let tickers = await dataSources.coinsAPI.getAllTickers()
+
+  // Search feature or symbols one
+  if (!isUndefined(symbols)) {
+    symbols = symbols.split('|')
+
+    tickers = filter(tickers, (coin) => {
+      return symbols.includes(coin.symbol)
+    })
+  }
+
+  return tickers
+}
+
+const queryTicker = async (parent, { id }, { dataSources }) => {
+  const tickers = await dataSources.coinsAPI.getAllTickers()
+
+  return find(tickers, { id })
 }
 
 const queryCount = async (parent, { limit }, { dataSources }) => {
@@ -63,6 +104,10 @@ const queryCount = async (parent, { limit }, { dataSources }) => {
 const resolvers = {
   Query: {
     coins: queryCoins,
+    summaries: querySummaries,
+    summary: querySummary,
+    tickers: queryTickers,
+    ticker: queryTicker,
     count: queryCount
   }
 }

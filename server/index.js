@@ -1,4 +1,5 @@
 const { ApolloServer, gql } = require('apollo-server')
+const responseCachePlugin = require('apollo-server-plugin-response-cache')
 // const { RedisCache } = require('apollo-server-cache-redis')
 // const { each } = require('lodash')
 const resolvers = require('./resolvers')
@@ -10,6 +11,7 @@ const CoinsAPI = require('./datasources/coins')
 // your data.
 const typeDefs = gql`
   type Coin {
+    id: String!
     symbol: String!
     baseCurrencySymbol: String!
     quoteCurrencySymbol: String!
@@ -18,7 +20,25 @@ const typeDefs = gql`
     status: String
     createdAt: String
     name: String
-    # name: CoinName!
+  }
+
+  type Summary {
+    id: String!
+    symbol: String!
+    high: Float
+    low: Float
+    volume: Float
+    quoteVolume: Float
+    percentChange: Float
+    updatedAt: String
+  }
+
+  type Ticker {
+    id: String!
+    symbol: String!
+    lastTradeRate: Float
+    bidRate: Float
+    askRate: Float
   }
 
   type Count {
@@ -30,6 +50,10 @@ const typeDefs = gql`
   # clients can execute, along with the return type for each. In this
   type Query {
     coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
+    summaries(symbols: String): [Summary!]
+    summary(id: String): Summary!
+    tickers(symbols: String): [Ticker!]
+    ticker(id: String): Ticker!
     count: [Count!]
   }
 `
@@ -42,7 +66,11 @@ const server = new ApolloServer({
   dataSources: () => ({
     coinsAPI: new CoinsAPI(),
     namesAPI: namesAPI
-  })
+  }),
+  plugins: [responseCachePlugin()],
+  cacheControl: {
+    defaultMaxAge: 5
+  }
 })
 
 // The `listen` method launches a web server.
