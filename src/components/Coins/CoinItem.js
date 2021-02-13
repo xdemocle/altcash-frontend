@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import { ReactSVG } from 'react-svg'
 import Tooltip from '@material-ui/core/Tooltip'
 import ListItem from '@material-ui/core/ListItem'
@@ -16,7 +16,7 @@ import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../Common/CoinTicker'
 import useGlobal from '../../common/globalStateHook'
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   avatar: {
     width: '2rem',
     height: '2rem',
@@ -34,16 +34,22 @@ const styles = (theme) => ({
   column: {
     flexBasis: 0
   }
-})
+}))
 
 const svgCoinPathHelper = (name) => {
   return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
 }
 
-const CoinItem = ({ classes, coin }) => {
+const CoinItem = ({ coin }) => {
+  const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
-  const isCoinActive = coin.status === 'ONLINE'
-  let coinSymbol = coin.baseCurrencySymbol.toLowerCase()
+
+  if (!coin) {
+    return null
+  }
+
+  // const isCoinActive = coin.status === 'ONLINE'
+  let coinSymbol = coin.symbol.toLowerCase()
   let svgCoinPath = null
 
   try {
@@ -53,9 +59,7 @@ const CoinItem = ({ classes, coin }) => {
     svgCoinPath = svgCoinPathHelper('btc')
   }
 
-  const isStarred = globalState.userCoinFavourites.includes(
-    coin.baseCurrencySymbol
-  )
+  const isStarred = globalState.userCoinFavourites.includes(coin.symbol)
 
   return (
     <React.Fragment>
@@ -68,11 +72,11 @@ const CoinItem = ({ classes, coin }) => {
         </ListItemIcon>
         <ListItemText
           primary={coin.name}
-          secondary={coin.baseCurrencySymbol.toUpperCase()}
+          secondary={coin.symbol.toUpperCase()}
           className={classes.column}
         />
         <ListItemText
-          primary={<CoinTicker coin={isCoinActive} />}
+          primary={<CoinTicker coin={coin} />}
           secondary="Live Price"
           className={classNames(classes.column, coin.status)}
         />
@@ -87,11 +91,9 @@ const CoinItem = ({ classes, coin }) => {
               aria-label="Add to your favourite"
               onClick={() => {
                 if (isStarred) {
-                  globalActions.removeUserCoinFavourites(
-                    coin.baseCurrencySymbol
-                  )
+                  globalActions.removeUserCoinFavourites(coin.symbol)
                 } else {
-                  globalActions.addUserCoinFavourites(coin.baseCurrencySymbol)
+                  globalActions.addUserCoinFavourites(coin.symbol)
                 }
               }}
             >
@@ -106,8 +108,7 @@ const CoinItem = ({ classes, coin }) => {
 }
 
 CoinItem.propTypes = {
-  classes: PropTypes.object.isRequired,
   coin: PropTypes.object.isRequired
 }
 
-export default withStyles(styles)(CoinItem)
+export default CoinItem
