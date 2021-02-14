@@ -82,9 +82,12 @@ const queryTickers = async (parent, { symbols }, { dataSources }) => {
 }
 
 const queryTicker = async (parent, { id }, { dataSources }) => {
-  const tickers = await dataSources.coinsAPI.getAllTickers()
+  const response = await dataSources.coinsAPI.getTicker(id)
 
-  return find(tickers, { id })
+  // Add the id for client caching purpouse
+  response.id = response.symbol = response.symbol.replace('-BTC', '')
+
+  return response
 }
 
 const queryCount = async (parent, { limit }, { dataSources }) => {

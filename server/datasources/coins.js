@@ -104,6 +104,12 @@ class CoinsAPI extends RESTDataSource {
     return response
   }
 
+  async getTicker(symbol) {
+    const marketSymbol = `${symbol}-BTC`.toLowerCase()
+
+    return await this.get(`markets/${marketSymbol}/ticker`)
+  }
+
   // get baseURL() {
   //   if (this.context.env === 'development') {
   //     return 'https://movies-api-dev.example.com/'
