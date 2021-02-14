@@ -17,6 +17,9 @@ import BitcoinRandLivePrice from './Common/BitcoinRandLivePrice'
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
 import BuyTabPage from '../components/Coins/BuyTabPage'
+import Cart from '../components/Cart'
+import Overview from '../components/Overview'
+import Support from '../components/Support'
 
 export const theme = createMuiTheme({
   palette: {
@@ -113,6 +116,9 @@ class App extends Component {
                 <Route exact path="/" component={Landing} />
                 <Route path="/about" component={About} />
                 <Route path="/buy" component={BuyTabPage} />
+                <Route path="/cart" component={Cart} />
+                <Route path="/overview" component={Overview} />
+                <Route path="/support" component={Support} />
               </Switch>
             </main>
             <Hidden xsDown>

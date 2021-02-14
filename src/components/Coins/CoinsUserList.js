@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import { useQuery } from '@apollo/client'
-import { GET_COINS_LIST } from '../../graphql/queries'
+import { GET_COINS } from '../../graphql/queries'
 import CoinItem from './CoinItem'
 import useGlobal from '../../common/globalStateHook'
 
@@ -42,11 +42,8 @@ const CoinsUserFavourites = (props) => {
   // const classes = useStyles()
 
   const [globalState] = useGlobal()
-  const { data, networkStatus } = useQuery(GET_COINS_LIST, {
+  const { data, networkStatus } = useQuery(GET_COINS, {
     variables: {
-      offset: 0,
-      limit: 20,
-      needle: globalState.coinPageNeedle,
       symbols: props.predefined
         ? props.predefined.join('|')
         : globalState.userCoinFavourites.join('|')

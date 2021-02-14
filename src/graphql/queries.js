@@ -3,9 +3,20 @@ import { gql } from '@apollo/client'
 // https://www.apollographql.com/docs/react/v2/caching/cache-interaction/#the-connection-directive
 // @connection(key: "feed", filter: ["type"])
 
-export const GET_COINS_LIST = gql`
+export const GET_COINS = gql`
   query Coins($offset: Int, $limit: Int, $term: String, $symbols: String) {
     coins(offset: $offset, limit: $limit, term: $term, symbols: $symbols) {
+      id
+      name
+      symbol
+      status
+    }
+  }
+`
+
+export const GET_COIN = gql`
+  query Coin($id: String) {
+    coin(id: $id) {
       id
       name
       symbol
