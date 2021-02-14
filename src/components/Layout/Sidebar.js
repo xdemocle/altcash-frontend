@@ -65,7 +65,7 @@ const styles = (theme) => ({
     ...theme.mixins.toolbar
   },
   toolbarTitle: {
-    margin: '0 1.2rem',
+    margin: '0 0.8rem',
     [theme.breakpoints.only('xs')]: {
       margin: '0 1.1rem'
     }

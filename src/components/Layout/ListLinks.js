@@ -61,19 +61,6 @@ function MainLinks(props) {
       <Divider />
 
       <Tooltip
-        title="Your overview"
-        placement="right"
-        enterDelay={isSidebarOpen ? 2000 : 50}
-      >
-        <ListItem component={Link} to="/overview" button>
-          <ListItemIcon>
-            <StoreIcon className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Overview" />
-        </ListItem>
-      </Tooltip>
-
-      <Tooltip
         title="Your cart"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
@@ -83,6 +70,19 @@ function MainLinks(props) {
             <ShoppingBasket className={classes.icons} />
           </ListItemIcon>
           <ListItemText primary="Cart" />
+        </ListItem>
+      </Tooltip>
+
+      <Tooltip
+        title="Your balance overview"
+        placement="right"
+        enterDelay={isSidebarOpen ? 2000 : 50}
+      >
+        <ListItem component={Link} to="/overview" button>
+          <ListItemIcon>
+            <StoreIcon className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary="Overview" />
         </ListItem>
       </Tooltip>
 
