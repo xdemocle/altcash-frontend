@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // import classNames from 'classnames'
 import { withStyles } from '@material-ui/core/styles'
-import { CircularProgress, Fab, Tooltip } from '@material-ui/core'
+import { CircularProgress, Button, Tooltip } from '@material-ui/core'
 import { Refresh, Close, Search } from '@material-ui/icons'
 import CoinSearchModal from './CoinSearchModal'
 
@@ -59,44 +59,50 @@ class HeaderfabButtons extends Component {
           {coinPageNeedle && (
             <Tooltip title="Reset search results">
               <div className={classes.fabButtons}>
-                <Fab
+                <Button
+                  variant="contained"
                   color="primary"
                   size="small"
                   aria-label="Reset search results"
                   disabled={loading}
                   onClick={() => updateNeedle('')}
                   // className={classNames(!coinPageNeedle && classes.hide)}
+                  startIcon={<Close />}
                 >
-                  <Close />
-                </Fab>
+                  Close Search
+                </Button>
               </div>
             </Tooltip>
           )}
 
           <Tooltip title="Find coins">
             <div className={classes.fabButtons}>
-              <Fab
+              <Button
+                variant="contained"
                 color="primary"
                 size="small"
                 aria-label="Find coins"
                 onClick={this.handleModalOpen}
+                startIcon={<Search />}
               >
-                <Search />
-              </Fab>
+                Search
+              </Button>
             </div>
           </Tooltip>
 
           <Tooltip title="Retrieve an updated list">
             <div className={classes.fabButtons}>
-              <Fab
+              <Button
+                variant="contained"
                 color="primary"
                 size="small"
                 aria-label="Retrieve an updated list"
                 disabled={loading}
                 onClick={() => updateNeedle('')}
+                startIcon={<Refresh />}
               >
-                <Refresh />
-              </Fab>
+                Refresh
+              </Button>
               {loading && (
                 <CircularProgress size={52} className={classes.fabProgress} />
               )}
@@ -116,7 +122,7 @@ class HeaderfabButtons extends Component {
 HeaderfabButtons.propTypes = {
   classes: PropTypes.object.isRequired,
   loading: PropTypes.bool.isRequired,
-  coinPageNeedle: PropTypes.string.isRequired,
+  coinPageNeedle: PropTypes.string,
   updateNeedle: PropTypes.func.isRequired
 }
 
