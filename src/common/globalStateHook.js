@@ -4,7 +4,8 @@ import globalHook from 'use-global-hook'
 
 const initialState = {
   isSidebarOpen: false,
-  coinPageNeedle: '',
+  coinPageNeedle: undefined,
+  coinListPage: 1,
   userCoinFavourites: window.localStorage.getItem('userCoinFavourites')
     ? JSON.parse(window.localStorage.getItem('userCoinFavourites'))
     : [],
@@ -46,6 +47,9 @@ const actions = {
     persistBitcoinRandPrice(response.data.ask)
 
     store.setState({ bitcoinRandPrice: response.data.ask })
+  },
+  setCoinListPage: async (store, page) => {
+    store.setState({ coinListPage: page })
   }
 }
 

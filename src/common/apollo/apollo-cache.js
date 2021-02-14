@@ -6,9 +6,9 @@
  */
 import { InMemoryCache } from '@apollo/client'
 import {
-  // offsetLimitPagination,
+  offsetLimitPagination
   // relayStylePagination,
-  concatPagination
+  // concatPagination
 } from '@apollo/client/utilities'
 import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist'
 
@@ -18,7 +18,21 @@ const cache = new InMemoryCache({
   typePolicies: {
     Query: {
       fields: {
-        coins: concatPagination(['term', 'symbols'])
+        // coins: concatPagination(['term', 'symbols'])
+        coins: offsetLimitPagination(['term', 'symbols'])
+        // coins: {
+        //   keyArgs: ['term', 'symbols'],
+        //   merge(existing, incoming, { args: { offset, limit } }) {
+        //     const merged = existing ? existing.slice(0) : []
+        //     const start = offset ? offset : merged.length
+        //     const end = start + incoming.length
+        //     for (let i = start; i < end; ++i) {
+        //       merged[i] = incoming[i - start]
+        //     }
+        //     debugger
+        //     return merged.splice(start, limit)
+        //   }
+        // }
       }
     }
   }

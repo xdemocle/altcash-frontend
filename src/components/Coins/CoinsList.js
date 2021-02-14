@@ -1,17 +1,17 @@
-import React, { Fragment /* , useState */ } from 'react'
-import { find } from 'lodash'
+import React, { Fragment } from 'react'
+import { clone, find } from 'lodash'
 import { useQuery } from '@apollo/client'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
-import Button from '@material-ui/core/Button'
-import { ArrowDownward } from '@material-ui/icons'
+// import Button from '@material-ui/core/Button'
+// import { ArrowDownward } from '@material-ui/icons'
+// import CircularProgress from '@material-ui/core/CircularProgress'
 import green from '@material-ui/core/colors/green'
-import CircularProgress from '@material-ui/core/CircularProgress'
-// import Pagination from '@material-ui/lab/Pagination'
+import Pagination from '@material-ui/lab/Pagination'
 import CoinItem from './CoinItem'
 import HeaderFabButtons from './HeaderFabButtons'
-import { GET_COINS_LIST, GET_COUNT } from '../../graphql/queries'
+import { GET_COINS, GET_COUNT } from '../../graphql/queries'
 import useGlobal from '../../common/globalStateHook'
 
 const useStyles = makeStyles((theme) => ({
@@ -47,25 +47,24 @@ const useStyles = makeStyles((theme) => ({
   },
   pagination: {
     textAlign: 'center',
-    margin: '1rem 2rem'
+    margin: '1.7rem 2rem 1.5rem 2rem'
   }
 }))
 
 const CoinsList = () => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
-  // const [page, setPage] = useState(1)
   const { data: dataCount } = useQuery(GET_COUNT)
-  const { loading, error, data, refetch, fetchMore, networkStatus } = useQuery(
-    GET_COINS_LIST,
-    {
-      variables: {
-        offset: 0,
-        limit: 30,
-        term: globalState.coinPageNeedle
-      }
+  const { loading, error, data, refetch, networkStatus } = useQuery(GET_COINS, {
+    fetchPolicy: 'cache-first',
+    variables: {
+      // offset: 0,
+      // limit: 30,
+      term: globalState.coinPageNeedle
     }
-  )
+  })
+
+  const coins = getListSlice(data, globalState.coinListPage, 30)
 
   const coinsTotal =
     dataCount && dataCount.count
@@ -77,30 +76,35 @@ const CoinsList = () => {
     refetch()
   }
 
-  const onLoadMore = () => {
-    fetchMore({
-      variables: {
-        offset: data && data.coins.length
-      }
-    })
-  }
-
-  // const handleChange = (event, value) => {
-  //   setPage(value)
+  // const onLoadMore = () => {
   //   fetchMore({
   //     variables: {
-  //       offset: 30 * value,
+  //       offset: data && coins.length,
   //       limit: 30
   //     }
   //   })
   // }
 
-  const showLoadMoreButton =
-    data &&
-    data.coins &&
-    data.coins.length < coinsTotal &&
-    networkStatus !== 4 &&
-    !globalState.coinPageNeedle
+  const handleChange = (event, value) => {
+    globalActions.setCoinListPage(value)
+
+    // fetchMore({
+    //   variables: {
+    //     offset: 30 * (value - 1),
+    //     limit: 30
+    //   }
+    // })
+  }
+
+  // const showLoadMoreButton =
+  //   data &&
+  //   coins.length < coinsTotal &&
+  //   networkStatus !== 4 &&
+  //   !globalState.coinPageNeedle
+
+  const showPagination = !globalState.coinPageNeedle.length
+
+  const paginationPages = Math.floor(coinsTotal / 30)
 
   return (
     <Fragment>
@@ -110,33 +114,36 @@ const CoinsList = () => {
         updateNeedle={updateNeedle}
       />
       {error && <Typography>Error! {error.message}</Typography>}
-      {data && data.coins && !data.coins.length && networkStatus === 7 && (
+      {coins && !coins.length && networkStatus === 7 && (
         <Typography variant="subtitle1">No results...</Typography>
       )}
-      {loading && ((data && !data.coins) || networkStatus === 4) && (
+      {loading && (!coins || networkStatus === 4) && (
         <Typography variant="subtitle2">Loading coins list...</Typography>
       )}
-      {networkStatus !== 4 && data && data.coins && (
+      {networkStatus !== 4 && coins && (
         <List>
-          {data.coins.map((coin, ix) => {
+          {coins.map((coin, ix) => {
             return coin && <CoinItem key={`${coin.name}${ix}`} coin={coin} />
           })}
         </List>
       )}
 
-      {/* <div className={classes.pagination}>
-        <Pagination
-          count={coinsTotal / 30}
-          size="large"
-          color="primary"
-          page={page}
-          defaultPage={1}
-          siblingCount={6}
-          onChange={handleChange}
-        />
-      </div> */}
+      {showPagination && (
+        <div className={classes.pagination}>
+          <Pagination
+            count={paginationPages}
+            size="large"
+            color="primary"
+            page={globalState.coinListPage}
+            defaultPage={1}
+            siblingCount={6}
+            onChange={handleChange}
+            className="pagination-coins-list"
+          />
+        </div>
+      )}
 
-      {showLoadMoreButton && (
+      {/* {showLoadMoreButton && (
         <div className={classes.bottomListWrapper}>
           <Button
             variant="contained"
@@ -152,9 +159,16 @@ const CoinsList = () => {
             )}
           </Button>
         </div>
-      )}
+      )} */}
     </Fragment>
   )
 }
 
 export default CoinsList
+
+function getListSlice(data, page, limit) {
+  const offset = (page - 1) * limit
+  const list = data ? clone(data.coins) : []
+
+  return list.splice(offset, limit)
+}
