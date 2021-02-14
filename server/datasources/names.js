@@ -2332,7 +2332,7 @@ const coins = [
   },
   {
     symbol: 'XRP',
-    name: 'XRP',
+    name: 'Ripple',
     color: '#23292f'
   },
   {
