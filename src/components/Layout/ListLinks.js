@@ -54,7 +54,7 @@ function MainLinks(props) {
           <ListItemIcon>
             <MonetizationOnIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="Buy Crypto Coins" />
+          <ListItemText primary="Crypto Coins" />
         </ListItem>
       </Tooltip>
 
