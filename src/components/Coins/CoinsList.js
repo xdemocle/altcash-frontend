@@ -53,7 +53,9 @@ const CoinsList = () => {
   const [globalState, globalActions] = useGlobal()
   const { data: dataCount } = useQuery(GET_COUNT)
   const { loading, error, data, networkStatus } = useQuery(GET_COINS, {
-    fetchPolicy: 'cache-first',
+    // fetchPolicy: 'cache-first',
+    // We refresh data list at least at reload
+    fetchPolicy: 'cache-and-network',
     variables: {
       term: globalState.coinPageNeedle
     }

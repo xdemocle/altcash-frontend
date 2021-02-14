@@ -48,7 +48,7 @@ const CoinItem = ({ coin }) => {
     return null
   }
 
-  // const isCoinActive = coin.status === 'ONLINE'
+  const isCoinActive = coin.status === 'ONLINE'
   let coinSymbol = coin.symbol.toLowerCase()
   let svgCoinPath = null
 
@@ -72,7 +72,9 @@ const CoinItem = ({ coin }) => {
         </ListItemIcon>
         <ListItemText
           primary={coin.name}
-          secondary={coin.symbol.toUpperCase()}
+          secondary={`${coin.symbol.toUpperCase()} ${
+            !isCoinActive ? ' / ' + coin.status : ''
+          }`}
           className={classes.column}
         />
         <ListItemText
