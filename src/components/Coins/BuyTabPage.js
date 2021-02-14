@@ -60,7 +60,21 @@ const BuyTabPage = (props) => {
   // const [globalState, globalActions] = useGlobal()
   const [tab, setTab] = useState(0)
 
-  const symbolsFeatured = ['ZRX', 'ANT', 'POT', 'STORJ']
+  const symbolsFeatured = [
+    'ETH',
+    'DOT',
+    'BCH',
+    'XRP',
+    'ADA',
+    'BNB',
+    'LTC',
+    'LINK',
+    'XLM',
+    'DOGE',
+    'USDC',
+    'UNI',
+    'WBTC'
+  ].sort()
 
   const handleChange = (event, tab) => {
     setTab(tab)
