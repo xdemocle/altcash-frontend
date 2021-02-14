@@ -18,9 +18,14 @@ export const GET_COIN = gql`
   query Coin($id: String) {
     coin(id: $id) {
       id
-      name
       symbol
+      baseCurrencySymbol
+      quoteCurrencySymbol
+      minTradeSize
+      precision
       status
+      createdAt
+      name
     }
   }
 `
