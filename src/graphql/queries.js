@@ -51,7 +51,7 @@ export const GET_TICKERS = gql`
   query Tickers {
     tickers {
       id
-      symbol
+      # symbol
       # lastTradeRate
       # bidRate
       askRate
@@ -63,9 +63,9 @@ export const GET_TICKER = gql`
   query Ticker($id: String) {
     ticker(id: $id) {
       id
-      symbol
-      lastTradeRate
-      bidRate
+      # symbol
+      # lastTradeRate
+      # bidRate
       askRate
     }
   }
