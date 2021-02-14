@@ -4,9 +4,6 @@ import { useQuery } from '@apollo/client'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
-// import Button from '@material-ui/core/Button'
-// import { ArrowDownward } from '@material-ui/icons'
-// import CircularProgress from '@material-ui/core/CircularProgress'
 import green from '@material-ui/core/colors/green'
 import Pagination from '@material-ui/lab/Pagination'
 import CoinItem from './CoinItem'
@@ -55,56 +52,44 @@ const CoinsList = () => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const { data: dataCount } = useQuery(GET_COUNT)
-  const { loading, error, data, refetch, networkStatus } = useQuery(GET_COINS, {
+  const { loading, error, data, networkStatus } = useQuery(GET_COINS, {
     fetchPolicy: 'cache-first',
     variables: {
-      // offset: 0,
-      // limit: 30,
       term: globalState.coinPageNeedle
     }
   })
 
-  const coins = getListSlice(data, globalState.coinListPage, 30)
+  const getListSlice = (limit) => {
+    const list = data ? clone(data.coins) : []
+
+    if (globalState.coinPageNeedle && !!globalState.coinPageNeedle.length) {
+      return list
+    }
+
+    const offset = (globalState.coinListPage - 1) * limit
+
+    return list.splice(offset, limit)
+  }
+
+  const coins = getListSlice(30)
 
   const coinsTotal =
     dataCount && dataCount.count
       ? find(dataCount.count, { name: 'markets' }).count
       : 0
 
+  const hidePagination =
+    globalState.coinPageNeedle && !!globalState.coinPageNeedle.length
+
+  const paginationPages = Math.floor(coinsTotal / 30)
+
   const updateNeedle = (needle) => {
     globalActions.updateCoinPageNeedle(needle)
-    refetch()
   }
-
-  // const onLoadMore = () => {
-  //   fetchMore({
-  //     variables: {
-  //       offset: data && coins.length,
-  //       limit: 30
-  //     }
-  //   })
-  // }
 
   const handleChange = (event, value) => {
     globalActions.setCoinListPage(value)
-
-    // fetchMore({
-    //   variables: {
-    //     offset: 30 * (value - 1),
-    //     limit: 30
-    //   }
-    // })
   }
-
-  // const showLoadMoreButton =
-  //   data &&
-  //   coins.length < coinsTotal &&
-  //   networkStatus !== 4 &&
-  //   !globalState.coinPageNeedle
-
-  const showPagination = !globalState.coinPageNeedle.length
-
-  const paginationPages = Math.floor(coinsTotal / 30)
 
   return (
     <Fragment>
@@ -128,7 +113,7 @@ const CoinsList = () => {
         </List>
       )}
 
-      {showPagination && (
+      {!hidePagination && (
         <div className={classes.pagination}>
           <Pagination
             count={paginationPages}
@@ -142,33 +127,8 @@ const CoinsList = () => {
           />
         </div>
       )}
-
-      {/* {showLoadMoreButton && (
-        <div className={classes.bottomListWrapper}>
-          <Button
-            variant="contained"
-            color="primary"
-            className={classes.buttonLoadMore}
-            onClick={onLoadMore}
-            disabled={loading}
-          >
-            Load more
-            <ArrowDownward className={classes.rightIcon} />
-            {loading && (
-              <CircularProgress size={24} className={classes.buttonProgress} />
-            )}
-          </Button>
-        </div>
-      )} */}
     </Fragment>
   )
 }
 
 export default CoinsList
-
-function getListSlice(data, page, limit) {
-  const offset = (page - 1) * limit
-  const list = data ? clone(data.coins) : []
-
-  return list.splice(offset, limit)
-}
