@@ -6,6 +6,7 @@ const initialState = {
   isSidebarOpen: false,
   coinPageNeedle: undefined,
   coinListPage: 1,
+  tab: 0,
   userCoinFavourites: window.localStorage.getItem('userCoinFavourites')
     ? JSON.parse(window.localStorage.getItem('userCoinFavourites'))
     : [],
@@ -50,6 +51,9 @@ const actions = {
   },
   setCoinListPage: async (store, page) => {
     store.setState({ coinListPage: page })
+  },
+  setTab: async (store, tab) => {
+    store.setState({ tab })
   }
 }
 

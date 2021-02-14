@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
@@ -8,7 +8,7 @@ import Tab from '@material-ui/core/Tab'
 import green from '@material-ui/core/colors/green'
 import { Star, List as ListIcon } from '@material-ui/icons'
 import NewReleasesIcon from '@material-ui/icons/NewReleases'
-// import useGlobal from '../../common/globalStateHook'
+import useGlobal from '../../common/globalStateHook'
 import CoinsList from './CoinsList'
 import CoinsUserList from './CoinsUserList'
 
@@ -57,8 +57,7 @@ const styles = (theme) => ({
 
 const BuyTabPage = (props) => {
   const { classes } = props
-  // const [globalState, globalActions] = useGlobal()
-  const [tab, setTab] = useState(0)
+  const [globalState, globalActions] = useGlobal()
 
   const symbolsFeatured = [
     'ETH',
@@ -77,7 +76,7 @@ const BuyTabPage = (props) => {
   ].sort()
 
   const handleChange = (event, tab) => {
-    setTab(tab)
+    globalActions.setTab(tab)
   }
 
   return (
@@ -93,7 +92,7 @@ const BuyTabPage = (props) => {
 
       <Paper className={classes.paper}>
         <Tabs
-          value={tab}
+          value={globalState.tab}
           onChange={handleChange}
           indicatorColor="primary"
           textColor="primary"
@@ -116,9 +115,9 @@ const BuyTabPage = (props) => {
         </Tabs>
       </Paper>
 
-      {tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
-      {tab === 1 && <CoinsList />}
-      {tab === 2 && <CoinsUserList />}
+      {globalState.tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
+      {globalState.tab === 1 && <CoinsList />}
+      {globalState.tab === 2 && <CoinsUserList />}
     </div>
   )
 }
