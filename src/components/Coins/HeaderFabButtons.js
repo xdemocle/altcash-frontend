@@ -27,8 +27,12 @@ const styles = (theme) => ({
   fabProgress: {
     color: theme.palette.primary.main,
     position: 'absolute',
-    top: -6,
-    right: -6,
+    // top: -6,
+    // right: -6,
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
     zIndex: 1
   },
   hide: {
@@ -90,7 +94,7 @@ class HeaderfabButtons extends Component {
             </div>
           </Tooltip>
 
-          <Tooltip title="Retrieve an updated list">
+          {/* <Tooltip title="Retrieve an updated list">
             <div className={classes.fabButtons}>
               <Button
                 variant="contained"
@@ -104,10 +108,10 @@ class HeaderfabButtons extends Component {
                 Refresh
               </Button>
               {loading && (
-                <CircularProgress size={52} className={classes.fabProgress} />
+                <CircularProgress size={24} className={classes.fabProgress} />
               )}
             </div>
-          </Tooltip>
+          </Tooltip> */}
         </div>
         <CoinSearchModal
           open={modalOpen}
