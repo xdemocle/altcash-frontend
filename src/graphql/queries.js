@@ -52,8 +52,8 @@ export const GET_TICKERS = gql`
     tickers {
       id
       symbol
-      lastTradeRate
-      bidRate
+      # lastTradeRate
+      # bidRate
       askRate
     }
   }

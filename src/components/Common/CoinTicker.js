@@ -6,7 +6,7 @@ import useGlobal from '../../common/globalStateHook'
 
 const CoinTicker = ({ coin }) => {
   const [globalState] = useGlobal()
-  const { data: dataTicker } = useQuery(GET_TICKER, {
+  const { data } = useQuery(GET_TICKER, {
     fetchPolicy: 'cache-first',
     variables: {
       id: coin && coin.id
@@ -19,14 +19,13 @@ const CoinTicker = ({ coin }) => {
 
   // console.log(
   //   'summary' + coin.name,
-  //   dataTicker && dataTicker.ticker.lastTradeRate
+  //   data && data.ticker.askRate
   // )
 
-  const num =
-    dataTicker && dataTicker.ticker.lastTradeRate * globalState.bitcoinRandPrice
+  const num = data && data.ticker.askRate * globalState.bitcoinRandPrice
   const randPrice = num && num.toFixed(2)
 
-  return <span>{dataTicker ? `R${randPrice}` : 'R0'}</span>
+  return <span>{num ? `R${randPrice}` : 'n/d'}</span>
 }
 
 CoinTicker.propTypes = {
