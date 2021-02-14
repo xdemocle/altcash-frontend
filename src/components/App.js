@@ -20,6 +20,7 @@ import BuyTabPage from '../components/Coins/BuyTabPage'
 import Cart from '../components/Cart'
 import Overview from '../components/Overview'
 import Support from '../components/Support'
+import CoinPage from '../components/Coins/CoinPage'
 
 export const theme = createMuiTheme({
   palette: {
@@ -119,6 +120,7 @@ class App extends Component {
                 <Route path="/cart" component={Cart} />
                 <Route path="/overview" component={Overview} />
                 <Route path="/support" component={Support} />
+                <Route path="/coin/:coinId" component={CoinPage} />
               </Switch>
             </main>
             <Hidden xsDown>
