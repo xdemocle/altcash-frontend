@@ -50,6 +50,7 @@ const typeDefs = gql`
   # clients can execute, along with the return type for each. In this
   type Query {
     coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
+    coin(id: String): Coin!
     summaries(symbols: String): [Summary!]
     summary(id: String): Summary!
     tickers(symbols: String): [Ticker!]

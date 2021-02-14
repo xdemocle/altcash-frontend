@@ -39,6 +39,12 @@ const queryCoins = async (
   return coins
 }
 
+const queryCoin = async (parent, { id }, { dataSources }) => {
+  const coins = await dataSources.coinsAPI.getAllMarkets()
+
+  return find(coins, { id })
+}
+
 const querySummaries = async (parent, { symbols }, { dataSources }) => {
   let summaries = await dataSources.coinsAPI.getAllSummaries()
 
@@ -104,6 +110,7 @@ const queryCount = async (parent, { limit }, { dataSources }) => {
 const resolvers = {
   Query: {
     coins: queryCoins,
+    coin: queryCoin,
     summaries: querySummaries,
     summary: querySummary,
     tickers: queryTickers,
