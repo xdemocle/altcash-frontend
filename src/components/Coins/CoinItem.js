@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { makeStyles } from '@material-ui/core/styles'
-import { ReactSVG } from 'react-svg'
 import Tooltip from '@material-ui/core/Tooltip'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -14,6 +14,7 @@ import StarIcon from '@material-ui/icons/Star'
 // import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../Common/CoinTicker'
+import CoinSVG from './CoinSvg'
 import useGlobal from '../../common/globalStateHook'
 
 const useStyles = makeStyles((theme) => ({
@@ -36,10 +37,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const svgCoinPathHelper = (name) => {
-  return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
-}
-
 const CoinItem = ({ coin }) => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
@@ -49,26 +46,14 @@ const CoinItem = ({ coin }) => {
   }
 
   const isCoinActive = coin.status === 'ONLINE'
-  let coinSymbol = coin.symbol.toLowerCase()
-  let svgCoinPath = null
-
-  try {
-    svgCoinPath = svgCoinPathHelper(coinSymbol)
-  } catch (err) {
-    coinSymbol = 'cc-default'
-    svgCoinPath = svgCoinPathHelper('btc')
-  }
 
   const isStarred = globalState.userCoinFavourites.includes(coin.symbol)
 
   return (
     <React.Fragment>
-      <ListItem button onClick={() => console.log('goto coin page')}>
+      <ListItem button component={Link} to={`/coin/${coin.id.toLowerCase()}`}>
         <ListItemIcon>
-          <ReactSVG
-            src={svgCoinPath}
-            className={classNames(classes.avatar, coinSymbol)}
-          />
+          <CoinSVG coinSymbol={coin.symbol} />
         </ListItemIcon>
         <ListItemText
           primary={coin.name}
