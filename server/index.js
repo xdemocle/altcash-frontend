@@ -18,6 +18,7 @@ const typeDefs = gql`
     minTradeSize: Float
     precision: Float
     status: String
+    notice: String
     createdAt: String
     name: String
   }
