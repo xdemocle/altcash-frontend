@@ -1,4 +1,4 @@
-const { filter, find, isUndefined } = require('lodash')
+const { filter, isUndefined } = require('lodash')
 
 const queryCoins = async (
   parent,
@@ -46,6 +46,12 @@ const queryCoin = async (parent, { id }, { dataSources }) => {
   response.id = response.symbol = response.symbol.replace('-BTC', '')
 
   return response
+}
+
+const queryMetaCoin = async (parent, { id }, { dataSources }) => {
+  const response = await dataSources.metadataAPI.getCoin(id)
+
+  return response.data ? response.data[id] : {}
 }
 
 const querySummaries = async (parent, { symbols }, { dataSources }) => {
@@ -120,6 +126,7 @@ const resolvers = {
   Query: {
     coins: queryCoins,
     coin: queryCoin,
+    metaCoin: queryMetaCoin,
     summaries: querySummaries,
     summary: querySummary,
     tickers: queryTickers,

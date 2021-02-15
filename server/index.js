@@ -1,10 +1,12 @@
 const { ApolloServer, gql } = require('apollo-server')
+const { RedisCache } = require('apollo-server-cache-redis')
 const responseCachePlugin = require('apollo-server-plugin-response-cache')
 // const { RedisCache } = require('apollo-server-cache-redis')
 // const { each } = require('lodash')
 const resolvers = require('./resolvers')
 const namesAPI = require('./datasources/names')
 const CoinsAPI = require('./datasources/coins')
+const MetadataAPI = require('./datasources/metadata')
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -42,6 +44,16 @@ const typeDefs = gql`
     askRate: Float
   }
 
+  type Metadata @cacheControl(maxAge: 604800) {
+    id: String!
+    name: String
+    symbol: String
+    slug: String
+    description: String
+    logo: String
+    # urls: String
+  }
+
   type Count {
     name: String!
     count: Float!
@@ -52,6 +64,7 @@ const typeDefs = gql`
   type Query {
     coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
     coin(id: String): Coin!
+    metaCoin(id: String): Metadata!
     summaries(symbols: String): [Summary!]
     summary(id: String): Summary!
     tickers(symbols: String): [Ticker!]
@@ -67,11 +80,17 @@ const server = new ApolloServer({
   resolvers,
   dataSources: () => ({
     coinsAPI: new CoinsAPI(),
+    metadataAPI: new MetadataAPI(),
     namesAPI: namesAPI
+  }),
+  cache: new RedisCache({
+    // https://github.com/luin/ioredis
+    host: '127.0.0.1', // Redis host
+    port: 6379 // Redis port
   }),
   plugins: [responseCachePlugin()],
   cacheControl: {
-    defaultMaxAge: 5
+    defaultMaxAge: 20
   }
 })
 
