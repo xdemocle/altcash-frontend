@@ -91,7 +91,7 @@ const BuyTabPage = (props) => {
         gutterBottom
         className={classes.title}
       >
-        Crypto Coins
+        Altcoins
       </Typography>
 
       <Paper className={classes.paper}>
