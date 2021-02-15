@@ -76,8 +76,17 @@ class CoinsAPI extends RESTDataSource {
 
   async getMarket(symbol) {
     const marketSymbol = `${symbol}-BTC`.toLowerCase()
+    const response = await this.get(`markets/${marketSymbol}`)
 
-    return await this.get(`markets/${marketSymbol}`)
+    // Add names
+    const nameCoin = find(names, (name) => {
+      return name.symbol === response.baseCurrencySymbol
+    })
+
+    response.id = response.symbol = response.baseCurrencySymbol
+    response.name = nameCoin && nameCoin.name
+
+    return response
   }
 
   async getAllSummaries() {
