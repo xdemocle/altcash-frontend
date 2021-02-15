@@ -15,7 +15,7 @@ import BitcoinRandLivePrice from './Common/BitcoinRandLivePrice'
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
 import BuyTabPage from '../components/Coins/BuyTabPage'
-import Cart from '../components/Cart'
+// import Cart from '../components/Cart'
 import Overview from '../components/Overview'
 import Support from '../components/Support'
 import CoinPage from '../components/Coins/CoinPage'
@@ -113,7 +113,7 @@ const App = () => {
               <Route exact path="/" component={Landing} />
               <Route path="/about" component={About} />
               <Route path="/buy" component={BuyTabPage} />
-              <Route path="/cart" component={Cart} />
+              {/* <Route path="/cart" component={Cart} /> */}
               <Route path="/overview" component={Overview} />
               <Route path="/support" component={Support} />
               <Route path="/coin/:coinId" component={CoinPage} />
