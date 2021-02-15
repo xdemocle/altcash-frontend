@@ -1,36 +1,61 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Moment from 'react-moment'
 import { makeStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 import { useQuery } from '@apollo/client'
-import { GET_COIN } from '../../graphql/queries'
+import { green } from '@material-ui/core/colors'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import useGlobal from '../../common/globalStateHook'
+import { btcToRandPrice } from '../../common/currency'
+import { GET_PAGE_DATA, GET_META_COIN } from '../../graphql/queries'
 import CoinSVG from './CoinSvg'
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.typography.pxToRem(theme.spacing(3)),
+    padding: theme.typography.pxToRem(theme.spacing(6)),
+    paddingTop: theme.typography.pxToRem(theme.spacing(4)),
     [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(1.5))
+      padding: theme.typography.pxToRem(theme.spacing(3))
     }
   },
   title: {
-    lineHeight: '3rem',
-    [theme.breakpoints.only('xs')]: {
-      textAlign: 'center'
-    }
+    lineHeight: '3rem'
+    // [theme.breakpoints.only('xs')]: {
+    //   textAlign: 'center'
+    // }
   },
   pageAvatar: {
-    float: 'left',
+    float: 'right',
     display: 'inline',
     marginTop: '-0.2rem',
     marginRight: '0.5rem'
+  },
+  infoParagraph: {
+    marginTop: '1rem'
+    // marginBottom: '1rem'
+  },
+  dataParagraph: {
+    // marginTop: '1rem',
+    marginBottom: '2.5rem',
+    maxWidth: 1024
+  },
+  column: {
+    flexBasis: 0
+  },
+  progress: {
+    color: green[500]
   }
 }))
 
 const CoinPage = (props) => {
   const classes = useStyles()
   const { coinId } = props.match.params
-  const { loading, error, data, networkStatus } = useQuery(GET_COIN, {
+  const [globalState] = useGlobal()
+  const { data, loading } = useQuery(GET_PAGE_DATA, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',
     variables: {
@@ -38,7 +63,22 @@ const CoinPage = (props) => {
     }
   })
 
-  // console.log('coinId', coinId)
+  const { data: metadata } = useQuery(GET_META_COIN, {
+    // We refresh data list at least at reload
+    fetchPolicy: 'cache-first',
+    variables: {
+      id: coinId.toUpperCase()
+    }
+  })
+
+  const dataCoin = data ? data.coin : {}
+  const dataSummary = data ? data.summary : { quoteVolume: 0, volume: 0 }
+  const dataTicker = data ? data.ticker : {}
+  const metaCoin = metadata ? metadata.metaCoin : {}
+
+  // console.log('data', data)
+  // console.log('dataTicker', dataTicker)
+  // console.log('metadata', metadata)
 
   return (
     <div className={classes.root}>
@@ -48,12 +88,118 @@ const CoinPage = (props) => {
         gutterBottom
         className={classes.title}
       >
+        {dataCoin.name}
         <div className={classes.pageAvatar}>
-          <CoinSVG coinSymbol={coinId} />
+          {loading && (
+            <CircularProgress className={classes.progress} size="4rem" />
+          )}
+          {!loading && !metaCoin.description && <CoinSVG coinSymbol={coinId} />}
+          {!loading && metaCoin.logo && (
+            <img
+              src={metaCoin.logo}
+              width="64"
+              height="64"
+              alt={metaCoin.logo}
+              title={metaCoin.name}
+            />
+          )}
         </div>
-        {data && data.coin.name}
       </Typography>
-      {/* <span>{data && JSON.stringify(data.coin)}</span> */}
+      <Typography variant="h5" gutterBottom className={classes.infoParagraph}>
+        Buy now
+      </Typography>
+      <Typography variant="h5" gutterBottom className={classes.infoParagraph}>
+        Market Details & Statistics
+      </Typography>
+      <List className={classes.dataParagraph} aria-label="Coin Data">
+        <ListItem divider>
+          <ListItemText
+            primary={<strong>Current Buy Price</strong>}
+            className={classes.column}
+          />
+          <ListItemText
+            primary={`${btcToRandPrice(
+              dataTicker.bidRate,
+              globalState.bitcoinRandPrice
+            )}`}
+            secondary={`${dataTicker.bidRate} BTC`}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Last Trade Price" className={classes.column} />
+          <ListItemText
+            primary={`${btcToRandPrice(
+              dataTicker.lastTradeRate,
+              globalState.bitcoinRandPrice
+            )}`}
+            secondary={`${dataTicker.lastTradeRate} BTC`}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Price Change" className={classes.column} />
+          <ListItemText
+            primary={`${dataSummary.percentChange}%`}
+            secondary={'Last 24hrs'}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Price at Highest" className={classes.column} />
+          <ListItemText
+            primary={`${btcToRandPrice(
+              dataSummary.high,
+              globalState.bitcoinRandPrice
+            )}`}
+            secondary={`${dataSummary.high} BTC`}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Price at Lowest" className={classes.column} />
+          <ListItemText
+            primary={`${btcToRandPrice(
+              dataSummary.low,
+              globalState.bitcoinRandPrice
+            )}`}
+            secondary={`${dataSummary.low} BTC`}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Trading Volume" className={classes.column} />
+          <ListItemText
+            primary={`${dataSummary.volume.toFixed(2)} ${dataCoin.symbol}`}
+            secondary={`of ${dataCoin.name}`}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Quote Volume" className={classes.column} />
+          <ListItemText
+            primary={`${btcToRandPrice(
+              dataSummary.quoteVolume,
+              globalState.bitcoinRandPrice
+            )}`}
+            secondary={`${dataSummary.quoteVolume.toFixed(2)} BTC`}
+            className={classes.column}
+          />
+        </ListItem>
+        <ListItem divider>
+          <ListItemText primary="Last update" className={classes.column} />
+          <ListItemText
+            primary={<Moment>{dataSummary.updatedAt}</Moment>}
+            secondary="Page data refresh automatically"
+            className={classes.column}
+          />
+        </ListItem>
+      </List>
+      <Typography variant="body1" gutterBottom>
+        <strong>Description</strong>
+        <br />
+        {metadata && metaCoin.description}
+      </Typography>
     </div>
   )
 }

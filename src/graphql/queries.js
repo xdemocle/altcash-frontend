@@ -76,6 +76,52 @@ export const GET_TICKER = gql`
   }
 `
 
+export const GET_PAGE_DATA = gql`
+  query PageData($id: String) {
+    coin(id: $id) {
+      id
+      symbol
+      baseCurrencySymbol
+      quoteCurrencySymbol
+      minTradeSize
+      precision
+      status
+      createdAt
+      name
+    }
+
+    summary(id: $id) {
+      id
+      high
+      low
+      volume
+      quoteVolume
+      percentChange
+      updatedAt
+    }
+
+    ticker(id: $id) {
+      id
+      lastTradeRate
+      bidRate
+      askRate
+    }
+  }
+`
+
+export const GET_META_COIN = gql`
+  query MetaCoin($id: String) {
+    metaCoin(id: $id) {
+      id
+      name
+      symbol
+      slug
+      description
+      logo
+    }
+  }
+`
+
 export const GET_COUNT = gql`
   query Counts {
     count {
