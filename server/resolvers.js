@@ -40,9 +40,12 @@ const queryCoins = async (
 }
 
 const queryCoin = async (parent, { id }, { dataSources }) => {
-  const coins = await dataSources.coinsAPI.getAllMarkets()
+  const response = await dataSources.coinsAPI.getMarket(id)
 
-  return find(coins, { id })
+  // Add the id for client caching purpouse
+  response.id = response.symbol = response.symbol.replace('-BTC', '')
+
+  return response
 }
 
 const querySummaries = async (parent, { symbols }, { dataSources }) => {
@@ -61,9 +64,12 @@ const querySummaries = async (parent, { symbols }, { dataSources }) => {
 }
 
 const querySummary = async (parent, { id }, { dataSources }) => {
-  const summaries = await dataSources.coinsAPI.getAllSummaries()
+  const response = await dataSources.coinsAPI.getSummary(id)
 
-  return find(summaries, { id })
+  // Add the id for client caching purpouse
+  response.id = response.symbol = response.symbol.replace('-BTC', '')
+
+  return response
 }
 
 const queryTickers = async (parent, { symbols }, { dataSources }) => {
