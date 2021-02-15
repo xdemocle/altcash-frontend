@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { useQuery } from '@apollo/client'
 import { GET_TICKER } from '../../graphql/queries'
 import useGlobal from '../../common/globalStateHook'
+import { btcToRandPrice } from '../../common/currency'
 
 const CoinTicker = ({ coin }) => {
   const [globalState] = useGlobal()
@@ -18,14 +19,19 @@ const CoinTicker = ({ coin }) => {
   }
 
   // console.log(
-  //   'summary' + coin.name,
+  //   // 'summary' + coin.name,
   //   data && data.ticker.askRate
   // )
 
-  const num = data && data.ticker.askRate * globalState.bitcoinRandPrice
-  const randPrice = num && num.toFixed(2)
+  const dataTicker = data ? data.ticker : {}
 
-  return <span>{num ? `R${randPrice}` : 'n/d'}</span>
+  return (
+    <span>
+      {dataTicker.askRate && globalState.bitcoinRandPrice
+        ? btcToRandPrice(dataTicker.askRate, globalState.bitcoinRandPrice)
+        : 'n/d'}
+    </span>
+  )
 }
 
 CoinTicker.propTypes = {
