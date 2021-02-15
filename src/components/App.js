@@ -1,4 +1,3 @@
-import { hot } from 'react-hot-loader/root'
 import React, { useEffect, useState } from 'react'
 import { persistCacheInstance } from '../common/apollo/apollo-cache'
 import { Route, Switch } from 'react-router-dom'
@@ -132,4 +131,4 @@ const App = () => {
   )
 }
 
-export default hot(App)
+export default App
