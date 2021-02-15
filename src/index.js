@@ -1,3 +1,4 @@
+import 'react-hot-loader'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
@@ -8,28 +9,16 @@ import App, { theme } from './components/App'
 import * as serviceWorker from './serviceWorker'
 import './index.css'
 
-const render = (Component) => {
-  // eslint-disable-next-line react/no-render-return-value
-  return ReactDOM.render(
-    <ApolloProvider client={apolloClient}>
-      <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
-          <Component />
-        </BrowserRouter>
-      </MuiThemeProvider>
-    </ApolloProvider>,
-    document.getElementById('root')
-  )
-}
-
-render(App)
-
-if (module.hot) {
-  module.hot.accept('./components/App', () => {
-    const NextApp = require('./components/App').default
-    render(NextApp)
-  })
-}
+ReactDOM.render(
+  <ApolloProvider client={apolloClient}>
+    <MuiThemeProvider theme={theme}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </MuiThemeProvider>
+  </ApolloProvider>,
+  document.getElementById('root')
+)
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

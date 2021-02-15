@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import { hot } from 'react-hot-loader/root'
+import React, { useEffect, useState } from 'react'
 import { persistCacheInstance } from '../common/apollo/apollo-cache'
 import { Route, Switch } from 'react-router-dom'
-import { createMuiTheme, withStyles } from '@material-ui/core/styles'
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
 import green from '@material-ui/core/colors/green'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import CssBaseline from '@material-ui/core/CssBaseline'
@@ -13,7 +13,6 @@ import BottomNav from './Layout/BottomNav'
 import Bottombar from './Layout/Bottombar'
 import TickersLivePrice from './Common/TickersLivePrice'
 import BitcoinRandLivePrice from './Common/BitcoinRandLivePrice'
-
 import Landing from '../components/Landing/Landing'
 import About from '../components/About/About'
 import BuyTabPage from '../components/Coins/BuyTabPage'
@@ -47,7 +46,7 @@ export const theme = createMuiTheme({
   }
 })
 
-const styles = (theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1
   },
@@ -71,73 +70,66 @@ const styles = (theme) => ({
       // marginLeft: 0
     }
   }
-})
+}))
 
-class App extends Component {
-  state = {
-    loaded: false
-  }
+const App = () => {
+  const classes = useStyles()
+  const [loaded, setLoaded] = useState(false)
 
-  async componentDidMount() {
-    /**
-     * Enabling the snippet of code below we would activate the cache at first
-     * stage of app bootstrap. At moment is deactivated and data is written only
-     * after bootstrap and first relevant action, since i'm trying to temporary
-     * overcome the current limitation of apollo-cache-persist and have fresh
-     * data each reload of the browser.
-     */
-    try {
-      await persistCacheInstance
-    } catch (error) {
-      console.error('Error restoring Apollo cache', error)
+  useEffect(() => {
+    const loadCache = async () => {
+      /**
+       * Enabling the snippet of code below we would activate the cache at first
+       * stage of app bootstrap. At moment is deactivated and data is written only
+       * after bootstrap and first relevant action, since i'm trying to temporary
+       * overcome the current limitation of apollo-cache-persist and have fresh
+       * data each reload of the browser.
+       */
+      try {
+        await persistCacheInstance
+      } catch (error) {
+        console.error('Error restoring Apollo cache', error)
+      }
+
+      setLoaded(true)
     }
 
-    this.setState({
-      loaded: true
-    })
+    loadCache()
+  }, [])
+
+  if (!loaded) {
+    return <div>Loading...</div>
   }
 
-  render() {
-    const { classes } = this.props
-
-    if (!this.state.loaded) {
-      return <div>Loading...</div>
-    }
-
-    return (
-      <ScrollToTop>
-        <div className={classes.root}>
-          <CssBaseline />
-          <BitcoinRandLivePrice />
-          <TickersLivePrice />
-          <div className={classes.appFrame}>
-            <Sidebar />
-            <main className={classes.content}>
-              <Switch>
-                <Route exact path="/" component={Landing} />
-                <Route path="/about" component={About} />
-                <Route path="/buy" component={BuyTabPage} />
-                <Route path="/cart" component={Cart} />
-                <Route path="/overview" component={Overview} />
-                <Route path="/support" component={Support} />
-                <Route path="/coin/:coinId" component={CoinPage} />
-              </Switch>
-            </main>
-            <Hidden xsDown>
-              <Bottombar />
-            </Hidden>
-            <Hidden smUp>
-              <BottomNav />
-            </Hidden>
-          </div>
+  return (
+    <ScrollToTop>
+      <div className={classes.root}>
+        <CssBaseline />
+        <BitcoinRandLivePrice />
+        <TickersLivePrice />
+        <div className={classes.appFrame}>
+          <Sidebar />
+          <main className={classes.content}>
+            <Switch>
+              <Route exact path="/" component={Landing} />
+              <Route path="/about" component={About} />
+              <Route path="/buy" component={BuyTabPage} />
+              <Route path="/cart" component={Cart} />
+              <Route path="/overview" component={Overview} />
+              <Route path="/support" component={Support} />
+              <Route path="/coin/:coinId" component={CoinPage} />
+            </Switch>
+          </main>
+          <Hidden xsDown>
+            <Bottombar />
+          </Hidden>
+          <Hidden smUp>
+            <BottomNav />
+          </Hidden>
         </div>
-      </ScrollToTop>
-    )
-  }
+      </div>
+    </ScrollToTop>
+  )
 }
 
-App.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { withTheme: true })(App)
+export default hot(App)

@@ -33,6 +33,7 @@
     "prettier-eslint": "^12.0.0",
     "prettier-eslint-cli": "^5.0.0",
     "prop-types": "^15.7.2",
+    "react-hot-loader": "^4.13.0",
     "react-scripts": "^4.0.2",
     "socket.io": "^3.1.1"
   },
