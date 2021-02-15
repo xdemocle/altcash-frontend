@@ -8,12 +8,12 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Tooltip from '@material-ui/core/Tooltip'
-import Divider from '@material-ui/core/Divider'
+// import Divider from '@material-ui/core/Divider'
 import {
   ContactSupport,
   Home,
-  People,
-  ShoppingBasket
+  People
+  // ShoppingBasket
 } from '@material-ui/icons'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import StoreIcon from '@material-ui/icons/Store'
@@ -58,9 +58,9 @@ function MainLinks(props) {
         </ListItem>
       </Tooltip>
 
-      <Divider />
+      {/* <Divider /> */}
 
-      <Tooltip
+      {/* <Tooltip
         title="Your cart"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
@@ -71,7 +71,7 @@ function MainLinks(props) {
           </ListItemIcon>
           <ListItemText primary="Cart" />
         </ListItem>
-      </Tooltip>
+      </Tooltip> */}
 
       <Tooltip
         title="Your balance overview"
@@ -86,7 +86,7 @@ function MainLinks(props) {
         </ListItem>
       </Tooltip>
 
-      <Divider />
+      {/* <Divider /> */}
 
       <Tooltip
         title="About Us"

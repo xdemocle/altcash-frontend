@@ -6,10 +6,12 @@ import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import {
   ContactSupport,
-  Home,
+  Home
   // People,
-  ShoppingBasket
+  // ShoppingBasket
 } from '@material-ui/icons'
+import StoreIcon from '@material-ui/icons/Store'
+import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 
 const styles = {
   root: {
@@ -43,8 +45,13 @@ class SimpleBottomNavigation extends React.Component {
         <BottomNavigationAction label="Home" icon={<Home />} value="/" />
         <BottomNavigationAction
           label="Buy"
-          icon={<ShoppingBasket />}
+          icon={<MonetizationOnIcon />}
           value="/buy"
+        />
+        <BottomNavigationAction
+          label="Overview"
+          icon={<StoreIcon />}
+          value="/overview"
         />
         <BottomNavigationAction
           label="Support"
