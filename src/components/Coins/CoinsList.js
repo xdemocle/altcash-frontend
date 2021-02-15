@@ -12,17 +12,6 @@ import { GET_COINS, GET_COUNT } from '../../graphql/queries'
 import useGlobal from '../../common/globalStateHook'
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.typography.pxToRem(theme.spacing(3)),
-    [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(1.5))
-    }
-  },
-  title: {
-    [theme.breakpoints.only('xs')]: {
-      textAlign: 'center'
-    }
-  },
   buttonLoadMore: {
     margin: '0 auto'
   },

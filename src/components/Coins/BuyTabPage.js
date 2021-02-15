@@ -14,12 +14,16 @@ import CoinsUserList from './CoinsUserList'
 
 const styles = (theme) => ({
   root: {
-    padding: theme.typography.pxToRem(theme.spacing(3)),
+    paddingTop: theme.typography.pxToRem(theme.spacing(4)),
+    paddingLeft: theme.typography.pxToRem(theme.spacing(5)),
+    paddingBottom: theme.typography.pxToRem(theme.spacing(5)),
+    paddingRight: theme.typography.pxToRem(theme.spacing(5)),
     [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(1.5))
+      padding: theme.typography.pxToRem(theme.spacing(1))
     }
   },
   title: {
+    lineHeight: '3rem',
     [theme.breakpoints.only('xs')]: {
       textAlign: 'center'
     }
