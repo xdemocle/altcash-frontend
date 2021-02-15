@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import classNames from 'classnames'
 import { makeStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import Tooltip from '@material-ui/core/Tooltip'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -12,6 +13,7 @@ import IconButton from '@material-ui/core/IconButton'
 import StarBorderIcon from '@material-ui/icons/StarBorder'
 import StarIcon from '@material-ui/icons/Star'
 // import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import ShoppingBasket from '@material-ui/icons/ShoppingBasket'
 import Divider from '@material-ui/core/Divider'
 import CoinTicker from '../Common/CoinTicker'
 import CoinSVG from './CoinSvg'
@@ -40,13 +42,13 @@ const useStyles = makeStyles((theme) => ({
 const CoinItem = ({ coin }) => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
+  const showIconBuy = useMediaQuery('(min-width:600px)')
 
   if (!coin) {
     return null
   }
 
   const isCoinActive = coin.status === 'ONLINE'
-
   const isStarred = globalState.userCoinFavourites.includes(coin.symbol)
 
   return (
@@ -68,11 +70,17 @@ const CoinItem = ({ coin }) => {
           className={classNames(classes.column, coin.status)}
         />
         <ListItemSecondaryAction>
-          {/* <Tooltip title="Add to your cart" placement="bottom">
-            <IconButton aria-label="Add to your cart">
-              <AddShoppingCartIcon />
-            </IconButton>
-          </Tooltip> */}
+          {showIconBuy && (
+            <Tooltip title="Buy now" placement="bottom">
+              <IconButton
+                aria-label="Buy now"
+                component={Link}
+                to={`/coin/${coin.id.toLowerCase()}`}
+              >
+                <ShoppingBasket />
+              </IconButton>
+            </Tooltip>
+          )}
           <Tooltip title="Add to your favourite" placement="bottom">
             <IconButton
               aria-label="Add to your favourite"
