@@ -1,5 +1,5 @@
 /**
- * apollo-cache.js
+ * apollo-cache.ts
  *
  * Todo: add apollo-link-persisted-queries cache for very large queries that can
  *       become bottlenecks for client performance.

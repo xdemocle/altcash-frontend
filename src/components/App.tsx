@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { hot } from 'react-hot-loader/root'
 import { persistCacheInstance } from '../common/apollo/apollo-cache'
 import { Route, Switch } from 'react-router-dom'
 import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
@@ -61,12 +62,10 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     overflow: 'hidden',
     minHeight: 'calc(100vh - 36px)',
-    paddingBottom: theme.typography.pxToRem('36'),
-    // marginLeft: theme.typography.pxToRem('72'),
+    paddingBottom: theme.typography.pxToRem(36),
     [theme.breakpoints.only('xs')]: {
       minHeight: 'calc(100vh - 56px)',
-      paddingBottom: theme.typography.pxToRem('56')
-      // marginLeft: 0
+      paddingBottom: theme.typography.pxToRem(56)
     }
   }
 }))
@@ -131,4 +130,4 @@ const App = () => {
   )
 }
 
-export default App
+export default hot(App)
