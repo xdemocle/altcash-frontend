@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react'
-import useGlobal from '../../common/globalStateHook'
+import useGlobal from '../common/globalStateHook'
 
 const BitcoinRandLivePrice = () => {
   // eslint-disable-next-line no-unused-vars

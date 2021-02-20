@@ -1,25 +1,24 @@
-import React, { useEffect, useState } from 'react'
-import { hot } from 'react-hot-loader/root'
-import { persistCacheInstance } from '../common/apollo/apollo-cache'
-import { Route, Switch } from 'react-router-dom'
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
-import green from '@material-ui/core/colors/green'
-import blueGrey from '@material-ui/core/colors/blueGrey'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
-import ScrollToTop from './Common/ScrollToTop'
-import Sidebar from './Layout/Sidebar'
-import BottomNav from './Layout/BottomNav'
-import Bottombar from './Layout/Bottombar'
-import TickersLivePrice from './Common/TickersLivePrice'
-import BitcoinRandLivePrice from './Common/BitcoinRandLivePrice'
-import Landing from '../components/Landing/Landing'
-import About from '../components/About/About'
-import BuyTabPage from '../components/Coins/BuyTabPage'
-// import Cart from '../components/Cart'
-import Overview from '../components/Overview'
-import Support from '../components/Support'
-import CoinPage from '../components/Coins/CoinPage'
+import blueGrey from '@material-ui/core/colors/blueGrey'
+import green from '@material-ui/core/colors/green'
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
+import React, { useEffect, useState } from 'react'
+import { hot } from 'react-hot-loader/root'
+import { Route, Switch } from 'react-router-dom'
+import { persistCacheInstance } from '../common/apollo/apollo-cache'
+import AboutPage from '../pages/About'
+import BuyPage from '../pages/Buy'
+import CoinDetailsPage from '../pages/CoinDetails'
+import LandingPage from '../pages/Landing'
+import OverviewPage from '../pages/Overview'
+import SupportPage from '../pages/Support'
+import BitcoinRandLivePrice from './BitcoinRandLivePrice'
+import BottomNav from './BottomNav'
+import Bottombar from './Bottombar'
+import ScrollToTop from './ScrollToTop'
+import Sidebar from './Sidebar'
+import TickersLivePrice from './TickersLivePrice'
 
 export const theme = createMuiTheme({
   palette: {
@@ -109,13 +108,12 @@ const App = () => {
           <Sidebar />
           <main className={classes.content}>
             <Switch>
-              <Route exact path="/" component={Landing} />
-              <Route path="/about" component={About} />
-              <Route path="/buy" component={BuyTabPage} />
-              {/* <Route path="/cart" component={Cart} /> */}
-              <Route path="/overview" component={Overview} />
-              <Route path="/support" component={Support} />
-              <Route path="/coin/:coinId" component={CoinPage} />
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/about" component={AboutPage} />
+              <Route path="/buy" component={BuyPage} />
+              <Route path="/overview" component={OverviewPage} />
+              <Route path="/support" component={SupportPage} />
+              <Route path="/coin/:coinId" component={CoinDetailsPage} />
             </Switch>
           </main>
           <Hidden xsDown>

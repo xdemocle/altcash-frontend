@@ -1,79 +1,80 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { Link } from 'react-router-dom'
-import { withStyles } from '@material-ui/core/styles'
-import { Parallax } from 'react-parallax'
 import Button from '@material-ui/core/Button'
 import Grid from '@material-ui/core/Grid'
 import Icon from '@material-ui/core/Icon'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
-import image1 from '../../assets/hero.jpg'
-import image2 from '../../assets/section.jpg'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import classNames from 'classnames'
+import React from 'react'
+import { Parallax } from 'react-parallax'
+import { Link } from 'react-router-dom'
+import image1 from '../assets/hero.jpg'
+import image2 from '../assets/section.jpg'
 
-const styles = (theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  gridContainer: {
-    padding: '6rem 1.5rem',
-    textAlign: 'center',
-    [theme.breakpoints.only('xs')]: {
-      padding: '2rem 1.5rem'
+const useStyles = makeStyles(
+  ({ breakpoints, palette, spacing, typography }: Theme) => ({
+    root: {
+      flexGrow: 1
+    },
+    gridContainer: {
+      padding: '6rem 1.5rem',
+      textAlign: 'center',
+      [breakpoints.only('xs')]: {
+        padding: '2rem 1.5rem'
+      }
+    },
+    gridOverlayItem: {
+      backgroundColor: 'rgba(255, 255, 255, 0.85)',
+      padding: '1.5rem',
+      color: '#232323'
+    },
+    parallaxContent: {
+      position: 'absolute',
+      top: '50%',
+      left: '0',
+      width: '100%',
+      padding: '3rem 1.5rem',
+      transform: 'translate(0,-50%)',
+      color: palette.primary.contrastText,
+      textAlign: 'center',
+      [breakpoints.only('xs')]: {
+        position: 'static',
+        transform: 'none',
+        padding: '2rem 1.5rem'
+      }
+    },
+    paper: {
+      padding: spacing(2),
+      color: palette.text.secondary,
+      textAlign: 'center'
+    },
+    typographyMainTitle: {
+      fontWeight: 700,
+      textTransform: 'uppercase'
+    },
+    typographyShadow: {
+      textShadow: '1px 1px 1px rgba(0,0,0,0.35)'
+    },
+    heroDivider: {
+      background: '#fff',
+      opacity: 0.5,
+      height: '0.3rem',
+      width: '65%'
+    },
+    ctoButton: {
+      margin: typography.pxToRem(spacing(2)),
+      padding: '.9rem ' + typography.pxToRem(spacing(4)),
+      minHeight: 'auto',
+      lineHeight: 'normal'
+    },
+    leftIcon: {
+      marginRight: spacing(1)
     }
-  },
-  gridOverlayItem: {
-    backgroundColor: 'rgba(255, 255, 255, 0.85)',
-    padding: '1.5rem',
-    color: '#232323'
-  },
-  parallaxContent: {
-    position: 'absolute',
-    top: '50%',
-    left: '0',
-    width: '100%',
-    padding: '3rem 1.5rem',
-    transform: 'translate(0,-50%)',
-    color: theme.palette.primary.contrastText,
-    textAlign: 'center',
-    [theme.breakpoints.only('xs')]: {
-      position: 'static',
-      transform: 'none',
-      padding: '2rem 1.5rem'
-    }
-  },
-  paper: {
-    padding: theme.spacing(2),
-    color: theme.palette.text.secondary,
-    textAlign: 'center'
-  },
-  typographyMainTitle: {
-    fontWeight: 700,
-    textTransform: 'uppercase'
-  },
-  typographyShadow: {
-    textShadow: '1px 1px 1px rgba(0,0,0,0.35)'
-  },
-  heroDivider: {
-    background: '#fff',
-    opacity: 0.5,
-    height: '0.3rem',
-    width: '65%'
-  },
-  ctoButton: {
-    margin: theme.typography.pxToRem(theme.spacing(2)),
-    padding: '.9rem ' + theme.typography.pxToRem(theme.spacing(4)),
-    minHeight: 'auto',
-    lineHeight: 'normal'
-  },
-  leftIcon: {
-    marginRight: theme.spacing(1)
-  }
-})
+  })
+)
 
-function Landing(props) {
-  const { classes } = props
+function Landing() {
+  const classes = useStyles()
 
   return (
     <div className={classes.root}>
@@ -235,8 +236,4 @@ function Landing(props) {
   )
 }
 
-Landing.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { withTheme: true })(Landing)
+export default Landing

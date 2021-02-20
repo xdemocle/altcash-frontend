@@ -1,10 +1,10 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
+import { useQuery } from '@apollo/client'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
-import { useQuery } from '@apollo/client'
-import { GET_COUNT } from '../../graphql/queries'
+import { withStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { GET_COUNT } from '../graphql/queries'
 
 const styles = (theme) => ({
   root: {

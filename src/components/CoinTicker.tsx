@@ -1,9 +1,9 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import { useQuery } from '@apollo/client'
-import { GET_TICKER } from '../../graphql/queries'
-import useGlobal from '../../common/globalStateHook'
-import { btcToRandPrice } from '../../common/currency'
+import PropTypes from 'prop-types'
+import React from 'react'
+import { btcToRandPrice } from '../common/currency'
+import useGlobal from '../common/globalStateHook'
+import { GET_TICKER } from '../graphql/queries'
 
 const CoinTicker = ({ coin }) => {
   const [globalState] = useGlobal()

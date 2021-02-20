@@ -1,18 +1,23 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Moment from 'react-moment'
-import { makeStyles } from '@material-ui/core/styles'
-import Typography from '@material-ui/core/Typography'
 import { useQuery } from '@apollo/client'
-import { green } from '@material-ui/core/colors'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import useGlobal from '../../common/globalStateHook'
-import { btcToRandPrice } from '../../common/currency'
-import { GET_PAGE_DATA, GET_META_COIN } from '../../graphql/queries'
-import CoinSVG from './CoinSvg'
+import Typography from '@material-ui/core/Typography'
+import { green } from '@material-ui/core/colors'
+import { makeStyles } from '@material-ui/core/styles'
+import PropTypes from 'prop-types'
+import React from 'react'
+import Moment from 'react-moment'
+import { useParams } from 'react-router-dom'
+import { btcToRandPrice } from '../common/currency'
+import useGlobal from '../common/globalStateHook'
+import CoinSVG from '../components/CoinSvg'
+import { GET_PAGE_DATA, GET_META_COIN } from '../graphql/queries'
+
+interface RouteParams {
+  coinId: string
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,9 +56,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-const CoinPage = (props) => {
+const CoinPage = () => {
   const classes = useStyles()
-  const { coinId } = props.match.params
+  const { coinId } = useParams<RouteParams>()
   const [globalState] = useGlobal()
   const { data, loading } = useQuery(GET_PAGE_DATA, {
     // We refresh data list at least at reload

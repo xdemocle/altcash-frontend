@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
 import { useQuery } from '@apollo/client'
-import { GET_TICKERS } from '../../graphql/queries'
+import React, { Fragment } from 'react'
+import { GET_TICKERS } from '../graphql/queries'
 
 const TickersLivePrice = () => {
   // const { data, networkStatus, refetch } =

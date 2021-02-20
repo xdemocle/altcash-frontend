@@ -1,45 +1,35 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
-import classNames from 'classnames'
-import { makeStyles } from '@material-ui/core/styles'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
-import Tooltip from '@material-ui/core/Tooltip'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 import ListItemText from '@material-ui/core/ListItemText'
-import IconButton from '@material-ui/core/IconButton'
-import StarBorderIcon from '@material-ui/icons/StarBorder'
-import StarIcon from '@material-ui/icons/Star'
+import Tooltip from '@material-ui/core/Tooltip'
+import { makeStyles } from '@material-ui/core/styles'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 // import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket'
-import Divider from '@material-ui/core/Divider'
-import CoinTicker from '../Common/CoinTicker'
+import StarIcon from '@material-ui/icons/Star'
+import StarBorderIcon from '@material-ui/icons/StarBorder'
+import classNames from 'classnames'
+import React from 'react'
+import { Link } from 'react-router-dom'
+import useGlobal from '../common/globalStateHook'
 import CoinSVG from './CoinSvg'
-import useGlobal from '../../common/globalStateHook'
+import CoinTicker from './CoinTicker'
 
-const useStyles = makeStyles((theme) => ({
-  avatar: {
-    width: '2rem',
-    height: '2rem',
-    padding: 0,
-    verticalAlign: 'middle',
-    overflow: 'visible',
-    '& svg': {
-      width: '2rem',
-      height: '2rem',
-      padding: 0,
-      verticalAlign: 'middle',
-      overflow: 'visible'
-    }
-  },
-  column: {
-    flexBasis: 0
-  }
-}))
+export interface Coin {
+  id: string
+  name: string
+  status: string
+  symbol: string
+}
 
-const CoinItem = ({ coin }) => {
+type Props = {
+  coin: Coin
+}
+
+const CoinItem = ({ coin }: Props) => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const showIconBuy = useMediaQuery('(min-width:600px)')
@@ -102,8 +92,24 @@ const CoinItem = ({ coin }) => {
   )
 }
 
-CoinItem.propTypes = {
-  coin: PropTypes.object.isRequired
-}
-
 export default CoinItem
+
+const useStyles = makeStyles((theme) => ({
+  avatar: {
+    width: '2rem',
+    height: '2rem',
+    padding: 0,
+    verticalAlign: 'middle',
+    overflow: 'visible',
+    '& svg': {
+      width: '2rem',
+      height: '2rem',
+      padding: 0,
+      verticalAlign: 'middle',
+      overflow: 'visible'
+    }
+  },
+  column: {
+    flexBasis: 0
+  }
+}))

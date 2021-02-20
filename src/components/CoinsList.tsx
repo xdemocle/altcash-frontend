@@ -1,15 +1,15 @@
-import React, { Fragment } from 'react'
-import { clone, find } from 'lodash'
 import { useQuery } from '@apollo/client'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
+import Typography from '@material-ui/core/Typography'
 import green from '@material-ui/core/colors/green'
+import { makeStyles } from '@material-ui/core/styles'
 import Pagination from '@material-ui/lab/Pagination'
+import { clone, find } from 'lodash'
+import React, { Fragment } from 'react'
+import useGlobal from '../common/globalStateHook'
+import { GET_COINS, GET_COUNT } from '../graphql/queries'
 import CoinItem from './CoinItem'
 import HeaderFabButtons from './HeaderFabButtons'
-import { GET_COINS, GET_COUNT } from '../../graphql/queries'
-import useGlobal from '../../common/globalStateHook'
 
 const useStyles = makeStyles((theme) => ({
   buttonLoadMore: {
