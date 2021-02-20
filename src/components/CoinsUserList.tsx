@@ -11,14 +11,13 @@ type CoinsUserListParams = {
   predefined?: string[]
 }
 
-const CoinsUserList = (props: CoinsUserListParams) => {
+const CoinsUserList = ({ predefined }: CoinsUserListParams) => {
   const classes = useStyles()
-
   const [globalState] = useGlobal()
   const { data, networkStatus } = useQuery(GET_COINS, {
     variables: {
-      symbols: props.predefined
-        ? props.predefined.join('|')
+      symbols: predefined
+        ? predefined.join('|')
         : globalState.userCoinFavourites.join('|')
     }
   })

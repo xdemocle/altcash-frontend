@@ -1,10 +1,42 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import classNames from 'classnames'
-import { ReactSVG } from 'react-svg'
 import { makeStyles } from '@material-ui/core/styles'
+import classNames from 'classnames'
+import React from 'react'
+import { ReactSVG } from 'react-svg'
 
-const useStyles = makeStyles((theme) => ({
+type Props = {
+  coinSymbol: string
+  size?: string
+}
+
+const CoinSVG = ({ coinSymbol, size }: Props) => {
+  const classes: Record<string, any> = useStyles()
+  let symbol = coinSymbol.toLowerCase()
+  let svgCoinPath = null
+
+  try {
+    svgCoinPath = svgCoinPathHelper(symbol)
+  } catch (err) {
+    symbol = 'cc-default'
+    svgCoinPath = svgCoinPathHelper('btc')
+  }
+
+  return (
+    <ReactSVG
+      src={svgCoinPath}
+      className={classNames(
+        classes.avatar,
+        symbol,
+        size ? classes[size] : classes.regular
+      )}
+    />
+  )
+}
+
+const svgCoinPathHelper = (name: string) => {
+  return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
+}
+
+const useStyles = makeStyles(() => ({
   avatar: {
     padding: 0,
     verticalAlign: 'middle',
@@ -34,38 +66,5 @@ const useStyles = makeStyles((theme) => ({
     }
   }
 }))
-
-const svgCoinPathHelper = (name) => {
-  return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
-}
-
-const CoinSVG = ({ coinSymbol, size }) => {
-  const classes = useStyles()
-  let symbol = coinSymbol.toLowerCase()
-  let svgCoinPath = null
-
-  try {
-    svgCoinPath = svgCoinPathHelper(symbol)
-  } catch (err) {
-    symbol = 'cc-default'
-    svgCoinPath = svgCoinPathHelper('btc')
-  }
-
-  return (
-    <ReactSVG
-      src={svgCoinPath}
-      className={classNames(
-        classes.avatar,
-        size ? classes[size] : classes.regular,
-        symbol
-      )}
-    />
-  )
-}
-
-CoinSVG.propTypes = {
-  coinSymbol: PropTypes.string.isRequired,
-  size: PropTypes.string
-}
 
 export default CoinSVG

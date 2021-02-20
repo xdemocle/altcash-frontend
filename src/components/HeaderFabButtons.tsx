@@ -1,12 +1,96 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-// import classNames from 'classnames'
-import { withStyles } from '@material-ui/core/styles'
-import { CircularProgress, Button, Tooltip } from '@material-ui/core'
-import { Refresh, Close, Search } from '@material-ui/icons'
+import { Button, Tooltip } from '@material-ui/core'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import { Close, Search } from '@material-ui/icons'
+import React, { useState } from 'react'
 import CoinSearchModal from './CoinSearchModal'
 
-const styles = (theme) => ({
+type Props = {
+  loading: boolean
+  coinPageNeedle?: string
+  updateNeedle: (needle: string) => void
+}
+
+const HeaderfabButtons = (props: Props) => {
+  const classes = useStyles()
+  const [modalOpen, setModalOpen] = useState(false)
+  const { loading, updateNeedle, coinPageNeedle } = props
+
+  const handleModalOpen = () => {
+    setModalOpen(true)
+  }
+
+  const handleModalClose = () => {
+    setModalOpen(false)
+  }
+
+  return (
+    <React.Fragment>
+      <div className={classes.root}>
+        {coinPageNeedle && (
+          <Tooltip title="Reset search results">
+            <div className={classes.fabButtons}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                aria-label="Reset search results"
+                disabled={loading}
+                onClick={() => updateNeedle('')}
+                // className={classNames(!coinPageNeedle && classes.hide)}
+                startIcon={<Close />}
+              >
+                Close Search
+              </Button>
+            </div>
+          </Tooltip>
+        )}
+
+        <Tooltip title="Find coins">
+          <div className={classes.fabButtons}>
+            <Button
+              variant="contained"
+              color="primary"
+              size="small"
+              aria-label="Find coins"
+              onClick={handleModalOpen}
+              startIcon={<Search />}
+            >
+              Search
+            </Button>
+          </div>
+        </Tooltip>
+
+        {/* <Tooltip title="Retrieve an updated list">
+            <div className={classes.fabButtons}>
+              <Button
+                variant="contained"
+                color="primary"
+                size="small"
+                aria-label="Retrieve an updated list"
+                disabled={loading}
+                onClick={() => updateNeedle('')}
+                startIcon={<Refresh />}
+              >
+                Refresh
+              </Button>
+              {loading && (
+                <CircularProgress size={24} className={classes.fabProgress} />
+              )}
+            </div>
+          </Tooltip> */}
+      </div>
+      <CoinSearchModal
+        open={modalOpen}
+        handleClose={handleModalClose}
+        updateNeedle={updateNeedle}
+      />
+    </React.Fragment>
+  )
+}
+
+export default HeaderfabButtons
+
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     position: 'absolute',
     top: theme.spacing(3),
@@ -38,96 +122,4 @@ const styles = (theme) => ({
   hide: {
     display: 'none'
   }
-})
-
-class HeaderfabButtons extends Component {
-  state = {
-    modalOpen: false
-  }
-
-  handleModalOpen = () => {
-    this.setState({ modalOpen: true })
-  }
-
-  handleModalClose = () => {
-    this.setState({ modalOpen: false })
-  }
-
-  render() {
-    const { classes, loading, updateNeedle, coinPageNeedle } = this.props
-    const { modalOpen } = this.state
-
-    return (
-      <React.Fragment>
-        <div className={classes.root}>
-          {coinPageNeedle && (
-            <Tooltip title="Reset search results">
-              <div className={classes.fabButtons}>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  size="small"
-                  aria-label="Reset search results"
-                  disabled={loading}
-                  onClick={() => updateNeedle('')}
-                  // className={classNames(!coinPageNeedle && classes.hide)}
-                  startIcon={<Close />}
-                >
-                  Close Search
-                </Button>
-              </div>
-            </Tooltip>
-          )}
-
-          <Tooltip title="Find coins">
-            <div className={classes.fabButtons}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                aria-label="Find coins"
-                onClick={this.handleModalOpen}
-                startIcon={<Search />}
-              >
-                Search
-              </Button>
-            </div>
-          </Tooltip>
-
-          {/* <Tooltip title="Retrieve an updated list">
-            <div className={classes.fabButtons}>
-              <Button
-                variant="contained"
-                color="primary"
-                size="small"
-                aria-label="Retrieve an updated list"
-                disabled={loading}
-                onClick={() => updateNeedle('')}
-                startIcon={<Refresh />}
-              >
-                Refresh
-              </Button>
-              {loading && (
-                <CircularProgress size={24} className={classes.fabProgress} />
-              )}
-            </div>
-          </Tooltip> */}
-        </div>
-        <CoinSearchModal
-          open={modalOpen}
-          handleClose={this.handleModalClose}
-          updateNeedle={updateNeedle}
-        />
-      </React.Fragment>
-    )
-  }
-}
-
-HeaderfabButtons.propTypes = {
-  classes: PropTypes.object.isRequired,
-  loading: PropTypes.bool.isRequired,
-  coinPageNeedle: PropTypes.string,
-  updateNeedle: PropTypes.func.isRequired
-}
-
-export default withStyles(styles, { withTheme: true })(HeaderfabButtons)
+}))

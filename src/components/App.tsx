@@ -16,7 +16,6 @@ import SupportPage from '../pages/Support'
 import BitcoinRandLivePrice from './BitcoinRandLivePrice'
 import BottomNav from './BottomNav'
 import Bottombar from './Bottombar'
-import ScrollToTop from './ScrollToTop'
 import Sidebar from './Sidebar'
 import TickersLivePrice from './TickersLivePrice'
 
@@ -99,32 +98,30 @@ const App = () => {
   }
 
   return (
-    <ScrollToTop>
-      <div className={classes.root}>
-        <CssBaseline />
-        <BitcoinRandLivePrice />
-        <TickersLivePrice />
-        <div className={classes.appFrame}>
-          <Sidebar />
-          <main className={classes.content}>
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <Route path="/about" component={AboutPage} />
-              <Route path="/buy" component={BuyPage} />
-              <Route path="/overview" component={OverviewPage} />
-              <Route path="/support" component={SupportPage} />
-              <Route path="/coin/:coinId" component={CoinDetailsPage} />
-            </Switch>
-          </main>
-          <Hidden xsDown>
-            <Bottombar />
-          </Hidden>
-          <Hidden smUp>
-            <BottomNav />
-          </Hidden>
-        </div>
+    <div className={classes.root}>
+      <CssBaseline />
+      <BitcoinRandLivePrice />
+      <TickersLivePrice />
+      <div className={classes.appFrame}>
+        <Sidebar />
+        <main className={classes.content}>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/about" component={AboutPage} />
+            <Route path="/buy" component={BuyPage} />
+            <Route path="/overview" component={OverviewPage} />
+            <Route path="/support" component={SupportPage} />
+            <Route path="/coin/:coinId" component={CoinDetailsPage} />
+          </Switch>
+        </main>
+        <Hidden xsDown>
+          <Bottombar />
+        </Hidden>
+        <Hidden smUp>
+          <BottomNav />
+        </Hidden>
       </div>
-    </ScrollToTop>
+    </div>
   )
 }
 

@@ -44,8 +44,8 @@ class CoinsAPI extends RESTDataSource {
     // Order by name
     response.sort((a, b) => {
       // ignore upper and lowercase
-      const nameA = a.name.toUpperCase()
-      const nameB = b.name.toUpperCase()
+      const nameA = a.name && a.name.toUpperCase()
+      const nameB = b.name && b.name.toUpperCase()
 
       if (nameA < nameB) {
         return -1

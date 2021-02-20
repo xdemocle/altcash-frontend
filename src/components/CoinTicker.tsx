@@ -4,8 +4,13 @@ import React from 'react'
 import { btcToRandPrice } from '../common/currency'
 import useGlobal from '../common/globalStateHook'
 import { GET_TICKER } from '../graphql/queries'
+import { Coin } from './CoinItem'
 
-const CoinTicker = ({ coin }) => {
+type Props = {
+  coin: Coin
+}
+
+const CoinTicker = ({ coin }: Props) => {
   const [globalState] = useGlobal()
   const { data } = useQuery(GET_TICKER, {
     fetchPolicy: 'cache-first',

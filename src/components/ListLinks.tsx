@@ -1,34 +1,28 @@
 // This file is shared across the project
-import React from 'react'
-import { Link } from 'react-router-dom'
-import PropTypes from 'prop-types'
-import { withStyles } from '@material-ui/core/styles'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Tooltip from '@material-ui/core/Tooltip'
+import { makeStyles } from '@material-ui/core/styles'
 // import Divider from '@material-ui/core/Divider'
 import {
   ContactSupport,
   Home,
-  People
-  // ShoppingBasket
+  People // ShoppingBasket
 } from '@material-ui/icons'
 import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
 import StoreIcon from '@material-ui/icons/Store'
+import React from 'react'
+import { Link } from 'react-router-dom'
 
-const styles = {
-  nav: {
-    padding: 0
-  },
-  icons: {
-    marginLeft: '0.5rem'
-  }
+type Props = {
+  isSidebarOpen: boolean
 }
 
-function MainLinks(props) {
-  const { classes, isSidebarOpen } = props
+function MainLinks(props: Props) {
+  const classes = useStyles()
+  const { isSidebarOpen } = props
 
   return (
     <List component="nav" className={classes.nav}>
@@ -116,9 +110,13 @@ function MainLinks(props) {
   )
 }
 
-MainLinks.propTypes = {
-  classes: PropTypes.object.isRequired,
-  isSidebarOpen: PropTypes.bool.isRequired
-}
+export default MainLinks
 
-export default withStyles(styles)(MainLinks)
+const useStyles = makeStyles(() => ({
+  nav: {
+    padding: 0
+  },
+  icons: {
+    marginLeft: '0.5rem'
+  }
+}))

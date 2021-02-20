@@ -39,7 +39,9 @@ const CoinItem = ({ coin }: Props) => {
   }
 
   const isCoinActive = coin.status === 'ONLINE'
-  const isStarred = globalState.userCoinFavourites.includes(coin.symbol)
+  const isStarred = globalState.userCoinFavourites.includes(
+    coin.symbol as never
+  )
 
   return (
     <React.Fragment>

@@ -1,25 +1,82 @@
 /* eslint-disable no-debugger */
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { debounce } from 'lodash'
-import { withStyles } from '@material-ui/core/styles'
+import Button from '@material-ui/core/Button'
+import InputAdornment from '@material-ui/core/InputAdornment'
 import Modal from '@material-ui/core/Modal'
 import TextField from '@material-ui/core/TextField'
-import InputAdornment from '@material-ui/core/InputAdornment'
-import Button from '@material-ui/core/Button'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 import { Close, Search } from '@material-ui/icons'
+import React from 'react'
 
-const styles = (theme) => ({
+type Props = {
+  handleClose: () => void
+  updateNeedle: (needle: string) => void
+  open: boolean
+}
+
+const CoinsSearchModal = (props: Props) => {
+  const classes = useStyles()
+  const { open, handleClose, updateNeedle } = props
+
+  const textFieldHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+    if (!event.target.value.length) {
+      return
+    }
+    updateNeedle(event.target.value)
+  }
+
+  return (
+    <Modal
+      aria-labelledby="simple-modal-title"
+      aria-describedby="simple-modal-description"
+      open={open}
+      onClose={handleClose}
+    >
+      <div className={classes.root}>
+        <Button
+          color="primary"
+          className={classes.fabButton}
+          aria-label="Close search coins popup"
+          onClick={handleClose}
+          disableRipple
+        >
+          <Close />
+        </Button>
+        <div>
+          <TextField
+            className={classes.input}
+            name="inputSearchCoins"
+            id="input-with-icon-textfield"
+            placeholder="Type the coin name"
+            fullWidth
+            autoFocus
+            onChange={textFieldHandler}
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">
+                  <Search />
+                </InputAdornment>
+              )
+            }}
+          />
+        </div>
+      </div>
+    </Modal>
+  )
+}
+
+export default CoinsSearchModal
+
+const useStyles = makeStyles(({ shadows, spacing }: Theme) => ({
   root: {
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
     position: 'absolute',
     width: '90%',
-    maxWidth: theme.spacing(50),
+    maxWidth: spacing(50),
     backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(4),
+    boxShadow: shadows[5],
+    padding: spacing(4),
     borderRadius: '1rem',
     outline: 'none'
   },
@@ -35,77 +92,8 @@ const styles = (theme) => ({
   },
   iconSmall: {
     fontSize: '1rem'
+  },
+  input: {
+    margin: '1rem'
   }
-})
-
-class CoinsSearchModal extends Component {
-  _textFieldHandler(e) {
-    if (!e.target.value.length) {
-      return
-    }
-    this.props.updateNeedle(e.target.value)
-  }
-
-  render() {
-    const { classes, open, handleClose } = this.props
-
-    function debounceEventHandler(...args) {
-      const debounced = debounce(...args)
-      return (e) => {
-        e.persist()
-        return debounced(e)
-      }
-    }
-
-    return (
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={open}
-        onClose={handleClose}
-      >
-        <div className={classes.root}>
-          <Button
-            color="primary"
-            className={classes.fabButton}
-            aria-label="Close search coins popup"
-            onClick={handleClose}
-            disableRipple
-          >
-            <Close />
-          </Button>
-          <div>
-            <TextField
-              className={classes.margin}
-              name="inputSearchCoins"
-              id="input-with-icon-textfield"
-              placeholder="Type the coin name"
-              fullWidth
-              autoFocus
-              onChange={debounceEventHandler(
-                this._textFieldHandler.bind(this),
-                300
-              )}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                )
-              }}
-            />
-          </div>
-        </div>
-      </Modal>
-    )
-  }
-}
-
-CoinsSearchModal.propTypes = {
-  classes: PropTypes.object.isRequired,
-  open: PropTypes.bool.isRequired,
-  handleClose: PropTypes.func.isRequired,
-  updateNeedle: PropTypes.func.isRequired
-}
-
-export default withStyles(styles, { withTheme: true })(CoinsSearchModal)
+}))

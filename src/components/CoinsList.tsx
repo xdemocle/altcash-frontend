@@ -8,7 +8,7 @@ import { clone, find } from 'lodash'
 import React, { Fragment } from 'react'
 import useGlobal from '../common/globalStateHook'
 import { GET_COINS, GET_COUNT } from '../graphql/queries'
-import CoinItem from './CoinItem'
+import CoinItem, { Coin } from './CoinItem'
 import HeaderFabButtons from './HeaderFabButtons'
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +50,7 @@ const CoinsList = () => {
     }
   })
 
-  const getListSlice = (limit) => {
+  const getListSlice = (limit: number) => {
     const list = data ? clone(data.coins) : []
 
     if (globalState.coinPageNeedle && !!globalState.coinPageNeedle.length) {
@@ -74,12 +74,12 @@ const CoinsList = () => {
 
   const paginationPages = Math.floor(coinsTotal / 30)
 
-  const updateNeedle = (needle) => {
+  const updateNeedle = (needle: string) => {
     globalActions.updateCoinPageNeedle(needle)
   }
 
-  const handleChange = (event, value) => {
-    globalActions.setCoinListPage(value)
+  const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
+    globalActions.setCoinListPage(page)
   }
 
   return (
@@ -98,7 +98,7 @@ const CoinsList = () => {
       )}
       {networkStatus !== 4 && coins && (
         <List>
-          {coins.map((coin, ix) => {
+          {coins.map((coin: Coin, ix: number) => {
             return coin && <CoinItem key={`${coin.name}${ix}`} coin={coin} />
           })}
         </List>

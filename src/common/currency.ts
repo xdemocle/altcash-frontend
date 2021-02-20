@@ -1,4 +1,4 @@
-export const btcToRandPrice = (amounBTC, bitcoinRandPrice) => {
+export const btcToRandPrice = (amounBTC: number, bitcoinRandPrice: number) => {
   let num = 0
 
   try {
