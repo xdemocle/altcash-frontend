@@ -3,5 +3,13 @@ module.exports = {
   singleQuote: true,
   semi: false,
   tabWidth: 2,
-  bracketSpacing: true
+  bracketSpacing: true,
+  importOrder: [
+    '^@graphql/(.*)$',
+    '^@common/(.*)$',
+    '^@components/(.*)$',
+    '^@pages/(.*)$',
+    '^[./]'
+  ],
+  importOrderSeparation: false
 }
