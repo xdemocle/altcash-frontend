@@ -1,4 +1,3 @@
-import Divider from '@material-ui/core/Divider'
 import Drawer from '@material-ui/core/Drawer'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
@@ -75,7 +74,7 @@ const Sidebar = () => {
               </Typography>
             </div>
           </Tooltip>
-          <Divider />
+
           <MainLinks isSidebarOpen={globalState.isSidebarOpen} />
         </div>
       </Drawer>
@@ -106,15 +105,12 @@ const useStyles = makeStyles((theme: Theme) => ({
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
     }),
-    width: theme.spacing(7),
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9)
-    }
+    width: '6rem'
   },
   toolbar: {
     position: 'fixed',
     overflow: 'hidden',
-    width: theme.typography.pxToRem(72),
+    width: '6rem',
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen
@@ -127,17 +123,11 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'left',
-    padding: '0 .8rem',
-    [theme.breakpoints.only('xs')]: {
-      padding: '0 .2rem'
-    },
+    padding: '1.5rem',
     ...theme.mixins.toolbar
   },
   toolbarTitle: {
-    margin: '0 0.8rem',
-    [theme.breakpoints.only('xs')]: {
-      margin: '0 1.1rem'
-    }
+    margin: '0 1.5rem'
   },
   buttonLogoNormal: {
     padding: 0,

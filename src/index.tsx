@@ -1,13 +1,14 @@
-import 'react-hot-loader'
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { BrowserRouter } from 'react-router-dom'
 import { ApolloProvider } from '@apollo/client'
 import { MuiThemeProvider } from '@material-ui/core/styles'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import 'react-hot-loader'
+import { BrowserRouter } from 'react-router-dom'
 import { apolloClient } from './common/apollo/apollo-client'
-import App, { theme } from './components/App'
-import * as serviceWorker from './serviceWorker'
+import { theme } from './common/theme'
+import App from './components/App'
 import './index.css'
+import * as serviceWorker from './serviceWorker'
 
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>

@@ -1,20 +1,16 @@
-// This file is shared across the project
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import Tooltip from '@material-ui/core/Tooltip'
-import { makeStyles } from '@material-ui/core/styles'
-// import Divider from '@material-ui/core/Divider'
-import {
-  ContactSupport,
-  Home,
-  People // ShoppingBasket
-} from '@material-ui/icons'
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn'
-import StoreIcon from '@material-ui/icons/Store'
+import { makeStyles, Theme } from '@material-ui/core/styles'
+import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined'
+import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
+import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'
+import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined'
+import StorefrontOutlinedIcon from '@material-ui/icons/StorefrontOutlined'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 type Props = {
   isSidebarOpen: boolean
@@ -31,11 +27,11 @@ function MainLinks(props: Props) {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={Link} to="/" button>
+        <ListItem exact component={NavLink} to="/" className={classes.listItem}>
           <ListItemIcon>
-            <Home className={classes.icons} />
+            <HomeOutlinedIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary="Home" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
 
@@ -44,54 +40,44 @@ function MainLinks(props: Props) {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={Link} to="/buy" button>
+        <ListItem component={NavLink} to="/buy" className={classes.listItem}>
           <ListItemIcon>
-            <MonetizationOnIcon className={classes.icons} />
+            <MonetizationOnOutlinedIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="Crypto Coins" />
+          <ListItemText
+            primary="Crypto Coins"
+            className={classes.listItemText}
+          />
         </ListItem>
       </Tooltip>
-
-      {/* <Divider /> */}
-
-      {/* <Tooltip
-        title="Your cart"
-        placement="right"
-        enterDelay={isSidebarOpen ? 2000 : 50}
-      >
-        <ListItem component={Link} to="/cart" button>
-          <ListItemIcon>
-            <ShoppingBasket className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Cart" />
-        </ListItem>
-      </Tooltip> */}
 
       <Tooltip
         title="Your balance overview"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={Link} to="/overview" button>
+        <ListItem
+          component={NavLink}
+          to="/overview"
+          className={classes.listItem}
+        >
           <ListItemIcon>
-            <StoreIcon className={classes.icons} />
+            <StorefrontOutlinedIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="Overview" />
+          <ListItemText primary="Overview" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
-
-      {/* <Divider /> */}
 
       <Tooltip
         title="About Us"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={Link} to="/about" button>
+        <ListItem component={NavLink} to="/about" className={classes.listItem}>
           <ListItemIcon>
-            <People className={classes.icons} />
+            <PeopleAltOutlinedIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="About Us" />
+          <ListItemText primary="About Us" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
       <Tooltip
@@ -99,11 +85,15 @@ function MainLinks(props: Props) {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={Link} to="/support" button>
+        <ListItem
+          component={NavLink}
+          to="/support"
+          className={classes.listItem}
+        >
           <ListItemIcon>
-            <ContactSupport className={classes.icons} />
+            <ContactSupportOutlinedIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="Support" />
+          <ListItemText primary="Support" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
     </List>
@@ -112,11 +102,43 @@ function MainLinks(props: Props) {
 
 export default MainLinks
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(({ palette }: Theme) => ({
   nav: {
+    display: 'flex',
+    minHeight: 'calc(100vh - 6rem)',
+    // height: 'calc(100vh - 12rem)',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
     padding: 0
   },
   icons: {
-    marginLeft: '0.5rem'
+    marginLeft: '0.5rem',
+    color: '#A09EA0',
+    '.active &': {
+      color: '#fff'
+    }
+  },
+  listItem: {
+    position: 'relative',
+    paddingLeft: '1.8rem',
+    paddingRight: '1.8rem',
+    margin: '0.8rem 0',
+    height: '3.2rem',
+    color: '#2B3A41',
+    '&.active::after': {
+      content: '""',
+      position: 'absolute',
+      top: 0,
+      left: '1.45rem',
+      width: '3.2rem',
+      height: '3.2rem',
+      borderRadius: '.6rem',
+      backgroundColor: palette.primary.main,
+      zIndex: -1
+    }
+  },
+  listItemText: {
+    paddingLeft: '.7rem'
   }
 }))

@@ -1,8 +1,6 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
-import blueGrey from '@material-ui/core/colors/blueGrey'
-import green from '@material-ui/core/colors/green'
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/core/styles'
 import React, { useEffect, useState } from 'react'
 import { hot } from 'react-hot-loader/root'
 import { Route, Switch } from 'react-router-dom'
@@ -16,57 +14,9 @@ import SupportPage from '../pages/Support'
 import BitcoinRandLivePrice from './BitcoinRandLivePrice'
 import BottomNav from './BottomNav'
 import Bottombar from './Bottombar'
+import ScrollToTop from './ScrollToTop'
 import Sidebar from './Sidebar'
 import TickersLivePrice from './TickersLivePrice'
-
-export const theme = createMuiTheme({
-  palette: {
-    // type: 'light',
-    // type: 'dark',
-    primary: {
-      // main: '#28a745'
-      main: green[600]
-    },
-    secondary: {
-      // main: '#5A7684'
-      main: blueGrey[500]
-    }
-  },
-  // spacing: {
-  //   unit: 8
-  // },
-  typography: {
-    fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif',
-    fontSize: 14,
-    fontWeightLight: 300,
-    fontWeightRegular: 500,
-    fontWeightMedium: 700
-  }
-})
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1
-  },
-  appFrame: {
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-    width: '100%',
-    minHeight: '100vh'
-  },
-  content: {
-    flexGrow: 1,
-    overflow: 'hidden',
-    minHeight: 'calc(100vh - 36px)',
-    paddingBottom: theme.typography.pxToRem(36),
-    [theme.breakpoints.only('xs')]: {
-      minHeight: 'calc(100vh - 56px)',
-      paddingBottom: theme.typography.pxToRem(56)
-    }
-  }
-}))
 
 const App = () => {
   const classes = useStyles()
@@ -100,6 +50,7 @@ const App = () => {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      <ScrollToTop />
       <BitcoinRandLivePrice />
       <TickersLivePrice />
       <div className={classes.appFrame}>
@@ -126,3 +77,34 @@ const App = () => {
 }
 
 export default hot(App)
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1
+  },
+  appFrame: {
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+    minHeight: '100vh',
+    backgroundColor: '#e3e4e9'
+    // [theme.breakpoints.up('xl')]: {
+    //   padding: '6rem',
+    //   height: 'calc(100vh - 12rem)'
+    // }
+  },
+  content: {
+    position: 'relative',
+    flexGrow: 1,
+    overflow: 'hidden',
+    minHeight: 'calc(100vh - 36px)',
+    paddingBottom: theme.typography.pxToRem(36),
+    backgroundColor: '#fafafa',
+    [theme.breakpoints.only('xs')]: {
+      minHeight: 'calc(100vh - 56px)',
+      paddingBottom: theme.typography.pxToRem(56)
+    }
+  }
+}))
