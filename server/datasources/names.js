@@ -2414,6 +2414,11 @@ const coins = [
     symbol: 'ZRX',
     name: '0x',
     color: '#302c2c'
+  },
+  {
+    symbol: 'UPCO2',
+    name: 'Universal Carbon',
+    color: '#01572D'
   }
 ]
 
