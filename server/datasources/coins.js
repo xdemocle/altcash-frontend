@@ -68,7 +68,7 @@ class CoinsAPI extends RESTDataSource {
 
     if (!!missingNamesObj.length) {
       // eslint-disable-next-line no-console
-      console.log(JSON.stringify(missingNamesObj))
+      console.log('missingNamesObj', JSON.stringify(missingNamesObj))
     }
 
     return response
