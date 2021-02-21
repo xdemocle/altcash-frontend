@@ -1,9 +1,9 @@
 {
-  "name": "altcash-frontend",
+  "name": "altcash-fullstack",
   "description": "Showcase of React+GraphQL+AWS AppSync",
   "version": "0.1.0",
   "license": "ISC",
-  "homepage": "https://rocco.me/altcash-frontend/",
+  "homepage": "https://rocco.me/altcash-fullstack/",
   "dependencies": {
     "@apollo/client": "^3.3.9",
     "@craco/craco": "^6.1.1",
