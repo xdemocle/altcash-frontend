@@ -25,7 +25,7 @@ const queryCoins = async (
 
     coins = filter(coins, (coin) => {
       return (
-        coin.name.toLowerCase().search(term) !== -1 ||
+        (coin.name && coin.name.toLowerCase().search(term) !== -1) ||
         coin.baseCurrencySymbol.toLowerCase().search(term.toLowerCase()) !== -1
       )
     })
