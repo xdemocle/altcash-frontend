@@ -48,10 +48,11 @@ jobs:
           mv heroku_dist build
         shell: bash
 
-      - uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
+      - uses: akhileshns/heroku-deploy@v3.11.10
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'altcash-staging' # Must be unique in Heroku
-          heroku_email: 'xdemocle@gmail.com'
+          heroku_app_name: 'altcash-staging'
+          heroku_email: ${{secrets.HEROKU_EMAIL}}
           buildpack: 'https://github.com/heroku/heroku-buildpack-static.git'
           appdir: 'build'
+          remote_branch: 'main'
