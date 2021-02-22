@@ -29,11 +29,11 @@ jobs:
         if: github.ref == 'refs/heads/production'
         run: yarn version --minor && git push --follow-tags
 
-      # - name: Build steps
-      #   run: |
-      #     yarn install
-      #     yarn build
-      #   shell: bash
+      - name: Build steps
+        run: |
+          yarn install
+          yarn build
+        shell: bash
 
       - name: Deploy frontend app to Heroku
         if: github.ref == 'refs/heads/master'
