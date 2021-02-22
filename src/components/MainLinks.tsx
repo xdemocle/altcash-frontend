@@ -136,9 +136,6 @@ const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
       borderRadius: '.6rem',
       backgroundColor: palette.primary.main,
       zIndex: -1
-    },
-    [breakpoints.down('md')]: {
-      margin: '0.3rem 0'
     }
   },
   listItemText: {
