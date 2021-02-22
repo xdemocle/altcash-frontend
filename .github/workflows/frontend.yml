@@ -29,11 +29,11 @@ jobs:
         if: github.ref == 'refs/heads/production'
         run: yarn version --minor && git push --follow-tags
 
-      # - name: Build steps
-      #   run: |
-      #     yarn install
-      #     yarn build
-      #   shell: bash
+      - name: Build steps
+        run: |
+          yarn install
+          yarn build
+        shell: bash
 
       # - name: Prepare GIT build
       #   run: |
@@ -63,3 +63,4 @@ jobs:
           heroku_app_name: 'altcash-staging' # Must be unique in Heroku
           heroku_email: 'xdemocle@gmail.com'
           buildpack: 'https://github.com/heroku/heroku-buildpack-static.git'
+          appdir: 'build'
