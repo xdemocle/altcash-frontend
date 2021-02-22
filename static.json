@@ -6,8 +6,8 @@
     "/**": "index.html"
   },
   "proxies": {
-    "/api/": {
-      "origin": "${REACT_APP_API_URL}"
+    "/graphql/": {
+      "origin": "${GRAPHQL_API_URI}"
     }
   }
 }
