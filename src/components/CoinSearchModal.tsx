@@ -41,11 +41,9 @@ const CoinsSearchModal = (props: Props) => {
         >
           <Close />
         </Button>
-        <div>
+        <div className={classes.input}>
           <TextField
-            className={classes.input}
             name="inputSearchCoins"
-            id="input-with-icon-textfield"
             placeholder="Type the coin name"
             fullWidth
             autoFocus
@@ -94,6 +92,6 @@ const useStyles = makeStyles(({ shadows, spacing }: Theme) => ({
     fontSize: '1rem'
   },
   input: {
-    margin: '1rem'
+    margin: '.5rem'
   }
 }))
