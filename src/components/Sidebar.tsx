@@ -9,7 +9,7 @@ import classNames from 'classnames'
 import React, { useEffect } from 'react'
 import Logo from '../assets/logo.png'
 import useGlobal from '../common/globalStateHook'
-import MainLinks from './ListLinks'
+import MainLinks from './MainLinks'
 
 const drawerWidth = '17rem'
 
@@ -32,7 +32,7 @@ const Sidebar = () => {
   }
 
   return (
-    <Hidden xsDown>
+    <Hidden smDown>
       <Drawer
         variant="permanent"
         anchor="left"

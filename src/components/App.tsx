@@ -65,10 +65,10 @@ const App = () => {
             <Route path="/coin/:coinId" component={CoinDetailsPage} />
           </Switch>
         </main>
-        <Hidden xsDown>
+        <Hidden smDown>
           <Bottombar />
         </Hidden>
-        <Hidden smUp>
+        <Hidden mdUp>
           <BottomNav />
         </Hidden>
       </div>

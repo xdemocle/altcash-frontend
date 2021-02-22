@@ -102,7 +102,7 @@ function MainLinks(props: Props) {
 
 export default MainLinks
 
-const useStyles = makeStyles(({ palette }: Theme) => ({
+const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
   nav: {
     display: 'flex',
     minHeight: 'calc(100vh - 6rem)',
@@ -136,6 +136,9 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
       borderRadius: '.6rem',
       backgroundColor: palette.primary.main,
       zIndex: -1
+    },
+    [breakpoints.down('md')]: {
+      margin: '0.3rem 0'
     }
   },
   listItemText: {
