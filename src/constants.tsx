@@ -1,3 +1,5 @@
+export const COINS_PER_PAGE = 30
+
 export const SYMBOLS_FEATURED = [
   'ETH',
   'DOT',

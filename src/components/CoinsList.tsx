@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import List from '@material-ui/core/List'
 import Typography from '@material-ui/core/Typography'
 import green from '@material-ui/core/colors/green'
 import { makeStyles } from '@material-ui/core/styles'
@@ -7,35 +6,10 @@ import Pagination from '@material-ui/lab/Pagination'
 import { clone, find } from 'lodash'
 import React, { Fragment } from 'react'
 import useGlobal from '../common/globalStateHook'
+import { COINS_PER_PAGE } from '../constants'
 import { GET_COINS, GET_COUNT } from '../graphql/queries'
-import CoinItem, { Coin } from './CoinItem'
+import CoinsListMap from './CoinsListMap'
 import HeaderFabButtons from './HeaderFabButtons'
-
-const useStyles = makeStyles((theme) => ({
-  buttonLoadMore: {
-    margin: '0 auto'
-  },
-  rightIcon: {
-    marginLeft: theme.spacing(1)
-  },
-  buttonProgress: {
-    color: green[100],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -12,
-    marginLeft: -12
-  },
-  bottomListWrapper: {
-    position: 'relative',
-    textAlign: 'center',
-    margin: theme.spacing(1)
-  },
-  pagination: {
-    textAlign: 'center',
-    margin: '1.7rem 2rem 1.5rem 2rem'
-  }
-}))
 
 const CoinsList = () => {
   const classes = useStyles()
@@ -62,7 +36,7 @@ const CoinsList = () => {
     return list.splice(offset, limit)
   }
 
-  const coins = getListSlice(30)
+  const coins = getListSlice(COINS_PER_PAGE)
 
   const coinsTotal =
     dataCount && dataCount.count
@@ -72,7 +46,7 @@ const CoinsList = () => {
   const hidePagination =
     globalState.coinPageNeedle && !!globalState.coinPageNeedle.length
 
-  const paginationPages = Math.floor(coinsTotal / 30)
+  const paginationPages = Math.floor(coinsTotal / COINS_PER_PAGE)
 
   const updateNeedle = (needle: string) => {
     globalActions.updateCoinPageNeedle(needle)
@@ -96,13 +70,7 @@ const CoinsList = () => {
       {loading && (!coins || networkStatus === 4) && (
         <Typography variant="subtitle2">Loading coins list...</Typography>
       )}
-      {networkStatus !== 4 && coins && (
-        <List>
-          {coins.map((coin: Coin, ix: number) => {
-            return coin && <CoinItem key={`${coin.name}${ix}`} coin={coin} />
-          })}
-        </List>
-      )}
+      {networkStatus !== 4 && coins && <CoinsListMap coins={coins} />}
 
       {!hidePagination && (
         <div className={classes.pagination}>
@@ -123,3 +91,29 @@ const CoinsList = () => {
 }
 
 export default CoinsList
+
+const useStyles = makeStyles((theme) => ({
+  buttonLoadMore: {
+    margin: '0 auto'
+  },
+  rightIcon: {
+    marginLeft: theme.spacing(1)
+  },
+  buttonProgress: {
+    color: green[100],
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12
+  },
+  bottomListWrapper: {
+    position: 'relative',
+    textAlign: 'center',
+    margin: theme.spacing(1)
+  },
+  pagination: {
+    textAlign: 'center',
+    margin: '1.7rem 2rem 1.5rem 2rem'
+  }
+}))
