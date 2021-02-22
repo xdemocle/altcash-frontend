@@ -44,7 +44,7 @@ export default CoinsUserList
 
 const useStyles = makeStyles(({ typography, spacing }: Theme) => ({
   root: {
-    padding: typography.pxToRem(spacing(3))
+    // padding: typography.pxToRem(spacing(1))
     // [breakpoints.only('xs')]: {
     //   padding: theme.typography.pxToRem(theme.spacing(1.5))
     // }

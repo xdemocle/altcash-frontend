@@ -10,6 +10,7 @@ import React from 'react'
 import useGlobal from '../common/globalStateHook'
 import CoinsList from '../components/CoinsList'
 import CoinsUserList from '../components/CoinsUserList'
+import HeaderFabButtons from '../components/HeaderFabButtons'
 import { SYMBOLS_FEATURED } from '../constants'
 
 const BuyTabPage = () => {
@@ -57,6 +58,8 @@ const BuyTabPage = () => {
         </Tabs>
       </Paper>
 
+      <HeaderFabButtons />
+
       {globalState.tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
       {globalState.tab === 1 && <CoinsList />}
       {globalState.tab === 2 && <CoinsUserList />}
@@ -68,19 +71,20 @@ export default BuyTabPage
 
 const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {
-    paddingTop: typography.pxToRem(spacing(4)),
-    paddingLeft: typography.pxToRem(spacing(5)),
+    position: 'relative',
+    paddingTop: typography.pxToRem(spacing(2)),
+    marginLeft: typography.pxToRem(spacing(5)),
     paddingBottom: typography.pxToRem(spacing(5)),
-    paddingRight: typography.pxToRem(spacing(5)),
+    marginRight: typography.pxToRem(spacing(5)),
     [breakpoints.only('xs')]: {
-      padding: typography.pxToRem(spacing(1))
+      paddingTop: typography.pxToRem(spacing(2)),
+      marginLeft: typography.pxToRem(spacing(2)),
+      paddingBottom: typography.pxToRem(spacing(2)),
+      marginRight: typography.pxToRem(spacing(2))
     }
   },
   title: {
-    lineHeight: '3rem',
-    [breakpoints.only('xs')]: {
-      textAlign: 'center'
-    }
+    lineHeight: '3rem'
   },
   buttonLoadMore: {
     margin: '0 auto'

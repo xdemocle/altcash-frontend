@@ -16,4 +16,5 @@ const CoinsListMap: React.FC<Props> = ({ coins }: Props) => {
   )
 }
 
-export default React.memo(CoinsListMap)
+export default CoinsListMap
+// export default React.memo(CoinsListMap)

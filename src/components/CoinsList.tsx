@@ -9,7 +9,6 @@ import useGlobal from '../common/globalStateHook'
 import { COINS_PER_PAGE } from '../constants'
 import { GET_COINS, GET_COUNT } from '../graphql/queries'
 import CoinsListMap from './CoinsListMap'
-import HeaderFabButtons from './HeaderFabButtons'
 
 const CoinsList = () => {
   const classes = useStyles()
@@ -48,21 +47,12 @@ const CoinsList = () => {
 
   const paginationPages = Math.floor(coinsTotal / COINS_PER_PAGE)
 
-  const updateNeedle = (needle: string) => {
-    globalActions.updateCoinPageNeedle(needle)
-  }
-
   const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
     globalActions.setCoinListPage(page)
   }
 
   return (
     <Fragment>
-      <HeaderFabButtons
-        loading={loading}
-        coinPageNeedle={globalState.coinPageNeedle}
-        updateNeedle={updateNeedle}
-      />
       {error && <Typography>Error! {error.message}</Typography>}
       {coins && !coins.length && networkStatus === 7 && (
         <Typography variant="subtitle1">No results...</Typography>
