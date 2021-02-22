@@ -1,13 +1,13 @@
 {
   "name": "altcash-backend",
-  "version": "1.0.0",
-  "description": "",
+  "description": "Backend server altcash",
+  "version": "0.1.0",
+  "author": "Rocco R. <im@rocco.me>",
   "main": "index.js",
   "scripts": {
     "start": "node index.js"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-datasource-rest": "^0.10.0",
