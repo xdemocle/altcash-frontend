@@ -83,11 +83,13 @@ const server = new ApolloServer({
     metadataAPI: new MetadataAPI(),
     namesAPI: namesAPI
   }),
-  cache: new RedisCache({
-    // https://github.com/luin/ioredis
-    host: '127.0.0.1', // Redis host
-    port: 6379 // Redis port
-  }),
+  cache: new RedisCache(
+    process.env.REDIS_URL || {
+      // https://github.com/luin/ioredis
+      host: '127.0.0.1', // Redis host
+      port: 6379 // Redis port
+    }
+  ),
   plugins: [responseCachePlugin()],
   cacheControl: {
     defaultMaxAge: 20
