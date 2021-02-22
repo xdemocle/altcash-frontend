@@ -35,16 +35,16 @@ jobs:
           yarn build
         shell: bash
 
-      # - name: Prepare GIT build
-      #   run: |
-      #     cp -r build heroku_dist
-      #     rm -fr build/
-      #     mkdir build
-      #     mv heroku_dist build/
-      #     cp static.json build/
-      #     cd build
-      #     mv heroku_dist build
-      #   shell: bash
+      - name: Prepare GIT build
+        run: |
+          cp -r build heroku_dist
+          rm -fr build/
+          mkdir build
+          mv heroku_dist build/
+          cp static.json build/
+          cd build
+          mv heroku_dist build
+        shell: bash
 
       # - name: Deploy frontend app to Heroku
       #   if: github.ref == 'refs/heads/master'
