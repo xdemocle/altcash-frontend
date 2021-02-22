@@ -29,30 +29,37 @@ jobs:
         if: github.ref == 'refs/heads/production'
         run: yarn version --minor && git push --follow-tags
 
-      - name: Build steps
-        run: |
-          yarn install
-          yarn build
-        shell: bash
+      # - name: Build steps
+      #   run: |
+      #     yarn install
+      #     yarn build
+      #   shell: bash
 
-      - name: Prepare GIT build
-        run: |
-          cp -r build heroku_dist
-          rm -fr build/
-          mkdir build
-          mv heroku_dist build/
-          cp static.json build/
-          cd build
-          mv heroku_dist build
-        shell: bash
+      # - name: Prepare GIT build
+      #   run: |
+      #     cp -r build heroku_dist
+      #     rm -fr build/
+      #     mkdir build
+      #     mv heroku_dist build/
+      #     cp static.json build/
+      #     cd build
+      #     mv heroku_dist build
+      #   shell: bash
 
-      - name: Deploy frontend app to Heroku
-        if: github.ref == 'refs/heads/master'
-        run: |
-          git fetch --all --unshallow
-          cd build
-          git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
-          git add -f .
-          git commit -m "[skip CI]"
-          git push -f deployment master:master
-        shell: bash
+      # - name: Deploy frontend app to Heroku
+      #   if: github.ref == 'refs/heads/master'
+      #   run: |
+      #     git fetch --unshallow
+      #     cd build
+      #     git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
+      #     git add -f .
+      #     git commit -m "[skip CI]"
+      #     git push -f deployment master:master
+      #   shell: bash
+
+      - uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: 'altcash-staging' # Must be unique in Heroku
+          heroku_email: 'xdemocle@gmail.com'
+          buildpack: 'https://github.com/heroku/heroku-buildpack-static.git'
