@@ -35,6 +35,7 @@ jobs:
           yarn build
         shell: bash
   deploy:
+    needs: build
     runs-on: ubuntu-latest
     steps:
       # # Only for heroku hosting
