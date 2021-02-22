@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact for build
         uses: actions/upload-artifact@v2
         with:
-          name: build-artifact
+          name: build
           path: build
   deploy:
     needs: build
@@ -59,7 +59,10 @@ jobs:
       - name: Download artifact for build
         uses: actions/download-artifact@v2
         with:
-          name: build-artifact
+          name: build
+      - uses: montudor/action-zip@v0.1.1
+        with:
+          args: unzip -qq build.zip -d build
 
       - name: Deploy frontend app to Heroku
         if: github.ref == 'refs/heads/master'
