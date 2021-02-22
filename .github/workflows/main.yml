@@ -39,7 +39,7 @@ jobs:
       - name: Prepare GIT build
         run: |
           cp -r build heroku_dist
-          rm -fr build/
+          rm -fr build
           mkdir build
           mv heroku_dist build/
           cp static.json build/
