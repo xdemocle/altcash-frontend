@@ -35,23 +35,28 @@ jobs:
           yarn build
         shell: bash
 
-      - name: Deploy frontend app to gh-pages branch 🚀
-        uses: JamesIves/github-pages-deploy-action@4.0.0
-        with:
-          branch: gh-pages # The branch the action should deploy to.
-          folder: build # The folder the action should deploy.
-
       # Only for heroku hosting
-      # - name: Prepare GIT build
-      #   run: |
-      #     cp -r build heroku_dist
-      #     rm -fr build/
-      #     mkdir build
-      #     mv heroku_dist build/
-      #     cp static.json build/
-      #     cd build
-      #     mv heroku_dist build
-      #   shell: bash
+      - name: Prepare GIT build
+        run: |
+          cp -r build heroku_dist
+          rm -fr build/
+          mkdir build
+          mv heroku_dist build/
+          cp static.json build/
+          cd build
+          mv heroku_dist build
+        shell: bash
+
+      - name: Deploy frontend app to Heroku
+        if: github.ref == 'refs/heads/master'
+        run: |
+          cd build
+          git init
+          git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
+          git add -f build
+          git commit -m "[skip CI]"
+          git push -f deployment master:master
+        shell: bash
 
       - name: Deploy backend app to Heroku
         if: github.ref == 'refs/heads/master'

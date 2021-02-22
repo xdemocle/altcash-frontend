@@ -1,0 +1,13 @@
+{
+  "root": "build/",
+  "clean_urls": false,
+  "routes": {
+    "/static/*": "/static/",
+    "/**": "index.html"
+  },
+  "proxies": {
+    "/api/": {
+      "origin": "${REACT_APP_API_URL}"
+    }
+  }
+}
