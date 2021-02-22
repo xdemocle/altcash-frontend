@@ -46,7 +46,7 @@ jobs:
           mv heroku_dist build
         shell: bash
 
-      - run: git add -A && git commit -m "Updated code" # <- Add this line
+      - run: git add -A && git commit -m "Updated code" && git push
 
       # - name: Deploy frontend app to Heroku
       #   if: github.ref == 'refs/heads/master'
