@@ -11,10 +11,5 @@ const ROOT_URL =
 export const apolloClient = new ApolloClient({
   cache,
   uri: `${ROOT_URL}/graphql`,
-  // headers: {
-  //   authorization: localStorage.getItem('token') || '',
-  //   'client-name': 'Space Explorer [web]',
-  //   'client-version': '1.0.0',
-  // },
   connectToDevTools: true
 })
