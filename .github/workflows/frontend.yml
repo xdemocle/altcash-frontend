@@ -55,4 +55,3 @@ jobs:
           heroku_email: ${{secrets.HEROKU_EMAIL}}
           buildpack: 'https://github.com/heroku/heroku-buildpack-static.git'
           appdir: 'build'
-          remote_branch: 'main'
