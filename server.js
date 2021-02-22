@@ -3,6 +3,8 @@ const app = express()
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const fallback = require('express-history-api-fallback')
 
+const graphqlApiUri = process.env.GRAPHQL_API_URI || 'http://localhost:4000/'
+
 const root = `${__dirname}/build`
 app.use(express.static(root))
 
@@ -10,7 +12,7 @@ app.use(express.static(root))
 app.use(
   '/graphql',
   createProxyMiddleware({
-    target: 'http://localhost:4000/',
+    target: graphqlApiUri,
     changeOrigin: true
   })
 )
