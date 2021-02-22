@@ -34,18 +34,20 @@ jobs:
           yarn install
           yarn build
         shell: bash
-
-      # Only for heroku hosting
-      - name: Prepare GIT build
-        run: |
-          cp -r build heroku_dist
-          rm -fr build
-          mkdir build
-          mv heroku_dist build/
-          cp static.json build/
-          cd build
-          mv heroku_dist build
-        shell: bash
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # # Only for heroku hosting
+      # - name: Prepare GIT build
+      #   run: |
+      #     cp -r build heroku_dist
+      #     rm -fr build
+      #     mkdir build
+      #     mv heroku_dist build/
+      #     cp static.json build/
+      #     cd build
+      #     mv heroku_dist build
+      #   shell: bash
 
       - name: Deploy frontend app to Heroku
         if: github.ref == 'refs/heads/master'
@@ -53,7 +55,7 @@ jobs:
           cd build
           git init
           git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
-          git add -f build
+          git add -f .
           git commit -m "[skip CI]"
           git push -f deployment master:master
         shell: bash

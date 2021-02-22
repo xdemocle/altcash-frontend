@@ -4,7 +4,6 @@
   "version": "0.1.0",
   "license": "ISC",
   "author": "Rocco R. <im@rocco.me>",
-  "homepage": "https://rocco.me/altcash-fullstack/",
   "dependencies": {
     "@apollo/client": "^3.3.9",
     "@babel/helper-builder-react-jsx": "^7.12.13",
@@ -30,6 +29,8 @@
     "eslint-config-prettier": "^7.2.0",
     "eslint-config-react-app": "^6.0.0",
     "eslint-plugin-react": "^7.22.0",
+    "express": "^4.17.1",
+    "express-history-api-fallback": "^2.2.1",
     "graphql": "^15.5.0",
     "http-proxy-middleware": "^1.0.6",
     "localforage": "^1.9.0",
@@ -54,12 +55,14 @@
     "use-global-hook": "^0.2.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "yarn host-app",
+    "dev": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",
     "server": "cd server && ./node_modules/.bin/nodemon index.js",
-    "fix-code": "prettier-eslint --write $PWD/'src/**/*.{js,jsx}' "
+    "fix-code": "prettier-eslint --write $PWD/'src/**/*.{js,jsx}'",
+    "host-app": "node server 8080"
   },
   "browserslist": {
     "production": [
