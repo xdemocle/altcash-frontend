@@ -1,4 +1,4 @@
-name: CI/CD my-profile
+name: Altcash frontend app
 
 on:
   push:
@@ -17,8 +17,8 @@ jobs:
 
       - name: Setup GIT
         run: |
-          git config --global user.name "OkRoger"
-          git config --global user.email "okroger@users.noreply.github.com"
+          git config --global user.name "Altcash"
+          git config --global user.email "altcash@users.noreply.github.com"
         shell: bash
 
       - name: GIT tag patch
@@ -38,19 +38,9 @@ jobs:
       - name: Deploy frontend app to Heroku
         if: github.ref == 'refs/heads/master'
         run: |
+          git fetch --unshallow origin
           git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
           git add -f build
-          git commit -m "[skip CI]"
-          git push -f deployment master:master
-        shell: bash
-
-      - name: Deploy backend app to Heroku
-        if: github.ref == 'refs/heads/master'
-        run: |
-          cd server
-          git init
-          git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-backend-staging.git
-          git add -f .
           git commit -m "[skip CI]"
           git push -f deployment master:master
         shell: bash

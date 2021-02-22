@@ -1,0 +1,33 @@
+name: Altcash backend app
+
+on:
+  push:
+    branches:
+      - master
+      - production
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+
+      - name: Setup GIT
+        run: |
+          git config --global user.name "Altcash"
+          git config --global user.email "altcash@users.noreply.github.com"
+        shell: bash
+
+      - name: Deploy backend app to Heroku
+        if: github.ref == 'refs/heads/master'
+        run: |
+          cd server
+          git init
+          git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-backend-staging.git
+          git add -f .
+          git commit -m "[skip CI]"
+          git push -f deployment master:master
+        shell: bash
