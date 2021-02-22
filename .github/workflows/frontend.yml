@@ -29,6 +29,8 @@ jobs:
         if: github.ref == 'refs/heads/production'
         run: yarn version --minor && git push --follow-tags
 
+      - run: git push
+
       - name: Build steps
         run: |
           yarn install
@@ -45,19 +47,6 @@ jobs:
           cd build
           mv heroku_dist build
         shell: bash
-
-      - run: git push && git add -A && git push
-
-      # - name: Deploy frontend app to Heroku
-      #   if: github.ref == 'refs/heads/master'
-      #   run: |
-      #     git fetch --unshallow
-      #     cd build
-      #     git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
-      #     git add -f .
-      #     git commit -m "[skip CI]"
-      #     git push -f deployment master:master
-      #   shell: bash
 
       - uses: akhileshns/heroku-deploy@v3.11.10 # This is the action
         with:
