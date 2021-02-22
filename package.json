@@ -55,8 +55,7 @@
     "use-global-hook": "^0.2.1"
   },
   "scripts": {
-    "start": "",
-    "dev": "craco start",
+    "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "craco eject",

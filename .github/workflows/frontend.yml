@@ -48,10 +48,20 @@ jobs:
           mv heroku_dist build
         shell: bash
 
-      - uses: akhileshns/heroku-deploy@v3.11.10
-        with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'altcash-staging'
-          heroku_email: ${{secrets.HEROKU_EMAIL}}
-          buildpack: 'https://github.com/heroku/heroku-buildpack-static.git'
-          appdir: 'build'
+      - name: Deploy frontend app to Heroku
+        if: github.ref == 'refs/heads/master'
+        run: |
+          cd build
+          git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
+          git add -f .
+          git commit -m "[skip CI]"
+          git push -f deployment master:main
+        shell: bash
+
+      # - uses: akhileshns/heroku-deploy@v3.11.10
+      #   with:
+      #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+      #     heroku_app_name: 'altcash-staging'
+      #     heroku_email: ${{secrets.HEROKU_EMAIL}}
+      #     buildpack: 'https://github.com/heroku/heroku-buildpack-static.git'
+      #     appdir: 'build'
