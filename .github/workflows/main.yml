@@ -35,16 +35,9 @@ jobs:
           yarn build
         shell: bash
 
-      # Only for heroku hosting
-      - name: Prepare GIT build
-        run: |
-          cp package.json build/
-        shell: bash
-
       - name: Deploy frontend app to Heroku
         if: github.ref == 'refs/heads/master'
         run: |
-          cd build
           git init
           git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
           git add -f .
