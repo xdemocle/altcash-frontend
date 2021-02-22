@@ -39,8 +39,10 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           git fetch --unshallow origin
-          git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
+          # git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
+          git remote add origin https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
           # git add -f build
           git commit -m "[skip CI]"
-          git push -f deployment master:master
+          # git push -f deployment master:master
+          git push -f origin master
         shell: bash
