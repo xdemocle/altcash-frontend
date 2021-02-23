@@ -29,5 +29,5 @@ jobs:
           git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-backend-staging.git
           git add -f .
           git commit -m "[skip CI]"
-          git push -f deployment master:master
+          git push -f deployment master:main
         shell: bash
