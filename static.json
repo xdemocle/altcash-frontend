@@ -12,5 +12,10 @@
     "/api/": {
       "origin": "https://api.mybitx.com/api/"
     }
+  },
+  "headers": {
+    "/**": {
+      "Access-Control-Allow-Origin": "*"
+    }
   }
 }
