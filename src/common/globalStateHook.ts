@@ -5,7 +5,8 @@ import globalHook, { Store } from 'use-global-hook'
 const userCoinFavouritesLocal = window.localStorage.getItem(
   'userCoinFavourites'
 )
-const bitcoinRandPriceLocal = window.localStorage.getItem('bitcoinRandPrice')
+const bitcoinRandPriceLocal =
+  window.localStorage.getItem('bitcoinRandPrice') || ''
 
 // Defining your own state and associated actions is required
 type MyState = {
@@ -36,9 +37,10 @@ const initialState: MyState = {
   userCoinFavourites: userCoinFavouritesLocal
     ? JSON.parse(userCoinFavouritesLocal)
     : [],
-  bitcoinRandPrice: bitcoinRandPriceLocal
-    ? JSON.parse(bitcoinRandPriceLocal)
-    : 0
+  bitcoinRandPrice:
+    bitcoinRandPriceLocal !== 'undefined'
+      ? JSON.parse(bitcoinRandPriceLocal)
+      : 0
 }
 
 const actions = {
