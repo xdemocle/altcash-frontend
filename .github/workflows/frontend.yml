@@ -57,8 +57,10 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           cd build
+          git init
           git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-staging.git
-          git add -f .
+          git add -f build
+          git add -f static.json
           git commit -m "[skip CI]"
           git push -f deployment master:main
         shell: bash
