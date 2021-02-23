@@ -6,7 +6,6 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import { green } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
-import PropTypes from 'prop-types'
 import React from 'react'
 import Moment from 'react-moment'
 import { useParams } from 'react-router-dom'
@@ -18,43 +17,6 @@ import { GET_PAGE_DATA, GET_META_COIN } from '../graphql/queries'
 interface RouteParams {
   coinId: string
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    padding: theme.typography.pxToRem(theme.spacing(6)),
-    paddingTop: theme.typography.pxToRem(theme.spacing(4)),
-    [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(3))
-    }
-  },
-  title: {
-    lineHeight: '3rem'
-    // [theme.breakpoints.only('xs')]: {
-    //   textAlign: 'center'
-    // }
-  },
-  pageAvatar: {
-    float: 'right',
-    display: 'inline',
-    marginTop: '-0.2rem',
-    marginRight: '0.5rem'
-  },
-  infoParagraph: {
-    marginTop: '1rem'
-    // marginBottom: '1rem'
-  },
-  dataParagraph: {
-    // marginTop: '1rem',
-    marginBottom: '2.5rem',
-    maxWidth: 1024
-  },
-  column: {
-    flexBasis: 0
-  },
-  progress: {
-    color: green[500]
-  }
-}))
 
 const CoinPage = () => {
   const classes = useStyles()
@@ -209,8 +171,41 @@ const CoinPage = () => {
   )
 }
 
-CoinPage.propTypes = {
-  match: PropTypes.object.isRequired
-}
-
 export default CoinPage
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    padding: theme.typography.pxToRem(theme.spacing(6)),
+    paddingTop: theme.typography.pxToRem(theme.spacing(4)),
+    [theme.breakpoints.only('xs')]: {
+      padding: theme.typography.pxToRem(theme.spacing(3))
+    }
+  },
+  title: {
+    lineHeight: '3rem'
+    // [theme.breakpoints.only('xs')]: {
+    //   textAlign: 'center'
+    // }
+  },
+  pageAvatar: {
+    float: 'right',
+    display: 'inline',
+    marginTop: '-0.2rem',
+    marginRight: '0.5rem'
+  },
+  infoParagraph: {
+    marginTop: '1rem'
+    // marginBottom: '1rem'
+  },
+  dataParagraph: {
+    // marginTop: '1rem',
+    marginBottom: '2.5rem',
+    maxWidth: 1024
+  },
+  column: {
+    flexBasis: 0
+  },
+  progress: {
+    color: green[500]
+  }
+}))
