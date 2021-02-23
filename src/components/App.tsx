@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'hidden',
     minHeight: 'calc(100vh - 36px)',
     paddingBottom: theme.typography.pxToRem(36),
-    backgroundColor: '#eef1ef',
+    backgroundColor: '#f4f5f4',
     [theme.breakpoints.only('xs')]: {
       minHeight: 'calc(100vh - 56px)',
       paddingBottom: theme.typography.pxToRem(56)
