@@ -7,7 +7,7 @@
   },
   "proxies": {
     "/graphql/": {
-      "origin": "${GRAPHQL_API_URI}"
+      "origin": "${REACT_APP_API_URL}"
     }
   }
 }
