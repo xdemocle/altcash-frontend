@@ -93,7 +93,8 @@ const server = new ApolloServer({
   plugins: [responseCachePlugin()],
   cacheControl: {
     defaultMaxAge: 20
-  }
+  },
+  cors: true
 })
 
 // The `listen` method launches a web server.
