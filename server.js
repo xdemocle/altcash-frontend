@@ -17,6 +17,15 @@ app.use(
   })
 )
 
+// add proxy
+app.use(
+  '/api',
+  createProxyMiddleware({
+    target: 'https://api.mybitx.com',
+    changeOrigin: true
+  })
+)
+
 // history fallback
 app.use(fallback('index.html', { root }))
 

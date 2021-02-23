@@ -10,7 +10,7 @@
       "origin": "${REACT_APP_API_URL}"
     },
     "/api/": {
-      "origin": "https://api.mybitx.com"
+      "origin": "https://api.mybitx.com/"
     }
   }
 }
