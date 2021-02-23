@@ -93,14 +93,14 @@ const server = new ApolloServer({
   plugins: [responseCachePlugin()],
   cacheControl: {
     defaultMaxAge: 20
-  },
-  cors: {
-    origin: '*',
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-    credentials: true
   }
+  // cors: {
+  //   origin: '*',
+  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  //   preflightContinue: false,
+  //   optionsSuccessStatus: 204,
+  //   credentials: true
+  // }
 })
 
 // The `listen` method launches a web server.
