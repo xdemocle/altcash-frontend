@@ -1,4 +1,5 @@
 import { useQuery } from '@apollo/client'
+import { Button, Tooltip } from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -6,8 +7,10 @@ import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import { green } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
+import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import React from 'react'
 import Moment from 'react-moment'
+import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { btcToRandPrice } from '../common/currency'
 import useGlobal from '../common/globalStateHook'
@@ -20,6 +23,7 @@ interface RouteParams {
 
 const CoinPage = () => {
   const classes = useStyles()
+  const history = useHistory()
   const { coinId } = useParams<RouteParams>()
   const [globalState] = useGlobal()
   const { data, loading } = useQuery(GET_PAGE_DATA, {
@@ -47,8 +51,28 @@ const CoinPage = () => {
   // console.log('dataTicker', dataTicker)
   // console.log('metadata', metadata)
 
+  const handleBackButton = () => {
+    if (history.action === 'PUSH') {
+      history.goBack()
+    } else {
+      history.push('/buy')
+    }
+  }
+
   return (
     <div className={classes.root}>
+      <Tooltip title="Go back to coin list">
+        <Button
+          color="primary"
+          size="large"
+          aria-label="Find a coin"
+          onClick={handleBackButton}
+          startIcon={<ArrowBackIcon />}
+          className={classes.backButton}
+        >
+          Back
+        </Button>
+      </Tooltip>
       <Typography
         color="primary"
         variant="h4"
@@ -176,16 +200,13 @@ export default CoinPage
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.typography.pxToRem(theme.spacing(6)),
-    paddingTop: theme.typography.pxToRem(theme.spacing(4)),
+    paddingTop: theme.typography.pxToRem(theme.spacing(1)),
     [theme.breakpoints.only('xs')]: {
       padding: theme.typography.pxToRem(theme.spacing(3))
     }
   },
   title: {
     lineHeight: '3rem'
-    // [theme.breakpoints.only('xs')]: {
-    //   textAlign: 'center'
-    // }
   },
   pageAvatar: {
     float: 'right',
@@ -195,17 +216,18 @@ const useStyles = makeStyles((theme) => ({
   },
   infoParagraph: {
     marginTop: '1rem'
-    // marginBottom: '1rem'
   },
   dataParagraph: {
-    // marginTop: '1rem',
     marginBottom: '2.5rem',
-    maxWidth: 1024
+    maxWidth: '64rem'
   },
   column: {
     flexBasis: 0
   },
   progress: {
     color: green[500]
+  },
+  backButton: {
+    marginBottom: theme.typography.pxToRem(theme.spacing(1))
   }
 }))

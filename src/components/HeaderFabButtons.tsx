@@ -37,7 +37,6 @@ const HeaderfabButtons = (props: Props) => {
           {coinPageNeedle && (
             <Tooltip title="Reset search results">
               <Button
-                variant="contained"
                 color="primary"
                 size="small"
                 aria-label="Reset search results"
@@ -53,7 +52,6 @@ const HeaderfabButtons = (props: Props) => {
 
           <Tooltip title="Find a coin">
             <Button
-              variant="contained"
               color="primary"
               size="small"
               aria-label="Find a coin"
