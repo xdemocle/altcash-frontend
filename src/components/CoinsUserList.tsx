@@ -7,13 +7,11 @@ import useGlobal from '../common/globalStateHook'
 import { GET_COINS } from '../graphql/queries'
 import CoinItem, { Coin } from './CoinItem'
 
-type CoinsUserListParams = {
+interface Props {
   predefined?: string[]
 }
 
-const CoinsUserList: React.FC<Props> = ({
-  predefined
-}: CoinsUserListParams) => {
+const CoinsUserList: React.FC<Props> = ({ predefined }: Props) => {
   const classes = useStyles()
   const [globalState] = useGlobal()
   const { data, networkStatus } = useQuery(GET_COINS, {

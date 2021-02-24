@@ -11,7 +11,6 @@ module.exports = {
     'prettier'
   ],
   plugins: ['react', '@typescript-eslint', 'prettier'],
-
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-console': [
@@ -24,5 +23,10 @@ module.exports = {
     'prettier/prettier': 'error',
     'arrow-body-style': 'off',
     'prefer-arrow-callback': 'off'
+  },
+  settings: {
+    react: {
+      version: 'detect'
+    }
   }
 }

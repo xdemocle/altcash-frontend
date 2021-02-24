@@ -1,5 +1,4 @@
 import { useQuery } from '@apollo/client'
-import PropTypes from 'prop-types'
 import React from 'react'
 import { btcToRandPrice } from '../common/currency'
 import useGlobal from '../common/globalStateHook'
@@ -37,10 +36,6 @@ const CoinTicker: React.FC<Props> = ({ coin }: Props) => {
         : 'n/d'}
     </span>
   )
-}
-
-CoinTicker.propTypes = {
-  coin: PropTypes.object.isRequired
 }
 
 export default CoinTicker
