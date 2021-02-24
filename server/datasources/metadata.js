@@ -23,6 +23,29 @@ class MetadataAPI extends RESTDataSource {
   async getAllLogos() {
     return names
   }
+
+  async missingData() {
+    // const symbols = 'AR,ETH,EOS,FCT,GO,NEO,SG,SMBSWAP,TFC'
+    const symbols = 'IOTA'
+    let response = await this.get(`cryptocurrency/info?symbol=${symbols}`)
+    console.log(response)
+
+    const obj = []
+
+    for (const [key, value] of Object.entries(response.data)) {
+      arr.push({
+        id: key,
+        bittrexId: value.id,
+        symbol: key,
+        name: value.name,
+        slug: value.slug,
+        description: value.description,
+        logo: value.logo
+      })
+    }
+
+    return arr
+  }
 }
 
 module.exports = MetadataAPI

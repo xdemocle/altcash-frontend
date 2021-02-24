@@ -22415,7 +22415,79 @@ const names = {
     date_added: '2017-08-16T00:00:00.000Z',
     twitter_username: '0xproject',
     is_hidden: 0
-  }
+  },
+  AR: {
+        "id": "AR",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/5632.png",
+        "symbol": "AR",
+        "name": "Arweave",
+        "slug": "arweave",
+        "description": "Arweave (AR) is a cryptocurrency . Arweave has a current supply of 63,190,435 with 33,394,701 in circulation. The last known price of Arweave is 10.17275451 USD and is up 67.45 over the last 24 hours. It is currently trading on 16 active market(s) with $48,441,455.08 traded over the last 24 hours. More information can be found at https://www.arweave.org."
+      },
+  EOS: {
+        "id": "EOS",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/1765.png",
+        "symbol": "EOS",
+        "name": "EOS",
+        "slug": "eos",
+        "description": "EOS (EOS) is a cryptocurrency . EOS has a current supply of 1,027,318,601.4397 with 950,818,189.9557 in circulation. The last known price of EOS is 3.93217686 USD and is up 2.62 over the last 24 hours. It is currently trading on 479 active market(s) with $4,190,553,207.17 traded over the last 24 hours. More information can be found at https://eos.io/."
+      },
+  ETH: {
+        "id": "ETH",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/1027.png",
+        "symbol": "ETH",
+        "name": "Ethereum",
+        "slug": "ethereum",
+        "description": "Ethereum (ETH) is a cryptocurrency . Users are able to generate ETH through the process of mining. Ethereum has a current supply of 114,803,615.749. The last known price of Ethereum is 1,646.18371948 USD and is up 6.23 over the last 24 hours. It is currently trading on 6025 active market(s) with $36,441,873,309.69 traded over the last 24 hours. More information can be found at https://www.ethereum.org/."
+      },
+      FCT: {
+        "id": "FCT",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/1087.png",
+        "symbol": "FCT",
+        "name": "Factom",
+        "slug": "factom",
+        "description": "Factom (FCT) is a cryptocurrency . Factom has a current supply of 9,627,564.23900728. The last known price of Factom is 1.96508744 USD and is up 11.20 over the last 24 hours. It is currently trading on 3 active market(s) with $179,601.61 traded over the last 24 hours. More information can be found at https://www.factomprotocol.org."
+      },
+      GO: {
+        "id": "GO",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/2861.png",
+        "symbol": "GO",
+        "name": "GoChain",
+        "slug": "gochain",
+        "description": "GoChain (GO) is a cryptocurrency . GoChain has a current supply of 1,122,761,366 with 1,067,761,365.582844 in circulation. The last known price of GoChain is 0.0206809 USD and is up 24.09 over the last 24 hours. It is currently trading on 13 active market(s) with $1,088,731.88 traded over the last 24 hours. More information can be found at https://gochain.io/."
+      },
+      NEO: {
+        "id": "NEO",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/1376.png",
+        "symbol": "NEO",
+        "name": "Neo",
+        "slug": "neo",
+        "description": "Neo (NEO) is a cryptocurrency . Neo has a current supply of 100,000,000 with 70,538,831 in circulation. The last known price of Neo is 42.06447966 USD and is up 7.53 over the last 24 hours. It is currently trading on 275 active market(s) with $1,600,476,527.67 traded over the last 24 hours. More information can be found at https://neo.org/."
+      },
+      SG: {
+        "id": "SG",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/6245.png",
+        "symbol": "SG",
+        "name": "SocialGood",
+        "slug": "socialgood",
+        "description": "SocialGood (SG) is a cryptocurrency and operates on the Ethereum platform. SocialGood has a current supply of 700,000 with 0 in circulation. The last known price of SocialGood is 3.68454203 USD and is down -1.09 over the last 24 hours. It is currently trading on 3 active market(s) with $296,003.46 traded over the last 24 hours. More information can be found at https://socialgood-foundation.com/."
+      },
+      SMBSWAP: {
+        "id": "SMBSWAP",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/7764.png",
+        "symbol": "SMBSWAP",
+        "name": "Simbcoin Swap",
+        "slug": "simbcoin-swap",
+        "description": "Simbcoin Swap (SMBSWAP) is a cryptocurrency and operates on the Ethereum platform. Simbcoin Swap has a current supply of 0. The last known price of Simbcoin Swap is 0.7202525 USD and is down -0.01 over the last 24 hours. It is currently trading on 1 active market(s) with $1,115.72 traded over the last 24 hours. More information can be found at https://www.simbcoin.net."
+      },
+      TFC: {
+        "id": "TFC",
+        "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/4326.png",
+        "symbol": "TFC",
+        "name": "Treasure Financial Coin",
+        "slug": "treasure-financial-coin",
+        "description": null
+      }
 }
 
 const arr = []
@@ -22433,27 +22505,33 @@ for (const [key, value] of Object.entries(names)) {
 }
 
 const missings = [
-  { id: 'AR', symbol: 'AR', name: 'AR' },
-  { id: 'CBC', symbol: 'CBC', name: 'CBC' },
-  { id: 'EOS', symbol: 'EOS', name: 'EOS' },
-  { id: 'ETH', symbol: 'ETH', name: 'ETH' },
-  { id: 'FCT2', symbol: 'FCT2', name: 'FCT2' },
-  { id: 'FCT', symbol: 'FCT', name: 'FCT' },
-  { id: 'FRSP', symbol: 'FRSP', name: 'FRSP' },
-  { id: 'GO', symbol: 'GO', name: 'GO' },
-  { id: 'IOTA', symbol: 'IOTA', name: 'IOTA' },
-  { id: 'MFA', symbol: 'MFA', name: 'MFA' },
-  { id: 'NEO', symbol: 'NEO', name: 'NEO' },
-  { id: 'OGT', symbol: 'OGT', name: 'OGT' },
-  { id: 'OXEN', symbol: 'OXEN', name: 'OXEN' },
-  { id: 'REPV2', symbol: 'REPV2', name: 'REPV2' },
-  { id: 'SG', symbol: 'SG', name: 'SG' },
-  { id: 'SMBSWAP', symbol: 'SMBSWAP', name: 'SMBSWAP' },
-  { id: 'TFC', symbol: 'TFC', name: 'TFC' },
-  { id: 'UPCO2', symbol: 'UPCO2', name: 'UPCO2' },
-  { id: 'UPEUR', symbol: 'UPEUR', name: 'UPEUR' },
-  { id: 'UPUSD', symbol: 'UPUSD', name: 'UPUSD' },
-  { id: 'UTI', symbol: 'UTI', name: 'UTI' }
+  {
+    id: 'CBC',
+    symbol: 'CBC',
+    name: 'Casino Betting Coin',
+    logo:
+      'https://bittrexblobstorage.blob.core.windows.net/public/91d8d115-f1f2-468a-a957-14164178aebd.png'
+  },
+  {
+    id: 'FCT2',
+    symbol: 'FCT2',
+    name: 'FirmaChain',
+    logo:
+      'https://bittrexblobstorage.blob.core.windows.net/public/c4bbf81d-82a6-44b6-859c-5a91f61a3a80.png'
+  },
+  {
+    id: 'FRSP',
+    symbol: 'FRSP',
+    name: 'Forkspot',
+    logo:
+      'https://bittrexblobstorage.blob.core.windows.net/public/769c6401-9ba7-4166-8ff0-ebda7a5ac74d.png'
+  },
+  { id: 'MFA', symbol: 'MFA', name: 'MFA Coin', logo: 'https://bittrexblobstorage.blob.core.windows.net/public/a59b62d9-9709-4fd7-bf55-c95490f7032b.png' },
+  { id: 'OGT', symbol: 'OGT', name: 'OriginChainToken', logo: 'https://bittrexblobstorage.blob.core.windows.net/public/759c88db-5bed-427c-a22d-31d2db89c38f.png' },
+  { id: 'OXEN', symbol: 'OXEN', name: 'Oxen', logo: 'https://bittrexblobstorage.blob.core.windows.net/public/5e7f47f6-3d0a-4e86-bf2c-c14a0c6852ee.png' },
+  { id: 'REPV2', symbol: 'REPV2', name: 'Augur V2', logo: 'https://bittrexblobstorage.blob.core.windows.net/public/e040dc1f-04b4-40fd-87bd-fbe07a4ae7f3.png' },
+  { id: 'UPCO2', symbol: 'UPCO2', name: 'Universal Carbon', logo: 'https://bittrexblobstorage.blob.core.windows.net/public/27674666-017e-47fe-b411-ff873002675a.png' },
+  { id: 'UTI', symbol: 'UTI', name: 'Unicorn Technology International', logo: 'https://bittrexblobstorage.blob.core.windows.net/public/3b5426fc-4c91-41ad-9712-7d5390d32e97.png' }
 ]
 
 module.exports = arr.concat(missings)

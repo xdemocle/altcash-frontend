@@ -67,6 +67,7 @@ const typeDefs = gql`
     coin(id: String): Coin!
     metaCoin(id: String): Metadata!
     metaCoinAll: [Metadata!]
+    metaExperiment: [Metadata!]
     summaries(symbols: String): [Summary!]
     summary(id: String): Summary!
     tickers(symbols: String): [Ticker!]
