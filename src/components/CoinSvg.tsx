@@ -23,7 +23,7 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
   })
 
   const getCoinLogo = (symbol: string) => {
-    if (!metadata.metaCoinAll) {
+    if (!metadata || !metadata.metaCoinAll) {
       return 'n/d'
     }
 
