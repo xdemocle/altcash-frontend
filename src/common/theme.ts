@@ -25,4 +25,14 @@ export const theme = createMuiTheme({
     fontWeightRegular: 500,
     fontWeightMedium: 700
   }
+  // overrides: {
+  //   // Style sheet name ⚛️
+  //   MuiTouchRipple: {
+  //     // Name of the rule
+  //     root: {
+  //       // Some CSS
+  //       backgroundColor: 'rgba(24, 161, 30, 0.1)'
+  //     }
+  //   }
+  // }
 })

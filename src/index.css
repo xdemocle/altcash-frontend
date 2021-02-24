@@ -7,19 +7,19 @@ body {
   min-height: 100vh;
 }
 
-a:link:not(.MuiButton-root),
-a:hover:not(.MuiButton-root),
-a:active:not(.MuiButton-root),
-a:focus:not(.MuiButton-root) {
+a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):link,
+a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):hover,
+a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):active,
+a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):focus {
   color: #18a11e;
   text-decoration: underline;
 }
 
-a:visited:not(.MuiButton-root) {
+a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):visited {
   color: #558b58;
 }
 
-a:hover {
+a:not(.MuiButton-root):hover {
   text-decoration: none;
 }
 
