@@ -52,7 +52,19 @@ const typeDefs = gql`
     slug: String
     description: String
     logo: String
-    # urls: String
+    urls: MetadataUrls
+  }
+
+  type MetadataUrls {
+    website: [String]
+    twitter: [String]
+    chat: [String]
+    message_board: [String]
+    explorer: [String]
+    reddit: [String]
+    technical_doc: [String]
+    source_code: [String]
+    announcement: [String]
   }
 
   type Count {

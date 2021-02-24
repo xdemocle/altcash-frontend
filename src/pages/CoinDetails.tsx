@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { Button, Tooltip } from '@material-ui/core'
+import { Button, Grid, Paper, Tooltip } from '@material-ui/core'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -8,13 +8,14 @@ import Typography from '@material-ui/core/Typography'
 import { green } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
-import React from 'react'
+import React, { Fragment } from 'react'
 import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { btcToRandPrice } from '../common/currency'
 import useGlobal from '../common/globalStateHook'
 import CoinSVG from '../components/CoinSvg'
+import LinkExtBlank from '../components/LinkExtBlank'
 import { GET_PAGE_DATA, GET_META_COIN } from '../graphql/queries'
 
 interface RouteParams {
@@ -73,6 +74,7 @@ const CoinPage = () => {
           Back
         </Button>
       </Tooltip>
+
       <Typography
         color="primary"
         variant="h4"
@@ -96,9 +98,11 @@ const CoinPage = () => {
           )}
         </div>
       </Typography>
+
       <Typography variant="h5" gutterBottom className={classes.infoParagraph}>
         Buy now
       </Typography>
+
       <Typography variant="h5" gutterBottom className={classes.infoParagraph}>
         Market Details & Statistics
       </Typography>
@@ -186,11 +190,62 @@ const CoinPage = () => {
           />
         </ListItem>
       </List>
-      <Typography variant="body1" gutterBottom>
-        <strong>Description</strong>
-        <br />
-        {metadata && metaCoin.description}
-      </Typography>
+
+      {metadata && metaCoin.description && (
+        <Fragment>
+          <Typography variant="h5" gutterBottom>
+            Description
+          </Typography>
+          <Paper className={classes.card}>
+            <Typography variant="body1">{metaCoin.description}</Typography>
+          </Paper>
+        </Fragment>
+      )}
+
+      {metadata && metaCoin.urls && (
+        <div className={classes.links}>
+          <Typography variant="h5" gutterBottom>
+            Links
+          </Typography>
+          <Grid container>
+            {!!metaCoin.urls.website.length && (
+              <Grid item xs={12} sm={6}>
+                <Paper className={classes.paper}>
+                  <strong>Website:</strong>
+                  <br />
+                  {metaCoin.urls.website.map((url: string) => (
+                    <LinkExtBlank key={url} url={url} br />
+                  ))}
+                </Paper>
+              </Grid>
+            )}
+
+            {!!metaCoin.urls.twitter.length && (
+              <Grid item xs={12} sm={6}>
+                <Paper className={classes.paper}>
+                  <strong>Social Media:</strong>
+                  <br />
+                  {metaCoin.urls.twitter.map((url: string) => (
+                    <LinkExtBlank key={url} url={url} br />
+                  ))}
+                </Paper>
+              </Grid>
+            )}
+
+            {!!metaCoin.urls.chat.length && (
+              <Grid item xs={12} sm={6}>
+                <Paper className={classes.paper}>
+                  <strong>Chat:</strong>
+                  <br />
+                  {metaCoin.urls.chat.map((url: string) => (
+                    <LinkExtBlank key={url} url={url} br />
+                  ))}
+                </Paper>
+              </Grid>
+            )}
+          </Grid>
+        </div>
+      )}
     </div>
   )
 }
@@ -202,7 +257,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.typography.pxToRem(theme.spacing(6)),
     paddingTop: theme.typography.pxToRem(theme.spacing(1)),
     [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(3))
+      padding: theme.typography.pxToRem(theme.spacing(2))
     }
   },
   title: {
@@ -229,5 +284,19 @@ const useStyles = makeStyles((theme) => ({
   },
   backButton: {
     marginBottom: theme.typography.pxToRem(theme.spacing(1))
+  },
+  card: {
+    padding: theme.typography.pxToRem(theme.spacing(2)),
+    marginBottom: theme.typography.pxToRem(theme.spacing(3))
+  },
+  links: {
+    marginBottom: theme.typography.pxToRem(theme.spacing(3))
+  },
+  paper: {
+    padding: theme.typography.pxToRem(theme.spacing(2)),
+    margin: theme.typography.pxToRem(theme.spacing(1)),
+    marginBottom: theme.typography.pxToRem(theme.spacing(2)),
+    lineHeight: theme.typography.pxToRem(theme.spacing(3)),
+    color: theme.palette.text.secondary
   }
 }))

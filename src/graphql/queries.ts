@@ -118,6 +118,11 @@ export const GET_META_COIN = gql`
       slug
       description
       logo
+      urls {
+        website
+        twitter
+        chat
+      }
     }
   }
 `

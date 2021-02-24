@@ -106,7 +106,6 @@ const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
   nav: {
     display: 'flex',
     minHeight: 'calc(100vh - 6rem)',
-    // height: 'calc(100vh - 12rem)',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -125,7 +124,7 @@ const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
     paddingRight: '1.8rem',
     margin: '0.8rem 0',
     height: '3.2rem',
-    color: '#2B3A41',
+    // color: '#2B3A41',
     '&.active::after': {
       content: '""',
       position: 'absolute',
@@ -136,6 +135,10 @@ const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
       borderRadius: '.6rem',
       backgroundColor: palette.primary.main,
       zIndex: -1
+    },
+    'a&': {
+      textDecoration: 'none',
+      color: '#2B3A41'
     }
   },
   listItemText: {

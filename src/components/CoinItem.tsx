@@ -44,7 +44,12 @@ const CoinItem = ({ coin }: Props) => {
 
   return (
     <React.Fragment>
-      <ListItem button component={Link} to={`/coin/${coin.id.toLowerCase()}`}>
+      <ListItem
+        button
+        component={Link}
+        to={`/coin/${coin.id.toLowerCase()}`}
+        className={classes.listItem}
+      >
         <ListItemIcon>
           <CoinSVG coinSymbol={coin.symbol} />
         </ListItemIcon>
@@ -96,21 +101,13 @@ const CoinItem = ({ coin }: Props) => {
 export default CoinItem
 
 const useStyles = makeStyles((theme) => ({
-  avatar: {
-    width: '2rem',
-    height: '2rem',
-    padding: 0,
-    verticalAlign: 'middle',
-    overflow: 'visible',
-    '& svg': {
-      width: '2rem',
-      height: '2rem',
-      padding: 0,
-      verticalAlign: 'middle',
-      overflow: 'visible'
-    }
-  },
   column: {
     flexBasis: 0
+  },
+  listItem: {
+    'a&': {
+      textDecoration: 'none',
+      color: '#2B3A41'
+    }
   }
 }))

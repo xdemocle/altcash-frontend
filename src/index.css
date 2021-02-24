@@ -7,6 +7,22 @@ body {
   min-height: 100vh;
 }
 
+a:link,
+a:hover,
+a:active,
+a:focus {
+  color: #18a11e;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #558b58;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
 .pagination-coins-list .MuiPagination-ul {
   display: inline-flex;
 }
