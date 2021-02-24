@@ -21,15 +21,15 @@ jobs:
           git config --global user.email "altcash@users.noreply.github.com"
         shell: bash
 
-      - name: GIT tag patch
-        if: github.ref == 'refs/heads/master'
-        run: yarn version --patch
+      # - name: GIT tag patch
+      #   if: github.ref == 'refs/heads/master'
+      #   run: yarn version --patch
 
-      - name: GIT tag minor
-        if: github.ref == 'refs/heads/production'
-        run: yarn version --minor && git push --follow-tags
+      # - name: GIT tag minor
+      #   if: github.ref == 'refs/heads/production'
+      #   run: yarn version --minor && git push --follow-tags
 
-      - run: git push
+      # - run: git push
 
       - name: Build steps
         run: |
