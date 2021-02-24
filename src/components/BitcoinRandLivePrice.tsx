@@ -9,7 +9,7 @@ const BitcoinRandLivePrice = () => {
 
     const intervalBtcPrice = setInterval(
       () => globalActions.updateBitcoinRandPrice(),
-      30000
+      60000
     )
 
     return () => {
