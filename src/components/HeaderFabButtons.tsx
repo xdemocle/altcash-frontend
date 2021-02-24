@@ -45,7 +45,7 @@ const HeaderfabButtons = (props: Props) => {
                 startIcon={<Close />}
                 className={classes.fabButtons}
               >
-                Close Search
+                Close Results
               </Button>
             </Tooltip>
           )}
