@@ -19,7 +19,7 @@ a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):visited {
   color: #558b58;
 }
 
-a:not(.MuiButton-root):hover {
+a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):hover {
   text-decoration: none;
 }
 
