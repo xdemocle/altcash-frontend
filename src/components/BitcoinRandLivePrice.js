@@ -7,7 +7,15 @@ const BitcoinRandLivePrice = () => {
 
   useEffect(() => {
     globalActions.updateBitcoinRandPrice()
-    setInterval(() => globalActions.updateBitcoinRandPrice(), 30000)
+
+    const intervalBtcPrice = setInterval(
+      () => globalActions.updateBitcoinRandPrice(),
+      30000
+    )
+
+    return () => {
+      window.clearInterval(intervalBtcPrice)
+    }
   }, [globalActions])
 
   // console.log('bitcoinRandPrice', globalState.bitcoinRandPrice)
