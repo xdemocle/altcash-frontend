@@ -122,6 +122,15 @@ export const GET_META_COIN = gql`
   }
 `
 
+export const GET_META_COIN_LOGO = gql`
+  query Query {
+    metaCoinAll {
+      logo
+      symbol
+    }
+  }
+`
+
 export const GET_COUNT = gql`
   query Counts {
     count {

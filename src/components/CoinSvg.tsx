@@ -1,7 +1,10 @@
+import { useQuery } from '@apollo/client'
 import { makeStyles } from '@material-ui/core/styles'
 import classNames from 'classnames'
+import { find } from 'lodash'
 import React from 'react'
 import { ReactSVG } from 'react-svg'
+import { GET_META_COIN_LOGO } from '../graphql/queries'
 
 type Props = {
   coinSymbol: string
@@ -11,16 +14,38 @@ type Props = {
 const CoinSVG = ({ coinSymbol, size }: Props) => {
   const classes: Record<string, any> = useStyles()
   let symbol = coinSymbol.toLowerCase()
+  let imgCoinPath = ''
   let svgCoinPath = null
+
+  const { data: metadata } = useQuery(GET_META_COIN_LOGO, {
+    // We refresh data list at least at reload
+    fetchPolicy: 'cache-only'
+  })
+
+  const getCoinLogo = (symbol: string) => {
+    if (!metadata.metaCoinAll) {
+      return 'n/d'
+    }
+
+    const coin = find(metadata.metaCoinAll, { symbol })
+
+    if (!coin || !coin.logo) {
+      return svgCoinPathHelper('btc')
+    }
+    return coin.logo
+  }
 
   try {
     svgCoinPath = svgCoinPathHelper(symbol)
   } catch (err) {
     symbol = 'cc-default'
-    svgCoinPath = svgCoinPathHelper('btc')
+    // coinSymbol.toUpperCase()
+    // svgCoinPath = svgCoinPathHelper('btc')
+    // imgCoinPath = 'https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png'
+    imgCoinPath = getCoinLogo(coinSymbol.toUpperCase())
   }
 
-  return (
+  return !!svgCoinPath ? (
     <ReactSVG
       src={svgCoinPath}
       className={classNames(
@@ -28,6 +53,14 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
         symbol,
         size ? classes[size] : classes.regular
       )}
+    />
+  ) : (
+    <img
+      src={imgCoinPath}
+      alt={imgCoinPath}
+      width="32"
+      height="32"
+      title={`Logo ${coinSymbol}`}
     />
   )
 }

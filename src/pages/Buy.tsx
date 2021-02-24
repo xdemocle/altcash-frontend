@@ -1,3 +1,4 @@
+import { useQuery } from '@apollo/client'
 import Paper from '@material-ui/core/Paper'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
@@ -12,11 +13,16 @@ import CoinsList from '../components/CoinsList'
 import CoinsUserList from '../components/CoinsUserList'
 import HeaderFabButtons from '../components/HeaderFabButtons'
 import { SYMBOLS_FEATURED } from '../constants'
+import { GET_META_COIN_LOGO } from '../graphql/queries'
 
 const BuyTabPage = () => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const symbolsFeatured = SYMBOLS_FEATURED.sort()
+
+  useQuery(GET_META_COIN_LOGO, {
+    fetchPolicy: 'cache-first'
+  })
 
   const handleChange = (tab: number) => {
     globalActions.setTab(tab)
