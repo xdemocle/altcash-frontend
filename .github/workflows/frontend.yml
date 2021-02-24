@@ -34,6 +34,7 @@ jobs:
       - name: Build steps
         run: |
           yarn install
+          yarn lint
           yarn build
         shell: bash
 

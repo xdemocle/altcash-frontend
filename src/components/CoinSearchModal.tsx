@@ -13,7 +13,7 @@ type Props = {
   open: boolean
 }
 
-const CoinsSearchModal = (props: Props) => {
+const CoinsSearchModal: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const { open, handleClose, updateNeedle } = props
 

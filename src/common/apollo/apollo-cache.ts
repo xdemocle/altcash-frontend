@@ -6,8 +6,7 @@
  */
 import { InMemoryCache } from '@apollo/client'
 import {
-  offsetLimitPagination
-  // relayStylePagination,
+  offsetLimitPagination // relayStylePagination,
   // concatPagination
 } from '@apollo/client/utilities'
 import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist'

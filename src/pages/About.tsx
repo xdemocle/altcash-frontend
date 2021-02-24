@@ -1,13 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import React from 'react'
 
-const useStyles = makeStyles(({ spacing }: Theme) => ({
-  root: {
-    padding: spacing(3)
-  }
-}))
-
-const About = () => {
+const About: React.FC = () => {
   const classes = useStyles()
 
   return (
@@ -40,3 +34,9 @@ const About = () => {
 }
 
 export default About
+
+const useStyles = makeStyles(({ spacing }: Theme) => ({
+  root: {
+    padding: spacing(3)
+  }
+}))

@@ -15,7 +15,7 @@ import HeaderFabButtons from '../components/HeaderFabButtons'
 import { SYMBOLS_FEATURED } from '../constants'
 import { GET_META_COIN_LOGO } from '../graphql/queries'
 
-const BuyTabPage = () => {
+const BuyTabPage: React.FC = () => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const symbolsFeatured = SYMBOLS_FEATURED.sort()

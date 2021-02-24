@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect } from 'react'
 import useGlobal from '../common/globalStateHook'
 
-const BitcoinRandLivePrice = () => {
+const BitcoinRandLivePrice: React.FC = () => {
   const [globalState, globalActions] = useGlobal()
 
   useEffect(() => {

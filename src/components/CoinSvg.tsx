@@ -11,8 +11,8 @@ type Props = {
   size?: string
 }
 
-const CoinSVG = ({ coinSymbol, size }: Props) => {
-  const classes: Record<string, any> = useStyles()
+const CoinSVG: React.FC<Props> = ({ coinSymbol, size }: Props) => {
+  const classes: Record<string, string> = useStyles()
   let symbol = coinSymbol.toLowerCase()
   let imgCoinPath = ''
   let svgCoinPath = null
@@ -66,6 +66,7 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
 }
 
 const svgCoinPathHelper = (name: string) => {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return require(`cryptocurrency-icons/svg/color/${name}.svg`).default
 }
 

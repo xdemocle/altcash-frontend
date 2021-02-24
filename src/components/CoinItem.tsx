@@ -28,7 +28,7 @@ type Props = {
   coin: Coin
 }
 
-const CoinItem = ({ coin }: Props) => {
+const CoinItem: React.FC<Props> = ({ coin }: Props) => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const showIconBuy = useMediaQuery('(min-width:600px)')

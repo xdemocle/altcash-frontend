@@ -11,7 +11,9 @@ type CoinsUserListParams = {
   predefined?: string[]
 }
 
-const CoinsUserList = ({ predefined }: CoinsUserListParams) => {
+const CoinsUserList: React.FC<Props> = ({
+  predefined
+}: CoinsUserListParams) => {
   const classes = useStyles()
   const [globalState] = useGlobal()
   const { data, networkStatus } = useQuery(GET_COINS, {

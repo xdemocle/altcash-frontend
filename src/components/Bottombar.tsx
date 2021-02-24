@@ -5,7 +5,7 @@ import { makeStyles, Theme } from '@material-ui/core/styles'
 import React from 'react'
 import { GET_COUNT } from '../graphql/queries'
 
-function SimpleAppBar() {
+const SimpleAppBar: React.FC = () => {
   const classes = useStyles()
   const { data } = useQuery(GET_COUNT)
 

@@ -1,13 +1,16 @@
 module.exports = {
   root: true,
-
   env: {
     node: true
   },
-
-  extends: ['plugin:react/recommended', 'react-app', 'prettier'],
-
-  plugins: ['react'],
+  parser: '@typescript-eslint/parser',
+  extends: [
+    'plugin:react/recommended',
+    'react-app',
+    'plugin:@typescript-eslint/recommended',
+    'prettier'
+  ],
+  plugins: ['react', '@typescript-eslint', 'prettier'],
 
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
@@ -18,59 +21,8 @@ module.exports = {
       }
     ],
     'no-unused-vars': ['warn'],
-    semi: ['warn', 'never'],
-    'no-extra-semi': 'warn',
-    'semi-spacing': 'warn',
-    camelcase: 'warn',
-    'space-before-function-paren': [
-      'error',
-      {
-        anonymous: 'ignore',
-        named: 'ignore',
-        asyncArrow: 'ignore'
-      }
-    ],
-    'comma-dangle': ['warn', 'never'],
-    quotes: ['warn', 'single'],
-    indent: [
-      'warn',
-      2,
-      {
-        SwitchCase: 1,
-        MemberExpression: 1
-      }
-    ],
-    'keyword-spacing': [
-      'error',
-      {
-        before: true
-      }
-    ],
-    curly: 'error',
-    'no-else-return': 'error',
-    'no-lonely-if': 'error',
-    'brace-style': 'error',
-    'arrow-spacing': 'error',
-    'spaced-comment': [
-      'error',
-      'always',
-      {
-        line: {
-          markers: ['/'],
-          exceptions: ['-', '+']
-        },
-        block: {
-          markers: ['!'],
-          exceptions: ['*'],
-          balanced: true
-        }
-      }
-    ],
-    'no-trailing-spaces': 'warn',
-    'no-multi-spaces': 'warn'
+    'prettier/prettier': 'error',
+    'arrow-body-style': 'off',
+    'prefer-arrow-callback': 'off'
   }
-
-  // parserOptions: {
-  //   parser: 'babel-eslint'
-  // }
 }

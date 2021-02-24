@@ -23,7 +23,7 @@ interface RouteParams {
   coinId: string
 }
 
-const CoinPage = () => {
+const CoinPage: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
   const { coinId } = useParams<RouteParams>()

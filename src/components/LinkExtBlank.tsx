@@ -5,7 +5,7 @@ interface Props {
   br: boolean
 }
 
-const LinkExtBlank = ({ url, br }: Props) => {
+const LinkExtBlank: React.FC<Props> = ({ url, br }: Props) => {
   return (
     <Fragment>
       <a href={url} rel="noopener noreferrer" target="_blank">

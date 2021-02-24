@@ -13,7 +13,7 @@ import MainLinks from './MainLinks'
 
 const drawerWidth = '17rem'
 
-const Sidebar = () => {
+const Sidebar: React.FC = () => {
   const classes = useStyles()
   const theme = useTheme()
   const isDownMd = useMediaQuery(theme.breakpoints.down('md'))

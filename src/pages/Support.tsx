@@ -7,7 +7,7 @@ const useStyles = makeStyles(({ spacing }: Theme) => ({
   }
 }))
 
-const Support = () => {
+const Support: React.FC = () => {
   const classes = useStyles()
 
   return (

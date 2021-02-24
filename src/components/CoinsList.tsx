@@ -10,7 +10,7 @@ import { COINS_PER_PAGE } from '../constants'
 import { GET_COINS, GET_COUNT } from '../graphql/queries'
 import CoinsListMap from './CoinsListMap'
 
-const CoinsList = () => {
+const CoinsList: React.FC = () => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const { data: dataCount } = useQuery(GET_COUNT)

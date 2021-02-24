@@ -16,7 +16,7 @@ type Props = {
   isSidebarOpen: boolean
 }
 
-function MainLinks(props: Props) {
+const MainLinks: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const { isSidebarOpen } = props
 

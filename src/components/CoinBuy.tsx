@@ -40,7 +40,7 @@ interface Props {
   coin: Coin
 }
 
-const CoinBuy = ({ coin }: Props) => {
+const CoinBuy: React.FC<Props> = ({ coin }: Props) => {
   const classes = useStyles()
 
   return (
@@ -57,6 +57,7 @@ const CoinBuy = ({ coin }: Props) => {
               // helperText="ZAR"
               variant="outlined"
               InputProps={{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 startAdornment: (
                   <InputAdornment position="start">R</InputAdornment>
@@ -74,6 +75,7 @@ const CoinBuy = ({ coin }: Props) => {
               // helperText={coin.symbol}
               variant="outlined"
               InputProps={{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">

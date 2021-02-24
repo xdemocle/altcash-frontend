@@ -10,7 +10,7 @@ type Props = {
   loading?: boolean
 }
 
-const HeaderfabButtons = (props: Props) => {
+const HeaderfabButtons: React.FC<Props> = (props: Props) => {
   const classes = useStyles()
   const [globalState, globalActions] = useGlobal()
   const [modalOpen, setModalOpen] = useState(false)

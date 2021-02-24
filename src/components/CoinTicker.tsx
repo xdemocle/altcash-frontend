@@ -10,7 +10,7 @@ type Props = {
   coin: Coin
 }
 
-const CoinTicker = ({ coin }: Props) => {
+const CoinTicker: React.FC<Props> = ({ coin }: Props) => {
   const [globalState] = useGlobal()
   const { data } = useQuery(GET_TICKER, {
     fetchPolicy: 'cache-first',

@@ -7,7 +7,7 @@ import StoreIcon from '@material-ui/icons/Store'
 import React, { useState, ChangeEvent } from 'react'
 import { useHistory } from 'react-router-dom'
 
-const SimpleBottomNavigation = () => {
+const SimpleBottomNavigation: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
   const [pathname, setPathname] = useState(history.location.pathname)
