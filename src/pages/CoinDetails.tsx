@@ -14,6 +14,7 @@ import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { btcToRandPrice } from '../common/currency'
 import useGlobal from '../common/globalStateHook'
+import CoinBuy from '../components/CoinBuy'
 import CoinSVG from '../components/CoinSvg'
 import LinkExtBlank from '../components/LinkExtBlank'
 import { GET_PAGE_DATA, GET_META_COIN } from '../graphql/queries'
@@ -48,10 +49,6 @@ const CoinPage = () => {
   const dataTicker = data ? data.ticker : {}
   const metaCoin = metadata ? metadata.metaCoin : {}
 
-  // console.log('data', data)
-  // console.log('dataTicker', dataTicker)
-  // console.log('metadata', metadata)
-
   const handleBackButton = () => {
     if (history.action === 'PUSH') {
       history.goBack()
@@ -75,13 +72,15 @@ const CoinPage = () => {
         </Button>
       </Tooltip>
 
-      <Typography
-        color="primary"
-        variant="h4"
-        gutterBottom
-        className={classes.title}
-      >
-        {dataCoin.name}
+      <div className={classes.inner}>
+        <Typography
+          color="primary"
+          variant="h4"
+          gutterBottom
+          className={classes.title}
+        >
+          {dataCoin.name}
+        </Typography>
         <div className={classes.pageAvatar}>
           {loading && (
             <CircularProgress className={classes.progress} size="4rem" />
@@ -97,155 +96,176 @@ const CoinPage = () => {
             />
           )}
         </div>
-      </Typography>
 
-      <Typography variant="h5" gutterBottom className={classes.infoParagraph}>
-        Buy now
-      </Typography>
+        <Typography variant="h6" gutterBottom className={classes.infoParagraph}>
+          Buy now
+        </Typography>
 
-      <Typography variant="h5" gutterBottom className={classes.infoParagraph}>
-        Market Details & Statistics
-      </Typography>
-      <List className={classes.dataParagraph} aria-label="Coin Data">
-        <ListItem divider>
-          <ListItemText
-            primary={<strong>Current Buy Price</strong>}
-            className={classes.column}
-          />
-          <ListItemText
-            primary={`${btcToRandPrice(
-              dataTicker.bidRate,
-              globalState.bitcoinRandPrice
-            )}`}
-            secondary={`${dataTicker.bidRate} BTC`}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Last Trade Price" className={classes.column} />
-          <ListItemText
-            primary={`${btcToRandPrice(
-              dataTicker.lastTradeRate,
-              globalState.bitcoinRandPrice
-            )}`}
-            secondary={`${dataTicker.lastTradeRate} BTC`}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Price Change" className={classes.column} />
-          <ListItemText
-            primary={`${dataSummary.percentChange}%`}
-            secondary={'Last 24hrs'}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Price at Highest" className={classes.column} />
-          <ListItemText
-            primary={`${btcToRandPrice(
-              dataSummary.high,
-              globalState.bitcoinRandPrice
-            )}`}
-            secondary={`${dataSummary.high} BTC`}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Price at Lowest" className={classes.column} />
-          <ListItemText
-            primary={`${btcToRandPrice(
-              dataSummary.low,
-              globalState.bitcoinRandPrice
-            )}`}
-            secondary={`${dataSummary.low} BTC`}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Trading Volume" className={classes.column} />
-          <ListItemText
-            primary={`${dataSummary.volume.toFixed(2)} ${dataCoin.symbol}`}
-            secondary={`of ${dataCoin.name}`}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Quote Volume" className={classes.column} />
-          <ListItemText
-            primary={`${btcToRandPrice(
-              dataSummary.quoteVolume,
-              globalState.bitcoinRandPrice
-            )}`}
-            secondary={`${dataSummary.quoteVolume.toFixed(2)} BTC`}
-            className={classes.column}
-          />
-        </ListItem>
-        <ListItem divider>
-          <ListItemText primary="Last update" className={classes.column} />
-          <ListItemText
-            primary={<Moment>{dataSummary.updatedAt}</Moment>}
-            secondary="Page data refresh automatically"
-            className={classes.column}
-          />
-        </ListItem>
-      </List>
-
-      {metadata && metaCoin.description && (
-        <Fragment>
-          <Typography variant="h5" gutterBottom>
-            Description
-          </Typography>
-          <Paper className={classes.card}>
-            <Typography variant="body1">{metaCoin.description}</Typography>
-          </Paper>
-        </Fragment>
-      )}
-
-      {metadata && metaCoin.urls && (
-        <div className={classes.links}>
-          <Typography variant="h5" gutterBottom>
-            Links
-          </Typography>
-          <Grid container>
-            {!!metaCoin.urls.website.length && (
-              <Grid item xs={12} sm={6}>
-                <Paper className={classes.paper}>
-                  <strong>Website:</strong>
-                  <br />
-                  {metaCoin.urls.website.map((url: string) => (
-                    <LinkExtBlank key={url} url={url} br />
-                  ))}
-                </Paper>
-              </Grid>
-            )}
-
-            {!!metaCoin.urls.twitter.length && (
-              <Grid item xs={12} sm={6}>
-                <Paper className={classes.paper}>
-                  <strong>Social Media:</strong>
-                  <br />
-                  {metaCoin.urls.twitter.map((url: string) => (
-                    <LinkExtBlank key={url} url={url} br />
-                  ))}
-                </Paper>
-              </Grid>
-            )}
-
-            {!!metaCoin.urls.chat.length && (
-              <Grid item xs={12} sm={6}>
-                <Paper className={classes.paper}>
-                  <strong>Chat:</strong>
-                  <br />
-                  {metaCoin.urls.chat.map((url: string) => (
-                    <LinkExtBlank key={url} url={url} br />
-                  ))}
-                </Paper>
-              </Grid>
-            )}
-          </Grid>
+        <div className={classes.boxBuy}>
+          <CoinBuy coin={dataCoin} />
         </div>
-      )}
+
+        <Typography variant="h6" gutterBottom className={classes.infoParagraph}>
+          Market Details & Statistics
+        </Typography>
+        <List className={classes.dataParagraph} aria-label="Coin Data">
+          <ListItem divider>
+            <ListItemText
+              primary={<strong>Current Buy Price</strong>}
+              className={classes.column}
+            />
+            <ListItemText
+              primary={`${btcToRandPrice(
+                dataTicker.bidRate,
+                globalState.bitcoinRandPrice
+              )}`}
+              secondary={`${dataTicker.bidRate} BTC`}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText
+              primary="Last Trade Price"
+              className={classes.column}
+            />
+            <ListItemText
+              primary={`${btcToRandPrice(
+                dataTicker.lastTradeRate,
+                globalState.bitcoinRandPrice
+              )}`}
+              secondary={`${dataTicker.lastTradeRate} BTC`}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText primary="Price Change" className={classes.column} />
+            <ListItemText
+              primary={`${dataSummary.percentChange}%`}
+              secondary={'Last 24hrs'}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText
+              primary="Price at Highest"
+              className={classes.column}
+            />
+            <ListItemText
+              primary={`${btcToRandPrice(
+                dataSummary.high,
+                globalState.bitcoinRandPrice
+              )}`}
+              secondary={`${dataSummary.high} BTC`}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText
+              primary="Price at Lowest"
+              className={classes.column}
+            />
+            <ListItemText
+              primary={`${btcToRandPrice(
+                dataSummary.low,
+                globalState.bitcoinRandPrice
+              )}`}
+              secondary={`${dataSummary.low} BTC`}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText primary="Trading Volume" className={classes.column} />
+            <ListItemText
+              primary={`${dataSummary.volume.toFixed(2)} ${dataCoin.symbol}`}
+              secondary={`of ${dataCoin.name}`}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText primary="Quote Volume" className={classes.column} />
+            <ListItemText
+              primary={`${btcToRandPrice(
+                dataSummary.quoteVolume,
+                globalState.bitcoinRandPrice
+              )}`}
+              secondary={`${dataSummary.quoteVolume.toFixed(2)} BTC`}
+              className={classes.column}
+            />
+          </ListItem>
+          <ListItem divider>
+            <ListItemText primary="Last update" className={classes.column} />
+            <ListItemText
+              primary={<Moment>{dataSummary.updatedAt}</Moment>}
+              secondary="Page data refresh automatically"
+              className={classes.column}
+            />
+          </ListItem>
+        </List>
+
+        {metadata && metaCoin.description && (
+          <Fragment>
+            <Typography
+              variant="h6"
+              gutterBottom
+              className={classes.infoParagraph}
+            >
+              Description
+            </Typography>
+            <Paper className={classes.card}>
+              <Typography variant="body1">{metaCoin.description}</Typography>
+            </Paper>
+          </Fragment>
+        )}
+
+        {metadata && metaCoin.urls && (
+          <div className={classes.links}>
+            <Typography
+              variant="h6"
+              gutterBottom
+              className={classes.infoParagraph}
+            >
+              Links
+            </Typography>
+            <Grid container>
+              {!!metaCoin.urls.website.length && (
+                <Grid item xs={12} sm={6}>
+                  <Paper className={classes.paper}>
+                    <strong>Website:</strong>
+                    <br />
+                    {metaCoin.urls.website.map((url: string) => (
+                      <LinkExtBlank key={url} url={url} br />
+                    ))}
+                  </Paper>
+                </Grid>
+              )}
+
+              {!!metaCoin.urls.twitter.length && (
+                <Grid item xs={12} sm={6}>
+                  <Paper className={classes.paper}>
+                    <strong>Social Media:</strong>
+                    <br />
+                    {metaCoin.urls.twitter.map((url: string) => (
+                      <LinkExtBlank key={url} url={url} br />
+                    ))}
+                  </Paper>
+                </Grid>
+              )}
+
+              {!!metaCoin.urls.chat.length && (
+                <Grid item xs={12} sm={6}>
+                  <Paper className={classes.paper}>
+                    <strong>Chat:</strong>
+                    <br />
+                    {metaCoin.urls.chat.map((url: string) => (
+                      <LinkExtBlank key={url} url={url} br />
+                    ))}
+                  </Paper>
+                </Grid>
+              )}
+            </Grid>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
@@ -254,27 +274,34 @@ export default CoinPage
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.typography.pxToRem(theme.spacing(6)),
+    marginLeft: theme.typography.pxToRem(theme.spacing(6)),
+    marginRight: theme.typography.pxToRem(theme.spacing(6)),
     paddingTop: theme.typography.pxToRem(theme.spacing(1)),
+    paddingBottom: theme.typography.pxToRem(theme.spacing(6)),
     [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(2))
+      padding: theme.typography.pxToRem(theme.spacing(2)),
+      marginLeft: theme.typography.pxToRem(theme.spacing(1)),
+      marginRight: theme.typography.pxToRem(theme.spacing(1))
     }
+  },
+  inner: {
+    position: 'relative',
+    maxWidth: '64rem'
   },
   title: {
     lineHeight: '3rem'
   },
   pageAvatar: {
-    float: 'right',
-    display: 'inline',
-    marginTop: '-0.2rem',
-    marginRight: '0.5rem'
+    position: 'absolute',
+    top: 0,
+    right: 0
   },
   infoParagraph: {
-    marginTop: '1rem'
+    margin: '1rem 0',
+    fontWeight: 500
   },
   dataParagraph: {
-    marginBottom: '2.5rem',
-    maxWidth: '64rem'
+    marginBottom: '2.5rem'
   },
   column: {
     flexBasis: 0
@@ -284,6 +311,9 @@ const useStyles = makeStyles((theme) => ({
   },
   backButton: {
     marginBottom: theme.typography.pxToRem(theme.spacing(1))
+  },
+  boxBuy: {
+    marginBottom: theme.typography.pxToRem(theme.spacing(5))
   },
   card: {
     padding: theme.typography.pxToRem(theme.spacing(2)),
