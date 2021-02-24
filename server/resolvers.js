@@ -54,6 +54,13 @@ const queryMetaCoin = async (parent, { id }, { dataSources }) => {
   return response.data ? response.data[id] : {}
 }
 
+// eslint-disable-next-line no-empty-pattern
+const queryMetaAllCoins = async (parent, {}, { dataSources }) => {
+  const response = await dataSources.metadataAPI.getAllLogos()
+
+  return response
+}
+
 const querySummaries = async (parent, { symbols }, { dataSources }) => {
   let summaries = await dataSources.coinsAPI.getAllSummaries()
 
@@ -127,6 +134,7 @@ const resolvers = {
     coins: queryCoins,
     coin: queryCoin,
     metaCoin: queryMetaCoin,
+    metaCoinAll: queryMetaAllCoins,
     summaries: querySummaries,
     summary: querySummary,
     tickers: queryTickers,

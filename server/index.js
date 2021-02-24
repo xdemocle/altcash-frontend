@@ -46,6 +46,7 @@ const typeDefs = gql`
 
   type Metadata @cacheControl(maxAge: 604800) {
     id: String!
+    bittrexId: Float
     name: String
     symbol: String
     slug: String
@@ -65,6 +66,7 @@ const typeDefs = gql`
     coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
     coin(id: String): Coin!
     metaCoin(id: String): Metadata!
+    metaCoinAll: [Metadata!]
     summaries(symbols: String): [Summary!]
     summary(id: String): Summary!
     tickers(symbols: String): [Ticker!]
