@@ -28,9 +28,8 @@ class MetadataAPI extends RESTDataSource {
     // const symbols = 'AR,ETH,EOS,FCT,GO,NEO,SG,SMBSWAP,TFC'
     const symbols = 'IOTA'
     let response = await this.get(`cryptocurrency/info?symbol=${symbols}`)
-    console.log(response)
 
-    const obj = []
+    const arr = []
 
     for (const [key, value] of Object.entries(response.data)) {
       arr.push({
