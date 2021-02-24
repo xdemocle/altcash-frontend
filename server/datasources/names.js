@@ -22570,6 +22570,27 @@ const missings = [
       'https://bittrexblobstorage.blob.core.windows.net/public/27674666-017e-47fe-b411-ff873002675a.png'
   },
   {
+    id: 'IOTA',
+    symbol: 'IOTA',
+    name: 'IOTA',
+    logo:
+      'https://bittrexblobstorage.blob.core.windows.net/public/c800e686-8f38-46d8-aee7-02cfe6a9317f.png'
+  },
+  {
+    id: 'UPEUR',
+    symbol: 'UPEUR',
+    name: 'Universal Euro',
+    logo:
+      'https://bittrexblobstorage.blob.core.windows.net/public/22212865-dfc9-41de-9129-17c01b6ec9fd.png'
+  },
+  {
+    id: 'UPUSD',
+    symbol: 'UPUSD',
+    name: 'Universal US Dollar',
+    logo:
+      'https://bittrexblobstorage.blob.core.windows.net/public/b10c0e40-8289-4b38-932a-d69509f7213a.png'
+  },
+  {
     id: 'UTI',
     symbol: 'UTI',
     name: 'Unicorn Technology International',
