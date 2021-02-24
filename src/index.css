@@ -7,15 +7,15 @@ body {
   min-height: 100vh;
 }
 
-a:link,
-a:hover,
-a:active,
-a:focus {
+a:link:not(.MuiButton-root),
+a:hover:not(.MuiButton-root),
+a:active:not(.MuiButton-root),
+a:focus:not(.MuiButton-root) {
   color: #18a11e;
   text-decoration: underline;
 }
 
-a:visited {
+a:visited:not(.MuiButton-root) {
   color: #558b58;
 }
 
