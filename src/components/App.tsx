@@ -2,6 +2,7 @@ import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
 import { makeStyles } from '@material-ui/core/styles'
 import React, { useEffect, useState } from 'react'
+import CookieConsent from 'react-cookie-consent'
 import { hot } from 'react-hot-loader/root'
 import { Route, Switch } from 'react-router-dom'
 import { persistCacheInstance } from '../common/apollo/apollo-cache'
@@ -72,6 +73,24 @@ const App = () => {
           <BottomNav />
         </Hidden>
       </div>
+      <CookieConsent
+        location="bottom"
+        buttonText="Okay!!!"
+        cookieName="CookiePrivacySA"
+        style={{ background: '#2B373B' }}
+        buttonStyle={{
+          color: '#ffffff',
+          background: '#28a745',
+          fontSize: '13px',
+          font: 'inherit',
+          textTransform: 'uppercase',
+          fontWeight: '700',
+          borderRadius: '.25rem'
+        }}
+        expires={150}
+      >
+        This website uses cookies to enhance the user experience.
+      </CookieConsent>
     </div>
   )
 }
