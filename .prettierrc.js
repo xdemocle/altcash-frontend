@@ -9,6 +9,7 @@ module.exports = {
     '^@common/(.*)$',
     '^@components/(.*)$',
     '^@pages/(.*)$',
+    '^@assets/(.*)$',
     '^[./]'
   ],
   importOrderSeparation: false
