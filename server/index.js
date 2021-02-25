@@ -101,8 +101,8 @@ const server = new ApolloServer({
   cache: new RedisCache(
     process.env.REDIS_URL || {
       // https://github.com/luin/ioredis
-      host: '127.0.0.1', // Redis host
-      port: 6379 // Redis port
+      host: '127.0.0.1',
+      port: 6379
     }
   ),
   plugins: [responseCachePlugin()],
