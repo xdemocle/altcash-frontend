@@ -63,10 +63,21 @@ export interface MissingMarket {
   name: string
 }
 
+export interface Pair {
+  ask: string
+  bid: string
+  last_trade: string
+  pair: string
+  rolling_24_hour_volume: string
+  status: string
+  timestamp: number
+}
+
 export declare abstract class DataSource {
   getAllMarkets(): Coin[]
   getMarket(id: string): Coin
   getTicker(id: string): Ticker
+  getPair(pair: string): Pair
   getAllTickers(): Ticker[]
   getAllSummaries(): Summary[]
   getSummary(id: string): Summary
@@ -77,8 +88,4 @@ export declare abstract class DataSource {
 
 export type DataSources = {
   [name: string]: DataSource
-}
-
-declare global {
-  type Dictionary<T> = { [key: string]: T }
 }

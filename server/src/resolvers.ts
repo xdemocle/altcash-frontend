@@ -5,6 +5,7 @@ import {
   DataSources,
   Metadata,
   MissingMarket,
+  Pair,
   Summary,
   Ticker
 } from './types'
@@ -246,6 +247,16 @@ const queryCount = async (
   return counts
 }
 
+const queryPair = async (
+  _: unknown,
+  { pair }: { pair: string },
+  { dataSources }: { dataSources: DataSources }
+): Promise<Pair> => {
+  const response = await dataSources.mybitxAPI.getPair(pair)
+
+  return response
+}
+
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
@@ -259,7 +270,8 @@ const resolvers = {
     summary: querySummary,
     tickers: queryTickers,
     ticker: queryTicker,
-    count: queryCount
+    count: queryCount,
+    pair: queryPair
   }
 }
 

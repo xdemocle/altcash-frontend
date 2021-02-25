@@ -1,23 +1,31 @@
+import { useLazyQuery } from '@apollo/client'
 import React, { Fragment, useEffect } from 'react'
-import useGlobal from '../common/globalStateHook'
+import { REFRESH_BTCZAR_LIVE_PRICE } from '../constants'
+import { GET_PAIR } from '../graphql/queries'
 
 const BitcoinRandLivePrice: React.FC = () => {
-  const [globalState, globalActions] = useGlobal()
+  const [getLivePrice, { data }] = useLazyQuery(GET_PAIR, {
+    fetchPolicy: 'cache-and-network',
+    variables: {
+      pair: 'XBTZAR'
+    }
+  })
 
   useEffect(() => {
-    globalActions.updateBitcoinRandPrice()
+    getLivePrice()
 
     const intervalBtcPrice = setInterval(
-      () => globalActions.updateBitcoinRandPrice(),
-      60000
+      () => getLivePrice(),
+      REFRESH_BTCZAR_LIVE_PRICE
     )
 
     return () => {
       window.clearInterval(intervalBtcPrice)
     }
-  }, [globalActions])
+  }, [getLivePrice])
 
-  console.debug('bitcoinRandPrice', globalState.bitcoinRandPrice)
+  // eslint-disable-next-line no-console
+  console.info('bitcoinRandPrice', data && data.pair && data.pair.last_trade)
 
   return <Fragment />
 }

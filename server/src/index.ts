@@ -3,6 +3,7 @@ import { RedisCache } from 'apollo-server-cache-redis'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
 import CoinsAPI from './datasources/coins'
 import MetadataAPI from './datasources/metadata'
+import MybitxAPI from './datasources/mybitx'
 import NamesAPI from './datasources/names'
 import resolvers from './resolvers'
 
@@ -70,6 +71,16 @@ const typeDefs = gql`
     count: Float!
   }
 
+  type Pair {
+    ask: String
+    bid: String
+    last_trade: String
+    pair: String
+    rolling_24_hour_volume: String
+    status: String
+    timestamp: Float
+  }
+
   # The "Query" type is special: it lists all of the available queries that
   # clients can execute, along with the return type for each. In this
   type Query {
@@ -83,6 +94,7 @@ const typeDefs = gql`
     tickers(symbols: String): [Ticker!]
     ticker(id: String): Ticker!
     count: [Count!]
+    pair(pair: String): Pair!
   }
 `
 
@@ -94,7 +106,8 @@ const server = new ApolloServer({
   dataSources: () => ({
     coinsAPI: new CoinsAPI(),
     metadataAPI: new MetadataAPI(),
-    namesAPI: new NamesAPI()
+    namesAPI: new NamesAPI(),
+    mybitxAPI: new MybitxAPI()
   }),
   cache: new RedisCache(
     process.env.REDIS_URL || {

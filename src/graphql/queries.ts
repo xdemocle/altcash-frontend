@@ -144,3 +144,13 @@ export const GET_COUNT = gql`
     }
   }
 `
+
+export const GET_PAIR = gql`
+  query Pair($pair: String) {
+    pair(pair: $pair) {
+      pair
+      last_trade
+      timestamp
+    }
+  }
+`

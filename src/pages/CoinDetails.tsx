@@ -13,11 +13,10 @@ import Moment from 'react-moment'
 import { useHistory } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { btcToRandPrice } from '../common/currency'
-import useGlobal from '../common/globalStateHook'
 import CoinBuy from '../components/CoinBuy'
 import CoinSVG from '../components/CoinSvg'
 import LinkExtBlank from '../components/LinkExtBlank'
-import { GET_PAGE_DATA, GET_META_COIN } from '../graphql/queries'
+import { GET_PAGE_DATA, GET_META_COIN, GET_PAIR } from '../graphql/queries'
 
 interface RouteParams {
   coinId: string
@@ -27,7 +26,6 @@ const CoinPage: React.FC = () => {
   const classes = useStyles()
   const history = useHistory()
   const { coinId } = useParams<RouteParams>()
-  const [globalState] = useGlobal()
   const { data, loading } = useQuery(GET_PAGE_DATA, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',
@@ -44,10 +42,18 @@ const CoinPage: React.FC = () => {
     }
   })
 
+  const { data: dataPair } = useQuery(GET_PAIR, {
+    fetchPolicy: 'cache-first',
+    variables: {
+      pair: 'XBTZAR'
+    }
+  })
+
   const dataCoin = data ? data.coin : {}
   const dataSummary = data ? data.summary : { quoteVolume: 0, volume: 0 }
   const dataTicker = data ? data.ticker : {}
   const metaCoin = metadata ? metadata.metaCoin : {}
+  const bitcoinRandPrice = dataPair ? dataPair.pair.last_trade : undefined
 
   const handleBackButton = () => {
     if (history.action === 'PUSH') {
@@ -117,7 +123,7 @@ const CoinPage: React.FC = () => {
             <ListItemText
               primary={`${btcToRandPrice(
                 dataTicker.bidRate,
-                globalState.bitcoinRandPrice
+                bitcoinRandPrice
               )}`}
               secondary={`${dataTicker.bidRate} BTC`}
               className={classes.column}
@@ -131,7 +137,7 @@ const CoinPage: React.FC = () => {
             <ListItemText
               primary={`${btcToRandPrice(
                 dataTicker.lastTradeRate,
-                globalState.bitcoinRandPrice
+                bitcoinRandPrice
               )}`}
               secondary={`${dataTicker.lastTradeRate} BTC`}
               className={classes.column}
@@ -151,10 +157,7 @@ const CoinPage: React.FC = () => {
               className={classes.column}
             />
             <ListItemText
-              primary={`${btcToRandPrice(
-                dataSummary.high,
-                globalState.bitcoinRandPrice
-              )}`}
+              primary={`${btcToRandPrice(dataSummary.high, bitcoinRandPrice)}`}
               secondary={`${dataSummary.high} BTC`}
               className={classes.column}
             />
@@ -165,10 +168,7 @@ const CoinPage: React.FC = () => {
               className={classes.column}
             />
             <ListItemText
-              primary={`${btcToRandPrice(
-                dataSummary.low,
-                globalState.bitcoinRandPrice
-              )}`}
+              primary={`${btcToRandPrice(dataSummary.low, bitcoinRandPrice)}`}
               secondary={`${dataSummary.low} BTC`}
               className={classes.column}
             />
@@ -186,7 +186,7 @@ const CoinPage: React.FC = () => {
             <ListItemText
               primary={`${btcToRandPrice(
                 dataSummary.quoteVolume,
-                globalState.bitcoinRandPrice
+                bitcoinRandPrice
               )}`}
               secondary={`${dataSummary.quoteVolume.toFixed(2)} BTC`}
               className={classes.column}
