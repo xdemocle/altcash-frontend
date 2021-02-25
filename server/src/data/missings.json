@@ -70,5 +70,11 @@
     "symbol": "UTI",
     "name": "Unicorn Technology International",
     "logo": "https://bittrexblobstorage.blob.core.windows.net/public/3b5426fc-4c91-41ad-9712-7d5390d32e97.png"
+  },
+  {
+    "id": "WXBTC",
+    "symbol": "WXBTC",
+    "name": "Wrapped XBTC",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/db90f1bf-d5fc-4fc5-89fb-baf64abbab00.png"
   }
 ]

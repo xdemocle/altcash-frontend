@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const { createProxyMiddleware } = require('http-proxy-middleware')
 
 module.exports = function (app) {
@@ -5,14 +6,6 @@ module.exports = function (app) {
     '/graphql',
     createProxyMiddleware({
       target: 'http://localhost:4000',
-      changeOrigin: true
-    })
-  )
-
-  app.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'https://api.mybitx.com',
       changeOrigin: true
     })
   )
