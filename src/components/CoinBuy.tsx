@@ -79,7 +79,7 @@ const CoinBuy: React.FC<Props> = ({ coin }: Props) => {
                 inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">
-                    {coin.symbol}
+                    <span>R</span>
                   </InputAdornment>
                 )
               }}
