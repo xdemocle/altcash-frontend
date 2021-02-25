@@ -45,7 +45,7 @@ const typeDefs = gql`
 
   type Metadata @cacheControl(maxAge: 604800) {
     id: String!
-    bittrexId: Float
+    metadataId: Float
     name: String
     symbol: String
     slug: String

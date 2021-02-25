@@ -15,7 +15,7 @@ export interface Metadata {
   symbol: string
   name: string
   logo: string
-  bittrexId?: string | number
+  metadataId?: number
   slug?: string
   description?: string | null
   urls?: MetadataUrls

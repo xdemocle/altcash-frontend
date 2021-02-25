@@ -141,7 +141,12 @@ const queryMetaCoin = async (
     [key: string]: any
   } = await dataSources.metadataAPI.getCoin(id)
 
-  return response[id]
+  const coin = response[id]
+
+  coin.metadataId = coin.id
+  coin.id = id
+
+  return coin
 }
 
 const queryMetaAllCoins = async (

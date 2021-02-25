@@ -115,7 +115,6 @@ export const GET_META_COIN = gql`
       id
       name
       symbol
-      slug
       description
       logo
       urls {

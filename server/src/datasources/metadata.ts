@@ -16,7 +16,7 @@ class MetadataAPI extends RESTDataSource {
     request.headers.set('X-CMC_PRO_API_KEY', CMC_PRO_API_KEY)
   }
 
-  async getCoin(symbol: string): Promise<Record<string, string>> {
+  async getCoin(symbol: string): Promise<Metadata> {
     const response = await this.get(`cryptocurrency/info?symbol=${symbol}`)
     return response.data
   }
@@ -31,7 +31,7 @@ class MetadataAPI extends RESTDataSource {
     each(response.data, (value, key) => {
       arr.push({
         id: key,
-        bittrexId: value.id,
+        metadataId: value.id,
         symbol: key,
         name: value.name,
         slug: value.slug,
