@@ -1,12 +1,10 @@
-const { ApolloServer, gql } = require('apollo-server')
-const { RedisCache } = require('apollo-server-cache-redis')
-const responseCachePlugin = require('apollo-server-plugin-response-cache')
-// const { RedisCache } = require('apollo-server-cache-redis')
-// const { each } = require('lodash')
-const resolvers = require('./resolvers')
-const namesAPI = require('./datasources/names')
-const CoinsAPI = require('./datasources/coins')
-const MetadataAPI = require('./datasources/metadata')
+import { ApolloServer, gql } from 'apollo-server'
+import { RedisCache } from 'apollo-server-cache-redis'
+import responseCachePlugin from 'apollo-server-plugin-response-cache'
+import CoinsAPI from './datasources/coins'
+import MetadataAPI from './datasources/metadata'
+import NamesAPI from './datasources/names'
+import resolvers from './resolvers'
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -96,7 +94,7 @@ const server = new ApolloServer({
   dataSources: () => ({
     coinsAPI: new CoinsAPI(),
     metadataAPI: new MetadataAPI(),
-    namesAPI: namesAPI
+    namesAPI: new NamesAPI()
   }),
   cache: new RedisCache(
     process.env.REDIS_URL || {

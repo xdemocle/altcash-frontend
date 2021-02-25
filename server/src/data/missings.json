@@ -1,0 +1,74 @@
+[
+  {
+    "id": "CBC",
+    "symbol": "CBC",
+    "name": "Casino Betting Coin",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/91d8d115-f1f2-468a-a957-14164178aebd.png"
+  },
+  {
+    "id": "FCT2",
+    "symbol": "FCT2",
+    "name": "FirmaChain",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/c4bbf81d-82a6-44b6-859c-5a91f61a3a80.png"
+  },
+  {
+    "id": "FRSP",
+    "symbol": "FRSP",
+    "name": "Forkspot",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/769c6401-9ba7-4166-8ff0-ebda7a5ac74d.png"
+  },
+  {
+    "id": "MFA",
+    "symbol": "MFA",
+    "name": "MFA Coin",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/a59b62d9-9709-4fd7-bf55-c95490f7032b.png"
+  },
+  {
+    "id": "OGT",
+    "symbol": "OGT",
+    "name": "OriginChainToken",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/759c88db-5bed-427c-a22d-31d2db89c38f.png"
+  },
+  {
+    "id": "OXEN",
+    "symbol": "OXEN",
+    "name": "Oxen",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/5e7f47f6-3d0a-4e86-bf2c-c14a0c6852ee.png"
+  },
+  {
+    "id": "REPV2",
+    "symbol": "REPV2",
+    "name": "Augur V2",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/e040dc1f-04b4-40fd-87bd-fbe07a4ae7f3.png"
+  },
+  {
+    "id": "UPCO2",
+    "symbol": "UPCO2",
+    "name": "Universal Carbon",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/27674666-017e-47fe-b411-ff873002675a.png"
+  },
+  {
+    "id": "IOTA",
+    "symbol": "IOTA",
+    "name": "IOTA",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/c800e686-8f38-46d8-aee7-02cfe6a9317f.png"
+  },
+  {
+    "id": "UPEUR",
+    "symbol": "UPEUR",
+    "name": "Universal Euro",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/22212865-dfc9-41de-9129-17c01b6ec9fd.png"
+  },
+  {
+    "id": "UPUSD",
+    "symbol": "UPUSD",
+    "name": "Universal US Dollar",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/b10c0e40-8289-4b38-932a-d69509f7213a.png"
+  },
+  {
+    "id": "UTI",
+    "symbol": "UTI",
+    "name": "Unicorn Technology International",
+    "logo": "https://bittrexblobstorage.blob.core.windows.net/public/3b5426fc-4c91-41ad-9712-7d5390d32e97.png"
+  }
+]
