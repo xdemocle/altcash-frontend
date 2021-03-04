@@ -1,108 +1,75 @@
-import { ApolloServer, gql } from 'apollo-server'
+import { AccountsModule } from '@accounts/graphql-api'
+import { Mongo } from '@accounts/mongo'
+import { AccountsPassword } from '@accounts/password'
+import { AccountsServer } from '@accounts/server'
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
+import { loadSchemaSync } from '@graphql-tools/load'
+import { mergeTypeDefs, mergeResolvers } from '@graphql-tools/merge'
 import { RedisCache } from 'apollo-server-cache-redis'
+import { ApolloServer, makeExecutableSchema } from 'apollo-server-express'
 import responseCachePlugin from 'apollo-server-plugin-response-cache'
+import express from 'express'
+import mongoose from 'mongoose'
+import { join } from 'path'
 import CoinsAPI from './datasources/coins'
 import MetadataAPI from './datasources/metadata'
 import MybitxAPI from './datasources/mybitx'
 import NamesAPI from './datasources/names'
 import resolvers from './resolvers'
 
+// We connect mongoose to our local mongodb database
+mongoose.connect(
+  `${process.env.MONGODB_URI || 'mongodb://localhost:27017/altstack'}`,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
+)
+
+// We tell accounts-js to use the mongo connection
+const accountsMongo = new Mongo(mongoose.connection)
+
+const accountsPassword = new AccountsPassword({
+  // You can customise the behavior of the password service by providing some options
+})
+
+const accountsServer = new AccountsServer(
+  {
+    // We link the mongo adapter to the server
+    db: accountsMongo,
+    // Replace this value with a strong random secret
+    tokenSecret: 'my-super-random-secret'
+  },
+  {
+    // We pass a list of services to the server, in this example we just use the password service
+    password: accountsPassword
+  }
+)
+
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
 // your data.
-const typeDefs = gql`
-  type Coin {
-    id: String!
-    symbol: String!
-    baseCurrencySymbol: String!
-    quoteCurrencySymbol: String!
-    minTradeSize: Float
-    precision: Float
-    status: String
-    notice: String
-    createdAt: String
-    name: String
-  }
+const typeDefs = loadSchemaSync(join(__dirname, 'schema.graphql'), {
+  loaders: [new GraphQLFileLoader()]
+})
 
-  type Summary {
-    id: String!
-    symbol: String!
-    high: Float
-    low: Float
-    volume: Float
-    quoteVolume: Float
-    percentChange: Float
-    updatedAt: String
-  }
+// We generate the accounts-js GraphQL module
+const accountsGraphQL = AccountsModule.forRoot({ accountsServer })
 
-  type Ticker {
-    id: String!
-    symbol: String!
-    lastTradeRate: Float
-    bidRate: Float
-    askRate: Float
+// A new schema is created combining our schema and the accounts-js schema
+const schema = makeExecutableSchema({
+  typeDefs: mergeTypeDefs([typeDefs, accountsGraphQL.typeDefs]),
+  resolvers: mergeResolvers([accountsGraphQL.resolvers, resolvers]),
+  schemaDirectives: {
+    ...accountsGraphQL.schemaDirectives
   }
-
-  type Metadata @cacheControl(maxAge: 604800) {
-    id: String!
-    metadataId: Float
-    name: String
-    symbol: String
-    slug: String
-    description: String
-    logo: String
-    urls: MetadataUrls
-  }
-
-  type MetadataUrls {
-    website: [String]
-    twitter: [String]
-    chat: [String]
-    message_board: [String]
-    explorer: [String]
-    reddit: [String]
-    technical_doc: [String]
-    source_code: [String]
-    announcement: [String]
-  }
-
-  type Count {
-    name: String!
-    count: Float!
-  }
-
-  type Pair {
-    ask: String
-    bid: String
-    last_trade: String
-    pair: String
-    rolling_24_hour_volume: String
-    status: String
-    timestamp: Float
-  }
-
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  type Query {
-    coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
-    coin(id: String): Coin!
-    metaCoin(id: String): Metadata!
-    metaCoinAll: [Metadata!]
-    metaExperiment: [Metadata!]
-    summaries(symbols: String): [Summary!]
-    summary(id: String): Summary!
-    tickers(symbols: String): [Ticker!]
-    ticker(id: String): Ticker!
-    count: [Count!]
-    pair(pair: String): Pair!
-  }
-`
+})
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema,
+  context: accountsGraphQL.context,
   dataSources: () => ({
     coinsAPI: new CoinsAPI(),
     metadataAPI: new MetadataAPI(),
@@ -118,7 +85,7 @@ const server = new ApolloServer({
   ),
   plugins: [responseCachePlugin()],
   cacheControl: {
-    defaultMaxAge: 20
+    defaultMaxAge: 29
   }
   // cors: {
   //   origin: '*',
@@ -129,8 +96,16 @@ const server = new ApolloServer({
   // }
 })
 
+const app = express()
+
+server.applyMiddleware({ app })
+
 // The `listen` method launches a web server.
-server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
+app.listen({ port: process.env.PORT || 4000 }, () =>
   // eslint-disable-next-line no-console
-  console.log(` 🚀 Server ready at ${url}`)
-})
+  console.log(
+    `🚀 Server ready at http://localhost:${process.env.PORT || 4000}${
+      server.graphqlPath
+    }`
+  )
+)

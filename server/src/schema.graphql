@@ -1,0 +1,95 @@
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on OBJECT | FIELD_DEFINITION
+
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type Coin {
+  id: String!
+  symbol: String!
+  baseCurrencySymbol: String!
+  quoteCurrencySymbol: String!
+  minTradeSize: Float
+  precision: Float
+  status: String
+  notice: String
+  createdAt: String
+  name: String
+}
+
+type Summary {
+  id: String!
+  symbol: String!
+  high: Float
+  low: Float
+  volume: Float
+  quoteVolume: Float
+  percentChange: Float
+  updatedAt: String
+}
+
+type Ticker {
+  id: String!
+  symbol: String!
+  lastTradeRate: Float
+  bidRate: Float
+  askRate: Float
+}
+
+type Metadata @cacheControl(maxAge: 604800) {
+  id: String!
+  metadataId: Float
+  name: String
+  symbol: String
+  slug: String
+  description: String
+  logo: String
+  urls: MetadataUrls
+}
+
+type MetadataUrls {
+  website: [String]
+  twitter: [String]
+  chat: [String]
+  message_board: [String]
+  explorer: [String]
+  reddit: [String]
+  technical_doc: [String]
+  source_code: [String]
+  announcement: [String]
+}
+
+type Count {
+  name: String!
+  count: Float!
+}
+
+type Pair {
+  ask: String
+  bid: String
+  last_trade: String
+  pair: String
+  rolling_24_hour_volume: String
+  status: String
+  timestamp: Float
+}
+
+# The "Query" type is special: it lists all of the available queries that
+# clients can execute, along with the return type for each. In this
+type Query {
+  coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
+  coin(id: String): Coin!
+  metaCoin(id: String): Metadata!
+  metaCoinAll: [Metadata!]
+  metaExperiment: [Metadata!]
+  summaries(symbols: String): [Summary!]
+  summary(id: String): Summary!
+  tickers(symbols: String): [Ticker!]
+  ticker(id: String): Ticker!
+  count: [Count!]
+  pair(pair: String): Pair!
+}
