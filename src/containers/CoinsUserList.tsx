@@ -4,8 +4,8 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import React from 'react'
 import useGlobal from '../common/globalStateHook'
+import CoinItem, { Coin } from '../components/CoinItem'
 import { GET_COINS } from '../graphql/queries'
-import CoinItem, { Coin } from './CoinItem'
 
 interface Props {
   predefined?: string[]

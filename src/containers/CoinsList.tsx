@@ -6,9 +6,9 @@ import Pagination from '@material-ui/lab/Pagination'
 import { clone, find } from 'lodash'
 import React, { Fragment } from 'react'
 import useGlobal from '../common/globalStateHook'
+import CoinsListMap from '../components/CoinsListMap'
 import { COINS_PER_PAGE } from '../constants'
 import { GET_COINS, GET_COUNT } from '../graphql/queries'
-import CoinsListMap from './CoinsListMap'
 
 const CoinsList: React.FC = () => {
   const classes = useStyles()
