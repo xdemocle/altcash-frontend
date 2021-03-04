@@ -15,7 +15,12 @@ import CoinsAPI from './datasources/coins'
 import MetadataAPI from './datasources/metadata'
 import MybitxAPI from './datasources/mybitx'
 import NamesAPI from './datasources/names'
-import resolvers from './resolvers'
+import resolverCoin from './resolvers/resolver-coins'
+import resolverCount from './resolvers/resolver-count'
+import resolverMeta from './resolvers/resolver-meta'
+import resolverPair from './resolvers/resolver-pair'
+import resolverSummaries from './resolvers/resolver-summaries'
+import resolverTickers from './resolvers/resolver-tickers'
 
 // We connect mongoose to our local mongodb database
 mongoose.connect(
@@ -59,7 +64,15 @@ const accountsGraphQL = AccountsModule.forRoot({ accountsServer })
 // A new schema is created combining our schema and the accounts-js schema
 const schema = makeExecutableSchema({
   typeDefs: mergeTypeDefs([typeDefs, accountsGraphQL.typeDefs]),
-  resolvers: mergeResolvers([accountsGraphQL.resolvers, resolvers]),
+  resolvers: mergeResolvers([
+    accountsGraphQL.resolvers,
+    resolverCoin,
+    resolverCount,
+    resolverMeta,
+    resolverPair,
+    resolverSummaries,
+    resolverTickers
+  ]),
   schemaDirectives: {
     ...accountsGraphQL.schemaDirectives
   }
