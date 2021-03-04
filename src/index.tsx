@@ -6,7 +6,7 @@ import 'react-hot-loader'
 import { BrowserRouter } from 'react-router-dom'
 import { apolloClient } from './common/apollo/apollo-client'
 import { theme } from './common/theme'
-import App from './components/App'
+import App from './containers/App'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 

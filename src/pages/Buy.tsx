@@ -9,10 +9,10 @@ import { Star, List as ListIcon } from '@material-ui/icons'
 import NewReleasesIcon from '@material-ui/icons/NewReleases'
 import React from 'react'
 import useGlobal from '../common/globalStateHook'
-import CoinsList from '../components/CoinsList'
-import CoinsUserList from '../components/CoinsUserList'
 import HeaderFabButtons from '../components/HeaderFabButtons'
 import { SYMBOLS_FEATURED } from '../constants'
+import CoinsList from '../containers/CoinsList'
+import CoinsUserList from '../containers/CoinsUserList'
 import { GET_META_COIN_LOGO } from '../graphql/queries'
 
 const BuyTabPage: React.FC = () => {
