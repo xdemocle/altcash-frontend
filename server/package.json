@@ -5,7 +5,7 @@
   "author": "Rocco R. <im@rocco.me>",
   "main": "src/index.js",
   "scripts": {
-    "start": "yarn build && node dist/index.js",
+    "start": "yarn build && cp src/schema.graphql dist/ && node dist/index.js",
     "build": "$(yarn bin)/tsc -p .",
     "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts"
   },
