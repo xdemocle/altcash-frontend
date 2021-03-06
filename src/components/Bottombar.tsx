@@ -10,7 +10,7 @@ const SimpleAppBar: React.FC = () => {
   const { data } = useQuery(GET_COUNT)
 
   return (
-    <AppBar position="absolute" color="secondary" className={classes.root}>
+    <AppBar color="secondary" className={classes.root}>
       <Typography variant="body1" color="inherit" align="right">
         {data &&
           data.count &&
@@ -21,7 +21,7 @@ const SimpleAppBar: React.FC = () => {
               </span>
             )
           )}{' '}
-        &copy; Altcash {new Date().getFullYear()}
+        Support - &copy; Altcash {new Date().getFullYear()}
       </Typography>
     </AppBar>
   )
@@ -31,9 +31,15 @@ export default SimpleAppBar
 
 const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {
+    zIndex: 1,
     boxShadow: 'none',
     padding: '.5rem 1.5rem',
     top: 'auto',
-    bottom: 0
+    bottom: 0,
+    position: 'fixed',
+    [breakpoints.up('xl')]: {
+      position: 'absolute',
+      borderRadius: '.5rem .5rem 0 0'
+    }
   }
 }))

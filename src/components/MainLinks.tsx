@@ -6,9 +6,11 @@ import Tooltip from '@material-ui/core/Tooltip'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import ContactSupportOutlinedIcon from '@material-ui/icons/ContactSupportOutlined'
 import HomeOutlinedIcon from '@material-ui/icons/HomeOutlined'
+import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined'
 import StorefrontOutlinedIcon from '@material-ui/icons/StorefrontOutlined'
+import classnames from 'classnames'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -52,7 +54,7 @@ const MainLinks: React.FC<Props> = (props: Props) => {
       </Tooltip>
 
       <Tooltip
-        title="Your balance overview"
+        title="Your private area"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
@@ -64,7 +66,7 @@ const MainLinks: React.FC<Props> = (props: Props) => {
           <ListItemIcon>
             <StorefrontOutlinedIcon className={classes.icons} />
           </ListItemIcon>
-          <ListItemText primary="Overview" className={classes.listItemText} />
+          <ListItemText primary="Your area" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
 
@@ -96,6 +98,22 @@ const MainLinks: React.FC<Props> = (props: Props) => {
           <ListItemText primary="Support" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
+      <Tooltip
+        title="Login in your area"
+        placement="right"
+        enterDelay={isSidebarOpen ? 2000 : 50}
+      >
+        <ListItem
+          component={NavLink}
+          to="/login"
+          className={classnames(classes.listItem, classes.listItemLast)}
+        >
+          <ListItemIcon>
+            <LockOutlinedIcon className={classes.icons} />
+          </ListItemIcon>
+          <ListItemText primary="Login" className={classes.listItemText} />
+        </ListItem>
+      </Tooltip>
     </List>
   )
 }
@@ -104,12 +122,16 @@ export default MainLinks
 
 const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
   nav: {
+    position: 'relative',
     display: 'flex',
-    minHeight: 'calc(100vh - 6rem)',
+    height: 'calc(100% - 6rem)',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0
+    // [breakpoints.up('xl')]: {
+    //   minHeight: 'auto'
+    // }
   },
   icons: {
     marginLeft: '0.5rem',
@@ -143,5 +165,9 @@ const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
   },
   listItemText: {
     paddingLeft: '.7rem'
+  },
+  listItemLast: {
+    position: 'absolute',
+    bottom: '0'
   }
 }))

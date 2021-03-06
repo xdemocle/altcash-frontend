@@ -1,6 +1,6 @@
 import CssBaseline from '@material-ui/core/CssBaseline'
 import Hidden from '@material-ui/core/Hidden'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 import React, { useEffect, useState } from 'react'
 import CookieConsent from 'react-cookie-consent'
 import { hot } from 'react-hot-loader/root'
@@ -16,7 +16,9 @@ import AboutPage from '../pages/About'
 import BuyPage from '../pages/Buy'
 import CoinDetailsPage from '../pages/CoinDetails'
 import LandingPage from '../pages/Landing'
+import LoginPage from '../pages/Login'
 import OverviewPage from '../pages/Overview'
+import SignupPage from '../pages/Signup'
 import SupportPage from '../pages/Support'
 
 const App = () => {
@@ -55,17 +57,21 @@ const App = () => {
       <BitcoinRandLivePrice />
       <TickersLivePrice />
       <div className={classes.appFrame}>
-        <Sidebar />
-        <main className={classes.content}>
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/about" component={AboutPage} />
-            <Route path="/buy" component={BuyPage} />
-            <Route path="/overview" component={OverviewPage} />
-            <Route path="/support" component={SupportPage} />
-            <Route path="/coin/:coinId" component={CoinDetailsPage} />
-          </Switch>
-        </main>
+        <div className={classes.inner}>
+          <Sidebar />
+          <main className={classes.content}>
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/about" component={AboutPage} />
+              <Route path="/buy" component={BuyPage} />
+              <Route path="/overview" component={OverviewPage} />
+              <Route path="/support" component={SupportPage} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/signup" component={SignupPage} />
+              <Route path="/coin/:coinId" component={CoinDetailsPage} />
+            </Switch>
+          </main>
+        </div>
         <Hidden smDown>
           <Bottombar />
         </Hidden>
@@ -97,33 +103,48 @@ const App = () => {
 
 export default hot(App)
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: '#e3e4e9'
   },
   appFrame: {
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
-    display: 'flex',
     width: '100%',
     minHeight: '100vh',
-    backgroundColor: '#e3e4e9'
-    // [theme.breakpoints.up('xl')]: {
-    //   padding: '6rem',
-    //   height: 'calc(100vh - 12rem)'
-    // }
+    margin: '0 auto',
+    [breakpoints.up('xl')]: {
+      padding: '3rem 6rem 6rem 6rem',
+      height: 'calc(100vh - 12rem)',
+      maxWidth: '100rem'
+    }
+  },
+  inner: {
+    display: 'flex',
+    [breakpoints.up('xl')]: {
+      overflow: 'hidden',
+      minHeight: 'calc(100vh - 9rem)',
+      maxHeight: 'calc(100vh - 9rem)',
+      borderRadius: '1.5rem',
+      boxShadow: '0 0.25rem 1rem rgba(0,0,0,0.15)'
+    }
   },
   content: {
     position: 'relative',
     flexGrow: 1,
     overflow: 'hidden',
     minHeight: 'calc(100vh - 36px)',
-    paddingBottom: theme.typography.pxToRem(36),
+    paddingBottom: typography.pxToRem(36),
     backgroundColor: '#f4f5f4',
-    [theme.breakpoints.only('xs')]: {
+    [breakpoints.only('xs')]: {
       minHeight: 'calc(100vh - 56px)',
-      paddingBottom: theme.typography.pxToRem(56)
+      paddingBottom: typography.pxToRem(56)
+    },
+    [breakpoints.up('xl')]: {
+      overflowY: 'auto',
+      minHeight: 'auto'
     }
   }
 }))

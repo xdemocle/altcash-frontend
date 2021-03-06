@@ -15,8 +15,8 @@ const drawerWidth = '17rem'
 
 const Sidebar: React.FC = () => {
   const classes = useStyles()
-  const theme = useTheme()
-  const isDownMd = useMediaQuery(theme.breakpoints.down('md'))
+  const { breakpoints } = useTheme()
+  const isDownMd = useMediaQuery(breakpoints.down('md'))
   const [globalState, globalActions] = useGlobal()
 
   useEffect(() => {
@@ -84,26 +84,30 @@ const Sidebar: React.FC = () => {
 
 export default Sidebar
 
-const useStyles = makeStyles((theme: Theme) => ({
+const useStyles = makeStyles(({ breakpoints, transitions, mixins }: Theme) => ({
   hide: {
     display: 'none'
   },
   drawerPaper: {
+    zIndex: 2,
     position: 'relative',
     whiteSpace: 'nowrap',
-    height: '100%',
     width: drawerWidth,
+    minHeight: '100vh',
     overflow: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+    transition: transitions.create('width', {
+      easing: transitions.easing.sharp,
+      duration: transitions.duration.enteringScreen
+    }),
+    [breakpoints.up('xl')]: {
+      minHeight: '100%'
+    }
   },
   drawerPaperClose: {
     overflowX: 'hidden',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen
+    transition: transitions.create('width', {
+      easing: transitions.easing.sharp,
+      duration: transitions.duration.leavingScreen
     }),
     width: '6rem'
   },
@@ -111,10 +115,15 @@ const useStyles = makeStyles((theme: Theme) => ({
     position: 'fixed',
     overflow: 'hidden',
     width: '6rem',
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen
-    })
+    height: '100%',
+    transition: transitions.create('width', {
+      easing: transitions.easing.sharp,
+      duration: transitions.duration.enteringScreen
+    }),
+    [breakpoints.up('xl')]: {
+      position: 'relative',
+      overflowY: 'auto'
+    }
   },
   toolbarOpen: {
     width: drawerWidth
@@ -124,7 +133,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     alignItems: 'center',
     justifyContent: 'left',
     padding: '1.5rem',
-    ...theme.mixins.toolbar
+    ...mixins.toolbar
   },
   toolbarTitle: {
     margin: '0 1.5rem'
