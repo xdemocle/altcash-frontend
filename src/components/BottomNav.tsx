@@ -31,7 +31,7 @@ const SimpleBottomNavigation: React.FC = () => {
         value="/buy"
       />
       <BottomNavigationAction
-        label="Overview"
+        label="Your Area"
         icon={<StoreIcon />}
         value="/overview"
       />

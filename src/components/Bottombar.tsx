@@ -1,8 +1,10 @@
 import { useQuery } from '@apollo/client'
+import { Tooltip } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { GET_COUNT } from '../graphql/queries'
 
 const SimpleAppBar: React.FC = () => {
@@ -21,7 +23,16 @@ const SimpleAppBar: React.FC = () => {
               </span>
             )
           )}{' '}
-        Support - &copy; Altcash {new Date().getFullYear()}
+        <Tooltip
+          title="Require assistance with customer Support"
+          placement="top"
+          arrow
+        >
+          <Link to="/support" className={classes.link}>
+            Support
+          </Link>
+        </Tooltip>
+        {' - '} &copy; Altcash {new Date().getFullYear()}
       </Typography>
     </AppBar>
   )
@@ -41,5 +52,8 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
       position: 'absolute',
       borderRadius: '.5rem .5rem 0 0'
     }
+  },
+  link: {
+    color: '#fff !important'
   }
 }))
