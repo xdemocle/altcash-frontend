@@ -64,7 +64,7 @@ const CoinBuy: React.FC<Props> = ({ coin }: Props) => {
 
   const onSubmitHandler = (data: unknown) => {
     // e.preventDefault()
-    console.log(data)
+    // console.log(data)
   }
 
   return (
