@@ -1,12 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core/styles'
 import React from 'react'
 
-const useStyles = makeStyles(({ spacing }: Theme) => ({
-  root: {
-    padding: spacing(3)
-  }
-}))
-
 const Overview: React.FC = () => {
   const classes = useStyles()
 
@@ -40,3 +34,18 @@ const Overview: React.FC = () => {
 }
 
 export default Overview
+
+const useStyles = makeStyles(({ breakpoints, spacing, typography }: Theme) => ({
+  root: {
+    paddingTop: typography.pxToRem(spacing(2)),
+    marginLeft: typography.pxToRem(spacing(2)),
+    paddingBottom: typography.pxToRem(spacing(2)),
+    marginRight: typography.pxToRem(spacing(2)),
+    [breakpoints.up('sm')]: {
+      paddingTop: typography.pxToRem(spacing(2)),
+      marginLeft: typography.pxToRem(spacing(5)),
+      paddingBottom: typography.pxToRem(spacing(5)),
+      marginRight: typography.pxToRem(spacing(5))
+    }
+  }
+}))

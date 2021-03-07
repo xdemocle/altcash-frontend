@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
 import { green } from '@material-ui/core/colors'
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles, Theme } from '@material-ui/core/styles'
 import ArrowBackIcon from '@material-ui/icons/ArrowBack'
 import React, { Fragment } from 'react'
 import Moment from 'react-moment'
@@ -272,61 +272,64 @@ const CoinPage: React.FC = () => {
 
 export default CoinPage
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    marginLeft: theme.typography.pxToRem(theme.spacing(6)),
-    marginRight: theme.typography.pxToRem(theme.spacing(6)),
-    paddingTop: theme.typography.pxToRem(theme.spacing(1)),
-    paddingBottom: theme.typography.pxToRem(theme.spacing(6)),
-    [theme.breakpoints.only('xs')]: {
-      padding: theme.typography.pxToRem(theme.spacing(2)),
-      marginLeft: theme.typography.pxToRem(theme.spacing(1)),
-      marginRight: theme.typography.pxToRem(theme.spacing(1))
+const useStyles = makeStyles(
+  ({ breakpoints, palette, spacing, typography }: Theme) => ({
+    root: {
+      paddingTop: typography.pxToRem(spacing(2)),
+      marginLeft: typography.pxToRem(spacing(2)),
+      paddingBottom: typography.pxToRem(spacing(2)),
+      marginRight: typography.pxToRem(spacing(2)),
+      [breakpoints.up('sm')]: {
+        paddingTop: typography.pxToRem(spacing(2)),
+        marginLeft: typography.pxToRem(spacing(5)),
+        paddingBottom: typography.pxToRem(spacing(5)),
+        marginRight: typography.pxToRem(spacing(5))
+      }
+    },
+    inner: {
+      position: 'relative',
+      maxWidth: '64rem'
+    },
+    title: {
+      lineHeight: '3rem'
+    },
+    pageAvatar: {
+      position: 'absolute',
+      top: 0,
+      right: 0
+    },
+    infoParagraph: {
+      margin: '1rem 0',
+      fontWeight: 500
+    },
+    dataParagraph: {
+      marginBottom: '2.5rem'
+    },
+    column: {
+      flexBasis: 0
+    },
+    progress: {
+      color: green[500]
+    },
+    backButton: {
+      marginBottom: typography.pxToRem(spacing(1))
+    },
+    boxBuy: {
+      marginBottom: typography.pxToRem(spacing(5))
+    },
+    card: {
+      padding: typography.pxToRem(spacing(2)),
+      marginBottom: typography.pxToRem(spacing(3))
+    },
+    links: {
+      marginBottom: typography.pxToRem(spacing(3))
+    },
+    paper: {
+      padding: typography.pxToRem(spacing(2)),
+      margin: typography.pxToRem(spacing(1)),
+      marginBottom: typography.pxToRem(spacing(2)),
+      lineHeight: typography.pxToRem(spacing(3)),
+      color: palette.text.secondary
     }
-  },
-  inner: {
-    position: 'relative',
-    maxWidth: '64rem'
-  },
-  title: {
-    lineHeight: '3rem'
-  },
-  pageAvatar: {
-    position: 'absolute',
-    top: 0,
-    right: 0
-  },
-  infoParagraph: {
-    margin: '1rem 0',
-    fontWeight: 500
-  },
-  dataParagraph: {
-    marginBottom: '2.5rem'
-  },
-  column: {
-    flexBasis: 0
-  },
-  progress: {
-    color: green[500]
-  },
-  backButton: {
-    marginBottom: theme.typography.pxToRem(theme.spacing(1))
-  },
-  boxBuy: {
-    marginBottom: theme.typography.pxToRem(theme.spacing(5))
-  },
-  card: {
-    padding: theme.typography.pxToRem(theme.spacing(2)),
-    marginBottom: theme.typography.pxToRem(theme.spacing(3))
-  },
-  links: {
-    marginBottom: theme.typography.pxToRem(theme.spacing(3))
-  },
-  paper: {
-    padding: theme.typography.pxToRem(theme.spacing(2)),
-    margin: theme.typography.pxToRem(theme.spacing(1)),
-    marginBottom: theme.typography.pxToRem(theme.spacing(2)),
-    lineHeight: theme.typography.pxToRem(theme.spacing(3)),
-    color: theme.palette.text.secondary
-  }
-}))
+  })
+)

@@ -79,14 +79,14 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {
     position: 'relative',
     paddingTop: typography.pxToRem(spacing(2)),
-    marginLeft: typography.pxToRem(spacing(5)),
-    paddingBottom: typography.pxToRem(spacing(5)),
-    marginRight: typography.pxToRem(spacing(5)),
-    [breakpoints.only('xs')]: {
+    marginLeft: typography.pxToRem(spacing(2)),
+    paddingBottom: typography.pxToRem(spacing(2)),
+    marginRight: typography.pxToRem(spacing(2)),
+    [breakpoints.up('sm')]: {
       paddingTop: typography.pxToRem(spacing(2)),
-      marginLeft: typography.pxToRem(spacing(2)),
-      paddingBottom: typography.pxToRem(spacing(2)),
-      marginRight: typography.pxToRem(spacing(2))
+      marginLeft: typography.pxToRem(spacing(5)),
+      paddingBottom: typography.pxToRem(spacing(5)),
+      marginRight: typography.pxToRem(spacing(5))
     }
   },
   title: {
