@@ -27,6 +27,14 @@ a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):hover {
   display: inline-flex;
 }
 
+.root .MuiCardContent-root {
+  padding: 1.5rem;
+}
+
+.root .MuiCardContent-root:last-child {
+  padding-bottom: 2rem;
+}
+
 .cc-default {
   fill: #43a047;
 }

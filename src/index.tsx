@@ -10,6 +10,13 @@ import App from './containers/App'
 import './index.css'
 import * as serviceWorker from './serviceWorker'
 
+const rootElement = document.getElementById('root')
+
+// add .root class for global styles overwrites
+if (rootElement) {
+  rootElement.className = 'root'
+}
+
 ReactDOM.render(
   <ApolloProvider client={apolloClient}>
     <MuiThemeProvider theme={theme}>
@@ -18,7 +25,7 @@ ReactDOM.render(
       </BrowserRouter>
     </MuiThemeProvider>
   </ApolloProvider>,
-  document.getElementById('root')
+  rootElement
 )
 
 // If you want your app to work offline and load faster, you can change
