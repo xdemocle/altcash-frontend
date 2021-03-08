@@ -9,11 +9,11 @@ import { useAuth } from '../context/AuthProvider'
 
 type RouteProps = {
   component?:
-    | React.ComponentType<RouteComponentProps<any>>
-    | React.ComponentType<any>
-  render?: (props: RouteComponentProps<any>) => React.ReactNode
+    | React.ComponentType<RouteComponentProps<string>>
+    | React.ComponentType<string>
+  render?: (props: RouteComponentProps<string>) => React.ReactNode
   children?:
-    | ((props: RouteChildrenProps<any>) => React.ReactNode)
+    | ((props: RouteChildrenProps<string>) => React.ReactNode)
     | React.ReactNode
   path?: string | string[]
   exact?: boolean
@@ -30,6 +30,7 @@ const PrivateRoute: React.FC<RouteProps> = (route) => {
       path={route.path}
       render={(props) => {
         if (!auth.isAuthenticated) return <Redirect to="/login" />
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return React.createElement(route.component as any, props)
       }}
     />
