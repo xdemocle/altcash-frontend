@@ -2,6 +2,7 @@
 import { Button, Card, CardContent, TextField } from '@material-ui/core'
 import { red } from '@material-ui/core/colors'
 import { makeStyles, Theme } from '@material-ui/core/styles'
+import classnames from 'classnames'
 import React, { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
@@ -121,7 +122,7 @@ const Signup: React.FC = () => {
                 errors && errors.password2 && errors.password2.message
               }
             />
-            <div className={classes.textField}>
+            <div className={classnames(classes.textField, classes.captcha)}>
               <ReCAPTCHA
                 sitekey={GOOGLE_CAPTCHA_SITEKEY}
                 onChange={onCaptchaChange}
@@ -156,30 +157,37 @@ export default Signup
 
 const useStyles = makeStyles(({ breakpoints, spacing, typography }: Theme) => ({
   root: {
+    maxWidth: '30rem',
+    textAlign: 'center',
     paddingTop: typography.pxToRem(spacing(2)),
     marginLeft: typography.pxToRem(spacing(2)),
     paddingBottom: typography.pxToRem(spacing(2)),
     marginRight: typography.pxToRem(spacing(2)),
     [breakpoints.up('sm')]: {
       paddingTop: typography.pxToRem(spacing(2)),
-      marginLeft: typography.pxToRem(spacing(5)),
+      // marginLeft: typography.pxToRem(spacing(5)),
       paddingBottom: typography.pxToRem(spacing(5)),
-      marginRight: typography.pxToRem(spacing(5))
+      // marginRight: typography.pxToRem(spacing(5)),
+      marginLeft: 'auto',
+      marginRight: 'auto'
     }
   },
   textField: {
-    marginRight: spacing(3),
+    // marginRight: spacing(3),
     marginBottom: spacing(3),
     display: 'block',
     '& .MuiInputBase-formControl': {
-      width: '100%',
-      [breakpoints.up('sm')]: {
-        width: '50%'
-      }
+      width: '100%'
+      // [breakpoints.up('sm')]: {
+      //   width: '50%'
+      // }
     },
     '& .MuiFormHelperText-root': {
       color: red[600]
     }
+  },
+  captcha: {
+    display: 'inline-block'
   },
   buttonField: {
     paddingLeft: spacing(5),
