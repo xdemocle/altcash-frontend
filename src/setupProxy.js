@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.use(
     '/graphql',
     createProxyMiddleware({
-      target: 'http://localhost:4000',
+      target: process.env.REACT_APP_GRAPHQL_SERVER ||  'http://localhost:4000',
       changeOrigin: true
     })
   )
