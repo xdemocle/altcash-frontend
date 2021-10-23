@@ -1,6 +1,7 @@
 import React from 'react'
 import globalHook, { Store } from 'use-global-hook'
 
+// eslint-disable-next-line
 const userCoinFavouritesLocal = window.localStorage.getItem(
   'userCoinFavourites'
 )
