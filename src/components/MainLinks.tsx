@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import MonetizationOnOutlinedIcon from '@material-ui/icons/MonetizationOnOutlined'
 import PeopleAltOutlinedIcon from '@material-ui/icons/PeopleAltOutlined'
 import StorefrontOutlinedIcon from '@material-ui/icons/StorefrontOutlined'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 
@@ -106,7 +106,7 @@ const MainLinks: React.FC<Props> = (props: Props) => {
         <ListItem
           component={NavLink}
           to="/login"
-          className={classnames(classes.listItem, classes.listItemLast)}
+          className={clsx(classes.listItem, classes.listItemLast)}
         >
           <ListItemIcon>
             <LockOutlinedIcon className={classes.icons} />

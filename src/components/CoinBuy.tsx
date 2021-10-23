@@ -7,7 +7,7 @@ import grey from '@material-ui/core/colors/grey'
 import { makeStyles } from '@material-ui/core/styles'
 import SwapHorizIcon from '@material-ui/icons/SwapHoriz'
 import SwapVertIcon from '@material-ui/icons/SwapVert'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import NumberFormat from 'react-number-format'
@@ -108,7 +108,7 @@ const CoinBuy: React.FC<Props> = ({ coin }: Props) => {
               <Hidden mdUp>
                 <SwapVertIcon
                   color="primary"
-                  className={classnames(classes.arrow, classes.arrowMobile)}
+                  className={clsx(classes.arrow, classes.arrowMobile)}
                 />
               </Hidden>
             </div>

@@ -1,12 +1,19 @@
 /* eslint-disable no-console */
-import { Button, Card, CardContent, TextField } from '@material-ui/core'
+import {
+  Button,
+  Card,
+  CardContent,
+  InputAdornment,
+  TextField
+} from '@material-ui/core'
 import { red } from '@material-ui/core/colors'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import classnames from 'classnames'
+import clsx from 'clsx'
 import React, { useState } from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
+import { strengthIndicator, strengthColor } from '../common/strength-password'
 import {
   FORM_EMAIL_VALIDATION_REGEX,
   GOOGLE_CAPTCHA_SITEKEY,
@@ -24,7 +31,7 @@ type Inputs = {
 const Signup: React.FC = () => {
   const classes = useStyles()
   const [captchaValid, setCaptchaValid] = useState(false)
-  const { register, handleSubmit, errors } = useForm<Inputs>({
+  const { register, handleSubmit, errors, watch } = useForm<Inputs>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     // defaultValues: {},
@@ -33,6 +40,9 @@ const Signup: React.FC = () => {
     criteriaMode: 'all',
     shouldFocusError: true
   })
+
+  const strength = strengthIndicator(watch('password') || '')
+  const color = strengthColor(strength)
 
   function onCaptchaChange(token: string | null) {
     // console.log('Captcha value:', token)
@@ -60,7 +70,8 @@ const Signup: React.FC = () => {
           >
             <TextField
               name="email"
-              label="E-Mail"
+              // label="E-Mail"
+              placeholder="E-Mail"
               variant="outlined"
               required
               autoComplete="email"
@@ -78,9 +89,11 @@ const Signup: React.FC = () => {
               }}
               helperText={errors && errors.email && errors.email.message}
             />
+
             <TextField
               name="password"
-              label="Password"
+              // label="Password"
+              placeholder="Password"
               type="password"
               variant="outlined"
               required
@@ -97,11 +110,18 @@ const Signup: React.FC = () => {
               inputProps={{
                 maxLength: '255'
               }}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="end">{color}</InputAdornment>
+                )
+              }}
               helperText={errors && errors.password && errors.password.message}
             />
+
             <TextField
               name="password2"
-              label="Confirm Password"
+              // label="Confirm Password"
+              placeholder="Confirm Password"
               type="password"
               variant="outlined"
               required
@@ -122,12 +142,14 @@ const Signup: React.FC = () => {
                 errors && errors.password2 && errors.password2.message
               }
             />
-            <div className={classnames(classes.textField, classes.captcha)}>
+
+            <div className={clsx(classes.textField, classes.captcha)}>
               <ReCAPTCHA
                 sitekey={GOOGLE_CAPTCHA_SITEKEY}
                 onChange={onCaptchaChange}
               />
             </div>
+
             <Button
               variant="contained"
               color="primary"

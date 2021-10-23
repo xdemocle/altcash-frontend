@@ -42,6 +42,14 @@ const CoinItem: React.FC<Props> = ({ coin }: Props) => {
     coin.symbol as never
   )
 
+  const iconButtonHandler = () => {
+    if (isStarred) {
+      globalActions.removeUserCoinFavourites(coin.symbol)
+    } else {
+      globalActions.addUserCoinFavourites(coin.symbol)
+    }
+  }
+
   return (
     <React.Fragment>
       <ListItem
@@ -80,13 +88,7 @@ const CoinItem: React.FC<Props> = ({ coin }: Props) => {
           <Tooltip title="Add to your favourite" placement="bottom">
             <IconButton
               aria-label="Add to your favourite"
-              onClick={() => {
-                if (isStarred) {
-                  globalActions.removeUserCoinFavourites(coin.symbol)
-                } else {
-                  globalActions.addUserCoinFavourites(coin.symbol)
-                }
-              }}
+              onClick={iconButtonHandler}
             >
               {isStarred ? <StarIcon /> : <StarBorderIcon />}
             </IconButton>

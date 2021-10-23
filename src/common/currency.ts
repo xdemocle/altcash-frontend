@@ -10,10 +10,7 @@ export const btcToRandPrice = (
     return 'n/d'
   }
 
-  const toString = String(num.toFixed(2))
-
-  return toString
-    .toString()
+  return String(num.toFixed(2))
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     .replace(/^/, 'R ')
 }
