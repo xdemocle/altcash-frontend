@@ -10,7 +10,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import ShoppingBasket from '@material-ui/icons/ShoppingBasket'
 import StarIcon from '@material-ui/icons/Star'
 import StarBorderIcon from '@material-ui/icons/StarBorder'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 import { Link } from 'react-router-dom'
 import useGlobal from '../common/globalStateHook'
@@ -71,7 +71,7 @@ const CoinItem: React.FC<Props> = ({ coin }: Props) => {
         <ListItemText
           primary={<CoinTicker coin={coin} />}
           secondary="Live Price"
-          className={classNames(classes.column, coin.status)}
+          className={clsx(classes.column, coin.status)}
         />
         <ListItemSecondaryAction>
           {showIconBuy && (

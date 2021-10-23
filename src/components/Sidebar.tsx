@@ -5,7 +5,7 @@ import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, useTheme, Theme } from '@material-ui/core/styles'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React, { useEffect } from 'react'
 import Logo from '../assets/logo.png'
 import useGlobal from '../common/globalStateHook'
@@ -37,7 +37,7 @@ const Sidebar: React.FC = () => {
         variant="permanent"
         anchor="left"
         classes={{
-          paper: classNames(
+          paper: clsx(
             classes.drawerPaper,
             !globalState.isSidebarOpen && classes.drawerPaperClose
           )
@@ -49,7 +49,7 @@ const Sidebar: React.FC = () => {
         open={globalState.isSidebarOpen}
       >
         <div
-          className={classNames(
+          className={clsx(
             classes.toolbar,
             globalState.isSidebarOpen && classes.toolbarOpen
           )}
@@ -65,7 +65,7 @@ const Sidebar: React.FC = () => {
                 disableRipple
                 onClick={handleDrawerToggle}
                 aria-label="toggle drawer"
-                className={classNames(classes.buttonLogoNormal)}
+                className={clsx(classes.buttonLogoNormal)}
               >
                 <img src={Logo} alt="logo.png" width="48" />
               </IconButton>

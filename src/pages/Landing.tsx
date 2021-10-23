@@ -4,7 +4,7 @@ import Icon from '@material-ui/core/Icon'
 import Tooltip from '@material-ui/core/Tooltip'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles, Theme } from '@material-ui/core/styles'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import React from 'react'
 import { Parallax } from 'react-parallax'
 import { Link } from 'react-router-dom'
@@ -23,7 +23,7 @@ const Landing: React.FC = () => {
               variant="h2"
               gutterBottom
               color="inherit"
-              className={classNames(
+              className={clsx(
                 classes.typographyShadow,
                 classes.typographyMainTitle
               )}

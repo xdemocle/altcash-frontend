@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client'
 import { makeStyles } from '@material-ui/core/styles'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { find } from 'lodash'
 import React from 'react'
 import { ReactSVG } from 'react-svg'
@@ -48,7 +48,7 @@ const CoinSVG: React.FC<Props> = ({ coinSymbol, size }: Props) => {
   return !!svgCoinPath ? (
     <ReactSVG
       src={svgCoinPath}
-      className={classNames(
+      className={clsx(
         classes.avatar,
         symbol,
         size ? classes[size] : classes.regular
