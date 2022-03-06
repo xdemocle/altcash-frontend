@@ -22,7 +22,9 @@ module.exports = {
     'no-unused-vars': ['warn'],
     'prettier/prettier': 'error',
     'arrow-body-style': 'off',
-    'prefer-arrow-callback': 'off'
+    'prefer-arrow-callback': 'off',
+    'react/react-in-jsx-scope': 'off',
+    'react/jsx-uses-react': 'off'
   },
   settings: {
     react: {

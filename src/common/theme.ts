@@ -1,8 +1,7 @@
-import blueGrey from '@material-ui/core/colors/blueGrey'
-import green from '@material-ui/core/colors/green'
-import { createMuiTheme } from '@material-ui/core/styles'
+import { blueGrey, green } from '@mui/material/colors';
+import { createTheme } from '@mui/material/styles';
 
-export const theme = createMuiTheme({
+export const theme = createTheme({
   palette: {
     // type: 'light',
     // type: 'dark',
@@ -35,4 +34,4 @@ export const theme = createMuiTheme({
   //     }
   //   }
   // }
-})
+});

@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql } from '@apollo/client';
 
 // https://www.apollographql.com/docs/react/v2/caching/cache-interaction/#the-connection-directive
 // @connection(key: "feed", filter: ["type"])
@@ -12,7 +12,7 @@ export const GET_COINS = gql`
       status
     }
   }
-`
+`;
 
 export const GET_COIN = gql`
   query Coin($id: String) {
@@ -28,7 +28,7 @@ export const GET_COIN = gql`
       name
     }
   }
-`
+`;
 
 export const GET_SUMMARIES = gql`
   query Summaries {
@@ -39,7 +39,7 @@ export const GET_SUMMARIES = gql`
       percentChange
     }
   }
-`
+`;
 
 export const GET_SUMMARY = gql`
   query Summary($id: String) {
@@ -50,7 +50,7 @@ export const GET_SUMMARY = gql`
       percentChange
     }
   }
-`
+`;
 
 export const GET_TICKERS = gql`
   query Tickers {
@@ -62,7 +62,7 @@ export const GET_TICKERS = gql`
       askRate
     }
   }
-`
+`;
 
 export const GET_TICKER = gql`
   query Ticker($id: String) {
@@ -74,7 +74,7 @@ export const GET_TICKER = gql`
       askRate
     }
   }
-`
+`;
 
 export const GET_PAGE_DATA = gql`
   query PageData($id: String) {
@@ -107,7 +107,7 @@ export const GET_PAGE_DATA = gql`
       askRate
     }
   }
-`
+`;
 
 export const GET_META_COIN = gql`
   query MetaCoin($id: String) {
@@ -124,7 +124,7 @@ export const GET_META_COIN = gql`
       }
     }
   }
-`
+`;
 
 export const GET_META_COIN_LOGO = gql`
   query Query {
@@ -133,7 +133,7 @@ export const GET_META_COIN_LOGO = gql`
       symbol
     }
   }
-`
+`;
 
 export const GET_COUNT = gql`
   query Counts {
@@ -142,7 +142,7 @@ export const GET_COUNT = gql`
       count
     }
   }
-`
+`;
 
 export const GET_PAIR = gql`
   query Pair($pair: String) {
@@ -152,4 +152,4 @@ export const GET_PAIR = gql`
       timestamp
     }
   }
-`
+`;
