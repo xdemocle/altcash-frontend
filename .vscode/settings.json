@@ -17,6 +17,6 @@
   "editor.wordWrap": "off",
   "editor.autoIndent": "keep",
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": false
+    "source.fixAll.eslint": true
   }
 }
