@@ -2,7 +2,10 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
   column: {
-    flexBasis: 0
+    maxWidth: '35%'
+  },
+  ticker: {
+    maxWidth: '30%'
   },
   listItem: {
     'a&': {

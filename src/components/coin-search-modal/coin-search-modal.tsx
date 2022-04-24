@@ -27,15 +27,6 @@ const CoinsSearchModal = (props: Props) => {
       onClose={handleClose}
     >
       <div className={classes.root}>
-        <Button
-          color="primary"
-          className={classes.fabButton}
-          aria-label="Close search coins popup"
-          onClick={handleClose}
-          disableRipple
-        >
-          <Close />
-        </Button>
         <div className={classes.input}>
           <TextField
             name="inputSearchCoins"
@@ -52,6 +43,14 @@ const CoinsSearchModal = (props: Props) => {
             }}
           />
         </div>
+        <Button
+          color="primary"
+          aria-label="Close search coins popup"
+          onClick={handleClose}
+          disableRipple
+        >
+          <Close /> Close
+        </Button>
       </div>
     </Modal>
   );

@@ -72,7 +72,7 @@ const CoinItem = ({ coin }: Props) => {
         <ListItemText
           primary={<CoinTicker coin={coin} />}
           secondary="Live Price"
-          className={clsx(classes.column, coin.status)}
+          className={clsx(classes.column, classes.ticker, coin.status)}
         />
         <ListItemSecondaryAction>
           {showBuy && (
