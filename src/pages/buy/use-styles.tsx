@@ -47,7 +47,8 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     minWidth: 'auto',
     flexGrow: 1,
     flexShrink: 1,
-    flexBasis: 0
+    flexBasis: 0,
+    textDecoration: 'none !important'
   }
 }));
 

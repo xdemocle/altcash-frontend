@@ -7,6 +7,7 @@ import BitcoinRandLivePrice from '../../components/bitcoin-rand-live-price';
 import ScrollToTop from '../../components/scroll-to-top';
 import TickersLivePrice from '../../components/tickers-live-price';
 import AuthProvider from '../../context/auth';
+import { CustomBuyRouter } from '../../pages/buy';
 import AuthLayout from '../auth-layout';
 import DefaultLayout from '../default-layout';
 import PrivateRoute from '../private-route';
@@ -76,8 +77,9 @@ const App = () => {
                 </Suspense>
               }
             />
+            <Route path="buy" element={<CustomBuyRouter />} />
             <Route
-              path="buy"
+              path="buy/:slug"
               element={
                 <Suspense fallback={<>...</>}>
                   <BuyPage />

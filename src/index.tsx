@@ -18,18 +18,17 @@ if (rootElement) {
 }
 
 ReactDOM.render(
-  <GlobalProvider>
-    <UserCoinFavouritesProvider>
-      <ApolloProvider client={apolloClient}>
-        <ThemeProvider theme={theme}>
-          <BrowserRouter>
+  <BrowserRouter>
+    <GlobalProvider>
+      <UserCoinFavouritesProvider>
+        <ApolloProvider client={apolloClient}>
+          <ThemeProvider theme={theme}>
             <App />
-          </BrowserRouter>
-        </ThemeProvider>
-      </ApolloProvider>
-    </UserCoinFavouritesProvider>
-    ,
-  </GlobalProvider>,
+          </ThemeProvider>
+        </ApolloProvider>
+      </UserCoinFavouritesProvider>
+    </GlobalProvider>
+  </BrowserRouter>,
   rootElement
 );
 

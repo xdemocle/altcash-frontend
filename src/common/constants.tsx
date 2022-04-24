@@ -29,3 +29,8 @@ export const REQUIRED_EMAIL_TEXT = 'E-Mail field is incorrect';
 
 export const REQUIRED_PASSWORD_TEXT =
   'Password field must have at least 8 characters';
+
+export const BUY_TABS_DEFAULT = 0;
+export const BUY_TAB_FEATURED = 0;
+export const BUY_TAB_ALL = 1;
+export const BUY_TAB_FAVOURITE = 2;
