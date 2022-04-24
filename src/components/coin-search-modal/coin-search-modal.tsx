@@ -1,5 +1,6 @@
 import { Close, Search } from '@mui/icons-material';
 import { Button, InputAdornment, Modal, TextField } from '@mui/material';
+import { ChangeEvent } from 'react';
 import useStyles from './use-styles';
 
 type Props = {
@@ -12,7 +13,7 @@ const CoinsSearchModal = (props: Props) => {
   const classes = useStyles();
   const { open, handleClose, updateNeedle } = props;
 
-  const textFieldHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const textFieldHandler = (event: ChangeEvent<HTMLTextAreaElement>) => {
     if (!event.target.value.length) {
       return;
     }

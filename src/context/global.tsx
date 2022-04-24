@@ -1,14 +1,21 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState
+} from 'react';
 
 type GlobalContextProps = {
   isSidebarOpen: boolean;
-  setSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setSidebarOpen: Dispatch<SetStateAction<boolean>>;
   coinPageNeedle: string | undefined;
-  setCoinPageNeedle: React.Dispatch<React.SetStateAction<string | undefined>>;
+  setCoinPageNeedle: Dispatch<SetStateAction<string | undefined>>;
   coinListPage: number;
-  setCoinListPage: React.Dispatch<React.SetStateAction<number>>;
+  setCoinListPage: Dispatch<SetStateAction<number>>;
   tab: number;
-  setTab: React.Dispatch<React.SetStateAction<number>>;
+  setTab: Dispatch<SetStateAction<number>>;
 };
 
 export const GlobalContext = createContext<GlobalContextProps>(
@@ -19,7 +26,6 @@ interface Props {
   children: ReactNode;
 }
 
-// eslint-disable-next-line react/prop-types
 const GlobalProvider = ({ children }: Props) => {
   const [isSidebarOpen, setSidebarOpen] =
     useState<GlobalContextProps['isSidebarOpen']>(false);

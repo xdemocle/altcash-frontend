@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { Pagination, Typography } from '@mui/material';
 import { clone, find } from 'lodash';
-import { Fragment } from 'react';
+import { ChangeEvent, Fragment } from 'react';
 import { COINS_PER_PAGE } from '../../common/constants';
 import CoinsListMap from '../../components/coins-list-map';
 import Loader from '../../components/loader';
@@ -33,7 +33,7 @@ const CoinsList = () => {
     return list.splice(offset, limit);
   };
 
-  const handleChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handleChange = (event: ChangeEvent<unknown>, page: number) => {
     setCoinListPage(page);
   };
 
