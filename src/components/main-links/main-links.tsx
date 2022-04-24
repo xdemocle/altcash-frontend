@@ -15,6 +15,7 @@ import {
 } from '@mui/material';
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
+import { useAuth } from '../../context/auth';
 import useStyles from './use-styles';
 
 type Props = {
@@ -22,6 +23,7 @@ type Props = {
 };
 
 const MainLinks = (props: Props) => {
+  const auth = useAuth();
   const classes = useStyles();
   const { isSidebarOpen } = props;
 
@@ -56,22 +58,27 @@ const MainLinks = (props: Props) => {
         </ListItem>
       </Tooltip>
 
-      <Tooltip
-        title="Your private area"
-        placement="right"
-        enterDelay={isSidebarOpen ? 2000 : 50}
-      >
-        <ListItem
-          component={NavLink}
-          to="/overview"
-          className={classes.listItem}
+      {!!auth.isAuthenticated && (
+        <Tooltip
+          title="Your private area"
+          placement="right"
+          enterDelay={isSidebarOpen ? 2000 : 50}
         >
-          <ListItemIcon>
-            <StorefrontOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Your area" className={classes.listItemText} />
-        </ListItem>
-      </Tooltip>
+          <ListItem
+            component={NavLink}
+            to="/overview"
+            className={classes.listItem}
+          >
+            <ListItemIcon>
+              <StorefrontOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Your area"
+              className={classes.listItemText}
+            />
+          </ListItem>
+        </Tooltip>
+      )}
 
       <Tooltip
         title="About Us"
