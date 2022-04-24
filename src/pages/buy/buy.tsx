@@ -5,8 +5,8 @@ import {
   NewReleases as NewReleasesIcon
 } from '@mui/icons-material';
 import { Paper, Tab, Tabs, Typography } from '@mui/material';
+import { SYMBOLS_FEATURED } from '../../common/constants';
 import HeaderFabButtons from '../../components/header-fab-buttons';
-import { SYMBOLS_FEATURED } from '../../constants';
 import CoinsList from '../../containers/coins-list';
 import CoinsUserList from '../../containers/coins-user-list';
 import { useGlobal } from '../../context/global';

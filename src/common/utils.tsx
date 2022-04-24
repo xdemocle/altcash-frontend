@@ -7,6 +7,6 @@ export const strPxRem = (px: string) => {
   return Number(px.replace('px', ''));
 };
 
-export const persistUserCoinFavourites = (coins: []) => {
+export const persistUserCoinFavourites = (coins: string[]) => {
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins));
 };

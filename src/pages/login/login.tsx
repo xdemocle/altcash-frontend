@@ -8,7 +8,7 @@ import {
   GOOGLE_CAPTCHA_SITEKEY,
   REQUIRED_EMAIL_TEXT,
   REQUIRED_PASSWORD_TEXT
-} from '../../constants';
+} from '../../common/constants';
 import useStyles from './use-styles';
 
 type IInputs = {

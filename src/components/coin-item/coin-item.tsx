@@ -12,7 +12,7 @@ import {
 import clsx from 'clsx';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { useGlobal } from '../../context/global';
+import { useUserCoinFavourites } from '../../context/user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';
@@ -30,22 +30,19 @@ type Props = {
 
 const CoinItem = ({ coin }: Props) => {
   const classes = useStyles();
+  const showBuy = useMediaQuery('(min-width:600px)');
   const {
     addUserCoinFavourites,
     removeUserCoinFavourites,
     userCoinFavourites
-  } = useGlobal();
-  const showBuy = useMediaQuery('(min-width:600px)');
+  } = useUserCoinFavourites();
 
   if (!coin) {
     return null;
   }
 
-  const isCoinActive = coin.status === 'ONLINE';
-  const isStarred = userCoinFavourites.includes(coin.symbol as never);
-
   const iconButtonHandler = () => {
-    if (isStarred) {
+    if (userCoinFavourites.includes(coin.symbol as never)) {
       removeUserCoinFavourites(coin.symbol);
     } else {
       addUserCoinFavourites(coin.symbol);
@@ -66,7 +63,7 @@ const CoinItem = ({ coin }: Props) => {
         <ListItemText
           primary={coin.name}
           secondary={`${coin.symbol.toUpperCase()} ${
-            !isCoinActive ? ' / ' + coin.status : ''
+            coin.status !== 'ONLINE' ? ' / ' + coin.status : ''
           }`}
           className={classes.column}
         />
@@ -92,7 +89,11 @@ const CoinItem = ({ coin }: Props) => {
               aria-label="Add to your favourite"
               onClick={iconButtonHandler}
             >
-              {isStarred ? <Star /> : <StarBorder />}
+              {userCoinFavourites.includes(coin.symbol as never) ? (
+                <Star />
+              ) : (
+                <StarBorder />
+              )}
             </Button>
           </Tooltip>
         </ListItemSecondaryAction>

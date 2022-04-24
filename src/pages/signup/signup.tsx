@@ -12,15 +12,15 @@ import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import {
-  strengthColor,
-  strengthIndicator
-} from '../../common/strength-password';
-import {
   FORM_EMAIL_VALIDATION_REGEX,
   GOOGLE_CAPTCHA_SITEKEY,
   REQUIRED_EMAIL_TEXT,
   REQUIRED_PASSWORD_TEXT
-} from '../../constants';
+} from '../../common/constants';
+import {
+  strengthColor,
+  strengthIndicator
+} from '../../common/strength-password';
 import useStyles from './use-styles';
 
 interface IInputs {

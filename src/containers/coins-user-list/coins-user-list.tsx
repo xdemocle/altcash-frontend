@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { List, Typography } from '@mui/material';
 import CoinItem, { ICoin } from '../../components/coin-item';
-import { useGlobal } from '../../context/global';
+import { useUserCoinFavourites } from '../../context/user-coin-favourites';
 import { GET_COINS } from '../../graphql/queries';
 import useStyles from './use-styles';
 
@@ -11,7 +11,7 @@ interface Props {
 
 const CoinsUserList = ({ predefined }: Props) => {
   const classes = useStyles();
-  const { userCoinFavourites } = useGlobal();
+  const { userCoinFavourites } = useUserCoinFavourites();
   const { data, networkStatus } = useQuery(GET_COINS, {
     variables: {
       symbols: predefined ? predefined.join('|') : userCoinFavourites.join('|')

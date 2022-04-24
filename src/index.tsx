@@ -6,6 +6,7 @@ import { apolloClient } from './common/apollo/apollo-client';
 import { theme } from './common/theme';
 import App from './containers/app';
 import GlobalProvider from './context/global';
+import UserCoinFavouritesProvider from './context/user-coin-favourites';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -18,13 +19,16 @@ if (rootElement) {
 
 ReactDOM.render(
   <GlobalProvider>
-    <ApolloProvider client={apolloClient}>
-      <ThemeProvider theme={theme}>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
-      </ThemeProvider>
-    </ApolloProvider>
+    <UserCoinFavouritesProvider>
+      <ApolloProvider client={apolloClient}>
+        <ThemeProvider theme={theme}>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </ThemeProvider>
+      </ApolloProvider>
+    </UserCoinFavouritesProvider>
+    ,
   </GlobalProvider>,
   rootElement
 );

@@ -1,6 +1,6 @@
 import { useLazyQuery } from '@apollo/client';
 import { Fragment, useEffect } from 'react';
-import { REFRESH_BTCZAR_LIVE_PRICE } from '../../constants';
+import { REFRESH_BTCZAR_LIVE_PRICE } from '../../common/constants';
 import { GET_PAIR } from '../../graphql/queries';
 
 const BitcoinRandLivePrice = () => {
