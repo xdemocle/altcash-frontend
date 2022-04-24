@@ -12,7 +12,7 @@ interface Props {
 const CoinsUserList = ({ predefined }: Props) => {
   const classes = useStyles();
   const { userCoinFavourites } = useUserCoinFavourites();
-  const { data, networkStatus } = useQuery(GET_COINS, {
+  const { loading, data, networkStatus } = useQuery(GET_COINS, {
     variables: {
       symbols: predefined ? predefined.join('|') : userCoinFavourites.join('|')
     }
@@ -31,6 +31,9 @@ const CoinsUserList = ({ predefined }: Props) => {
             <CoinItem key={`${coin.name}${ix}`} coin={coin} />
           ))}
         </List>
+      )}
+      {loading && (!(data && data.coins) || networkStatus === 4) && (
+        <Typography variant="subtitle1">Loading favourite list...</Typography>
       )}
     </div>
   );
