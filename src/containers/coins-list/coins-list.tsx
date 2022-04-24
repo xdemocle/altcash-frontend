@@ -4,6 +4,7 @@ import { clone, find } from 'lodash';
 import { Fragment } from 'react';
 import { COINS_PER_PAGE } from '../../common/constants';
 import CoinsListMap from '../../components/coins-list-map';
+import Loader from '../../components/loader';
 import { useGlobal } from '../../context/global';
 import { GET_COINS, GET_COUNT } from '../../graphql/queries';
 import useStyles from './use-styles';
@@ -54,7 +55,11 @@ const CoinsList = () => {
         <Typography variant="subtitle1">No results...</Typography>
       )}
       {loading && (!coins || networkStatus === 4) && (
-        <Typography variant="subtitle2">Loading coins list...</Typography>
+        <Loader
+          text={
+            <Typography variant="subtitle2">Loading coins list...</Typography>
+          }
+        />
       )}
       {networkStatus !== 4 && coins && <CoinsListMap coins={coins} />}
 

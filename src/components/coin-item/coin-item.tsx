@@ -49,6 +49,8 @@ const CoinItem = ({ coin }: Props) => {
     }
   };
 
+  const isStarred = userCoinFavourites.includes(coin.symbol as never);
+
   return (
     <Fragment>
       <ListItem
@@ -84,16 +86,17 @@ const CoinItem = ({ coin }: Props) => {
               </Button>
             </Tooltip>
           )}
-          <Tooltip title="Add to your favourite" placement="bottom">
+          <Tooltip
+            title={`${isStarred ? 'Remove from' : 'Add to'} your favourites`}
+            placement="bottom"
+          >
             <Button
-              aria-label="Add to your favourite"
+              aria-label={`${
+                isStarred ? 'Remove from' : 'Add to'
+              } your favourites`}
               onClick={iconButtonHandler}
             >
-              {userCoinFavourites.includes(coin.symbol as never) ? (
-                <Star />
-              ) : (
-                <StarBorder />
-              )}
+              {isStarred ? <Star /> : <StarBorder />}
             </Button>
           </Tooltip>
         </ListItemSecondaryAction>
