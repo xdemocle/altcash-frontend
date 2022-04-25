@@ -10,44 +10,14 @@ import {
 } from '@mui/material';
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
-import NumberFormat from 'react-number-format';
 import { ICoin } from '../coin-item/coin-item';
+import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
 
 interface Inputs {
   localCurrency: string;
   cryptoCurrency: string;
 }
-
-interface NumberFormatCustomProps {
-  inputRef: (instance: NumberFormat<number> | null) => void;
-  onChange: (event: { target: { name: string; value: string } }) => void;
-  name: string;
-}
-
-const NumberFormatCustom = ({
-  inputRef,
-  onChange,
-  name,
-  ...other
-}: NumberFormatCustomProps) => {
-  return (
-    <NumberFormat
-      {...other}
-      getInputRef={inputRef}
-      onValueChange={(values) => {
-        onChange({
-          target: {
-            name: name,
-            value: values.value
-          }
-        });
-      }}
-      thousandSeparator
-      isNumericString
-    />
-  );
-};
 
 interface Props {
   coin: ICoin;
@@ -71,7 +41,7 @@ const CoinBuy = ({ coin }: Props) => {
 
   const onSubmitHandler = (data: unknown) => {
     // e.preventDefault()
-    // console.log(data)
+    console.debug(data);
   };
 
   return (
