@@ -27,12 +27,13 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     color: green[700]
   },
   buyButton: {
-    marginTop: '1.4rem',
-    minHeight: '3.35rem',
+    minHeight: '3.5rem',
     width: '100%'
   },
   buyButtonInner: {
+    flexGrow: 1,
     marginLeft: 0,
+    paddingBottom: '0.1rem',
     [breakpoints.up('md')]: {
       marginLeft: typography.pxToRem(strPxRem(spacing(2)))
     }

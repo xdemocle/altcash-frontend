@@ -25,9 +25,12 @@ interface NumberFormatCustomProps {
   name: string;
 }
 
-function NumberFormatCustom(props: NumberFormatCustomProps) {
-  const { inputRef, onChange, ...other } = props;
-
+const NumberFormatCustom = ({
+  inputRef,
+  onChange,
+  name,
+  ...other
+}: NumberFormatCustomProps) => {
   return (
     <NumberFormat
       {...other}
@@ -35,17 +38,16 @@ function NumberFormatCustom(props: NumberFormatCustomProps) {
       onValueChange={(values) => {
         onChange({
           target: {
-            name: props.name,
+            name: name,
             value: values.value
           }
         });
       }}
       thousandSeparator
       isNumericString
-      // prefix="$"
     />
   );
-}
+};
 
 interface Props {
   coin: ICoin;
