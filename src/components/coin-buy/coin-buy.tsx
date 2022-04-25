@@ -79,7 +79,7 @@ const CoinBuy = ({ coin }: Props) => {
 
           <Grid item xs={12} md={1} className={classes.grid}>
             <div className={classes.flex}>
-              <Hidden smDown>
+              <Hidden mdDown>
                 <SwapHoriz color="primary" className={classes.arrow} />
               </Hidden>
               <Hidden mdUp>
@@ -119,8 +119,8 @@ const CoinBuy = ({ coin }: Props) => {
             />
           </Grid>
 
-          <Grid item xs={12} md={3}>
-            <div className={classes.buyButtonInner}>
+          <Grid item xs={12} md={3} sx={{ display: 'flex', alignItems: 'end' }}>
+            <div className={classes.buyButtonContainer}>
               <Button
                 variant="contained"
                 color="primary"

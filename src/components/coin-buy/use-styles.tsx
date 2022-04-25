@@ -26,17 +26,19 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   symbol: {
     color: green[700]
   },
+  buyButtonContainer: {
+    flexGrow: 1,
+    marginLeft: 0,
+    marginTop: '2.5rem',
+    paddingBottom: '0.1rem',
+    [breakpoints.up('md')]: {
+      marginLeft: typography.pxToRem(strPxRem(spacing(2))),
+      marginTop: 0
+    }
+  },
   buyButton: {
     minHeight: '3.5rem',
     width: '100%'
-  },
-  buyButtonInner: {
-    flexGrow: 1,
-    marginLeft: 0,
-    paddingBottom: '0.1rem',
-    [breakpoints.up('md')]: {
-      marginLeft: typography.pxToRem(strPxRem(spacing(2)))
-    }
   },
   flex: {
     display: 'flex',
@@ -48,12 +50,14 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     }
   },
   arrow: {
-    width: '2.5rem',
-    height: '2.5rem'
+    marginTop: '0.5rem',
+    width: '2rem !important',
+    height: '2rem !important'
   },
   arrowMobile: {
-    width: '4.5rem',
-    height: '4.5rem'
+    margin: '1.5rem 0 1rem 0',
+    width: '3rem !important',
+    height: '3rem !important'
   }
 }));
 
