@@ -136,6 +136,7 @@ const App = () => {
           <Route element={<div>404 - Not Found</div>}></Route>
         </Routes>
 
+        {/* @ts-ignore */}
         <CookieConsent
           location="bottom"
           buttonText="Okay!!!"

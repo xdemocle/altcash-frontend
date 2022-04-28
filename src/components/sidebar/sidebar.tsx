@@ -1,4 +1,4 @@
-import { Hidden, Tooltip, useMediaQuery, useTheme } from '@mui/material';
+import { Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { useEffect } from 'react';
 import Logo from '../../assets/logo.png';
@@ -31,51 +31,48 @@ const Sidebar = () => {
   };
 
   return (
-    <Hidden smDown>
-      <DrawerStyled
-        variant="permanent"
-        anchor="left"
-        className={clsx(
-          styles['DrawerStyled'],
-          !isSidebarOpen ? styles['DrawerStyled--Close'] : ''
-        )}
-        classes={{
-          paper: clsx(
-            styles['DrawerStyled-Paper'],
-            !isSidebarOpen ? styles['DrawerStyled-Paper--Close'] : ''
-          )
-        }}
-        ModalProps={{
-          // Better open performance on mobile.
-          keepMounted: true
-        }}
-        open={isSidebarOpen}
+    <DrawerStyled
+      sx={{ display: { xs: 'none', sm: 'block' } }}
+      variant="permanent"
+      anchor="left"
+      className={clsx(
+        styles['DrawerStyled'],
+        !isSidebarOpen ? styles['DrawerStyled--Close'] : ''
+      )}
+      classes={{
+        paper: clsx(
+          styles['DrawerStyled-Paper'],
+          !isSidebarOpen ? styles['DrawerStyled-Paper--Close'] : ''
+        )
+      }}
+      ModalProps={{
+        // Better open performance on mobile.
+        keepMounted: true
+      }}
+      open={isSidebarOpen}
+    >
+      <ToolbarStyled
+        className={isSidebarOpen ? styles['DrawerStyled-Toolbar--Open'] : ''}
       >
-        <ToolbarStyled
-          className={isSidebarOpen ? styles['DrawerStyled-Toolbar--Open'] : ''}
+        <Tooltip
+          title={`${isSidebarOpen ? 'Collapse' : 'Expand'} sidebar`}
+          placement="right"
         >
-          <Tooltip
-            title={`${isSidebarOpen ? 'Collapse' : 'Expand'} sidebar`}
-            placement="right"
-          >
-            <ToolbarHeaderStyled>
-              <ButtonLogoStyled
-                disableRipple
-                onClick={handleDrawerToggle}
-                aria-label="toggle drawer"
-              >
-                <img src={Logo} alt="logo.png" width="48" />
-              </ButtonLogoStyled>
-              <ToolbarTitleStyled variant="subtitle1">
-                Altcash
-              </ToolbarTitleStyled>
-            </ToolbarHeaderStyled>
-          </Tooltip>
+          <ToolbarHeaderStyled>
+            <ButtonLogoStyled
+              disableRipple
+              onClick={handleDrawerToggle}
+              aria-label="toggle drawer"
+            >
+              <img src={Logo} alt="logo.png" width="48" />
+            </ButtonLogoStyled>
+            <ToolbarTitleStyled variant="subtitle1">Altcash</ToolbarTitleStyled>
+          </ToolbarHeaderStyled>
+        </Tooltip>
 
-          <MainLinks isSidebarOpen={isSidebarOpen} />
-        </ToolbarStyled>
-      </DrawerStyled>
-    </Hidden>
+        <MainLinks isSidebarOpen={isSidebarOpen} />
+      </ToolbarStyled>
+    </DrawerStyled>
   );
 };
 

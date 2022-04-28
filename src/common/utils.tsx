@@ -1,5 +1,4 @@
 export const svgCoinPathHelper = (name: string) => {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   return require(`cryptocurrency-icons/svg/color/${name}.svg`);
 };
 

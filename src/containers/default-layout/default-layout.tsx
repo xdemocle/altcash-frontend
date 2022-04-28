@@ -1,4 +1,4 @@
-import { Hidden } from '@mui/material';
+import { Box } from '@mui/material';
 import { Outlet } from 'react-router-dom';
 import Bottombar from '../../components/bottom-bar';
 import BottomNav from '../../components/bottom-nav';
@@ -16,12 +16,12 @@ const DefaultLayout = () => {
           <Outlet />
         </main>
       </div>
-      <Hidden smDown>
+      <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
         <Bottombar />
-      </Hidden>
-      <Hidden mdUp>
+      </Box>
+      <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
         <BottomNav />
-      </Hidden>
+      </Box>
     </div>
   );
 };

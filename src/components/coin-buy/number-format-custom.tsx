@@ -13,10 +13,11 @@ const NumberFormatCustom = ({
   ...other
 }: NumberFormatCustomProps) => {
   return (
+    // @ts-ignore
     <NumberFormat
       {...other}
       getInputRef={inputRef}
-      onValueChange={(values) => {
+      onValueChange={(values: { value: any }) => {
         onChange({
           target: {
             name: name,

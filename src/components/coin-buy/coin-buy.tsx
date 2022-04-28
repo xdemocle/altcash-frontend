@@ -1,9 +1,9 @@
 import { SwapHoriz, SwapVert } from '@mui/icons-material';
 import {
+  Box,
   Button,
   Card,
   Grid,
-  Hidden,
   InputAdornment,
   InputLabel,
   TextField
@@ -68,7 +68,6 @@ const CoinBuy = ({ coin }: Props) => {
                 maxLength: '25'
               }}
               InputProps={{
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 startAdornment: (
                   <InputAdornment position="start">R</InputAdornment>
@@ -79,15 +78,15 @@ const CoinBuy = ({ coin }: Props) => {
 
           <Grid item xs={12} md={1} className={classes.grid}>
             <div className={classes.flex}>
-              <Hidden mdDown>
+              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <SwapHoriz color="primary" className={classes.arrow} />
-              </Hidden>
-              <Hidden mdUp>
+              </Box>
+              <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                 <SwapVert
                   color="primary"
                   className={clsx(classes.arrow, classes.arrowMobile)}
                 />
-              </Hidden>
+              </Box>
             </div>
           </Grid>
 
@@ -108,7 +107,6 @@ const CoinBuy = ({ coin }: Props) => {
                 maxLength: '25'
               }}
               InputProps={{
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">

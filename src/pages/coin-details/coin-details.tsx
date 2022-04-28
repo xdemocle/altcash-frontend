@@ -199,6 +199,7 @@ const CoinPage = () => {
           <ListItem divider>
             <ListItemText primary="Last update" className={classes.column} />
             <ListItemText
+              // @ts-ignore
               primary={<Moment>{dataSummary.updatedAt}</Moment>}
               secondary="Page data refresh automatically"
               className={classes.column}

@@ -6,7 +6,6 @@ const queryMetaCoin = async (
   { dataSources }: { dataSources: DataSources }
 ): Promise<Metadata> => {
   const response: {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any
   } = await dataSources.metadataAPI.getCoin(id)
 

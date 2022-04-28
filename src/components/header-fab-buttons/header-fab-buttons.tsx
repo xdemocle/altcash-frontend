@@ -1,5 +1,5 @@
 import { Close, Search } from '@mui/icons-material';
-import { Button, Hidden, IconButton, Tooltip } from '@mui/material';
+import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import { Fragment, useState } from 'react';
 import { useGlobal } from '../../context/global';
 import CoinSearchModal from '../coin-search-modal';
@@ -31,7 +31,7 @@ const HeaderfabButtons = (props: Props) => {
   return (
     <Fragment>
       <div className={classes.root}>
-        <Hidden smDown>
+        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
           {coinPageNeedle && (
             <Tooltip title="Reset search results">
               <Button
@@ -78,9 +78,9 @@ const HeaderfabButtons = (props: Props) => {
               )}
             </Button>
           </Tooltip> */}
-        </Hidden>
+        </Box>
 
-        <Hidden smUp>
+        <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
           {coinPageNeedle && (
             <IconButton
               color="primary"
@@ -99,7 +99,7 @@ const HeaderfabButtons = (props: Props) => {
           >
             <Search />
           </IconButton>
-        </Hidden>
+        </Box>
       </div>
       <CoinSearchModal
         open={modalOpen}
