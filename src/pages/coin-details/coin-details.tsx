@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useQuery } from '@apollo/client';
 import { ArrowBack } from '@mui/icons-material';
 import {

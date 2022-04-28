@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { CssBaseline } from '@mui/material';
 import { lazy, Suspense, useEffect, useState } from 'react';
 import CookieConsent from 'react-cookie-consent';

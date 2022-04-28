@@ -68,6 +68,7 @@ const CoinBuy = ({ coin }: Props) => {
                 maxLength: '25'
               }}
               InputProps={{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 startAdornment: (
                   <InputAdornment position="start">R</InputAdornment>
@@ -107,6 +108,7 @@ const CoinBuy = ({ coin }: Props) => {
                 maxLength: '25'
               }}
               InputProps={{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">

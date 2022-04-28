@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import NumberFormat from 'react-number-format';
 
 interface NumberFormatCustomProps {
@@ -13,6 +14,7 @@ const NumberFormatCustom = ({
   ...other
 }: NumberFormatCustomProps) => {
   return (
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     <NumberFormat
       {...other}
