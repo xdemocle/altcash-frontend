@@ -39,4 +39,4 @@ export const BUY_TAB_FEATURED = 0;
 export const BUY_TAB_ALL = 1;
 export const BUY_TAB_FAVOURITE = 2;
 
-export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
+export type PaystackCurrency = 'NGN' | 'GHS' | 'USD' | 'ZAR';

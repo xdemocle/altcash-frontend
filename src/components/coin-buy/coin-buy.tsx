@@ -11,12 +11,7 @@ import {
 import clsx from 'clsx';
 import { useForm } from 'react-hook-form';
 import { usePaystackPayment } from 'react-paystack';
-import { PaystackProps } from 'react-paystack/dist/types';
-import {
-  Currency,
-  PAYSTACK_EMAIL,
-  PAYSTACK_PUBLICK_KEY
-} from '../../common/constants';
+import { getPaystackConfig } from '../../common/utils';
 import { ICoin } from '../coin-item/coin-item';
 import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
@@ -30,19 +25,9 @@ interface Props {
   coin: ICoin;
 }
 
-const getConfig = () => {
-  return {
-    reference: new Date().getTime().toString(),
-    email: PAYSTACK_EMAIL,
-    amount: 200,
-    currency: 'ZAR' as Currency,
-    publicKey: PAYSTACK_PUBLICK_KEY
-  };
-};
-
 const CoinBuy = ({ coin }: Props) => {
   const classes = useStyles();
-  const initializePayment = usePaystackPayment(getConfig() as PaystackProps);
+  const initializePayment = usePaystackPayment(getPaystackConfig());
   const {
     register,
     handleSubmit,
