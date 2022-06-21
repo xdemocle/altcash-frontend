@@ -21,6 +21,10 @@ export const SYMBOLS_FEATURED = [
 export const GOOGLE_CAPTCHA_SITEKEY =
   '6LchYHUaAAAAAOFX3hvJfIKirgL7465qTK-_9y3B';
 
+export const PAYSTACK_EMAIL = process.env.REACT_APP_PAYSTACK_EMAIL;
+
+export const PAYSTACK_PUBLICK_KEY = process.env.REACT_APP_PAYSTACK_PUBLICK_KEY;
+
 // eslint-disable-next-line
 export const FORM_EMAIL_VALIDATION_REGEX =
   /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,3 +38,5 @@ export const BUY_TABS_DEFAULT = 0;
 export const BUY_TAB_FEATURED = 0;
 export const BUY_TAB_ALL = 1;
 export const BUY_TAB_FAVOURITE = 2;
+
+export type Currency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
