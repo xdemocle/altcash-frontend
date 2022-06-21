@@ -65,7 +65,7 @@ const Landing = () => {
             align="center"
           >
             A new service for South Africans to buy crypto coins with credit
-            card and bank transfer.
+            card, bank transfer, Masterpass, and Snapscan.
           </Typography>
           <Typography
             variant="subtitle2"

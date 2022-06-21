@@ -1,7 +1,6 @@
 import {
   ContactSupportOutlined,
-  HomeOutlined,
-  LockOutlined,
+  HomeOutlined, // LockOutlined,
   MonetizationOnOutlined,
   PeopleAltOutlined,
   StorefrontOutlined
@@ -13,7 +12,7 @@ import {
   ListItemText,
   Tooltip
 } from '@mui/material';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../../context/auth';
 import useStyles from './use-styles';
@@ -108,7 +107,7 @@ const MainLinks = (props: Props) => {
           <ListItemText primary="Support" className={classes.listItemText} />
         </ListItem>
       </Tooltip>
-      <Tooltip
+      {/* <Tooltip
         title="Login in your area"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
@@ -123,7 +122,7 @@ const MainLinks = (props: Props) => {
           </ListItemIcon>
           <ListItemText primary="Login" className={classes.listItemText} />
         </ListItem>
-      </Tooltip>
+      </Tooltip> */}
     </List>
   );
 };
