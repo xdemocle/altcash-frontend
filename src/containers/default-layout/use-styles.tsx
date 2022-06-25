@@ -21,6 +21,10 @@ const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
   },
   inner: {
     display: 'flex',
+    paddingTop: '4rem',
+    [breakpoints.up('sm')]: {
+      paddingTop: '0'
+    },
     [breakpoints.up('xl')]: {
       overflow: 'hidden',
       minHeight: 'calc(100vh - 9rem)',

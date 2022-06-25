@@ -9,7 +9,7 @@ import ScrollToTop from '../../components/scroll-to-top';
 import TickersLivePrice from '../../components/tickers-live-price';
 import AuthProvider from '../../context/auth';
 import { CustomBuyRouter } from '../../pages/buy';
-import AuthLayout from '../auth-layout';
+// import AuthLayout from '../auth-layout';
 import DefaultLayout from '../default-layout';
 import PrivateRoute from '../private-route';
 import useStyles from './use-styles';
@@ -20,7 +20,7 @@ const CoinDetailsPage = lazy(() => import('../../pages/coin-details'));
 const LandingPage = lazy(() => import('../../pages/landing'));
 const LoginPage = lazy(() => import('../../pages/login'));
 const OverviewPage = lazy(() => import('../../pages/overview'));
-const SignupPage = lazy(() => import('../../pages/signup'));
+// const SignupPage = lazy(() => import('../../pages/signup'));
 const SupportPage = lazy(() => import('../../pages/support'));
 
 const App = () => {
@@ -123,7 +123,7 @@ const App = () => {
             />
           </Route>
 
-          <Route
+          {/* <Route
             path="/signup"
             element={
               <Suspense fallback={<>...</>}>
@@ -132,15 +132,14 @@ const App = () => {
                 </AuthLayout>
               </Suspense>
             }
-          />
+          /> */}
 
           <Route element={<div>404 - Not Found</div>}></Route>
         </Routes>
 
-        {/* @ts-ignore */}
         <CookieConsent
           location="bottom"
-          buttonText="Okay!!!"
+          buttonText="Okay"
           cookieName="CookiePrivacySA"
           style={{ background: '#2B373B' }}
           buttonStyle={{

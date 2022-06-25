@@ -5,7 +5,7 @@ import { strPxRem } from '../../common/utils';
 const useStyles = makeStyles(
   ({ breakpoints, palette, spacing, typography }: Theme) => ({
     root: {
-      position: 'absolute',
+      position: 'static',
       top: typography.pxToRem(strPxRem(spacing(3))),
       right: '0',
       [breakpoints.only('xs')]: {

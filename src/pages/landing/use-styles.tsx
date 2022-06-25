@@ -40,7 +40,7 @@ const useStyles = makeStyles(
       textAlign: 'center'
     },
     typographyMainTitle: {
-      fontWeight: 700,
+      fontWeight: '600 !important',
       textTransform: 'uppercase'
     },
     typographyShadow: {

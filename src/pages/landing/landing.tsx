@@ -12,7 +12,9 @@ const Landing = () => {
   return (
     <div className={classes.root}>
       <Parallax bgImage={image1} strength={300} bgStyle={{ top: '-5%' }}>
-        <div style={{ minHeight: '65vh' }}>
+        <div
+          style={{ minHeight: '65vh', display: 'flex', alignItems: 'center' }}
+        >
           <div className={classes.parallaxContent}>
             <Typography
               variant="h2"

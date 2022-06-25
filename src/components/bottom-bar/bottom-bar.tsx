@@ -3,7 +3,7 @@ import { Tooltip, Typography } from '@mui/material';
 import { GET_COUNT } from '../../graphql/queries';
 import { AppBarStyled, LinkStyled } from './styled';
 
-const SimpleAppBar = () => {
+const BottomBar = () => {
   const { data } = useQuery(GET_COUNT);
 
   return (
@@ -31,4 +31,4 @@ const SimpleAppBar = () => {
   );
 };
 
-export default SimpleAppBar;
+export default BottomBar;

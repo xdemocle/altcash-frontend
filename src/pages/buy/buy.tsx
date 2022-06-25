@@ -38,6 +38,8 @@ const BuyTabPage = () => {
         Altcoins
       </Typography>
 
+      <HeaderFabButtons />
+
       <Paper className={classes.paper}>
         <Tabs
           value={tab}
@@ -68,8 +70,6 @@ const BuyTabPage = () => {
           />
         </Tabs>
       </Paper>
-
-      <HeaderFabButtons />
 
       {tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
       {tab === 1 && <CoinsList />}
