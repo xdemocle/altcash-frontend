@@ -113,7 +113,7 @@ const CoinPage = () => {
         </Typography>
 
         <div className={classes.boxBuy}>
-          <CoinBuy coin={dataCoin} />
+          <CoinBuy coin={dataCoin} ticker={dataTicker} />
         </div>
 
         <Typography variant="h6" gutterBottom className={classes.infoParagraph}>

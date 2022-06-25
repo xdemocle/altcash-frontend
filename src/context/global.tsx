@@ -23,6 +23,8 @@ type GlobalContextProps = {
   setCoinListPage: Dispatch<SetStateAction<number>>;
   tab: number;
   setTab: Dispatch<SetStateAction<number>>;
+  bitcoinRandPrice: number;
+  setBitcoinRandPrice: Dispatch<SetStateAction<number>>;
 };
 
 export const GlobalContext = createContext<GlobalContextProps>(
@@ -53,6 +55,8 @@ const GlobalProvider = ({ children }: Props) => {
     useState<GlobalContextProps['coinPageNeedle']>(undefined);
   const [coinListPage, setCoinListPage] =
     useState<GlobalContextProps['coinListPage']>(1);
+  const [bitcoinRandPrice, setBitcoinRandPrice] =
+    useState<GlobalContextProps['bitcoinRandPrice']>(0);
 
   return (
     <GlobalContext.Provider
@@ -64,7 +68,9 @@ const GlobalProvider = ({ children }: Props) => {
         coinListPage,
         setCoinListPage,
         tab,
-        setTab
+        setTab,
+        bitcoinRandPrice,
+        setBitcoinRandPrice
       }}
     >
       {children}

@@ -24,6 +24,13 @@ export interface ICoin {
   symbol: string;
 }
 
+export interface ITicker {
+  askRate: number;
+  bidRate: number;
+  id: string;
+  lastTradeRate: number;
+}
+
 type Props = {
   coin: ICoin;
 };

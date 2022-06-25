@@ -17,11 +17,11 @@ export const persistUserCoinFavourites = (coins: string[]) => {
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins));
 };
 
-export const getPaystackConfig = () => {
+export const getPaystackConfig = (amount: number) => {
   return {
     reference: new Date().getTime().toString(),
     email: PAYSTACK_EMAIL,
-    amount: 200,
+    amount: amount * 100,
     currency: 'ZAR' as PaystackCurrency,
     publicKey: PAYSTACK_PUBLICK_KEY
   } as PaystackProps;

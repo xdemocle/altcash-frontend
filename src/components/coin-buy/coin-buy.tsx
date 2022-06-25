@@ -9,42 +9,36 @@ import {
   TextField
 } from '@mui/material';
 import clsx from 'clsx';
-import { useForm } from 'react-hook-form';
+import { FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import { getPaystackConfig } from '../../common/utils';
-import { ICoin } from '../coin-item/coin-item';
+import { useGlobal } from '../../context/global';
+import { ICoin, ITicker } from '../coin-item/coin-item';
 import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
 
-interface Inputs {
-  localCurrency: string;
-  cryptoCurrency: string;
-}
+// interface Inputs {
+//   localCurrency: string;
+//   cryptoCurrency: string;
+// }
 
 interface Props {
   coin: ICoin;
+  ticker: ITicker;
 }
 
-const CoinBuy = ({ coin }: Props) => {
+const CoinBuy = ({ coin, ticker }: Props) => {
   const classes = useStyles();
-  const initializePayment = usePaystackPayment(getPaystackConfig());
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<Inputs>({
-    // mode: 'onSubmit',
-    // reValidateMode: 'onChange',
-    // defaultValues: {},
-    // resolver: undefined,
-    // context: undefined,
-    criteriaMode: 'all',
-    shouldFocusError: true
-  });
+  const { bitcoinRandPrice } = useGlobal();
+  const [localCurrency, setLocalCurrency] = useState(0);
+  const [cryptoCurrency, setCryptoCurrency] = useState(0);
+  const [multiplier, setMultiplier] = useState(1);
+  const initializePayment = usePaystackPayment(
+    getPaystackConfig(localCurrency)
+  );
 
-  const onSubmitHandler = (data: unknown) => {
-    // e.preventDefault()
-    console.debug(data);
+  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     initializePayment(onSuccess, onClose);
   };
 
@@ -55,10 +49,28 @@ const CoinBuy = ({ coin }: Props) => {
   };
 
   // you can call this function anything
-  const onClose = () => {
+  const onClose = (e: unknown) => {
     // implementation for  whatever you want to do when the Paystack dialog closed.
-    console.debug('closed');
+    console.debug('closed', e);
   };
+
+  useEffect(() => {
+    setCryptoCurrency(localCurrency * multiplier);
+  }, [localCurrency, multiplier]);
+
+  useEffect(() => {
+    if (localCurrency !== cryptoCurrency / multiplier) {
+      setLocalCurrency(cryptoCurrency / multiplier);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cryptoCurrency, multiplier]);
+
+  useEffect(() => {
+    setMultiplier((bitcoinRandPrice * ticker.askRate) / bitcoinRandPrice / 10);
+  }, [ticker, bitcoinRandPrice]);
+
+  console.debug('coin', coin);
+  console.debug('ticker', ticker);
 
   return (
     <Card className={classes.root}>
@@ -66,7 +78,7 @@ const CoinBuy = ({ coin }: Props) => {
         noValidate
         autoComplete="off"
         method="POST"
-        onSubmit={handleSubmit(onSubmitHandler)}
+        onSubmit={onSubmitHandler}
       >
         <Grid container>
           <Grid item xs={12} md={4} className={classes.grid}>
@@ -74,11 +86,10 @@ const CoinBuy = ({ coin }: Props) => {
               You pay in <strong>Rands (ZAR)</strong>
             </InputLabel>
             <TextField
-              {...register('localCurrency', { required: true, maxLength: 25 })}
               id="gridLeftInput"
               name="localCurrency"
               fullWidth
-              helperText={errors.localCurrency && errors.localCurrency.message}
+              // helperText={errors.localCurrency && errors.localCurrency.message}
               variant="outlined"
               inputProps={{
                 maxLength: '25'
@@ -90,6 +101,8 @@ const CoinBuy = ({ coin }: Props) => {
                   <InputAdornment position="start">R</InputAdornment>
                 )
               }}
+              value={localCurrency}
+              onChange={(e) => setLocalCurrency(Number(e.target.value))}
             />
           </Grid>
 
@@ -112,13 +125,12 @@ const CoinBuy = ({ coin }: Props) => {
               You get <strong className={classes.symbol}>{coin.name}</strong>
             </InputLabel>
             <TextField
-              {...register('cryptoCurrency', { required: true, maxLength: 25 })}
               id="gridRightInput"
               name="cryptoCurrency"
               fullWidth
-              helperText={
-                errors.cryptoCurrency && errors.cryptoCurrency.message
-              }
+              // helperText={
+              //   errors.cryptoCurrency && errors.cryptoCurrency.message
+              // }
               variant="outlined"
               inputProps={{
                 maxLength: '25'
@@ -132,6 +144,8 @@ const CoinBuy = ({ coin }: Props) => {
                   </InputAdornment>
                 )
               }}
+              value={cryptoCurrency}
+              onChange={(e) => setCryptoCurrency(Number(e.target.value))}
             />
           </Grid>
 
