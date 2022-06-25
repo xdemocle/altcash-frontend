@@ -1,6 +1,7 @@
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '@mui/material/styles';
 import ReactDOM from 'react-dom';
+import TagManager from 'react-gtm-module';
 import { BrowserRouter } from 'react-router-dom';
 import { apolloClient } from './common/apollo/apollo-client';
 import { theme } from './common/theme';
@@ -9,6 +10,13 @@ import GlobalProvider from './context/global';
 import UserCoinFavouritesProvider from './context/user-coin-favourites';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
+
+const tagManagerArgs = {
+  gtmId: 'G-BGCLZHPN2P',
+  auth: 'dev'
+};
+
+TagManager.initialize(tagManagerArgs);
 
 const rootElement = document.getElementById('root');
 

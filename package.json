@@ -68,6 +68,7 @@
     "react-cookie-consent": "7.4.1",
     "react-dom": "18.1.0",
     "react-google-recaptcha": "^2.1.0",
+    "react-gtm-module": "^2.0.11",
     "react-hook-form": "7.31.2",
     "react-moment": "^1.1.2",
     "react-number-format": "4.9.3",
@@ -83,5 +84,8 @@
   },
   "engines": {
     "node": ">=14.0.0"
+  },
+  "devDependencies": {
+    "@types/react-gtm-module": "^2.0.1"
   }
 }
