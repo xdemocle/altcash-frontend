@@ -9,8 +9,10 @@ import {
   TextField
 } from '@mui/material';
 import clsx from 'clsx';
+import { isNaN } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
+import { btcToRandPrice } from '../../common/currency';
 import { getPaystackConfig } from '../../common/utils';
 import { useGlobal } from '../../context/global';
 import { ICoin, ITicker } from '../coin-item/coin-item';
@@ -55,22 +57,28 @@ const CoinBuy = ({ coin, ticker }: Props) => {
   };
 
   useEffect(() => {
-    setCryptoCurrency(localCurrency * multiplier);
+    setCryptoCurrency(localCurrency / multiplier);
   }, [localCurrency, multiplier]);
 
-  useEffect(() => {
-    if (localCurrency !== cryptoCurrency / multiplier) {
-      setLocalCurrency(cryptoCurrency / multiplier);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cryptoCurrency, multiplier]);
+  // useEffect(() => {
+  //   if (localCurrency !== cryptoCurrency / multiplier) {
+  //     setLocalCurrency(cryptoCurrency / multiplier);
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [cryptoCurrency, multiplier]);
 
   useEffect(() => {
-    setMultiplier((bitcoinRandPrice * ticker.askRate) / bitcoinRandPrice / 10);
+    const newMultiplier = Number(
+      btcToRandPrice(ticker.lastTradeRate, bitcoinRandPrice)
+    );
+
+    if (!isNaN(newMultiplier)) {
+      setMultiplier(newMultiplier);
+    }
   }, [ticker, bitcoinRandPrice]);
 
-  console.debug('coin', coin);
-  console.debug('ticker', ticker);
+  // console.debug('coin', coin);
+  // console.debug('ticker', ticker);
 
   return (
     <Card className={classes.root}>
@@ -145,7 +153,8 @@ const CoinBuy = ({ coin, ticker }: Props) => {
                 )
               }}
               value={cryptoCurrency}
-              onChange={(e) => setCryptoCurrency(Number(e.target.value))}
+              // onChange={(e) => setCryptoCurrency(Number(e.target.value))}
+              disabled
             />
           </Grid>
 

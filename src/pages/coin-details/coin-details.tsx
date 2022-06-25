@@ -16,7 +16,7 @@ import { Fragment } from 'react';
 import Moment from 'react-moment';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import { btcToRandPrice } from '../../common/currency';
+import { btcToRandPriceWithSymbol } from '../../common/currency';
 import CoinBuy from '../../components/coin-buy';
 import CoinSVG from '../../components/coin-svg';
 import LinkExtBlank from '../../components/link-ext-blank';
@@ -54,7 +54,7 @@ const CoinPage = () => {
   const dataSummary = data ? data.summary : { quoteVolume: 0, volume: 0 };
   const dataTicker = data ? data.ticker : {};
   const metaCoin = metadata ? metadata.metaCoin : {};
-  const bitcoinRandPrice = dataPair ? dataPair.pair.last_trade : undefined;
+  const bitcoinRandPrice = dataPair ? Number(dataPair.pair.last_trade) : 1;
 
   const handleBackButton = () => {
     navigate('/buy');
@@ -126,7 +126,7 @@ const CoinPage = () => {
               className={classes.column}
             />
             <ListItemText
-              primary={`${btcToRandPrice(
+              primary={`${btcToRandPriceWithSymbol(
                 dataTicker.bidRate,
                 bitcoinRandPrice
               )}`}
@@ -140,7 +140,7 @@ const CoinPage = () => {
               className={classes.column}
             />
             <ListItemText
-              primary={`${btcToRandPrice(
+              primary={`${btcToRandPriceWithSymbol(
                 dataTicker.lastTradeRate,
                 bitcoinRandPrice
               )}`}
@@ -162,7 +162,10 @@ const CoinPage = () => {
               className={classes.column}
             />
             <ListItemText
-              primary={`${btcToRandPrice(dataSummary.high, bitcoinRandPrice)}`}
+              primary={`${btcToRandPriceWithSymbol(
+                dataSummary.high,
+                bitcoinRandPrice
+              )}`}
               secondary={`${dataSummary.high} BTC`}
               className={classes.column}
             />
@@ -173,7 +176,10 @@ const CoinPage = () => {
               className={classes.column}
             />
             <ListItemText
-              primary={`${btcToRandPrice(dataSummary.low, bitcoinRandPrice)}`}
+              primary={`${btcToRandPriceWithSymbol(
+                dataSummary.low,
+                bitcoinRandPrice
+              )}`}
               secondary={`${dataSummary.low} BTC`}
               className={classes.column}
             />
@@ -189,7 +195,7 @@ const CoinPage = () => {
           <ListItem divider>
             <ListItemText primary="Quote Volume" className={classes.column} />
             <ListItemText
-              primary={`${btcToRandPrice(
+              primary={`${btcToRandPriceWithSymbol(
                 dataSummary.quoteVolume,
                 bitcoinRandPrice
               )}`}

@@ -28,7 +28,7 @@ const BitcoinRandLivePrice = () => {
 
   // Set globally
   if (data && data.pair && data.pair.last_trade) {
-    setBitcoinRandPrice(data.pair.last_trade);
+    setBitcoinRandPrice(Number(data.pair.last_trade));
   }
 
   // eslint-disable-next-line no-console

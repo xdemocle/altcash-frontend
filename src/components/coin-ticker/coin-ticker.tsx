@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { btcToRandPrice } from '../../common/currency';
+import { btcToRandPriceWithSymbol } from '../../common/currency';
 import { GET_TICKER, GET_PAIR } from '../../graphql/queries';
 import { ICoin } from '../coin-item/coin-item';
 
@@ -27,12 +27,14 @@ const CoinTicker = ({ coin }: Props) => {
   }
 
   const dataTicker = data ? data.ticker : {};
-  const bitcoinRandPrice = dataPair ? dataPair.pair.last_trade : undefined;
+  const bitcoinRandPrice = dataPair
+    ? Number(dataPair.pair.last_trade)
+    : undefined;
 
   return (
     <span>
       {dataTicker.askRate && bitcoinRandPrice
-        ? btcToRandPrice(dataTicker.askRate, bitcoinRandPrice)
+        ? btcToRandPriceWithSymbol(dataTicker.askRate, bitcoinRandPrice)
         : 'n/d'}
     </span>
   );
