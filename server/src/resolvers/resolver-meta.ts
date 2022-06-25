@@ -1,4 +1,4 @@
-import { DataSources, Metadata } from '../types'
+import { DataSources, Metadata } from '../types';
 
 const queryMetaCoin = async (
   _: unknown,
@@ -6,36 +6,37 @@ const queryMetaCoin = async (
   { dataSources }: { dataSources: DataSources }
 ): Promise<Metadata> => {
   const response: {
-    [key: string]: any
-  } = await dataSources.metadataAPI.getCoin(id)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    [key: string]: any;
+  } = await dataSources.metadataAPI.getCoin(id);
 
-  const coin = response[id]
+  const coin = response[id];
 
-  coin.metadataId = coin.id
-  coin.id = id
+  coin.metadataId = coin.id;
+  coin.id = id;
 
-  return coin
-}
+  return coin;
+};
 
 const queryMetaAllCoins = async (
   _: unknown,
   __: unknown,
   { dataSources }: { dataSources: DataSources }
 ): Promise<Metadata[]> => {
-  const response = await dataSources.namesAPI.getAll()
+  const response = await dataSources.namesAPI.getAll();
 
-  return response
-}
+  return response;
+};
 
 const queryMetaExperiment = async (
   _: unknown,
   __: unknown,
   { dataSources }: { dataSources: DataSources }
 ): Promise<Metadata[]> => {
-  const response = await dataSources.metadataAPI.missingData()
+  const response = await dataSources.metadataAPI.missingData();
 
-  return response
-}
+  return response;
+};
 
 // Resolvers define the technique for fetching the types defined in the
 // schema. This resolver retrieves books from the "books" array above.
@@ -45,6 +46,6 @@ const resolvers = {
     metaCoinAll: queryMetaAllCoins,
     metaExperiment: queryMetaExperiment
   }
-}
+};
 
-export default resolvers
+export default resolvers;
