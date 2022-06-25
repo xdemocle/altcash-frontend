@@ -1,6 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider } from '@mui/material/styles';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import TagManager from 'react-gtm-module';
 import { BrowserRouter } from 'react-router-dom';
 import { apolloClient } from './common/apollo/apollo-client';
@@ -19,13 +19,14 @@ const tagManagerArgs = {
 TagManager.initialize(tagManagerArgs);
 
 const rootElement = document.getElementById('root');
+const root = createRoot(rootElement as HTMLElement);
 
 // add .root class for global styles overwrites
 if (rootElement) {
   rootElement.className = 'root';
 }
 
-ReactDOM.render(
+root.render(
   <BrowserRouter>
     <GlobalProvider>
       <UserCoinFavouritesProvider>
@@ -36,14 +37,13 @@ ReactDOM.render(
         </ApolloProvider>
       </UserCoinFavouritesProvider>
     </GlobalProvider>
-  </BrowserRouter>,
-  rootElement
+  </BrowserRouter>
 );
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-if (process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'development') {
   serviceWorker.register();
 } else {
   serviceWorker.unregister();

@@ -2,7 +2,7 @@ import {
   ContactSupport,
   Home,
   MonetizationOn,
-  Store
+  People
 } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { useState, ChangeEvent } from 'react';
@@ -34,20 +34,15 @@ const SimpleBottomNavigation = () => {
         value="/buy"
       />
       <BottomNavigationAction
-        label="Your Area"
-        icon={<Store />}
-        value="/overview"
+        label="About Us"
+        icon={<People />}
+        value="/about"
       />
       <BottomNavigationAction
         label="Support"
         icon={<ContactSupport />}
         value="/support"
       />
-      {/* <BottomNavigationAction
-          label="About"
-          icon={<People />}
-          value="/about"
-        /> */}
     </BottomNavigation>
   );
 };
