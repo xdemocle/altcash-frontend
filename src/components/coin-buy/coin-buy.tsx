@@ -7,12 +7,14 @@ import {
   Grid,
   InputAdornment,
   InputLabel,
-  TextField
+  TextField,
+  Typography
 } from '@mui/material';
 import clsx from 'clsx';
 import { isNaN } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
+import { PERCENTAGE_FEE } from '../../common/constants';
 import { btcToRandPrice } from '../../common/currency';
 import { getPaystackConfig } from '../../common/utils';
 import { useGlobal } from '../../context/global';
@@ -35,16 +37,18 @@ const CoinBuy = ({ coin, ticker }: Props) => {
   const { bitcoinRandPrice } = useGlobal();
   const [bulbColor, setBulbColor] = useState('green');
   const [gridReverse, setGridReverse] = useState(false);
+  const [totalAmount, setTotalAmount] = useState(0);
   const [localCurrency, setLocalCurrency] = useState(0);
   const [cryptoCurrency, setCryptoCurrency] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
-  const initializePayment = usePaystackPayment(
-    getPaystackConfig(localCurrency)
-  );
+  const initializePayment = usePaystackPayment(getPaystackConfig(totalAmount));
 
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    initializePayment(onPaymentSuccess, onPaymentClose);
+
+    if (cryptoCurrency > coin.minTradeSize) {
+      initializePayment(onPaymentSuccess, onPaymentClose);
+    }
   };
 
   const onPaymentSuccess = (reference: unknown) => {
@@ -66,6 +70,12 @@ const CoinBuy = ({ coin, ticker }: Props) => {
 
   useEffect(() => {
     if (!gridReverse) setCryptoCurrency(localCurrency / multiplier);
+
+    setTotalAmount(
+      localCurrency +
+        (2.9 / 100) * localCurrency +
+        (PERCENTAGE_FEE / 100) * localCurrency
+    );
   }, [gridReverse, localCurrency, multiplier]);
 
   useEffect(() => {
@@ -166,12 +176,12 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               id="gridRightInput"
               name="cryptoCurrency"
               fullWidth
-              // helperText={
-              //   errors.cryptoCurrency && errors.cryptoCurrency.message
-              // }
+              helperText={`Min: ${coin.minTradeSize} ${coin.symbol}`}
               variant="outlined"
               inputProps={{
-                maxLength: '25'
+                maxLength: '25',
+                min: coin.minTradeSize
+                // max: 10,
               }}
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -185,6 +195,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               value={cryptoCurrency}
               onChange={(e) => setCryptoCurrency(Number(e.target.value))}
               disabled={!gridReverse}
+              type="number"
             />
           </Grid>
         </div>
@@ -196,6 +207,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               color="primary"
               type="submit"
               className={classes.buyButton}
+              disabled={cryptoCurrency <= coin.minTradeSize}
             >
               Buy Now
             </Button>
@@ -204,6 +216,34 @@ const CoinBuy = ({ coin, ticker }: Props) => {
         <Box className={classes.boxBuyLed}>
           <div className={`led-${bulbColor}`}></div>
         </Box>
+      </Card>
+
+      <Card
+        className={clsx(
+          classes.innerCard,
+          localCurrency > 0 && classes.innerCardOpen
+        )}
+      >
+        <div className={classes.innerCardRoot}>
+          <Typography
+            variant="h6"
+            sx={{
+              marginBottom: '0.5rem',
+              textDecoration: 'underline',
+              textTransform: 'uppercase'
+            }}
+            color="primary"
+          >
+            Total buy R {totalAmount.toFixed(2)} =
+          </Typography>
+          (amount selected) R {localCurrency} +<br />
+          (payment fee) R {((2.9 / 100) * localCurrency).toFixed(2)} +<br />
+          (altcash fee) R {((PERCENTAGE_FEE / 100) * localCurrency).toFixed(
+            2
+          )}{' '}
+          +
+          <br />
+        </div>
       </Card>
     </form>
   );

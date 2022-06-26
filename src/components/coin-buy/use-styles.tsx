@@ -61,11 +61,11 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     right: '1.5rem'
   },
   buyButtonContainer: {
-    paddingBottom: '0.1rem',
     marginLeft: 0,
     marginTop: '2.5rem',
     width: '100%',
     [breakpoints.up('md')]: {
+      paddingBottom: '1.45rem',
       marginLeft: typography.pxToRem(strPxRem(spacing(2))),
       marginTop: 0
     }
@@ -94,6 +94,21 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     margin: '1.5rem 0 1rem 0',
     width: '3rem !important',
     height: '3rem !important'
+  },
+  innerCard: {
+    transition: 'all 300ms !important',
+    overflow: 'hidden',
+    height: '0',
+    width: '95%',
+    margin: '0 auto',
+    marginTop: '-0.1rem',
+    textAlign: 'right'
+  },
+  innerCardOpen: {
+    height: '9rem'
+  },
+  innerCardRoot: {
+    padding: '1rem'
   }
 }));
 

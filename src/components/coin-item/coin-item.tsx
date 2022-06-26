@@ -18,6 +18,7 @@ import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';
 
 export interface ICoin {
+  minTradeSize: number;
   id: string;
   name: string;
   status: string;
