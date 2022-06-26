@@ -5,16 +5,34 @@ import { strPxRem } from '../../common/utils';
 
 const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {
-    padding: typography.pxToRem(strPxRem(spacing(3)))
-    // [breakpoints.only('xs')]: {
-    //   padding: typography.pxToRem(strPxRem(spacing(2)))
-    // }
+    position: 'relative',
+    padding: typography.pxToRem(strPxRem(spacing(3))),
+    display: 'grid'
   },
   grid: {
-    paddingRight: typography.pxToRem(strPxRem(spacing(2))),
-    [breakpoints.down('sm')]: {
-      paddingRight: 0,
-      marginBottom: typography.pxToRem(strPxRem(spacing(3)))
+    display: 'flex',
+    justifyContent: 'space-between',
+    width: '100%',
+    flexDirection: 'column',
+    [breakpoints.up('md')]: {
+      width: '75%',
+      paddingRight: '2.5%',
+      flexDirection: 'row'
+    }
+  },
+  gridReverse: {
+    flexDirection: 'column-reverse',
+    justifyContent: 'flex-end',
+    [breakpoints.up('md')]: {
+      flexDirection: 'row-reverse',
+      justifyContent: 'flex-end'
+    }
+  },
+  gridItem: {
+    paddingRight: 0,
+    [breakpoints.up('md')]: {
+      padding: 0
+      // paddingRight: typography.pxToRem(strPxRem(spacing(2)))
     }
   },
   gridTitle: {
@@ -26,11 +44,27 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   symbol: {
     color: green[700]
   },
+  boxBuyButtonRoot: {
+    display: 'flex',
+    alignItems: 'end',
+    width: '100%',
+    [breakpoints.up('md')]: {
+      position: 'absolute',
+      bottom: '1.5rem',
+      right: '1.5rem',
+      width: '25%'
+    }
+  },
+  boxBuyLed: {
+    position: 'absolute',
+    top: '1.5rem',
+    right: '1.5rem'
+  },
   buyButtonContainer: {
-    flexGrow: 1,
+    paddingBottom: '0.1rem',
     marginLeft: 0,
     marginTop: '2.5rem',
-    paddingBottom: '0.1rem',
+    width: '100%',
     [breakpoints.up('md')]: {
       marginLeft: typography.pxToRem(strPxRem(spacing(2))),
       marginTop: 0
@@ -44,13 +78,15 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    height: '100%',
+    marginTop: '0',
+    height: 'auto',
     [breakpoints.up('md')]: {
-      paddingTop: '1rem'
+      marginTop: '31px',
+      height: '56px'
     }
   },
   arrow: {
-    marginTop: '0.5rem',
+    cursor: 'pointer',
     width: '2rem !important',
     height: '2rem !important'
   },

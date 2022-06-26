@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { SwapHoriz, SwapVert } from '@mui/icons-material';
 import {
   Box,
@@ -32,6 +33,8 @@ interface Props {
 const CoinBuy = ({ coin, ticker }: Props) => {
   const classes = useStyles();
   const { bitcoinRandPrice } = useGlobal();
+  const [bulbColor, setBulbColor] = useState('green');
+  const [gridReverse, setGridReverse] = useState(false);
   const [localCurrency, setLocalCurrency] = useState(0);
   const [cryptoCurrency, setCryptoCurrency] = useState(0);
   const [multiplier, setMultiplier] = useState(1);
@@ -41,31 +44,35 @@ const CoinBuy = ({ coin, ticker }: Props) => {
 
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    initializePayment(onSuccess, onClose);
+    initializePayment(onPaymentSuccess, onPaymentClose);
   };
 
-  // you can call this function anything
-  const onSuccess = (reference: unknown) => {
-    // Implementation for whatever you want to do with reference and after success call.
+  const onPaymentSuccess = (reference: unknown) => {
     console.debug(reference);
   };
 
-  // you can call this function anything
-  const onClose = (e: unknown) => {
-    // implementation for  whatever you want to do when the Paystack dialog closed.
+  const onPaymentClose = (e: unknown) => {
     console.debug('closed', e);
   };
 
-  useEffect(() => {
-    setCryptoCurrency(localCurrency / multiplier);
-  }, [localCurrency, multiplier]);
+  const onClickReverse = (e: unknown) => {
+    setGridReverse(!gridReverse);
+  };
 
-  // useEffect(() => {
-  //   if (localCurrency !== cryptoCurrency / multiplier) {
-  //     setLocalCurrency(cryptoCurrency / multiplier);
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [cryptoCurrency, multiplier]);
+  useEffect(() => {
+    setBulbColor('yellow');
+    setTimeout(() => setBulbColor('green'), 3000);
+  }, [multiplier]);
+
+  useEffect(() => {
+    if (!gridReverse) setCryptoCurrency(localCurrency / multiplier);
+  }, [gridReverse, localCurrency, multiplier]);
+
+  useEffect(() => {
+    if (gridReverse && localCurrency !== cryptoCurrency / multiplier) {
+      setLocalCurrency(cryptoCurrency * multiplier);
+    }
+  }, [gridReverse, cryptoCurrency, multiplier]);
 
   useEffect(() => {
     const newMultiplier = Number(
@@ -77,21 +84,26 @@ const CoinBuy = ({ coin, ticker }: Props) => {
     }
   }, [ticker, bitcoinRandPrice]);
 
-  // console.debug('coin', coin);
-  // console.debug('ticker', ticker);
-
   return (
-    <Card className={classes.root}>
-      <form
-        noValidate
-        autoComplete="off"
-        method="POST"
-        onSubmit={onSubmitHandler}
-      >
-        <Grid container>
-          <Grid item xs={12} md={4} className={classes.grid}>
+    <form
+      noValidate
+      autoComplete="off"
+      method="POST"
+      onSubmit={onSubmitHandler}
+    >
+      <Card className={classes.root}>
+        <div
+          className={clsx(classes.grid, gridReverse ? classes.gridReverse : '')}
+        >
+          <Grid
+            item
+            xs={12}
+            md={4}
+            className={classes.gridItem}
+            sx={{ minWidth: '45%' }}
+          >
             <InputLabel htmlFor="gridLeftInput" className={classes.gridTitle}>
-              You pay in <strong>Rands (ZAR)</strong>
+              You pay in <strong>Rand (ZAR)</strong>
             </InputLabel>
             <TextField
               id="gridLeftInput"
@@ -111,24 +123,42 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               }}
               value={localCurrency}
               onChange={(e) => setLocalCurrency(Number(e.target.value))}
+              disabled={gridReverse}
             />
           </Grid>
 
-          <Grid item xs={12} md={1} className={classes.grid}>
+          <Grid
+            item
+            xs={12}
+            md={1}
+            className={classes.gridItem}
+            sx={{ minWidth: '10%' }}
+          >
             <div className={classes.flex}>
               <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                <SwapHoriz color="primary" className={classes.arrow} />
+                <SwapHoriz
+                  color="primary"
+                  className={classes.arrow}
+                  onClick={onClickReverse}
+                />
               </Box>
               <Box sx={{ display: { xs: 'block', md: 'none' } }}>
                 <SwapVert
                   color="primary"
                   className={clsx(classes.arrow, classes.arrowMobile)}
+                  onClick={onClickReverse}
                 />
               </Box>
             </div>
           </Grid>
 
-          <Grid item xs={12} md={4} className={classes.grid}>
+          <Grid
+            item
+            xs={12}
+            md={4}
+            className={classes.gridItem}
+            sx={{ minWidth: '45%' }}
+          >
             <InputLabel htmlFor="gridRightInput" className={classes.gridTitle}>
               You get <strong className={classes.symbol}>{coin.name}</strong>
             </InputLabel>
@@ -153,26 +183,29 @@ const CoinBuy = ({ coin, ticker }: Props) => {
                 )
               }}
               value={cryptoCurrency}
-              // onChange={(e) => setCryptoCurrency(Number(e.target.value))}
-              disabled
+              onChange={(e) => setCryptoCurrency(Number(e.target.value))}
+              disabled={!gridReverse}
             />
           </Grid>
+        </div>
 
-          <Grid item xs={12} md={3} sx={{ display: 'flex', alignItems: 'end' }}>
-            <div className={classes.buyButtonContainer}>
-              <Button
-                variant="contained"
-                color="primary"
-                type="submit"
-                className={classes.buyButton}
-              >
-                Buy Now
-              </Button>
-            </div>
-          </Grid>
-        </Grid>
-      </form>
-    </Card>
+        <Box className={classes.boxBuyButtonRoot}>
+          <div className={classes.buyButtonContainer}>
+            <Button
+              variant="contained"
+              color="primary"
+              type="submit"
+              className={classes.buyButton}
+            >
+              Buy Now
+            </Button>
+          </div>
+        </Box>
+        <Box className={classes.boxBuyLed}>
+          <div className={`led-${bulbColor}`}></div>
+        </Box>
+      </Card>
+    </form>
   );
 };
 
