@@ -4,6 +4,8 @@ export const PERCENTAGE_FEE = 3.5;
 
 export const PERCENTAGE_FEE_PAYMENT = 2.9;
 
+export const MIN_AMOUNT_EXTRA = 1;
+
 export const COINS_PER_PAGE = 30;
 
 export const SYMBOLS_FEATURED = [

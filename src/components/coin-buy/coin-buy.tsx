@@ -14,7 +14,11 @@ import clsx from 'clsx';
 import { isNaN } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
-import { PERCENTAGE_FEE, PERCENTAGE_FEE_PAYMENT } from '../../common/constants';
+import {
+  MIN_AMOUNT_EXTRA,
+  PERCENTAGE_FEE,
+  PERCENTAGE_FEE_PAYMENT
+} from '../../common/constants';
 import { btcToRandPrice } from '../../common/currency';
 import { getPaystackConfig } from '../../common/utils';
 import { useGlobal } from '../../context/global';
@@ -46,7 +50,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (cryptoCurrency > coin.minTradeSize) {
+    if (cryptoCurrency > coin.minTradeSize + MIN_AMOUNT_EXTRA) {
       initializePayment(onPaymentSuccess, onPaymentClose);
     }
   };
@@ -70,7 +74,9 @@ const CoinBuy = ({ coin, ticker }: Props) => {
   }, [multiplier]);
 
   useEffect(() => {
-    if (!gridReverse) setCryptoCurrency(localCurrency / multiplier);
+    if (!gridReverse) {
+      setCryptoCurrency(localCurrency / multiplier);
+    }
 
     setTotalAmount(
       localCurrency +
@@ -121,7 +127,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               name="localCurrency"
               fullWidth
               helperText={`Min: R ${(coin && coin.minTradeSize
-                ? coin.minTradeSize * multiplier
+                ? coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA
                 : 0
               ).toFixed(2)}`}
               variant="outlined"
@@ -203,7 +209,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               value={cryptoCurrency}
               onChange={(e) => setCryptoCurrency(Number(e.target.value))}
               disabled={!gridReverse}
-              type="number"
+              // type="number"
             />
           </Grid>
         </div>
@@ -229,7 +235,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
       <Card
         className={clsx(
           classes.innerCard,
-          localCurrency > coin.minTradeSize * multiplier &&
+          localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA &&
             classes.innerCardOpen
         )}
       >
@@ -240,8 +246,8 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               borderBottom: '0.1rem solid',
               marginTop: '0.2rem',
               paddingTop: '0.2rem',
+              paddingBottom: '0.2rem',
               marginBottom: '0.5rem',
-              // textDecoration: 'underline',
               textTransform: 'uppercase'
             }}
             color="primary"
