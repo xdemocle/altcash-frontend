@@ -21,7 +21,7 @@ export const getPaystackConfig = (amount: number) => {
   return {
     reference: new Date().getTime().toString(),
     email: PAYSTACK_EMAIL,
-    amount: Number(amount.toFixed(2)) * 100,
+    amount: Number(Number(amount * 100).toFixed(0)),
     currency: 'ZAR' as PaystackCurrency,
     publicKey: PAYSTACK_PUBLICK_KEY
   } as PaystackProps;
