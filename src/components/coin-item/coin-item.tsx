@@ -12,7 +12,7 @@ import {
 import clsx from 'clsx';
 import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { useUserCoinFavourites } from '../../context/user-coin-favourites';
+import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';

@@ -1,11 +1,11 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, ReactNode, useState } from 'react';
 import { persistUserCoinFavourites } from '../common/utils';
 
-type UserCoinFavouritesContextProps = {
+export interface UserCoinFavouritesContextProps {
   userCoinFavourites: string[];
   addUserCoinFavourites: (symbol: string) => void;
   removeUserCoinFavourites: (symbol: string) => void;
-};
+}
 
 const userCoinFavouritesLocal =
   window.localStorage.getItem('userCoinFavourites');
@@ -53,10 +53,6 @@ const UserCoinFavouritesProvider = ({ children }: Props) => {
       {children}
     </UserCoinFavouritesContext.Provider>
   );
-};
-
-export const useUserCoinFavourites = (): UserCoinFavouritesContextProps => {
-  return useContext(UserCoinFavouritesContext);
 };
 
 export default UserCoinFavouritesProvider;

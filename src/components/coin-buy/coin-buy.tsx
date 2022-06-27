@@ -11,7 +11,6 @@ import {
   Typography
 } from '@mui/material';
 import clsx from 'clsx';
-import { isNaN } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import {
@@ -19,17 +18,11 @@ import {
   PERCENTAGE_FEE,
   PERCENTAGE_FEE_PAYMENT
 } from '../../common/constants';
-import { btcToRandPrice } from '../../common/currency';
 import { getPaystackConfig } from '../../common/utils';
-import { useGlobal } from '../../context/global';
+import useMultiplier from '../../hooks/use-multiplier';
 import { ICoin, ITicker } from '../coin-item/coin-item';
 import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
-
-// interface Inputs {
-//   localCurrency: string;
-//   cryptoCurrency: string;
-// }
 
 interface Props {
   coin: ICoin;
@@ -38,19 +31,18 @@ interface Props {
 
 const CoinBuy = ({ coin, ticker }: Props) => {
   const classes = useStyles();
-  const { bitcoinRandPrice } = useGlobal();
   const [bulbColor, setBulbColor] = useState('green');
   const [gridReverse, setGridReverse] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [localCurrency, setLocalCurrency] = useState(0);
   const [cryptoCurrency, setCryptoCurrency] = useState(0);
-  const [multiplier, setMultiplier] = useState(1);
+  const { multiplier } = useMultiplier(ticker);
   const initializePayment = usePaystackPayment(getPaystackConfig(totalAmount));
 
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (cryptoCurrency > coin.minTradeSize + MIN_AMOUNT_EXTRA) {
+    if (localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA) {
       initializePayment(onPaymentSuccess, onPaymentClose);
     }
   };
@@ -90,16 +82,6 @@ const CoinBuy = ({ coin, ticker }: Props) => {
       setLocalCurrency(cryptoCurrency * multiplier);
     }
   }, [gridReverse, cryptoCurrency, multiplier]);
-
-  useEffect(() => {
-    const newMultiplier = Number(
-      btcToRandPrice(ticker.lastTradeRate, bitcoinRandPrice)
-    );
-
-    if (!isNaN(newMultiplier)) {
-      setMultiplier(newMultiplier);
-    }
-  }, [ticker, bitcoinRandPrice]);
 
   return (
     <form

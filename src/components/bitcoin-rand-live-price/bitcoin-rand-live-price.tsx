@@ -1,8 +1,8 @@
 import { useLazyQuery } from '@apollo/client';
 import { Fragment, useEffect } from 'react';
 import { REFRESH_BTCZAR_LIVE_PRICE } from '../../common/constants';
-import { useGlobal } from '../../context/global';
 import { GET_PAIR } from '../../graphql/queries';
+import useGlobal from '../../hooks/use-global';
 
 const BitcoinRandLivePrice = () => {
   const { setBitcoinRandPrice } = useGlobal();

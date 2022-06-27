@@ -2,7 +2,7 @@ import { Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import clsx from 'clsx';
 import { useEffect } from 'react';
 import Logo from '../../assets/logo.png';
-import { useGlobal } from '../../context/global';
+import useGlobal from '../../hooks/use-global';
 import MainLinks from '../main-links';
 import styles from './sidebar.module.scss';
 import {

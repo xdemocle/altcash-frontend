@@ -10,8 +10,8 @@ import { SYMBOLS_FEATURED } from '../../common/constants';
 import HeaderFabButtons from '../../components/header-fab-buttons';
 import CoinsList from '../../containers/coins-list';
 import CoinsUserList from '../../containers/coins-user-list';
-import { useGlobal } from '../../context/global';
 import { GET_META_COIN_LOGO } from '../../graphql/queries';
+import useGlobal from '../../hooks/use-global';
 import useStyles from './use-styles';
 
 const BuyTabPage = () => {

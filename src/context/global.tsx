@@ -3,7 +3,6 @@ import {
   Dispatch,
   ReactNode,
   SetStateAction,
-  useContext,
   useState
 } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -14,7 +13,7 @@ import {
   BUY_TAB_FEATURED
 } from '../common/constants';
 
-type GlobalContextProps = {
+export interface GlobalContextProps {
   isSidebarOpen: boolean;
   setSidebarOpen: Dispatch<SetStateAction<boolean>>;
   coinPageNeedle: string | undefined;
@@ -25,7 +24,7 @@ type GlobalContextProps = {
   setTab: Dispatch<SetStateAction<number>>;
   bitcoinRandPrice: number;
   setBitcoinRandPrice: Dispatch<SetStateAction<number>>;
-};
+}
 
 export const GlobalContext = createContext<GlobalContextProps>(
   {} as GlobalContextProps
@@ -76,10 +75,6 @@ const GlobalProvider = ({ children }: Props) => {
       {children}
     </GlobalContext.Provider>
   );
-};
-
-export const useGlobal = (): GlobalContextProps => {
-  return useContext(GlobalContext);
 };
 
 export default GlobalProvider;

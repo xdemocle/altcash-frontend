@@ -14,7 +14,7 @@ import {
 } from '@mui/material';
 // import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
-import { useAuth } from '../../context/auth';
+import useAuth from '../../hooks/use-auth';
 import useStyles from './use-styles';
 
 type Props = {

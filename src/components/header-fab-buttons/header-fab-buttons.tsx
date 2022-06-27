@@ -1,7 +1,7 @@
 import { Close, Search } from '@mui/icons-material';
 import { Box, Button, IconButton, Tooltip } from '@mui/material';
 import { Fragment, useState } from 'react';
-import { useGlobal } from '../../context/global';
+import useGlobal from '../../hooks/use-global';
 import CoinSearchModal from '../coin-search-modal';
 import useStyles from './use-styles';
 

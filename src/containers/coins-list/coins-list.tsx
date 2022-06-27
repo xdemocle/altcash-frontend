@@ -5,8 +5,8 @@ import { ChangeEvent, Fragment } from 'react';
 import { COINS_PER_PAGE } from '../../common/constants';
 import CoinsListMap from '../../components/coins-list-map';
 import Loader from '../../components/loader';
-import { useGlobal } from '../../context/global';
 import { GET_COINS, GET_COUNT } from '../../graphql/queries';
+import useGlobal from '../../hooks/use-global';
 import useStyles from './use-styles';
 
 const CoinsList = () => {

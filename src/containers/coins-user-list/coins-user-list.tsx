@@ -3,8 +3,8 @@ import { List, Typography } from '@mui/material';
 import { isUndefined } from 'lodash';
 import CoinItem, { ICoin } from '../../components/coin-item';
 import Loader from '../../components/loader';
-import { useUserCoinFavourites } from '../../context/user-coin-favourites';
 import { GET_COINS } from '../../graphql/queries';
+import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import useStyles from './use-styles';
 
 interface Props {

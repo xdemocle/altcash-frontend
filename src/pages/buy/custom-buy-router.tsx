@@ -4,7 +4,7 @@ import {
   BUY_TAB_FAVOURITE,
   BUY_TAB_FEATURED
 } from '../../common/constants';
-import { useGlobal } from '../../context/global';
+import useGlobal from '../../hooks/use-global';
 
 const CustomBuyRouter = () => {
   const { tab } = useGlobal();

@@ -2,16 +2,15 @@ import {
   createContext,
   ReactNode,
   useCallback,
-  useContext,
   useEffect,
   useState
 } from 'react';
 
-type AuthContextProps = {
+export interface AuthContextProps {
   login: () => void;
   logout: () => void;
   isAuthenticated: boolean;
-};
+}
 
 export const AuthContext = createContext<AuthContextProps>({
   isAuthenticated: false
@@ -52,10 +51,6 @@ const AuthProvider = ({ children }: Props) => {
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = (): AuthContextProps => {
-  return useContext(AuthContext);
 };
 
 export default AuthProvider;
