@@ -26,10 +26,12 @@ const BitcoinRandLivePrice = () => {
     };
   }, [getLivePrice]);
 
-  // Set globally
-  if (data && data.pair && data.pair.last_trade) {
-    setBitcoinRandPrice(Number(data.pair.last_trade));
-  }
+  useEffect(() => {
+    // Set globally
+    if (data && data.pair && data.pair.last_trade) {
+      setBitcoinRandPrice(Number(data.pair.last_trade));
+    }
+  }, [data, setBitcoinRandPrice]);
 
   // eslint-disable-next-line no-console
   console.info('bitcoinRandPrice', data && data.pair && data.pair.last_trade);
