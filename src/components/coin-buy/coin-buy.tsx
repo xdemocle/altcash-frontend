@@ -237,13 +237,16 @@ const CoinBuy = ({ coin, ticker }: Props) => {
           <Typography
             variant="h6"
             sx={{
+              borderBottom: '0.1rem solid',
+              marginTop: '0.2rem',
+              paddingTop: '0.2rem',
               marginBottom: '0.5rem',
-              textDecoration: 'underline',
+              // textDecoration: 'underline',
               textTransform: 'uppercase'
             }}
             color="primary"
           >
-            Total buy R {totalAmount.toFixed(2)} =
+            (Total buy) R {totalAmount.toFixed(2)} =
           </Typography>
           (amount selected) R {localCurrency} +<br />
           (payment fee) R{' '}
