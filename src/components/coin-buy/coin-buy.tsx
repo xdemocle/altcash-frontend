@@ -14,7 +14,7 @@ import clsx from 'clsx';
 import { isNaN } from 'lodash';
 import { FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
-import { PERCENTAGE_FEE } from '../../common/constants';
+import { PERCENTAGE_FEE, PERCENTAGE_FEE_PAYMENT } from '../../common/constants';
 import { btcToRandPrice } from '../../common/currency';
 import { getPaystackConfig } from '../../common/utils';
 import { useGlobal } from '../../context/global';
@@ -53,6 +53,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
 
   const onPaymentSuccess = (reference: unknown) => {
     console.debug(reference);
+    // new order to backend with reference
   };
 
   const onPaymentClose = (e: unknown) => {
@@ -73,7 +74,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
 
     setTotalAmount(
       localCurrency +
-        (2.9 / 100) * localCurrency +
+        (PERCENTAGE_FEE_PAYMENT / 100) * localCurrency +
         (PERCENTAGE_FEE / 100) * localCurrency
     );
   }, [gridReverse, localCurrency, multiplier]);
@@ -119,10 +120,14 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               id="gridLeftInput"
               name="localCurrency"
               fullWidth
-              // helperText={errors.localCurrency && errors.localCurrency.message}
+              helperText={`Min: R ${(coin && coin.minTradeSize
+                ? coin.minTradeSize * multiplier
+                : 0
+              ).toFixed(2)}`}
               variant="outlined"
               inputProps={{
-                maxLength: '25'
+                maxLength: '25',
+                min: coin.minTradeSize * multiplier
               }}
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -176,7 +181,10 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               id="gridRightInput"
               name="cryptoCurrency"
               fullWidth
-              helperText={`Min: ${coin.minTradeSize} ${coin.symbol}`}
+              helperText={`Min: ${(coin && coin.minTradeSize
+                ? coin.minTradeSize
+                : 0
+              ).toFixed(2)} ${coin.symbol}`}
               variant="outlined"
               inputProps={{
                 maxLength: '25',
@@ -221,7 +229,8 @@ const CoinBuy = ({ coin, ticker }: Props) => {
       <Card
         className={clsx(
           classes.innerCard,
-          localCurrency > 0 && classes.innerCardOpen
+          localCurrency > coin.minTradeSize * multiplier &&
+            classes.innerCardOpen
         )}
       >
         <div className={classes.innerCardRoot}>
@@ -237,7 +246,8 @@ const CoinBuy = ({ coin, ticker }: Props) => {
             Total buy R {totalAmount.toFixed(2)} =
           </Typography>
           (amount selected) R {localCurrency} +<br />
-          (payment fee) R {((2.9 / 100) * localCurrency).toFixed(2)} +<br />
+          (payment fee) R{' '}
+          {((PERCENTAGE_FEE_PAYMENT / 100) * localCurrency).toFixed(2)} +<br />
           (altcash fee) R {((PERCENTAGE_FEE / 100) * localCurrency).toFixed(
             2
           )}{' '}
