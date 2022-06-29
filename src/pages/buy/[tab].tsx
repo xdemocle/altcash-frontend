@@ -5,7 +5,14 @@ import {
   NewReleases as NewReleasesIcon
 } from '@mui/icons-material';
 import { Paper, Tab, Tabs, Typography } from '@mui/material';
-import { SYMBOLS_FEATURED } from '../../common/constants';
+import type { NextPage } from 'next';
+import { useRouter } from 'next/router';
+import {
+  BUY_TAB_ALL,
+  BUY_TAB_FAVOURITE,
+  BUY_TAB_FEATURED,
+  SYMBOLS_FEATURED
+} from '../../common/constants';
 import HeaderFabButtons from '../../components/header-fab-buttons';
 import CoinsList from '../../containers/coins-list';
 import CoinsUserList from '../../containers/coins-user-list';
@@ -13,7 +20,8 @@ import { GET_META_COIN_LOGO } from '../../graphql/queries';
 import useGlobal from '../../hooks/use-global';
 import useStyles from './use-styles';
 
-const BuyTabPage = () => {
+const BuyTabPage: NextPage = () => {
+  const router = useRouter();
   const classes = useStyles();
   const { tab, setTab } = useGlobal();
   const symbolsFeatured = SYMBOLS_FEATURED.sort();
@@ -24,6 +32,18 @@ const BuyTabPage = () => {
 
   const handleChange = (tab: number) => {
     setTab(tab);
+
+    let slug = 'featured';
+
+    if (tab === BUY_TAB_FEATURED) {
+      slug = 'featured';
+    } else if (tab === BUY_TAB_ALL) {
+      slug = 'all';
+    } else if (tab === BUY_TAB_FAVOURITE) {
+      slug = 'favourite';
+    }
+
+    router.push(`/buy/${slug}`, undefined, { shallow: true });
   };
 
   return (

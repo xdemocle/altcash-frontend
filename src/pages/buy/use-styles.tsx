@@ -6,6 +6,7 @@ import { strPxRem } from '../../common/utils';
 const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {
     position: 'relative',
+    maxWidth: '64rem',
     paddingTop: typography.pxToRem(strPxRem(spacing(2))),
     marginLeft: typography.pxToRem(strPxRem(spacing(2))),
     paddingBottom: typography.pxToRem(strPxRem(spacing(2))),

@@ -23,6 +23,11 @@ a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):hov
   text-decoration: none;
 }
 
+.root .MuiPaper-root.MuiAppBar-colorSecondary a:link,
+.root .MuiPaper-root.MuiAppBar-colorSecondary a:visited {
+  color: #fff !important;
+}
+
 .pagination-coins-list .MuiPagination-ul {
   display: inline-flex;
 }

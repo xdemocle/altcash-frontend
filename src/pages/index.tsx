@@ -1,7 +1,6 @@
 import { Button, Grid, Icon, Tooltip, Typography } from '@mui/material';
 import clsx from 'clsx';
 import type { NextPage } from 'next';
-import Image from 'next/image';
 import Link from 'next/link';
 import { Parallax } from 'react-parallax';
 import useStyles from './use-styles';
@@ -12,7 +11,7 @@ const Index: NextPage = () => {
   return (
     <div className={classes.root}>
       <Parallax
-        bgImage={<Image src="/assets/hero.jpg" alt="hero.jpg" />}
+        bgImage="/assets/hero.jpg"
         strength={300}
         bgStyle={{ top: '-5%' }}
       >
@@ -95,7 +94,7 @@ const Index: NextPage = () => {
       </Grid>
 
       <Parallax
-        bgImage={<Image src="/assets/section.jpg" alt="section.jpg" />}
+        bgImage="/assets/section.jpg"
         strength={300}
         bgStyle={{ top: '-20%' }}
       >

@@ -90,7 +90,7 @@ const CoinPage: NextPage = () => {
           gutterBottom
           className={classes.title}
         >
-          {dataCoin.name}
+          {dataCoin.name || coinId}
         </Typography>
         <div className={classes.pageAvatar}>
           {loading && (

@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import Bottombar from '../../components/bottom-bar';
 import BottomNav from '../../components/bottom-nav';
+import ClientOnly from '../../components/client-only';
 import Sidebar from '../../components/sidebar';
 import TopNav from '../../components/top-nav';
 import useStyles from './use-styles';
@@ -23,7 +24,9 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
         <TopNav />
       </Box>
 
-      <Bottombar />
+      <ClientOnly>
+        <Bottombar />
+      </ClientOnly>
 
       <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
         <BottomNav />

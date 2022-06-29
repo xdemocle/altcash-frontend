@@ -21,11 +21,12 @@ type Props = {
   isSidebarOpen: boolean;
 };
 
-const MainLinks = (props: Props) => {
+const MainLinks = ({ isSidebarOpen }: Props) => {
   // const auth = useAuth();
   const router = useRouter();
   const classes = useStyles();
-  const { isSidebarOpen } = props;
+
+  console.log('router.pathname', router.pathname);
 
   return (
     <List component="nav" className={classes.nav}>
@@ -63,9 +64,9 @@ const MainLinks = (props: Props) => {
             href="/buy"
             className={clsx(
               classes.listItem,
-              router.pathname == '/buy' ? 'active' : ''
+              router.pathname == '/buy/[tab]' ? 'active' : ''
             )}
-            selected={router.pathname.search('/buy') !== -1}
+            selected={router.pathname == '/buy/[tab]'}
           >
             <ListItemIcon>
               <MonetizationOnOutlined className={classes.icons} />

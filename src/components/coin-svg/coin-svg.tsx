@@ -48,7 +48,7 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
 
   return svgCoinPath ? (
     <ReactSVG
-      src={svgCoinPath}
+      src={svgCoinPath.default.src}
       className={clsx(
         classes.avatar,
         symbol,

@@ -11,7 +11,7 @@ import {
 } from '@mui/material';
 import clsx from 'clsx';
 import Link from 'next/link';
-import { Fragment } from 'react';
+import { Fragment, SyntheticEvent } from 'react';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
@@ -49,7 +49,9 @@ const CoinItem = ({ coin }: Props) => {
     return null;
   }
 
-  const iconButtonHandler = () => {
+  const iconButtonHandler = (e: SyntheticEvent) => {
+    e.preventDefault();
+
     if (userCoinFavourites.includes(coin.symbol as never)) {
       removeUserCoinFavourites(coin.symbol);
     } else {
@@ -62,13 +64,13 @@ const CoinItem = ({ coin }: Props) => {
   return (
     <Fragment>
       <Link href={`/coin/${coin.id.toLowerCase()}`}>
-        <a>
+        <a style={{ textDecoration: 'none' }}>
           <ListItemButton className={classes.listItem}>
             <ListItemIcon>
               <CoinSVG coinSymbol={coin.symbol} />
             </ListItemIcon>
             <ListItemText
-              primary={coin.name}
+              primary={coin.name || coin.id}
               secondary={`${coin.symbol.toUpperCase()} ${
                 coin.status !== 'ONLINE' ? ' / ' + coin.status : ''
               }`}
