@@ -40,19 +40,9 @@ const cache = new InMemoryCache({
 let persistCacheInstance: Promise<void> | null = null;
 
 if (typeof window !== 'undefined') {
-  console.log('testrok');
   persistCacheInstance = persistCache({
     cache,
     storage: new LocalStorageWrapper(window.localStorage)
-  });
-} else {
-  persistCacheInstance = persistCache({
-    cache,
-    storage: new LocalStorageWrapper({
-      getItem: (key: string) => key || null,
-      setItem: (key: string) => key || null,
-      removeItem: (key: string) => key || null
-    })
   });
 }
 

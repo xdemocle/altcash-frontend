@@ -42,11 +42,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       setLoaded(true);
     };
 
-    loadCache();
+    if (typeof window !== 'undefined') {
+      loadCache();
+    } else {
+      setLoaded(true);
+    }
   }, []);
 
   if (!loaded) {
-    return <div>Loading...</div>;
+    return <div>Loading Altcash...</div>;
   }
 
   return (

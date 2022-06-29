@@ -26,8 +26,6 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
   const router = useRouter();
   const classes = useStyles();
 
-  console.log('router.pathname', router.pathname);
-
   return (
     <List component="nav" className={classes.nav}>
       <Tooltip
