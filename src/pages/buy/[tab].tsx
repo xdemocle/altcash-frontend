@@ -19,8 +19,6 @@ const BuyTabPage = () => {
   const { tab, setTab } = useGlobal();
   const symbolsFeatured = SYMBOLS_FEATURED.sort();
 
-  console.log('tab', tab);
-
   useQuery(GET_META_COIN_LOGO, {
     fetchPolicy: 'cache-first'
   });
