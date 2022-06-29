@@ -22,8 +22,6 @@ const CustomBuyRouter = () => {
       slug = 'favourite';
     }
 
-    debugger;
-
     router.push(`/buy/${slug}`);
   }, [router, tab]);
 

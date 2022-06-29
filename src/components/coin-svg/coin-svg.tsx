@@ -46,7 +46,7 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
       'https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png';
   }
 
-  return !!svgCoinPath ? (
+  return svgCoinPath ? (
     <ReactSVG
       src={svgCoinPath}
       className={clsx(

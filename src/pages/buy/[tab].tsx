@@ -5,7 +5,6 @@ import {
   NewReleases as NewReleasesIcon
 } from '@mui/icons-material';
 import { Paper, Tab, Tabs, Typography } from '@mui/material';
-import Link from 'next/link';
 import { SYMBOLS_FEATURED } from '../../common/constants';
 import HeaderFabButtons from '../../components/header-fab-buttons';
 import CoinsList from '../../containers/coins-list';
