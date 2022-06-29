@@ -19,6 +19,8 @@ const BuyTabPage = () => {
   const { tab, setTab } = useGlobal();
   const symbolsFeatured = SYMBOLS_FEATURED.sort();
 
+  console.log('tab', tab);
+
   useQuery(GET_META_COIN_LOGO, {
     fetchPolicy: 'cache-first'
   });
@@ -47,27 +49,21 @@ const BuyTabPage = () => {
           indicatorColor="primary"
           textColor="primary"
         >
-          <Link href={'/buy/featured'}>
-            <Tab
-              label="Featured"
-              icon={<NewReleasesIcon />}
-              classes={{ root: classes.tabRoot }}
-            />
-          </Link>
-          <Link href={'/buy/all'}>
-            <Tab
-              label="All Coins"
-              icon={<ListIcon />}
-              classes={{ root: classes.tabRoot }}
-            />
-          </Link>
-          <Link href={'/buy/favourite'}>
-            <Tab
-              label="Favourite"
-              icon={<Star />}
-              classes={{ root: classes.tabRoot }}
-            />
-          </Link>
+          <Tab
+            label="Featured"
+            icon={<NewReleasesIcon />}
+            classes={{ root: classes.tabRoot }}
+          />
+          <Tab
+            label="All Coins"
+            icon={<ListIcon />}
+            classes={{ root: classes.tabRoot }}
+          />
+          <Tab
+            label="Favourite"
+            icon={<Star />}
+            classes={{ root: classes.tabRoot }}
+          />
         </Tabs>
       </Paper>
 

@@ -11,6 +11,7 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
+import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
@@ -22,15 +23,17 @@ import LinkExtBlank from '../../components/link-ext-blank';
 import { GET_PAGE_DATA, GET_META_COIN, GET_PAIR } from '../../graphql/queries';
 import useStyles from './use-styles';
 
-const CoinPage = () => {
+const CoinPage: NextPage = () => {
   const classes = useStyles();
   const router = useRouter();
-  const { coinId } = router.query;
+  const { id } = router.query;
+  const coinId = String(id).toUpperCase();
+
   const { data, loading } = useQuery(GET_PAGE_DATA, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',
     variables: {
-      id: coinId && String(coinId).toUpperCase()
+      id: coinId
     }
   });
 
@@ -38,7 +41,7 @@ const CoinPage = () => {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-first',
     variables: {
-      id: coinId && String(coinId).toUpperCase()
+      id: coinId
     }
   });
 
@@ -94,7 +97,7 @@ const CoinPage = () => {
             <CircularProgress className={classes.progress} size="4rem" />
           )}
           {!loading && !metaCoin.description && (
-            <CoinSVG coinSymbol={String(coinId) || ''} />
+            <CoinSVG coinSymbol={coinId || ''} />
           )}
           {!loading && metaCoin.logo && (
             <Image
@@ -205,7 +208,6 @@ const CoinPage = () => {
           <ListItem divider>
             <ListItemText primary="Last update" className={classes.column} />
             <ListItemText
-              // @ts-ignore
               primary={<Moment>{dataSummary.updatedAt}</Moment>}
               secondary="Page data refresh automatically"
               className={classes.column}

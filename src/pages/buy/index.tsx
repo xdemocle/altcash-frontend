@@ -1,5 +1,33 @@
-import CustomBuyRouter from './custom-buy-router';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import {
+  BUY_TAB_ALL,
+  BUY_TAB_FAVOURITE,
+  BUY_TAB_FEATURED
+} from '../../common/constants';
+import useGlobal from '../../hooks/use-global';
 
-export { CustomBuyRouter };
+const CustomBuyRouter = () => {
+  const router = useRouter();
+  const { tab } = useGlobal();
 
-export { default } from './buy';
+  useEffect(() => {
+    let slug = 'featured';
+
+    if (tab === BUY_TAB_FEATURED) {
+      slug = 'featured';
+    } else if (tab === BUY_TAB_ALL) {
+      slug = 'all';
+    } else if (tab === BUY_TAB_FAVOURITE) {
+      slug = 'favourite';
+    }
+
+    debugger;
+
+    router.push(`/buy/${slug}`);
+  }, [router, tab]);
+
+  return null;
+};
+
+export default CustomBuyRouter;

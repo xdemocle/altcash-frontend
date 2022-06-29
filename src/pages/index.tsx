@@ -40,16 +40,16 @@ const Index: NextPage = () => {
               Buy crypto coins fast and easy in South Africa!
             </Typography>
             <hr className={classes.heroDivider} />
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.ctoButton}
-              component={Link}
-              href="/buy"
-            >
-              Buy Altcoins now
-            </Button>
+            <Link href="/buy">
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                className={classes.ctoButton}
+              >
+                Buy Altcoins now
+              </Button>
+            </Link>
           </div>
         </div>
       </Parallax>
@@ -81,16 +81,16 @@ const Index: NextPage = () => {
           >
             Fast, anonymous and easy instant buying.
           </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            className={classes.ctoButton}
-            component={Link}
-            href="/buy"
-          >
-            Buy Altcoins now
-          </Button>
+          <Link href="/buy">
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              className={classes.ctoButton}
+            >
+              Buy Altcoins now
+            </Button>
+          </Link>
         </Grid>
       </Grid>
 

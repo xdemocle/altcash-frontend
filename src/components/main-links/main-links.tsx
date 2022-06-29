@@ -65,7 +65,7 @@ const MainLinks = (props: Props) => {
               classes.listItem,
               router.pathname == '/buy' ? 'active' : ''
             )}
-            selected={router.pathname == '/buy'}
+            selected={router.pathname.search('/buy') !== -1}
           >
             <ListItemIcon>
               <MonetizationOnOutlined className={classes.icons} />

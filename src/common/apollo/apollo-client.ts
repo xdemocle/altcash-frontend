@@ -7,6 +7,6 @@ import { cache } from './apollo-cache';
 // Initialize Apollo client with cache and state
 export const apolloClient = new ApolloClient({
   cache,
-  uri: process.env.NEXT_PUBLIC_API_URL || '/graphql',
+  uri: '/graphql',
   connectToDevTools: true
 });
