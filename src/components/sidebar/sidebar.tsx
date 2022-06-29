@@ -64,7 +64,12 @@ const Sidebar = () => {
               onClick={handleDrawerToggle}
               aria-label="toggle drawer"
             >
-              <Image src={'/assets/logo.png'} alt="logo.png" width="48" />
+              <Image
+                src={'/assets/logo.png'}
+                alt="logo.png"
+                width="48"
+                height="48"
+              />
             </ButtonLogoStyled>
             <ToolbarTitleStyled variant="subtitle1">Altcash</ToolbarTitleStyled>
           </ToolbarHeaderStyled>

@@ -22,7 +22,6 @@ interface Props {
   children: ReactNode;
 }
 
-// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }: Props) => {
   const [isAuthenticated, setIsAuthenticated] = useState(
     localStorage.getItem(IsAuthenticatedKey) === 'true'

@@ -1,27 +1,23 @@
-import { ApolloProvider } from '@apollo/client';
-import { ThemeProvider } from '@mui/material/styles';
 import { Html, Head, Main, NextScript } from 'next/document';
+import { useEffect } from 'react';
 import TagManager from 'react-gtm-module';
-import { apolloClient } from '../common/apollo/apollo-client';
-import { theme } from '../common/theme';
-import GlobalProvider from '../context/global';
-import UserCoinFavouritesProvider from '../context/user-coin-favourites';
 
 export default function Document() {
-  const tagManagerArgs = {
-    gtmId: 'G-BGCLZHPN2P',
-    auth: 'dev'
-  };
+  useEffect(() => {
+    const tagManagerArgs = {
+      gtmId: 'G-BGCLZHPN2P',
+      auth: 'dev'
+    };
 
-  TagManager.initialize(tagManagerArgs);
+    TagManager.initialize(tagManagerArgs);
+  }, []);
 
   return (
     <Html lang="en">
       <Head>
-        <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content="#43a047" />
-        <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+        <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -42,15 +38,7 @@ export default function Document() {
         />
       </Head>
       <body className="root">
-        <GlobalProvider>
-          <UserCoinFavouritesProvider>
-            <ApolloProvider client={apolloClient}>
-              <ThemeProvider theme={theme}>
-                <Main />
-              </ThemeProvider>
-            </ApolloProvider>
-          </UserCoinFavouritesProvider>
-        </GlobalProvider>
+        <Main />
         <NextScript />
       </body>
     </Html>

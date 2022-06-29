@@ -1,17 +1,18 @@
 import { Button, Grid, Icon, Tooltip, Typography } from '@mui/material';
 import clsx from 'clsx';
+import type { NextPage } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Parallax } from 'react-parallax';
 import useStyles from './use-styles';
 
-const Landing = () => {
+const Index: NextPage = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
       <Parallax
-        bgImage={<Image src="/assets/hero.jpg" />}
+        bgImage={<Image src="/assets/hero.jpg" alt="hero.jpg" />}
         strength={300}
         bgStyle={{ top: '-5%' }}
       >
@@ -94,7 +95,7 @@ const Landing = () => {
       </Grid>
 
       <Parallax
-        bgImage={<Image src="/assets/section.jpg" />}
+        bgImage={<Image src="/assets/section.jpg" alt="section.jpg" />}
         strength={300}
         bgStyle={{ top: '-20%' }}
       >
@@ -178,4 +179,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Index;

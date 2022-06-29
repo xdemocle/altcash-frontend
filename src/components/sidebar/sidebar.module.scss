@@ -9,10 +9,6 @@
 .DrawerStyled-Paper {
   // position: fixed !important;
   width: 17rem;
-
-  @media (min-width: 1536px) {
-    position: absolute !important;
-  }
 }
 
 .DrawerStyled-Paper--Close {

@@ -56,7 +56,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
     console.debug('closed', e);
   };
 
-  const onClickReverse = (e: unknown) => {
+  const onClickReverse = () => {
     setGridReverse(!gridReverse);
   };
 
@@ -118,7 +118,6 @@ const CoinBuy = ({ coin, ticker }: Props) => {
                 min: coin.minTradeSize * multiplier
               }}
               InputProps={{
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 startAdornment: (
                   <InputAdornment position="start">R</InputAdornment>
@@ -180,7 +179,6 @@ const CoinBuy = ({ coin, ticker }: Props) => {
                 // max: 10,
               }}
               InputProps={{
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">

@@ -13,10 +13,6 @@ const AppBarStyled = styled(AppBar)(({ theme }) => ({
     top: 'auto',
     bottom: 0,
     marginBottom: '0'
-  },
-  [theme.breakpoints.up('xl')]: {
-    position: 'absolute',
-    borderRadius: '.5rem .5rem 0 0'
   }
 }));
 

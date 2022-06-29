@@ -1,11 +1,11 @@
 import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
+const useStyles = makeStyles(({ palette }: Theme) => ({
   nav: {
     position: 'relative',
-    display: 'flex',
     height: 'calc(100% - 6rem)',
+    display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
@@ -23,26 +23,29 @@ const useStyles = makeStyles(({ breakpoints, palette }: Theme) => ({
     }
   },
   listItem: {
+    flexGrow: '0 !important',
     position: 'relative',
     paddingLeft: '1.8rem',
     paddingRight: '1.8rem',
     margin: '0.8rem 0',
-    height: '3.2rem',
-    // color: '#2B3A41',
+    height: '4.75rem',
+    width: '100%',
+    textDecoration: 'none !important',
+    color: 'inherit',
+    '&:visited': {
+      color: 'inherit'
+    },
     '&.active::after': {
       content: '""',
       position: 'absolute',
-      top: 0,
+      top: '50%',
+      transform: 'translateY(-50%)',
       left: '1.45rem',
       width: '3.2rem',
       height: '3.2rem',
       borderRadius: '.6rem',
       backgroundColor: palette.primary.main,
       zIndex: -1
-    },
-    'a&': {
-      textDecoration: 'none',
-      color: '#2B3A41'
     }
   },
   listItemText: {

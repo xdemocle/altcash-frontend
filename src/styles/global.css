@@ -7,19 +7,19 @@ body {
   min-height: 100vh;
 }
 
-a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):link,
-a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):hover,
-a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):active,
-a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):focus {
+a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):link,
+a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):hover,
+a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):active,
+a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):focus {
   color: #18a11e;
   text-decoration: underline;
 }
 
-a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):visited {
+a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):visited {
   color: #558b58;
 }
 
-a:not(.MuiButton-root):not(.MuiListItem-root):not(.MuiIconButton-root):hover {
+a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):hover {
   text-decoration: none;
 }
 
