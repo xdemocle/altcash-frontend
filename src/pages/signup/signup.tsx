@@ -7,10 +7,10 @@ import {
   TextField
 } from '@mui/material';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import {
   FORM_EMAIL_VALIDATION_REGEX,
   GOOGLE_CAPTCHA_SITEKEY,
@@ -173,7 +173,7 @@ const Signup = () => {
             </Button>
           </form>
           <p className={classes.paragraphText}>
-            Or <Link to="/login">login here</Link> if you already have an
+            Or <Link href="/login">login here</Link> if you already have an
             account.
           </p>
         </CardContent>

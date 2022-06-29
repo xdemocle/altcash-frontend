@@ -4,7 +4,12 @@ module.exports = {
     node: true
   },
   parser: '@typescript-eslint/parser',
-  extends: ['react-app', 'plugin:@typescript-eslint/recommended', 'prettier'],
+  extends: [
+    'react-app',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
+    'plugin:@next/next/recommended'
+  ],
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',

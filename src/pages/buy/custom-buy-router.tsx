@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import {
   BUY_TAB_ALL,
   BUY_TAB_FAVOURITE,
@@ -7,6 +7,7 @@ import {
 import useGlobal from '../../hooks/use-global';
 
 const CustomBuyRouter = () => {
+  const router = useRouter();
   const { tab } = useGlobal();
 
   let slug = 'featured';
@@ -19,7 +20,7 @@ const CustomBuyRouter = () => {
     slug = 'favourite';
   }
 
-  return <Navigate to={`/buy/${slug}`} />;
+  return router.push(`/buy/${slug}`);
 };
 
 export default CustomBuyRouter;

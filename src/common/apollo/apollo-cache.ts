@@ -37,9 +37,22 @@ const cache = new InMemoryCache({
   }
 });
 
-const persistCacheInstance = persistCache({
-  cache,
-  storage: new LocalStorageWrapper(window.localStorage)
-});
+let persistCacheInstance: Promise<void> | null = null;
+
+if (typeof window !== 'undefined') {
+  persistCacheInstance = persistCache({
+    cache,
+    storage: new LocalStorageWrapper(window.localStorage)
+  });
+} else {
+  persistCacheInstance = persistCache({
+    cache,
+    storage: new LocalStorageWrapper({
+      getItem: (key: string) => key || null,
+      setItem: (key: string) => key || null,
+      removeItem: (key: string) => key || null
+    })
+  });
+}
 
 export { cache, persistCacheInstance };

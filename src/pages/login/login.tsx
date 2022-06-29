@@ -1,8 +1,8 @@
 import { Button, Card, CardContent, TextField } from '@mui/material';
+import Link from 'next/link';
 import { useState } from 'react';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
 import {
   FORM_EMAIL_VALIDATION_REGEX,
   GOOGLE_CAPTCHA_SITEKEY,
@@ -115,7 +115,7 @@ const Login = () => {
             </Button>
           </form>
           <p className={classes.paragraphText}>
-            Or <Link to="/signup">register here</Link> for a new account.
+            Or <Link href="/signup">register here</Link> for a new account.
           </p>
         </CardContent>
       </Card>

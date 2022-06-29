@@ -12,10 +12,10 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import Moment from 'react-moment';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import CoinBuy from '../../components/coin-buy';
 import CoinSVG from '../../components/coin-svg';
@@ -25,13 +25,13 @@ import useStyles from './use-styles';
 
 const CoinPage = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
-  const { coinId } = useParams();
+  const router = useRouter();
+  const { coinId } = router.query;
   const { data, loading } = useQuery(GET_PAGE_DATA, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',
     variables: {
-      id: coinId?.toUpperCase()
+      id: coinId && String(coinId).toUpperCase()
     }
   });
 
@@ -39,7 +39,7 @@ const CoinPage = () => {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-first',
     variables: {
-      id: coinId?.toUpperCase()
+      id: coinId && String(coinId).toUpperCase()
     }
   });
 
@@ -57,12 +57,12 @@ const CoinPage = () => {
   const bitcoinRandPrice = dataPair ? Number(dataPair.pair.last_trade) : 1;
 
   const handleBackButton = () => {
-    navigate('/buy');
+    router.push('/buy');
     // TODO refactor
     // if (history.action === 'PUSH') {
     //   history.goBack();
     // } else {
-    //   navigate('/buy');
+    //   router.push('/buy');
     // }
   };
 
@@ -95,10 +95,10 @@ const CoinPage = () => {
             <CircularProgress className={classes.progress} size="4rem" />
           )}
           {!loading && !metaCoin.description && (
-            <CoinSVG coinSymbol={coinId || ''} />
+            <CoinSVG coinSymbol={String(coinId) || ''} />
           )}
           {!loading && metaCoin.logo && (
-            <img
+            <Image
               src={metaCoin.logo}
               width="64"
               height="64"

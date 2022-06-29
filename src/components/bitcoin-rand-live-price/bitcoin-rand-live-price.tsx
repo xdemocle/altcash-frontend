@@ -22,7 +22,9 @@ const BitcoinRandLivePrice = () => {
     );
 
     return () => {
-      window.clearInterval(intervalBtcPrice);
+      if (typeof window !== 'undefined') {
+        window.clearInterval(intervalBtcPrice);
+      }
     };
   }, [getLivePrice]);
 

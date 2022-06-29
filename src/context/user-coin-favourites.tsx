@@ -7,8 +7,13 @@ export interface UserCoinFavouritesContextProps {
   removeUserCoinFavourites: (symbol: string) => void;
 }
 
-const userCoinFavouritesLocal =
-  window.localStorage.getItem('userCoinFavourites');
+const userCoinFavouritesLocal = () => {
+  if (typeof window !== 'undefined') {
+    return window.localStorage.getItem('userCoinFavourites') || '';
+  }
+
+  return '';
+};
 
 export const UserCoinFavouritesContext =
   createContext<UserCoinFavouritesContextProps>(
@@ -22,7 +27,7 @@ interface Props {
 const UserCoinFavouritesProvider = ({ children }: Props) => {
   const [userCoinFavourites, setUserCoinFavourites] = useState<
     UserCoinFavouritesContextProps['userCoinFavourites']
-  >(userCoinFavouritesLocal ? JSON.parse(userCoinFavouritesLocal) : []);
+  >(!!userCoinFavouritesLocal() ? JSON.parse(userCoinFavouritesLocal()) : []);
 
   const addUserCoinFavourites = (symbol: string) => {
     userCoinFavourites.push(symbol as never);

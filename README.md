@@ -35,13 +35,14 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ## First Setup
 
-Copy the below and paste it in a new file in root of the project called *.env*
+Copy the below and paste it in a new file in root of the project called _.env_
 
 ```
-REACT_APP_GRAPHQL_SERVER=https://altcash-backend-staging.herokuapp.com
+NEXT_PUBLIC_GRAPHQL_SERVER=https://altcash-backend-staging.herokuapp.com
 ```
 
 Run:
+
 ```
 yarn install
 yarn start

@@ -2,7 +2,7 @@ import { ShoppingBasket, Star, StarBorder } from '@mui/icons-material';
 import {
   Button,
   Divider,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
@@ -10,8 +10,8 @@ import {
   useMediaQuery
 } from '@mui/material';
 import clsx from 'clsx';
+import Link from 'next/link';
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
@@ -61,10 +61,9 @@ const CoinItem = ({ coin }: Props) => {
 
   return (
     <Fragment>
-      <ListItem
-        button
+      <ListItemButton
         component={Link}
-        to={`/coin/${coin.id.toLowerCase()}`}
+        href={`/coin/${coin.id.toLowerCase()}`}
         className={classes.listItem}
       >
         <ListItemIcon>
@@ -88,7 +87,7 @@ const CoinItem = ({ coin }: Props) => {
               <Button
                 aria-label="Buy now"
                 component={Link}
-                to={`/coin/${coin.id.toLowerCase()}`}
+                href={`/coin/${coin.id.toLowerCase()}`}
               >
                 <ShoppingBasket />
               </Button>
@@ -108,7 +107,7 @@ const CoinItem = ({ coin }: Props) => {
             </Button>
           </Tooltip>
         </ListItemSecondaryAction>
-      </ListItem>
+      </ListItemButton>
       <Divider />
     </Fragment>
   );

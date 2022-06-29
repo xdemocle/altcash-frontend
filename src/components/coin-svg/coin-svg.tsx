@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import clsx from 'clsx';
 import { find } from 'lodash';
+import Image from 'next/image';
 import { ReactSVG } from 'react-svg';
 import { svgCoinPathHelper } from '../../common/utils';
 import { GET_META_COIN_LOGO } from '../../graphql/queries';
@@ -57,7 +58,7 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
       )}
     />
   ) : (
-    <img
+    <Image
       src={imgCoinPath}
       alt={`Logo ${coinSymbol}`}
       width="32"

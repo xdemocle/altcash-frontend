@@ -4,7 +4,8 @@ import { createProxyMiddleware } from 'http-proxy-middleware';
 
 const app = express();
 
-const graphqlApiUri = process.env.REACT_APP_API_URL || 'http://localhost:4000/';
+const graphqlApiUri =
+  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/';
 
 const root = `${__dirname}/build`;
 app.use(express.static(root));

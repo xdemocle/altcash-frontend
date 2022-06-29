@@ -5,7 +5,7 @@ import {
   NewReleases as NewReleasesIcon
 } from '@mui/icons-material';
 import { Paper, Tab, Tabs, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { SYMBOLS_FEATURED } from '../../common/constants';
 import HeaderFabButtons from '../../components/header-fab-buttons';
 import CoinsList from '../../containers/coins-list';
@@ -43,31 +43,31 @@ const BuyTabPage = () => {
       <Paper className={classes.paper}>
         <Tabs
           value={tab}
-          onChange={(evt, tab) => handleChange(tab)}
+          onChange={(_evt, tab) => handleChange(tab)}
           indicatorColor="primary"
           textColor="primary"
         >
-          <Tab
-            label="Featured"
-            icon={<NewReleasesIcon />}
-            classes={{ root: classes.tabRoot }}
-            component={Link}
-            to={'/buy/featured'}
-          />
-          <Tab
-            label="All Coins"
-            icon={<ListIcon />}
-            classes={{ root: classes.tabRoot }}
-            component={Link}
-            to={'/buy/all'}
-          />
-          <Tab
-            label="Favourite"
-            icon={<Star />}
-            classes={{ root: classes.tabRoot }}
-            component={Link}
-            to={'/buy/favourite'}
-          />
+          <Link href={'/buy/featured'}>
+            <Tab
+              label="Featured"
+              icon={<NewReleasesIcon />}
+              classes={{ root: classes.tabRoot }}
+            />
+          </Link>
+          <Link href={'/buy/all'}>
+            <Tab
+              label="All Coins"
+              icon={<ListIcon />}
+              classes={{ root: classes.tabRoot }}
+            />
+          </Link>
+          <Link href={'/buy/favourite'}>
+            <Tab
+              label="Favourite"
+              icon={<Star />}
+              classes={{ root: classes.tabRoot }}
+            />
+          </Link>
         </Tabs>
       </Paper>
 

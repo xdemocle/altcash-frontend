@@ -13,7 +13,7 @@ import {
   Tooltip
 } from '@mui/material';
 // import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
+import Link from 'next/link';
 import useAuth from '../../hooks/use-auth';
 import useStyles from './use-styles';
 
@@ -33,7 +33,7 @@ const MainLinks = (props: Props) => {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={NavLink} to="/" className={classes.listItem}>
+        <ListItem component={Link} href="/" className={classes.listItem}>
           <ListItemIcon>
             <HomeOutlined className={classes.icons} />
           </ListItemIcon>
@@ -46,15 +46,17 @@ const MainLinks = (props: Props) => {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={NavLink} to="/buy" className={classes.listItem}>
-          <ListItemIcon>
-            <MonetizationOnOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText
-            primary="Crypto Coins"
-            className={classes.listItemText}
-          />
-        </ListItem>
+        <Link href="/buy">
+          <ListItem className={classes.listItem}>
+            <ListItemIcon>
+              <MonetizationOnOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText
+              primary="Crypto Coins"
+              className={classes.listItemText}
+            />
+          </ListItem>
+        </Link>
       </Tooltip>
 
       {!!auth.isAuthenticated && (
@@ -63,19 +65,17 @@ const MainLinks = (props: Props) => {
           placement="right"
           enterDelay={isSidebarOpen ? 2000 : 50}
         >
-          <ListItem
-            component={NavLink}
-            to="/overview"
-            className={classes.listItem}
-          >
-            <ListItemIcon>
-              <StorefrontOutlined className={classes.icons} />
-            </ListItemIcon>
-            <ListItemText
-              primary="Your area"
-              className={classes.listItemText}
-            />
-          </ListItem>
+          <Link href="/overview">
+            <ListItem className={classes.listItem}>
+              <ListItemIcon>
+                <StorefrontOutlined className={classes.icons} />
+              </ListItemIcon>
+              <ListItemText
+                primary="Your area"
+                className={classes.listItemText}
+              />
+            </ListItem>
+          </Link>
         </Tooltip>
       )}
 
@@ -84,28 +84,28 @@ const MainLinks = (props: Props) => {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={NavLink} to="/about" className={classes.listItem}>
-          <ListItemIcon>
-            <PeopleAltOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="About Us" className={classes.listItemText} />
-        </ListItem>
+        <Link href="/about">
+          <ListItem className={classes.listItem}>
+            <ListItemIcon>
+              <PeopleAltOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText primary="About Us" className={classes.listItemText} />
+          </ListItem>
+        </Link>
       </Tooltip>
       <Tooltip
         title="Support"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem
-          component={NavLink}
-          to="/support"
-          className={classes.listItem}
-        >
-          <ListItemIcon>
-            <ContactSupportOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Support" className={classes.listItemText} />
-        </ListItem>
+        <Link href="support">
+          <ListItem className={classes.listItem}>
+            <ListItemIcon>
+              <ContactSupportOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText primary="Support" className={classes.listItemText} />
+          </ListItem>
+        </Link>
       </Tooltip>
       {/* <Tooltip
         title="Login in your area"
@@ -113,7 +113,7 @@ const MainLinks = (props: Props) => {
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
         <ListItem
-          component={NavLink}
+          component={Link}
           to="/login"
           className={clsx(classes.listItem, classes.listItemLast)}
         >
