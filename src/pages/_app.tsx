@@ -20,10 +20,8 @@ import UserCoinFavouritesProvider from '../context/user-coin-favourites';
 import '../styles/global.css';
 
 // import { CustomBuyRouter } from '../pages/buy';
-// import useStyles from '../styles/use-styles';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  // const classes = useStyles();
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -66,7 +64,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   content="width=device-width, initial-scale=1"
                 />
               </Head>
-              {/* <div className={classes.root}> */}
               <div>
                 <CssBaseline />
                 <ScrollToTop />

@@ -118,6 +118,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
                 min: coin.minTradeSize * multiplier
               }}
               InputProps={{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 startAdornment: (
                   <InputAdornment position="start">R</InputAdornment>
@@ -179,6 +180,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
                 // max: 10,
               }}
               InputProps={{
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">
@@ -189,7 +191,6 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               value={cryptoCurrency}
               onChange={(e) => setCryptoCurrency(Number(e.target.value))}
               disabled={!gridReverse}
-              // type="number"
             />
           </Grid>
         </div>

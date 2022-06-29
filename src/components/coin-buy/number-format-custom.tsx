@@ -16,7 +16,7 @@ const NumberFormatCustom = ({
     <NumberFormat
       {...other}
       getInputRef={inputRef}
-      onValueChange={(values: { value: any }) => {
+      onValueChange={(values: { value: string }) => {
         onChange({
           target: {
             name: name,
