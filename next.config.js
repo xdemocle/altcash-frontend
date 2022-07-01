@@ -1,5 +1,10 @@
 module.exports = {
   reactStrictMode: true,
+  experimental: {
+    images: {
+      unoptimized: true
+    }
+  },
   images: {
     domains: [
       's2.coinmarketcap.com',

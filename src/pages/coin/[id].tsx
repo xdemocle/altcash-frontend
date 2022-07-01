@@ -16,12 +16,19 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import Moment from 'react-moment';
+import { apolloClient } from '../../common/apollo/apollo-client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import CoinBuy from '../../components/coin-buy';
 import CoinSVG from '../../components/coin-svg';
 import LinkExtBlank from '../../components/link-ext-blank';
-import { GET_PAGE_DATA, GET_META_COIN, GET_PAIR } from '../../graphql/queries';
-import useStyles from './use-styles';
+import {
+  GET_PAGE_DATA,
+  GET_META_COIN,
+  GET_PAIR,
+  GET_META_COIN_LOGO
+} from '../../graphql/queries';
+import { Metadata } from '../../graphql/types';
+import useStyles from '../../styles/coin-use-styles';
 
 const CoinPage: NextPage = () => {
   const classes = useStyles();
@@ -284,3 +291,29 @@ const CoinPage: NextPage = () => {
 };
 
 export default CoinPage;
+
+export async function getStaticPaths() {
+  const { data } = await apolloClient.query({
+    query: GET_META_COIN_LOGO
+  });
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data?.metaCoinAll?.map((coin: Metadata) => ({
+    params: { id: coin.symbol.toLowerCase() }
+  }));
+
+  // We'll pre-render only these paths at build time.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps() {
+  const { data } = await apolloClient.query({
+    query: GET_META_COIN_LOGO
+  });
+
+  return {
+    props: {
+      metaCoinAll: data.metaCoinAll.slice(0, 4)
+    }
+  };
+}

@@ -1,9 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { List, Typography } from '@mui/material';
 import { isUndefined } from 'lodash';
-import CoinItem, { ICoin } from '../../components/coin-item';
+import CoinItem from '../../components/coin-item';
 import Loader from '../../components/loader';
 import { GET_COINS } from '../../graphql/queries';
+import { Coin } from '../../graphql/types';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import useStyles from './use-styles';
 
@@ -21,10 +22,11 @@ const CoinsUserList = ({ predefined }: Props) => {
   });
 
   const isFeaturedView = !isUndefined(predefined);
+  const dataCoins = data?.coins;
 
   return (
     <div className={classes.root}>
-      {data && data.coins && !data.coins.length && networkStatus === 7 && (
+      {dataCoins && !dataCoins.length && networkStatus === 7 && (
         <Typography variant="subtitle1">
           No{' '}
           {isFeaturedView
@@ -32,14 +34,14 @@ const CoinsUserList = ({ predefined }: Props) => {
             : 'starred coins. Add some first.'}
         </Typography>
       )}
-      {data && data.coins && (
+      {dataCoins && (
         <List>
-          {data.coins.map((coin: ICoin, ix: number) => (
+          {dataCoins.map((coin: Coin, ix: number) => (
             <CoinItem key={`${coin.name}${ix}`} coin={coin} />
           ))}
         </List>
       )}
-      {loading && (!(data && data.coins) || networkStatus === 4) && (
+      {loading && (!dataCoins || networkStatus === 4) && (
         <Loader
           text={
             <Typography variant="subtitle1">

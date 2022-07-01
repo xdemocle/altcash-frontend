@@ -27,3 +27,5 @@ export const getPaystackConfig = (amount: number) => {
     publicKey: PAYSTACK_PUBLICK_KEY
   } as PaystackProps;
 };
+
+export const isServer = () => typeof window === 'undefined';

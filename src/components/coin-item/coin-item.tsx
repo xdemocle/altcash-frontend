@@ -12,28 +12,14 @@ import {
 import clsx from 'clsx';
 import Link from 'next/link';
 import { Fragment, SyntheticEvent } from 'react';
+import { Coin } from '../../graphql/types';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';
 
-export interface ICoin {
-  minTradeSize: number;
-  id: string;
-  name: string;
-  status: string;
-  symbol: string;
-}
-
-export interface ITicker {
-  askRate: number;
-  bidRate: number;
-  id: string;
-  lastTradeRate: number;
-}
-
 type Props = {
-  coin: ICoin;
+  coin: Coin;
 };
 
 const CoinItem = ({ coin }: Props) => {

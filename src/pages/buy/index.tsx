@@ -1,3 +1,4 @@
+import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import {
@@ -7,7 +8,7 @@ import {
 } from '../../common/constants';
 import useGlobal from '../../hooks/use-global';
 
-const CustomBuyRouter = () => {
+const CustomBuyRouter: NextPage = () => {
   const router = useRouter();
   const { tab } = useGlobal();
 

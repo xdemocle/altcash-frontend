@@ -1,10 +1,10 @@
 import { isNaN } from 'lodash';
 import { useEffect, useState } from 'react';
 import { btcToRandPrice } from '../common/currency';
-import { ITicker } from '../components/coin-item/coin-item';
+import { Ticker } from '../graphql/types';
 import useGlobal from './use-global';
 
-const useMultiplier = (ticker: ITicker) => {
+const useMultiplier = (ticker: Ticker) => {
   const { bitcoinRandPrice } = useGlobal();
   const [multiplier, setMultiplier] = useState(1);
 

@@ -6,10 +6,15 @@ import { COINS_PER_PAGE } from '../../common/constants';
 import CoinsListMap from '../../components/coins-list-map';
 import Loader from '../../components/loader';
 import { GET_COINS, GET_COUNT } from '../../graphql/queries';
+import { Coin } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
 import useStyles from './use-styles';
 
-const CoinsList = () => {
+interface CoinsListProps {
+  coins: Coin[];
+}
+
+const CoinsList = ({ coins }: CoinsListProps) => {
   const classes = useStyles();
   const { coinListPage, coinPageNeedle, setCoinListPage } = useGlobal();
   const { data: dataCount } = useQuery(GET_COUNT);
@@ -21,8 +26,10 @@ const CoinsList = () => {
     }
   });
 
+  const dataCoins = coins || data?.coins;
+
   const getListSlice = (limit: number) => {
-    const list = data ? clone(data.coins) : [];
+    const list = dataCoins ? clone(dataCoins) : [];
 
     if (coinPageNeedle && !!coinPageNeedle.length) {
       return list;
@@ -37,7 +44,7 @@ const CoinsList = () => {
     setCoinListPage(page);
   };
 
-  const coins = getListSlice(COINS_PER_PAGE);
+  const coinsList = getListSlice(COINS_PER_PAGE);
 
   const coinsTotal =
     dataCount && dataCount.count
@@ -51,17 +58,17 @@ const CoinsList = () => {
   return (
     <Fragment>
       {error && <Typography>Error! {error.message}</Typography>}
-      {coins && !coins.length && networkStatus === 7 && (
+      {coinsList && !coinsList.length && networkStatus === 7 && (
         <Typography variant="subtitle1">No results...</Typography>
       )}
-      {loading && (!coins || networkStatus === 4) && (
+      {loading && (!coinsList || networkStatus === 4) && (
         <Loader
           text={
             <Typography variant="subtitle2">Loading coins list...</Typography>
           }
         />
       )}
-      {networkStatus !== 4 && coins && <CoinsListMap coins={coins} />}
+      {networkStatus !== 4 && coinsList && <CoinsListMap coins={coinsList} />}
 
       {!hidePagination && (
         <div className={classes.pagination}>

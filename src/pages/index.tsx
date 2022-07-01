@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import type { NextPage } from 'next';
 import Link from 'next/link';
 import { Parallax } from 'react-parallax';
-import useStyles from './use-styles';
+import useStyles from '../styles/index-use-styles';
 
 const Index: NextPage = () => {
   const classes = useStyles();

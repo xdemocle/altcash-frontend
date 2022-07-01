@@ -7,6 +7,7 @@ import {
 import { Paper, Tab, Tabs, Typography } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { apolloClient } from '../../common/apollo/apollo-client';
 import {
   BUY_TAB_ALL,
   BUY_TAB_FAVOURITE,
@@ -16,11 +17,16 @@ import {
 import HeaderFabButtons from '../../components/header-fab-buttons';
 import CoinsList from '../../containers/coins-list';
 import CoinsUserList from '../../containers/coins-user-list';
-import { GET_META_COIN_LOGO } from '../../graphql/queries';
+import { GET_COINS, GET_META_COIN_LOGO } from '../../graphql/queries';
+import { Coin } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
-import useStyles from './use-styles';
+import useStyles from '../../styles/buy-use-styles';
 
-const BuyTabPage: NextPage = () => {
+interface BuyTabPageProps {
+  coins: Coin[];
+}
+
+const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
   const router = useRouter();
   const classes = useStyles();
   const { tab, setTab } = useGlobal();
@@ -85,10 +91,33 @@ const BuyTabPage: NextPage = () => {
       </Paper>
 
       {tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
-      {tab === 1 && <CoinsList />}
+      {tab === 1 && <CoinsList coins={coins} />}
       {tab === 2 && <CoinsUserList />}
     </div>
   );
 };
+
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { tab: 'featured' } },
+      { params: { tab: 'all' } },
+      { params: { tab: 'favourite' } }
+    ],
+    fallback: true
+  };
+}
+
+export async function getStaticProps() {
+  const { data: coins } = await apolloClient.query({
+    query: GET_COINS
+  });
+
+  return {
+    props: {
+      coins
+    }
+  };
+}
 
 export default BuyTabPage;

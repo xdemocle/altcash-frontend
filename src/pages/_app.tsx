@@ -8,13 +8,14 @@ import CookieConsent from 'react-cookie-consent';
 import { persistCacheInstance } from '../common/apollo/apollo-cache';
 import { apolloClient } from '../common/apollo/apollo-client';
 import { theme } from '../common/theme';
+import { isServer } from '../common/utils';
 import BitcoinRandLivePrice from '../components/bitcoin-rand-live-price';
 import ScrollToTop from '../components/scroll-to-top';
 import TickersLivePrice from '../components/tickers-live-price';
 // import AuthLayout from '../containers/auth-layout';
 import DefaultLayout from '../containers/default-layout';
 // import PrivateRoute from '../containers/private-route';
-import AuthProvider from '../context/auth';
+// import AuthProvider from '../context/auth';
 import GlobalProvider from '../context/global';
 import UserCoinFavouritesProvider from '../context/user-coin-favourites';
 import '../styles/global.css';
@@ -22,7 +23,7 @@ import '../styles/global.css';
 // import { CustomBuyRouter } from '../pages/buy';
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(isServer() ? true : false);
 
   useEffect(() => {
     const loadCache = async () => {
@@ -58,46 +59,46 @@ function MyApp({ Component, pageProps }: AppProps) {
       <UserCoinFavouritesProvider>
         <ApolloProvider client={apolloClient}>
           <ThemeProvider theme={theme}>
-            <AuthProvider>
-              <Head>
-                <title>
-                  Altcash | Buy crypto coins fast and easy in South Africa!
-                </title>
-                <meta
-                  name="viewport"
-                  content="width=device-width, initial-scale=1"
-                />
-              </Head>
-              <div>
-                <CssBaseline />
-                <ScrollToTop />
-                <BitcoinRandLivePrice />
-                <TickersLivePrice />
+            {/* <AuthProvider> */}
+            <Head>
+              <title>
+                Altcash | Buy crypto coins fast and easy in South Africa!
+              </title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1"
+              />
+            </Head>
+            <div>
+              <CssBaseline />
+              <ScrollToTop />
+              <BitcoinRandLivePrice />
+              <TickersLivePrice />
 
-                <DefaultLayout>
-                  <Component {...pageProps} />
-                </DefaultLayout>
+              <DefaultLayout>
+                <Component {...pageProps} />
+              </DefaultLayout>
 
-                <CookieConsent
-                  location="bottom"
-                  buttonText="Okay"
-                  cookieName="CookiePrivacySA"
-                  style={{ background: '#2B373B' }}
-                  buttonStyle={{
-                    color: '#ffffff',
-                    background: '#28a745',
-                    fontSize: '13px',
-                    font: 'inherit',
-                    textTransform: 'uppercase',
-                    fontWeight: '700',
-                    borderRadius: '.25rem'
-                  }}
-                  expires={150}
-                >
-                  This website uses cookies to enhance the user experience.
-                </CookieConsent>
-              </div>
-            </AuthProvider>
+              <CookieConsent
+                location="bottom"
+                buttonText="Okay"
+                cookieName="CookiePrivacySA"
+                style={{ background: '#2B373B' }}
+                buttonStyle={{
+                  color: '#ffffff',
+                  background: '#28a745',
+                  fontSize: '13px',
+                  font: 'inherit',
+                  textTransform: 'uppercase',
+                  fontWeight: '700',
+                  borderRadius: '.25rem'
+                }}
+                expires={150}
+              >
+                This website uses cookies to enhance the user experience.
+              </CookieConsent>
+            </div>
+            {/* </AuthProvider> */}
           </ThemeProvider>
         </ApolloProvider>
       </UserCoinFavouritesProvider>
