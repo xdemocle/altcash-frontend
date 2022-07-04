@@ -10,9 +10,6 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 0
-    // [breakpoints.up('xl')]: {
-    //   minHeight: 'auto'
-    // }
   },
   icons: {
     marginLeft: '1.3rem',
