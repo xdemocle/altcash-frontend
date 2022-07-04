@@ -14,7 +14,7 @@ export const strPxRem = (px: string) => {
 };
 
 export const persistUserCoinFavourites = (coins: string[]) => {
-  if (typeof window === 'undefined') return;
+  if (isServer()) return;
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins));
 };
 

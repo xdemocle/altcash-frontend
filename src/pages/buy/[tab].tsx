@@ -7,6 +7,7 @@ import {
 import { Paper, Tab, Tabs, Typography } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { apolloClient } from '../../common/apollo/apollo-client';
 import {
   BUY_TAB_ALL,
@@ -29,28 +30,44 @@ interface BuyTabPageProps {
 const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
   const router = useRouter();
   const classes = useStyles();
-  const { tab, setTab } = useGlobal();
+  const { tab: tabNumber, setTab } = useGlobal();
+  const tab = router.query.tab;
   const symbolsFeatured = SYMBOLS_FEATURED.sort();
 
   useQuery(GET_META_COIN_LOGO, {
     fetchPolicy: 'cache-first'
   });
 
-  const handleChange = (tab: number) => {
-    setTab(tab);
-
+  const handleChange = (tabNumber: number) => {
+    setTab(tabNumber);
     let slug = 'featured';
 
-    if (tab === BUY_TAB_FEATURED) {
+    if (tabNumber === BUY_TAB_FEATURED) {
       slug = 'featured';
-    } else if (tab === BUY_TAB_ALL) {
+    } else if (tabNumber === BUY_TAB_ALL) {
       slug = 'all';
-    } else if (tab === BUY_TAB_FAVOURITE) {
+    } else if (tabNumber === BUY_TAB_FAVOURITE) {
       slug = 'favourite';
     }
 
     router.push(`/buy/${slug}`, undefined, { shallow: true });
   };
+
+  // This affect only the selected UI tab
+  useEffect(() => {
+    let slug = 0;
+
+    if (tab === 'featured') {
+      slug = BUY_TAB_FEATURED;
+    } else if (tab === 'all') {
+      slug = BUY_TAB_ALL;
+    } else if (tab === 'favourite') {
+      slug = BUY_TAB_FAVOURITE;
+    }
+
+    setTab(slug);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [setTab]);
 
   return (
     <div className={classes.root}>
@@ -67,8 +84,8 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
 
       <Paper className={classes.paper}>
         <Tabs
-          value={tab}
-          onChange={(_evt, tab) => handleChange(tab)}
+          value={tabNumber}
+          onChange={(_evt, tabNumber) => handleChange(tabNumber)}
           indicatorColor="primary"
           textColor="primary"
         >
@@ -90,9 +107,11 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
         </Tabs>
       </Paper>
 
-      {tab === 0 && <CoinsUserList predefined={symbolsFeatured} />}
-      {tab === 1 && <CoinsList coins={coins} />}
-      {tab === 2 && <CoinsUserList />}
+      {tab === 'featured' && (
+        <CoinsUserList coins={coins} predefined={symbolsFeatured} />
+      )}
+      {tab === 'all' && <CoinsList coins={coins} />}
+      {tab === 'favourite' && <CoinsUserList coins={coins} />}
     </div>
   );
 };
@@ -109,13 +128,13 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps() {
-  const { data: coins } = await apolloClient.query({
+  const { data } = await apolloClient.query({
     query: GET_COINS
   });
 
   return {
     props: {
-      coins
+      coins: data.coins
     }
   };
 }

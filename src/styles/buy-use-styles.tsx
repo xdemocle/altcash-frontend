@@ -20,7 +20,7 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   },
   title: {
     lineHeight: '3rem',
-    marginTop: '-3.1rem !important'
+    marginTop: '-3.25rem !important'
   },
   buttonLoadMore: {
     margin: '0 auto'

@@ -10,6 +10,7 @@ import useStyles from './use-styles';
 
 interface Props {
   predefined?: string[];
+  coins: Coin[];
 }
 
 const CoinsUserList = ({ predefined }: Props) => {

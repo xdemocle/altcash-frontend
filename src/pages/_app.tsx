@@ -1,4 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
+import createCache from '@emotion/cache';
+import { CacheProvider } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
@@ -20,7 +22,7 @@ import GlobalProvider from '../context/global';
 import UserCoinFavouritesProvider from '../context/user-coin-favourites';
 import '../styles/global.css';
 
-// import { CustomBuyRouter } from '../pages/buy';
+const cache = createCache({ key: 'next' });
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [loaded, setLoaded] = useState(isServer() ? true : false);
@@ -43,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       setLoaded(true);
     };
 
-    if (typeof window !== 'undefined') {
+    if (!isServer()) {
       loadCache();
     } else {
       setLoaded(true);
@@ -55,54 +57,56 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <GlobalProvider>
-      <UserCoinFavouritesProvider>
-        <ApolloProvider client={apolloClient}>
-          <ThemeProvider theme={theme}>
-            {/* <AuthProvider> */}
-            <Head>
-              <title>
-                Altcash | Buy crypto coins fast and easy in South Africa!
-              </title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1"
-              />
-            </Head>
-            <div>
-              <CssBaseline />
-              <ScrollToTop />
-              <BitcoinRandLivePrice />
-              <TickersLivePrice />
+    <CacheProvider value={cache}>
+      <GlobalProvider>
+        <UserCoinFavouritesProvider>
+          <ApolloProvider client={apolloClient}>
+            <ThemeProvider theme={theme}>
+              {/* <AuthProvider> */}
+              <Head>
+                <title>
+                  Altcash | Buy crypto coins fast and easy in South Africa!
+                </title>
+                <meta
+                  name="viewport"
+                  content="width=device-width, initial-scale=1"
+                />
+              </Head>
+              <div>
+                <CssBaseline />
+                <ScrollToTop />
+                <BitcoinRandLivePrice />
+                <TickersLivePrice />
 
-              <DefaultLayout>
-                <Component {...pageProps} />
-              </DefaultLayout>
+                <DefaultLayout>
+                  <Component {...pageProps} />
+                </DefaultLayout>
 
-              <CookieConsent
-                location="bottom"
-                buttonText="Okay"
-                cookieName="CookiePrivacySA"
-                style={{ background: '#2B373B' }}
-                buttonStyle={{
-                  color: '#ffffff',
-                  background: '#28a745',
-                  fontSize: '13px',
-                  font: 'inherit',
-                  textTransform: 'uppercase',
-                  fontWeight: '700',
-                  borderRadius: '.25rem'
-                }}
-                expires={150}
-              >
-                This website uses cookies to enhance the user experience.
-              </CookieConsent>
-            </div>
-            {/* </AuthProvider> */}
-          </ThemeProvider>
-        </ApolloProvider>
-      </UserCoinFavouritesProvider>
-    </GlobalProvider>
+                <CookieConsent
+                  location="bottom"
+                  buttonText="Okay"
+                  cookieName="CookiePrivacySA"
+                  style={{ background: '#2B373B' }}
+                  buttonStyle={{
+                    color: '#ffffff',
+                    background: '#28a745',
+                    fontSize: '13px',
+                    font: 'inherit',
+                    textTransform: 'uppercase',
+                    fontWeight: '700',
+                    borderRadius: '.25rem'
+                  }}
+                  expires={150}
+                >
+                  This website uses cookies to enhance the user experience.
+                </CookieConsent>
+              </div>
+              {/* </AuthProvider> */}
+            </ThemeProvider>
+          </ApolloProvider>
+        </UserCoinFavouritesProvider>
+      </GlobalProvider>
+    </CacheProvider>
   );
 }
 

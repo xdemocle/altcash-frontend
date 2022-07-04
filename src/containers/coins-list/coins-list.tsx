@@ -3,6 +3,7 @@ import { Pagination, Typography } from '@mui/material';
 import { clone, find } from 'lodash';
 import { ChangeEvent, Fragment } from 'react';
 import { COINS_PER_PAGE } from '../../common/constants';
+import { isServer } from '../../common/utils';
 import CoinsListMap from '../../components/coins-list-map';
 import Loader from '../../components/loader';
 import { GET_COINS, GET_COUNT } from '../../graphql/queries';
@@ -25,8 +26,7 @@ const CoinsList = ({ coins }: CoinsListProps) => {
       term: coinPageNeedle
     }
   });
-
-  const dataCoins = coins || data?.coins;
+  const dataCoins = data?.coins;
 
   const getListSlice = (limit: number) => {
     const list = dataCoins ? clone(dataCoins) : [];
@@ -44,33 +44,35 @@ const CoinsList = ({ coins }: CoinsListProps) => {
     setCoinListPage(page);
   };
 
-  const coinsList = getListSlice(COINS_PER_PAGE);
-
+  const hidePagination = coinPageNeedle && !!coinPageNeedle.length;
+  const coinsList = isServer() ? coins : getListSlice(COINS_PER_PAGE);
   const coinsTotal =
     dataCount && dataCount.count
       ? find(dataCount.count, { name: 'markets' }).count
       : 0;
-
-  const hidePagination = coinPageNeedle && !!coinPageNeedle.length;
-
   const paginationPages = Math.floor(coinsTotal / COINS_PER_PAGE);
 
   return (
     <Fragment>
       {error && <Typography>Error! {error.message}</Typography>}
+
       {coinsList && !coinsList.length && networkStatus === 7 && (
         <Typography variant="subtitle1">No results...</Typography>
       )}
-      {loading && (!coinsList || networkStatus === 4) && (
+
+      {!isServer() && loading && (!coinsList || networkStatus === 4) && (
         <Loader
           text={
             <Typography variant="subtitle2">Loading coins list...</Typography>
           }
         />
       )}
-      {networkStatus !== 4 && coinsList && <CoinsListMap coins={coinsList} />}
 
-      {!hidePagination && (
+      {(networkStatus !== 4 || isServer()) && coinsList && (
+        <CoinsListMap coins={coinsList} />
+      )}
+
+      {!isServer() && !hidePagination && (
         <div className={classes.pagination}>
           <Pagination
             count={paginationPages}

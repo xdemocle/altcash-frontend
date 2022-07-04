@@ -1,6 +1,7 @@
 import { useLazyQuery } from '@apollo/client';
 import { Fragment, useEffect } from 'react';
 import { REFRESH_BTCZAR_LIVE_PRICE } from '../../common/constants';
+import { isServer } from '../../common/utils';
 import { GET_PAIR } from '../../graphql/queries';
 import useGlobal from '../../hooks/use-global';
 
@@ -22,7 +23,7 @@ const BitcoinRandLivePrice = () => {
     );
 
     return () => {
-      if (typeof window !== 'undefined') {
+      if (!isServer()) {
         window.clearInterval(intervalBtcPrice);
       }
     };

@@ -313,7 +313,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      metaCoinAll: data.metaCoinAll.slice(0, 4)
+      metaCoinAll: data.metaCoinAll
     }
   };
 }

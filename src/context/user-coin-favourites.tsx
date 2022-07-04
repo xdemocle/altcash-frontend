@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from 'react';
-import { persistUserCoinFavourites } from '../common/utils';
+import { isServer, persistUserCoinFavourites } from '../common/utils';
 
 export interface UserCoinFavouritesContextProps {
   userCoinFavourites: string[];
@@ -8,7 +8,7 @@ export interface UserCoinFavouritesContextProps {
 }
 
 const userCoinFavouritesLocal = () => {
-  if (typeof window !== 'undefined') {
+  if (!isServer()) {
     return window.localStorage.getItem('userCoinFavourites') || '';
   }
 
@@ -27,7 +27,7 @@ interface Props {
 const UserCoinFavouritesProvider = ({ children }: Props) => {
   const [userCoinFavourites, setUserCoinFavourites] = useState<
     UserCoinFavouritesContextProps['userCoinFavourites']
-  >(!!userCoinFavouritesLocal() ? JSON.parse(userCoinFavouritesLocal()) : []);
+  >(userCoinFavouritesLocal() ? JSON.parse(userCoinFavouritesLocal()) : []);
 
   const addUserCoinFavourites = (symbol: string) => {
     userCoinFavourites.push(symbol as never);
