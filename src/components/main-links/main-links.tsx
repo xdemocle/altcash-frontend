@@ -35,8 +35,8 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
       >
         <Link href="/">
           <ListItemButton
-            component={'a'}
-            href="/"
+            // component={'a'}
+            // href="/"
             selected={router.pathname == '/'}
             className={clsx(
               classes.listItem,

@@ -22,7 +22,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
   listItem: {
     flexGrow: '0 !important',
     position: 'relative',
-    paddingLeft: '1.8rem',
+    paddingLeft: '1rem',
     paddingRight: '1.8rem',
     margin: '0',
     height: '4.75rem',
@@ -37,7 +37,7 @@ const useStyles = makeStyles(({ palette }: Theme) => ({
       position: 'absolute',
       top: '50%',
       transform: 'translateY(-50%)',
-      left: '2.2rem',
+      left: '1.5rem',
       width: '3.2rem',
       height: '3.2rem',
       borderRadius: '.6rem',
