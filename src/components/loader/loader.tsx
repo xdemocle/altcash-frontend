@@ -11,6 +11,7 @@ const Loader = ({ centered = false, text = '' }: Props) => {
   const sxStyle = {
     display: 'flex',
     alignItems: 'center',
+    gap: 2,
     flexDirection: centered ? 'column' : 'row'
   };
 

@@ -6,7 +6,9 @@ import {
   BUY_TAB_FAVOURITE,
   BUY_TAB_FEATURED
 } from '../../common/constants';
+import Loader from '../../components/loader';
 import useGlobal from '../../hooks/use-global';
+import RootCenteredStyled from '../../styled/root-centered';
 
 const CustomBuyRouter: NextPage = () => {
   const router = useRouter();
@@ -26,7 +28,11 @@ const CustomBuyRouter: NextPage = () => {
     router.push(`/buy/${slug}`);
   }, [router, tab]);
 
-  return null;
+  return (
+    <RootCenteredStyled>
+      <Loader text="Loading coins page..." centered />
+    </RootCenteredStyled>
+  );
 };
 
 export default CustomBuyRouter;
