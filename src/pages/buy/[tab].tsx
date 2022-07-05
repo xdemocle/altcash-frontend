@@ -15,7 +15,8 @@ import {
   BUY_TAB_FEATURED,
   SYMBOLS_FEATURED
 } from '../../common/constants';
-import HeaderFabButtons from '../../components/header-fab-buttons';
+// import HeaderFabButtons from '../../components/header-fab-buttons';
+import TopBarSearch from '../../components/top-bar-search';
 import CoinsList from '../../containers/coins-list';
 import CoinsUserList from '../../containers/coins-user-list';
 import { GET_COINS, GET_META_COIN_LOGO } from '../../graphql/queries';
@@ -80,7 +81,8 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
         Altcoins
       </Typography>
 
-      <HeaderFabButtons />
+      {/* <HeaderFabButtons /> */}
+      <TopBarSearch />
 
       <Paper className={classes.paper}>
         <Tabs

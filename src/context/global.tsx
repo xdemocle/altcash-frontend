@@ -16,8 +16,8 @@ import {
 export interface GlobalContextProps {
   isSidebarOpen: boolean;
   setSidebarOpen: Dispatch<SetStateAction<boolean>>;
-  coinPageNeedle: string | undefined;
-  setCoinPageNeedle: Dispatch<SetStateAction<string | undefined>>;
+  coinPageNeedle: string;
+  setCoinPageNeedle: Dispatch<SetStateAction<string>>;
   coinListPage: number;
   setCoinListPage: Dispatch<SetStateAction<number>>;
   tab: number;
@@ -51,7 +51,7 @@ const GlobalProvider = ({ children }: Props) => {
   const [isSidebarOpen, setSidebarOpen] =
     useState<GlobalContextProps['isSidebarOpen']>(false);
   const [coinPageNeedle, setCoinPageNeedle] =
-    useState<GlobalContextProps['coinPageNeedle']>(undefined);
+    useState<GlobalContextProps['coinPageNeedle']>('');
   const [coinListPage, setCoinListPage] =
     useState<GlobalContextProps['coinListPage']>(1);
   const [bitcoinRandPrice, setBitcoinRandPrice] =
