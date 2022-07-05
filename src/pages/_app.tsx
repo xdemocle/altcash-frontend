@@ -1,6 +1,5 @@
 import { ApolloProvider } from '@apollo/client';
-import createCache from '@emotion/cache';
-import { CacheProvider } from '@emotion/react';
+import { CacheProvider, EmotionCache } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
@@ -9,6 +8,7 @@ import { useEffect, useState } from 'react';
 import CookieConsent from 'react-cookie-consent';
 import { persistCacheInstance } from '../common/apollo/apollo-cache';
 import { apolloClient } from '../common/apollo/apollo-client';
+import createEmotionCache from '../common/createEmotionCache';
 import { theme } from '../common/theme';
 import { isServer } from '../common/utils';
 import BitcoinRandLivePrice from '../components/bitcoin-rand-live-price';
@@ -22,9 +22,13 @@ import GlobalProvider from '../context/global';
 import UserCoinFavouritesProvider from '../context/user-coin-favourites';
 import '../styles/global.css';
 
-const cache = createCache({ key: 'next' });
+const clientSideEmotionCache = createEmotionCache();
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({
+  Component,
+  emotionCache = clientSideEmotionCache,
+  pageProps
+}: AppProps & { emotionCache: EmotionCache }) {
   const [loaded, setLoaded] = useState(isServer() ? true : false);
 
   useEffect(() => {
@@ -57,7 +61,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }
 
   return (
-    <CacheProvider value={cache}>
+    <CacheProvider value={emotionCache}>
       <GlobalProvider>
         <UserCoinFavouritesProvider>
           <ApolloProvider client={apolloClient}>
@@ -75,7 +79,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <div>
                 <CssBaseline />
                 <ScrollToTop />
-                <BitcoinRandLivePrice />
+                {!isServer() && <BitcoinRandLivePrice />}
                 <TickersLivePrice />
 
                 <DefaultLayout>

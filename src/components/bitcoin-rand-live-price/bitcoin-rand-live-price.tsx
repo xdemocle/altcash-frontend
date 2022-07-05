@@ -17,14 +17,17 @@ const BitcoinRandLivePrice = () => {
   useEffect(() => {
     getLivePrice();
 
-    const intervalBtcPrice = setInterval(
-      () => getLivePrice(),
-      REFRESH_BTCZAR_LIVE_PRICE
-    );
+    const intervalBtcPrice = () => {
+      if (!isServer()) {
+        return setInterval(() => getLivePrice(), REFRESH_BTCZAR_LIVE_PRICE);
+      }
+
+      return 0;
+    };
 
     return () => {
       if (!isServer()) {
-        window.clearInterval(intervalBtcPrice);
+        window.clearInterval(intervalBtcPrice());
       }
     };
   }, [getLivePrice]);

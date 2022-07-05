@@ -303,7 +303,7 @@ export async function getStaticPaths() {
   }));
 
   // We'll pre-render only these paths at build time.
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 }
 
 export async function getStaticProps() {

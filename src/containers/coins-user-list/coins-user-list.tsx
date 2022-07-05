@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { List, Typography } from '@mui/material';
 import { isUndefined } from 'lodash';
+import { isServer } from '../../common/utils';
 import CoinItem from '../../components/coin-item';
 import Loader from '../../components/loader';
 import { GET_COINS } from '../../graphql/queries';
@@ -8,12 +9,12 @@ import { Coin } from '../../graphql/types';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import useStyles from './use-styles';
 
-interface Props {
+interface CoinsUserListProps {
   predefined?: string[];
   coins: Coin[];
 }
 
-const CoinsUserList = ({ predefined }: Props) => {
+const CoinsUserList = ({ predefined, coins }: CoinsUserListProps) => {
   const classes = useStyles();
   const { userCoinFavourites } = useUserCoinFavourites();
   const { loading, data, networkStatus } = useQuery(GET_COINS, {
@@ -24,10 +25,11 @@ const CoinsUserList = ({ predefined }: Props) => {
 
   const isFeaturedView = !isUndefined(predefined);
   const dataCoins = data?.coins;
+  const coinsList = isServer() ? coins : dataCoins;
 
   return (
     <div className={classes.root}>
-      {dataCoins && !dataCoins.length && networkStatus === 7 && (
+      {!isServer() && coinsList && !coinsList.length && networkStatus === 7 && (
         <Typography variant="subtitle1">
           No{' '}
           {isFeaturedView
@@ -35,14 +37,14 @@ const CoinsUserList = ({ predefined }: Props) => {
             : 'starred coins. Add some first.'}
         </Typography>
       )}
-      {dataCoins && (
+      {coinsList && (
         <List>
-          {dataCoins.map((coin: Coin, ix: number) => (
+          {coinsList.map((coin: Coin, ix: number) => (
             <CoinItem key={`${coin.name}${ix}`} coin={coin} />
           ))}
         </List>
       )}
-      {loading && (!dataCoins || networkStatus === 4) && (
+      {!isServer() && loading && (!coinsList || networkStatus === 4) && (
         <Loader
           text={
             <Typography variant="subtitle1">

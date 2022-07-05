@@ -9,8 +9,6 @@ import { cache } from './apollo-cache';
 export const apolloClient = new ApolloClient({
   ssrMode: isServer(),
   cache,
-  uri: isServer()
-    ? process.env.NEXT_PUBLIC_GRAPHQL_SERVER + '/graphql'
-    : '/graphql',
+  uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER + '/graphql',
   connectToDevTools: true
 });
