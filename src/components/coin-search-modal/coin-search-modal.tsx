@@ -5,6 +5,7 @@ import useStyles from './use-styles';
 
 type Props = {
   handleClose: () => void;
+  // eslint-disable-next-line no-unused-vars
   updateNeedle: (needle: string) => void;
   open: boolean;
 };

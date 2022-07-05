@@ -10,6 +10,7 @@ import {
   // concatPagination
 } from '@apollo/client/utilities';
 import { persistCache, LocalStorageWrapper } from 'apollo3-cache-persist';
+import { isServer } from '../utils';
 
 // This is the same cache you pass into new ApolloClient and we going to use
 // it also for persisting the cache locally.
@@ -37,9 +38,13 @@ const cache = new InMemoryCache({
   }
 });
 
-const persistCacheInstance = persistCache({
-  cache,
-  storage: new LocalStorageWrapper(window.localStorage)
-});
+let persistCacheInstance: Promise<void> | null = null;
+
+if (!isServer()) {
+  persistCacheInstance = persistCache({
+    cache,
+    storage: new LocalStorageWrapper(window.localStorage)
+  });
+}
 
 export { cache, persistCacheInstance };

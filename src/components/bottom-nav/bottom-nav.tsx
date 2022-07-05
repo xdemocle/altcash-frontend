@@ -5,18 +5,17 @@ import {
   People
 } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
+import { useRouter } from 'next/router';
 import { useState, ChangeEvent } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 import useStyles from './use-styles';
 
 const SimpleBottomNavigation = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const [pathname, setPathname] = useState(location.pathname);
+  const router = useRouter();
+  const [pathname, setPathname] = useState(router.pathname);
 
   const handleChange = (event: ChangeEvent<unknown>, newValue: string) => {
-    navigate(newValue);
+    router.push(newValue);
     setPathname(newValue);
   };
 

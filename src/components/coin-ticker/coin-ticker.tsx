@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import { GET_TICKER, GET_PAIR } from '../../graphql/queries';
-import { ICoin } from '../coin-item/coin-item';
+import { Coin } from '../../graphql/types';
 
 type Props = {
-  coin: ICoin;
+  coin: Coin;
 };
 
 const CoinTicker = ({ coin }: Props) => {

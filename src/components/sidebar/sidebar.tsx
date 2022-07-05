@@ -1,7 +1,7 @@
 import { Tooltip, useMediaQuery, useTheme } from '@mui/material';
 import clsx from 'clsx';
+import Image from 'next/image';
 import { useEffect } from 'react';
-import Logo from '../../assets/logo.png';
 import useGlobal from '../../hooks/use-global';
 import MainLinks from '../main-links';
 import styles from './sidebar.module.scss';
@@ -64,7 +64,12 @@ const Sidebar = () => {
               onClick={handleDrawerToggle}
               aria-label="toggle drawer"
             >
-              <img src={Logo} alt="logo.png" width="48" />
+              <Image
+                src={'/assets/logo.png'}
+                alt="logo.png"
+                width="48"
+                height="48"
+              />
             </ButtonLogoStyled>
             <ToolbarTitleStyled variant="subtitle1">Altcash</ToolbarTitleStyled>
           </ToolbarHeaderStyled>

@@ -2,7 +2,7 @@ import { ShoppingBasket, Star, StarBorder } from '@mui/icons-material';
 import {
   Button,
   Divider,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemSecondaryAction,
   ListItemText,
@@ -10,30 +10,16 @@ import {
   useMediaQuery
 } from '@mui/material';
 import clsx from 'clsx';
-import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
+import { Fragment, SyntheticEvent } from 'react';
+import { Coin } from '../../graphql/types';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';
 
-export interface ICoin {
-  minTradeSize: number;
-  id: string;
-  name: string;
-  status: string;
-  symbol: string;
-}
-
-export interface ITicker {
-  askRate: number;
-  bidRate: number;
-  id: string;
-  lastTradeRate: number;
-}
-
 type Props = {
-  coin: ICoin;
+  coin: Coin;
 };
 
 const CoinItem = ({ coin }: Props) => {
@@ -49,7 +35,9 @@ const CoinItem = ({ coin }: Props) => {
     return null;
   }
 
-  const iconButtonHandler = () => {
+  const iconButtonHandler = (e: SyntheticEvent) => {
+    e.preventDefault();
+
     if (userCoinFavourites.includes(coin.symbol as never)) {
       removeUserCoinFavourites(coin.symbol);
     } else {
@@ -61,54 +49,53 @@ const CoinItem = ({ coin }: Props) => {
 
   return (
     <Fragment>
-      <ListItem
-        button
-        component={Link}
-        to={`/coin/${coin.id.toLowerCase()}`}
-        className={classes.listItem}
-      >
-        <ListItemIcon>
-          <CoinSVG coinSymbol={coin.symbol} />
-        </ListItemIcon>
-        <ListItemText
-          primary={coin.name}
-          secondary={`${coin.symbol.toUpperCase()} ${
-            coin.status !== 'ONLINE' ? ' / ' + coin.status : ''
-          }`}
-          className={classes.column}
-        />
-        <ListItemText
-          primary={<CoinTicker coin={coin} />}
-          secondary="Live Price"
-          className={clsx(classes.column, classes.ticker, coin.status)}
-        />
-        <ListItemSecondaryAction>
-          {showBuy && (
-            <Tooltip title="Buy now" placement="bottom">
-              <Button
-                aria-label="Buy now"
-                component={Link}
-                to={`/coin/${coin.id.toLowerCase()}`}
+      <Link href={`/coin/${coin.id.toLowerCase()}`}>
+        <a style={{ textDecoration: 'none' }}>
+          <ListItemButton className={classes.listItem}>
+            <ListItemIcon>
+              <CoinSVG coinSymbol={coin.symbol} />
+            </ListItemIcon>
+            <ListItemText
+              primary={coin.name || coin.id}
+              secondary={`${coin.symbol.toUpperCase()} ${
+                coin.status !== 'ONLINE' ? ' / ' + coin.status : ''
+              }`}
+              className={classes.column}
+            />
+            <ListItemText
+              primary={<CoinTicker coin={coin} />}
+              secondary="Live Price"
+              className={clsx(classes.column, classes.ticker, coin.status)}
+            />
+            <ListItemSecondaryAction>
+              {showBuy && (
+                <Tooltip title="Buy now" placement="bottom">
+                  <Link href={`/coin/${coin.id.toLowerCase()}`}>
+                    <Button aria-label="Buy now">
+                      <ShoppingBasket />
+                    </Button>
+                  </Link>
+                </Tooltip>
+              )}
+              <Tooltip
+                title={`${
+                  isStarred ? 'Remove from' : 'Add to'
+                } your favourites`}
+                placement="bottom"
               >
-                <ShoppingBasket />
-              </Button>
-            </Tooltip>
-          )}
-          <Tooltip
-            title={`${isStarred ? 'Remove from' : 'Add to'} your favourites`}
-            placement="bottom"
-          >
-            <Button
-              aria-label={`${
-                isStarred ? 'Remove from' : 'Add to'
-              } your favourites`}
-              onClick={iconButtonHandler}
-            >
-              {isStarred ? <Star /> : <StarBorder />}
-            </Button>
-          </Tooltip>
-        </ListItemSecondaryAction>
-      </ListItem>
+                <Button
+                  aria-label={`${
+                    isStarred ? 'Remove from' : 'Add to'
+                  } your favourites`}
+                  onClick={iconButtonHandler}
+                >
+                  {isStarred ? <Star /> : <StarBorder />}
+                </Button>
+              </Tooltip>
+            </ListItemSecondaryAction>
+          </ListItemButton>
+        </a>
+      </Link>
       <Divider />
     </Fragment>
   );

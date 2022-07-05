@@ -1,6 +1,6 @@
 import { AppBar } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const AppBarStyled = styled(AppBar)(({ theme }) => ({
   zIndex: 1,
@@ -13,10 +13,6 @@ const AppBarStyled = styled(AppBar)(({ theme }) => ({
     top: 'auto',
     bottom: 0,
     marginBottom: '0'
-  },
-  [theme.breakpoints.up('xl')]: {
-    position: 'absolute',
-    borderRadius: '.5rem .5rem 0 0'
   }
 }));
 

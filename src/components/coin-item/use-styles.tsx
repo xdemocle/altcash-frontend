@@ -2,7 +2,8 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles(() => ({
   column: {
-    maxWidth: '35%'
+    maxWidth: '35%',
+    textDecoration: 'none !important'
   },
   ticker: {
     maxWidth: '30%'

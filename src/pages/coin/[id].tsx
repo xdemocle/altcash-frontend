@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { useQuery } from '@apollo/client';
 import { ArrowBack } from '@mui/icons-material';
 import {
@@ -12,26 +11,36 @@ import {
   Tooltip,
   Typography
 } from '@mui/material';
+import type { NextPage } from 'next';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 import Moment from 'react-moment';
-import { useNavigate } from 'react-router-dom';
-import { useParams } from 'react-router-dom';
+import { apolloClient } from '../../common/apollo/apollo-client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import CoinBuy from '../../components/coin-buy';
 import CoinSVG from '../../components/coin-svg';
 import LinkExtBlank from '../../components/link-ext-blank';
-import { GET_PAGE_DATA, GET_META_COIN, GET_PAIR } from '../../graphql/queries';
-import useStyles from './use-styles';
+import {
+  GET_PAGE_DATA,
+  GET_META_COIN,
+  GET_PAIR,
+  GET_META_COIN_LOGO
+} from '../../graphql/queries';
+import { Metadata } from '../../graphql/types';
+import useStyles from '../../styles/coin-use-styles';
 
-const CoinPage = () => {
+const CoinPage: NextPage = () => {
   const classes = useStyles();
-  const navigate = useNavigate();
-  const { coinId } = useParams();
+  const router = useRouter();
+  const { id } = router.query;
+  const coinId = String(id).toUpperCase();
+
   const { data, loading } = useQuery(GET_PAGE_DATA, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',
     variables: {
-      id: coinId?.toUpperCase()
+      id: coinId
     }
   });
 
@@ -39,7 +48,7 @@ const CoinPage = () => {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-first',
     variables: {
-      id: coinId?.toUpperCase()
+      id: coinId
     }
   });
 
@@ -57,12 +66,12 @@ const CoinPage = () => {
   const bitcoinRandPrice = dataPair ? Number(dataPair.pair.last_trade) : 1;
 
   const handleBackButton = () => {
-    navigate('/buy');
+    router.push('/buy');
     // TODO refactor
     // if (history.action === 'PUSH') {
     //   history.goBack();
     // } else {
-    //   navigate('/buy');
+    //   router.push('/buy');
     // }
   };
 
@@ -88,7 +97,7 @@ const CoinPage = () => {
           gutterBottom
           className={classes.title}
         >
-          {dataCoin.name}
+          {dataCoin.name || coinId}
         </Typography>
         <div className={classes.pageAvatar}>
           {loading && (
@@ -98,7 +107,7 @@ const CoinPage = () => {
             <CoinSVG coinSymbol={coinId || ''} />
           )}
           {!loading && metaCoin.logo && (
-            <img
+            <Image
               src={metaCoin.logo}
               width="64"
               height="64"
@@ -206,7 +215,6 @@ const CoinPage = () => {
           <ListItem divider>
             <ListItemText primary="Last update" className={classes.column} />
             <ListItemText
-              // @ts-ignore
               primary={<Moment>{dataSummary.updatedAt}</Moment>}
               secondary="Page data refresh automatically"
               className={classes.column}
@@ -283,3 +291,29 @@ const CoinPage = () => {
 };
 
 export default CoinPage;
+
+export async function getStaticPaths() {
+  const { data } = await apolloClient.query({
+    query: GET_META_COIN_LOGO
+  });
+
+  // Get the paths we want to pre-render based on posts
+  const paths = data?.metaCoinAll?.map((coin: Metadata) => ({
+    params: { id: coin.symbol.toLowerCase() }
+  }));
+
+  // We'll pre-render only these paths at build time.
+  return { paths, fallback: true };
+}
+
+export async function getStaticProps() {
+  const { data } = await apolloClient.query({
+    query: GET_META_COIN_LOGO
+  });
+
+  return {
+    props: {
+      metaCoinAll: data.metaCoinAll
+    }
+  };
+}

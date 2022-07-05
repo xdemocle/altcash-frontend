@@ -31,7 +31,7 @@ const HeaderfabButtons = (props: Props) => {
   return (
     <Fragment>
       <div className={classes.root}>
-        <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+        <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
           {coinPageNeedle && (
             <Tooltip title="Reset search results">
               <Button

@@ -27,9 +27,10 @@ export const SYMBOLS_FEATURED = [
 export const GOOGLE_CAPTCHA_SITEKEY =
   '6LchYHUaAAAAAOFX3hvJfIKirgL7465qTK-_9y3B';
 
-export const PAYSTACK_EMAIL = process.env.REACT_APP_PAYSTACK_EMAIL;
+export const PAYSTACK_EMAIL = process.env.NEXT_PUBLIC_PAYSTACK_EMAIL;
 
-export const PAYSTACK_PUBLICK_KEY = process.env.REACT_APP_PAYSTACK_PUBLICK_KEY;
+export const PAYSTACK_PUBLICK_KEY =
+  process.env.NEXT_PUBLIC_PAYSTACK_PUBLICK_KEY;
 
 // eslint-disable-next-line
 export const FORM_EMAIL_VALIDATION_REGEX =

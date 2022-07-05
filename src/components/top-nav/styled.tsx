@@ -1,7 +1,7 @@
 import { AppBar } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-const AppBarStyled = styled(AppBar)(({ theme }) => ({
+const AppBarStyled = styled(AppBar)(() => ({
   zIndex: 1,
   boxShadow: 'none',
   padding: '.5rem 1.5rem',

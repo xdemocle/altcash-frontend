@@ -1,11 +1,12 @@
 import { Theme } from '@mui/material';
 import { green } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
-import { strPxRem } from '../../common/utils';
+import { strPxRem } from '../common/utils';
 
 const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {
     position: 'relative',
+    maxWidth: '64rem',
     paddingTop: typography.pxToRem(strPxRem(spacing(2))),
     marginLeft: typography.pxToRem(strPxRem(spacing(2))),
     paddingBottom: typography.pxToRem(strPxRem(spacing(2))),
@@ -19,7 +20,7 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   },
   title: {
     lineHeight: '3rem',
-    marginTop: '-3.1rem !important'
+    marginTop: '-3.25rem !important'
   },
   buttonLoadMore: {
     margin: '0 auto'

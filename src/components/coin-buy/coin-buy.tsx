@@ -19,14 +19,14 @@ import {
   PERCENTAGE_FEE_PAYMENT
 } from '../../common/constants';
 import { getPaystackConfig } from '../../common/utils';
+import { Coin, Ticker } from '../../graphql/types';
 import useMultiplier from '../../hooks/use-multiplier';
-import { ICoin, ITicker } from '../coin-item/coin-item';
 import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
 
 interface Props {
-  coin: ICoin;
-  ticker: ITicker;
+  coin: Coin;
+  ticker: Ticker;
 }
 
 const CoinBuy = ({ coin, ticker }: Props) => {
@@ -56,7 +56,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
     console.debug('closed', e);
   };
 
-  const onClickReverse = (e: unknown) => {
+  const onClickReverse = () => {
     setGridReverse(!gridReverse);
   };
 
@@ -191,7 +191,6 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               value={cryptoCurrency}
               onChange={(e) => setCryptoCurrency(Number(e.target.value))}
               disabled={!gridReverse}
-              // type="number"
             />
           </Grid>
         </div>

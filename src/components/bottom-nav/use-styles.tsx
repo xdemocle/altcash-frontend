@@ -1,7 +1,6 @@
-import { Theme } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'fixed',
     bottom: 0,

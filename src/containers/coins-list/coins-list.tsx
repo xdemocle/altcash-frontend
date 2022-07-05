@@ -3,13 +3,19 @@ import { Pagination, Typography } from '@mui/material';
 import { clone, find } from 'lodash';
 import { ChangeEvent, Fragment } from 'react';
 import { COINS_PER_PAGE } from '../../common/constants';
+import { isServer } from '../../common/utils';
 import CoinsListMap from '../../components/coins-list-map';
 import Loader from '../../components/loader';
 import { GET_COINS, GET_COUNT } from '../../graphql/queries';
+import { Coin } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
 import useStyles from './use-styles';
 
-const CoinsList = () => {
+interface CoinsListProps {
+  coins: Coin[];
+}
+
+const CoinsList = ({ coins }: CoinsListProps) => {
   const classes = useStyles();
   const { coinListPage, coinPageNeedle, setCoinListPage } = useGlobal();
   const { data: dataCount } = useQuery(GET_COUNT);
@@ -20,9 +26,10 @@ const CoinsList = () => {
       term: coinPageNeedle
     }
   });
+  const dataCoins = data?.coins;
 
   const getListSlice = (limit: number) => {
-    const list = data ? clone(data.coins) : [];
+    const list = dataCoins ? clone(dataCoins) : [];
 
     if (coinPageNeedle && !!coinPageNeedle.length) {
       return list;
@@ -37,33 +44,35 @@ const CoinsList = () => {
     setCoinListPage(page);
   };
 
-  const coins = getListSlice(COINS_PER_PAGE);
-
+  const hidePagination = coinPageNeedle && !!coinPageNeedle.length;
+  const coinsList = isServer() ? coins : getListSlice(COINS_PER_PAGE);
   const coinsTotal =
     dataCount && dataCount.count
       ? find(dataCount.count, { name: 'markets' }).count
       : 0;
-
-  const hidePagination = coinPageNeedle && !!coinPageNeedle.length;
-
   const paginationPages = Math.floor(coinsTotal / COINS_PER_PAGE);
 
   return (
     <Fragment>
       {error && <Typography>Error! {error.message}</Typography>}
-      {coins && !coins.length && networkStatus === 7 && (
+
+      {coinsList && !coinsList.length && networkStatus === 7 && (
         <Typography variant="subtitle1">No results...</Typography>
       )}
-      {loading && (!coins || networkStatus === 4) && (
+
+      {!isServer() && loading && (!coinsList || networkStatus === 4) && (
         <Loader
           text={
             <Typography variant="subtitle2">Loading coins list...</Typography>
           }
         />
       )}
-      {networkStatus !== 4 && coins && <CoinsListMap coins={coins} />}
 
-      {!hidePagination && (
+      {(networkStatus !== 4 || isServer()) && coinsList && (
+        <CoinsListMap coins={coinsList} />
+      )}
+
+      {!isServer() && !hidePagination && (
         <div className={classes.pagination}>
           <Pagination
             count={paginationPages}

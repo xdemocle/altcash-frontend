@@ -2,29 +2,29 @@ import {
   ContactSupportOutlined,
   HomeOutlined, // LockOutlined,
   MonetizationOnOutlined,
-  PeopleAltOutlined,
-  StorefrontOutlined
+  PeopleAltOutlined
 } from '@mui/icons-material';
 import {
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Tooltip
 } from '@mui/material';
-// import clsx from 'clsx';
-import { NavLink } from 'react-router-dom';
-import useAuth from '../../hooks/use-auth';
+import clsx from 'clsx';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+// import useAuth from '../../hooks/use-auth';
 import useStyles from './use-styles';
 
 type Props = {
   isSidebarOpen: boolean;
 };
 
-const MainLinks = (props: Props) => {
-  const auth = useAuth();
+const MainLinks = ({ isSidebarOpen }: Props) => {
+  // const auth = useAuth();
+  const router = useRouter();
   const classes = useStyles();
-  const { isSidebarOpen } = props;
 
   return (
     <List component="nav" className={classes.nav}>
@@ -33,12 +33,22 @@ const MainLinks = (props: Props) => {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={NavLink} to="/" className={classes.listItem}>
-          <ListItemIcon>
-            <HomeOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Home" className={classes.listItemText} />
-        </ListItem>
+        <Link href="/">
+          <ListItemButton
+            component={'a'}
+            href="/"
+            selected={router.pathname == '/'}
+            className={clsx(
+              classes.listItem,
+              router.pathname == '/' ? 'active' : ''
+            )}
+          >
+            <ListItemIcon>
+              <HomeOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText primary="Home" className={classes.listItemText} />
+          </ListItemButton>
+        </Link>
       </Tooltip>
 
       <Tooltip
@@ -46,83 +56,71 @@ const MainLinks = (props: Props) => {
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={NavLink} to="/buy" className={classes.listItem}>
-          <ListItemIcon>
-            <MonetizationOnOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText
-            primary="Crypto Coins"
-            className={classes.listItemText}
-          />
-        </ListItem>
-      </Tooltip>
-
-      {!!auth.isAuthenticated && (
-        <Tooltip
-          title="Your private area"
-          placement="right"
-          enterDelay={isSidebarOpen ? 2000 : 50}
-        >
-          <ListItem
-            component={NavLink}
-            to="/overview"
-            className={classes.listItem}
+        <Link href="/buy">
+          <ListItemButton
+            component={'a'}
+            href="/buy"
+            className={clsx(
+              classes.listItem,
+              router.pathname == '/buy/[tab]' ? 'active' : ''
+            )}
+            selected={router.pathname == '/buy/[tab]'}
           >
             <ListItemIcon>
-              <StorefrontOutlined className={classes.icons} />
+              <MonetizationOnOutlined className={classes.icons} />
             </ListItemIcon>
             <ListItemText
-              primary="Your area"
+              primary="Crypto Coins"
               className={classes.listItemText}
             />
-          </ListItem>
-        </Tooltip>
-      )}
+          </ListItemButton>
+        </Link>
+      </Tooltip>
 
       <Tooltip
         title="About Us"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem component={NavLink} to="/about" className={classes.listItem}>
-          <ListItemIcon>
-            <PeopleAltOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="About Us" className={classes.listItemText} />
-        </ListItem>
+        <Link href="/about">
+          <ListItemButton
+            component={'a'}
+            href="/about"
+            selected={router.pathname == '/about'}
+            className={clsx(
+              classes.listItem,
+              router.pathname == '/about' ? 'active' : ''
+            )}
+          >
+            <ListItemIcon>
+              <PeopleAltOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText primary="About Us" className={classes.listItemText} />
+          </ListItemButton>
+        </Link>
       </Tooltip>
       <Tooltip
         title="Support"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
-        <ListItem
-          component={NavLink}
-          to="/support"
-          className={classes.listItem}
-        >
-          <ListItemIcon>
-            <ContactSupportOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Support" className={classes.listItemText} />
-        </ListItem>
+        <Link href="/support">
+          <ListItemButton
+            component={'a'}
+            href="/support"
+            selected={router.pathname == '/support'}
+            className={clsx(
+              classes.listItem,
+              router.pathname == '/support' ? 'active' : ''
+            )}
+          >
+            <ListItemIcon>
+              <ContactSupportOutlined className={classes.icons} />
+            </ListItemIcon>
+            <ListItemText primary="Support" className={classes.listItemText} />
+          </ListItemButton>
+        </Link>
       </Tooltip>
-      {/* <Tooltip
-        title="Login in your area"
-        placement="right"
-        enterDelay={isSidebarOpen ? 2000 : 50}
-      >
-        <ListItem
-          component={NavLink}
-          to="/login"
-          className={clsx(classes.listItem, classes.listItemLast)}
-        >
-          <ListItemIcon>
-            <LockOutlined className={classes.icons} />
-          </ListItemIcon>
-          <ListItemText primary="Login" className={classes.listItemText} />
-        </ListItem>
-      </Tooltip> */}
     </List>
   );
 };

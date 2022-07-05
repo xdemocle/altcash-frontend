@@ -14,6 +14,7 @@ export const strPxRem = (px: string) => {
 };
 
 export const persistUserCoinFavourites = (coins: string[]) => {
+  if (isServer()) return;
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins));
 };
 
@@ -26,3 +27,5 @@ export const getPaystackConfig = (amount: number) => {
     publicKey: PAYSTACK_PUBLICK_KEY
   } as PaystackProps;
 };
+
+export const isServer = () => typeof window === 'undefined';

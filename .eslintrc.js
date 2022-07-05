@@ -3,9 +3,16 @@ module.exports = {
   env: {
     node: true
   },
+  extends: [
+    'next/core-web-vitals',
+    'prettier',
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@next/next/recommended'
+  ],
   parser: '@typescript-eslint/parser',
-  extends: ['react-app', 'plugin:@typescript-eslint/recommended', 'prettier'],
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['prettier', '@typescript-eslint'],
   rules: {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'warn',
     'no-console': [
@@ -14,16 +21,10 @@ module.exports = {
         allow: ['warn', 'error', 'debug', 'group', 'groupEnd']
       }
     ],
-    'no-unused-vars': ['warn'],
+    'no-unused-vars': ['off'],
+    '@typescript-eslint/no-unused-vars': ['warn'],
     'prettier/prettier': 'error',
     'arrow-body-style': 'off',
-    'prefer-arrow-callback': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/jsx-uses-react': 'off'
-  },
-  settings: {
-    react: {
-      version: 'detect'
-    }
+    'prefer-arrow-callback': 'off'
   }
 };

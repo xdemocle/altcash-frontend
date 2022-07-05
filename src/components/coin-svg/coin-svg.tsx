@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client';
 import clsx from 'clsx';
 import { find } from 'lodash';
+import Image from 'next/image';
 import { ReactSVG } from 'react-svg';
 import { svgCoinPathHelper } from '../../common/utils';
 import { GET_META_COIN_LOGO } from '../../graphql/queries';
@@ -45,9 +46,9 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
       'https://s2.coinmarketcap.com/static/img/coins/64x64/1831.png';
   }
 
-  return !!svgCoinPath ? (
+  return svgCoinPath ? (
     <ReactSVG
-      src={svgCoinPath}
+      src={svgCoinPath.default.src}
       className={clsx(
         classes.avatar,
         symbol,
@@ -57,7 +58,7 @@ const CoinSVG = ({ coinSymbol, size }: Props) => {
       )}
     />
   ) : (
-    <img
+    <Image
       src={imgCoinPath}
       alt={`Logo ${coinSymbol}`}
       width="32"

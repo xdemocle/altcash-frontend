@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import {
   createContext,
   Dispatch,
@@ -5,7 +6,6 @@ import {
   SetStateAction,
   useState
 } from 'react';
-import { useLocation } from 'react-router-dom';
 import {
   BUY_TABS_DEFAULT,
   BUY_TAB_ALL,
@@ -35,14 +35,14 @@ interface Props {
 }
 
 const GlobalProvider = ({ children }: Props) => {
-  const location = useLocation();
+  const router = useRouter();
   let defaultTab = BUY_TABS_DEFAULT;
 
-  if (location.pathname === '/buy/featured') {
+  if (router.pathname === '/buy/featured') {
     defaultTab = BUY_TAB_FEATURED;
-  } else if (location.pathname === '/buy/all') {
+  } else if (router.pathname === '/buy/all') {
     defaultTab = BUY_TAB_ALL;
-  } else if (location.pathname === '/buy/favourite') {
+  } else if (router.pathname === '/buy/favourite') {
     defaultTab = BUY_TAB_FAVOURITE;
   }
 

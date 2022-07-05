@@ -30,12 +30,11 @@ export const ToolbarStyled = styled('div')(({ theme }) => ({
   }
 }));
 
-export const ToolbarHeaderStyled = styled('div')(({ theme }) => ({
+export const ToolbarHeaderStyled = styled('div')(() => ({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'left',
-  padding: '1.5rem',
-  ...theme.mixins.toolbar
+  padding: '1.5rem'
 }));
 
 export const ButtonLogoStyled = styled(IconButton)(() => ({

@@ -1,17 +1,20 @@
 import { Button, Grid, Icon, Tooltip, Typography } from '@mui/material';
 import clsx from 'clsx';
+import type { NextPage } from 'next';
+import Link from 'next/link';
 import { Parallax } from 'react-parallax';
-import { Link } from 'react-router-dom';
-import image1 from '../../assets/hero.jpg';
-import image2 from '../../assets/section.jpg';
-import useStyles from './use-styles';
+import useStyles from '../styles/index-use-styles';
 
-const Landing = () => {
+const Index: NextPage = () => {
   const classes = useStyles();
 
   return (
     <div className={classes.root}>
-      <Parallax bgImage={image1} strength={300} bgStyle={{ top: '-5%' }}>
+      <Parallax
+        bgImage="/assets/hero.jpg"
+        strength={300}
+        bgStyle={{ top: '-5%' }}
+      >
         <div
           style={{ minHeight: '65vh', display: 'flex', alignItems: 'center' }}
         >
@@ -36,16 +39,16 @@ const Landing = () => {
               Buy crypto coins fast and easy in South Africa!
             </Typography>
             <hr className={classes.heroDivider} />
-            <Button
-              variant="contained"
-              color="primary"
-              size="large"
-              className={classes.ctoButton}
-              component={Link}
-              to="/buy"
-            >
-              Buy Altcoins now
-            </Button>
+            <Link href="/buy">
+              <Button
+                variant="contained"
+                color="primary"
+                size="large"
+                className={classes.ctoButton}
+              >
+                Buy Altcoins now
+              </Button>
+            </Link>
           </div>
         </div>
       </Parallax>
@@ -77,20 +80,24 @@ const Landing = () => {
           >
             Fast, anonymous and easy instant buying.
           </Typography>
-          <Button
-            variant="contained"
-            color="secondary"
-            size="large"
-            className={classes.ctoButton}
-            component={Link}
-            to="/buy"
-          >
-            Buy Altcoins now
-          </Button>
+          <Link href="/buy">
+            <Button
+              variant="contained"
+              color="secondary"
+              size="large"
+              className={classes.ctoButton}
+            >
+              Buy Altcoins now
+            </Button>
+          </Link>
         </Grid>
       </Grid>
 
-      <Parallax bgImage={image2} strength={300} bgStyle={{ top: '-20%' }}>
+      <Parallax
+        bgImage="/assets/section.jpg"
+        strength={300}
+        bgStyle={{ top: '-20%' }}
+      >
         <div style={{ minHeight: '45vh' }}>
           <div className={classes.parallaxContent}>
             <Grid container alignContent="center" justifyContent="center">
@@ -171,4 +178,4 @@ const Landing = () => {
   );
 };
 
-export default Landing;
+export default Index;

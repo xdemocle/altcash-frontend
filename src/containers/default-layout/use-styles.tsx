@@ -8,45 +8,27 @@ const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
   },
   appFrame: {
     zIndex: 1,
-    overflow: 'hidden',
     position: 'relative',
     width: '100%',
     minHeight: '100vh',
-    margin: '0 auto',
-    [breakpoints.up('xl')]: {
-      padding: '3rem 6rem 6rem 6rem',
-      height: 'calc(100vh - 12rem)',
-      maxWidth: '100rem'
-    }
+    margin: '0 auto'
   },
   inner: {
     display: 'flex',
     paddingTop: '4rem',
     [breakpoints.up('sm')]: {
       paddingTop: '0'
-    },
-    [breakpoints.up('xl')]: {
-      overflow: 'hidden',
-      minHeight: 'calc(100vh - 9rem)',
-      maxHeight: 'calc(100vh - 9rem)',
-      borderRadius: '1.5rem',
-      boxShadow: '0 0.25rem 1rem rgba(0,0,0,0.15)'
     }
   },
   content: {
     position: 'relative',
     flexGrow: 1,
-    overflow: 'hidden',
     minHeight: 'calc(100vh - 36px)',
     paddingBottom: typography.pxToRem(36),
     backgroundColor: '#f4f5f4',
     [breakpoints.only('xs')]: {
       minHeight: 'calc(100vh - 56px)',
       paddingBottom: typography.pxToRem(56)
-    },
-    [breakpoints.up('xl')]: {
-      overflowY: 'auto',
-      minHeight: 'auto'
     }
   }
 }));

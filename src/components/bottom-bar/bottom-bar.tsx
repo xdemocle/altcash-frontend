@@ -23,7 +23,7 @@ const BottomBar = () => {
           placement="top"
           arrow
         >
-          <LinkStyled to="/support">Support</LinkStyled>
+          <LinkStyled href="/support">Support</LinkStyled>
         </Tooltip>
         {' - '} &copy; Altcash {new Date().getFullYear()}
       </Typography>
