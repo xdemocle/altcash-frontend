@@ -11,7 +11,8 @@ import {
   Typography
 } from '@mui/material';
 import clsx from 'clsx';
-import { FormEvent, useEffect, useState } from 'react';
+import { Router, useRouter } from 'next/router';
+import { FC, FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import {
   MIN_AMOUNT_EXTRA,
@@ -24,15 +25,19 @@ import useMultiplier from '../../hooks/use-multiplier';
 import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
 
-interface Props {
+interface CoinBuyProps {
   coin: Coin;
   ticker: Ticker;
 }
 
-const CoinBuy = ({ coin, ticker }: Props) => {
+const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const classes = useStyles();
+  const router = useRouter();
   const [bulbColor, setBulbColor] = useState('green');
+  const [orderNumber, setOrderNumber] = useState('');
   const [gridReverse, setGridReverse] = useState(false);
+  const [gotoConfirmationOrder, setGotoConfirmationOrder] = useState(false);
+  const [formDisabled, setFormDisabled] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [localCurrency, setLocalCurrency] = useState(0);
   const [cryptoCurrency, setCryptoCurrency] = useState(0);
@@ -42,18 +47,27 @@ const CoinBuy = ({ coin, ticker }: Props) => {
   const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    setFormDisabled(true);
+
+    // new order to backend with reference
+    setOrderNumber('ALT' + Math.floor(Math.random() * 99999));
+
+    // store all in localStorage to repopulate the transaction
     if (localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA) {
       initializePayment(onPaymentSuccess, onPaymentClose);
     }
   };
 
   const onPaymentSuccess = (reference: unknown) => {
-    console.debug(reference);
-    // new order to backend with reference
+    console.debug('onPaymentSuccess', reference);
+    // update order to backend with reference
+    setGotoConfirmationOrder(true);
+    setFormDisabled(false);
   };
 
-  const onPaymentClose = (e: unknown) => {
-    console.debug('closed', e);
+  const onPaymentClose = () => {
+    console.debug('onPaymentClose');
+    setFormDisabled(false);
   };
 
   const onClickReverse = () => {
@@ -82,6 +96,14 @@ const CoinBuy = ({ coin, ticker }: Props) => {
       setLocalCurrency(cryptoCurrency * multiplier);
     }
   }, [gridReverse, cryptoCurrency, multiplier]);
+
+  useEffect(() => {
+    if (gotoConfirmationOrder) {
+      router.push(
+        `/order/${coin.symbol}/${orderNumber}/${cryptoCurrency}/${totalAmount}`
+      );
+    }
+  }, [gotoConfirmationOrder]);
 
   return (
     <form
@@ -126,7 +148,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               }}
               value={localCurrency}
               onChange={(e) => setLocalCurrency(Number(e.target.value))}
-              disabled={gridReverse}
+              disabled={gridReverse || formDisabled}
             />
           </Grid>
 
@@ -190,7 +212,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               }}
               value={cryptoCurrency}
               onChange={(e) => setCryptoCurrency(Number(e.target.value))}
-              disabled={!gridReverse}
+              disabled={!gridReverse || formDisabled}
             />
           </Grid>
         </div>
@@ -202,7 +224,7 @@ const CoinBuy = ({ coin, ticker }: Props) => {
               color="primary"
               type="submit"
               className={classes.buyButton}
-              disabled={cryptoCurrency <= coin.minTradeSize}
+              disabled={cryptoCurrency <= coin.minTradeSize || formDisabled}
             >
               Buy Now
             </Button>
@@ -235,12 +257,32 @@ const CoinBuy = ({ coin, ticker }: Props) => {
           >
             (Total buy) R {totalAmount.toFixed(2)} =
           </Typography>
-          (amount selected) R {localCurrency} +<br />
+          (amount selected) R{' '}
+          <NumberFormatCustom
+            displayType="text"
+            name="localCurrency"
+            onChange={() => null}
+            decimalScale={2}
+            value={Number(localCurrency)}
+          />{' '}
+          +<br />
           (payment fee) R{' '}
-          {((PERCENTAGE_FEE_PAYMENT / 100) * localCurrency).toFixed(2)} +<br />
-          (altcash fee) R {((PERCENTAGE_FEE / 100) * localCurrency).toFixed(
-            2
-          )}{' '}
+          <NumberFormatCustom
+            displayType="text"
+            name="percentageFeePayment"
+            onChange={() => null}
+            decimalScale={2}
+            value={(PERCENTAGE_FEE_PAYMENT / 100) * localCurrency}
+          />{' '}
+          +<br />
+          (altcash fee) R
+          <NumberFormatCustom
+            displayType="text"
+            name="percentageFeeAltcash"
+            onChange={() => null}
+            decimalScale={2}
+            value={(PERCENTAGE_FEE / 100) * localCurrency}
+          />{' '}
           +
           <br />
         </div>
