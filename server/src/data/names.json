@@ -32418,7 +32418,7 @@
     "name": "ChainZilla",
     "symbol": "ZILLA",
     "category": "coin",
-    "description": null,
+    "description": "",
     "slug": "chainzilla",
     "logo": "https://s2.coinmarketcap.com/static/img/coins/64x64/4437.png",
     "subreddit": "ChainZilla",
@@ -32601,6 +32601,6 @@
     "symbol": "TFC",
     "name": "Treasure Financial Coin",
     "slug": "treasure-financial-coin",
-    "description": null
+    "description": ""
   }
 }
