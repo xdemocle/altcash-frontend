@@ -10,7 +10,7 @@ interface CardConfirmationOrderProps {
   cryptoCurrency: number;
   totalAmount: number;
   orderNumber: string;
-  pin?: number;
+  pin?: string;
 }
 
 const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
@@ -18,10 +18,11 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
   cryptoCurrency,
   totalAmount,
   orderNumber,
-  pin = 0
+  pin
 }) => {
   const classes = useStyles();
   const [waitingOrderConfirmation, setOrderConfirmation] = useState(false);
+  const [showPinTooltip, setShowPinTooltip] = useState(false);
 
   // Simulate order confrimation succeeded
   useEffect(() => {
@@ -34,7 +35,7 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
         <Box>
           <h2 className={classes.confirmationTitle}>Payment received</h2>
 
-          {pin > 0 && (
+          {pin && (
             <h4 className={classes.confirmationTitleRed}>
               Take note of data below
             </h4>
@@ -46,9 +47,17 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
             <Tooltip
               placement="top"
               arrow
-              title="This PIN has been sent via e-mail to you."
+              title="This PIN has also been sent via e-mail to you."
+              open={showPinTooltip}
             >
-              <a href="#">[{pin === 0 ? '****' : pin}]</a>
+              <a
+                href="#"
+                onClick={() => setShowPinTooltip(true)}
+                onMouseOver={() => setShowPinTooltip(true)}
+                onMouseOut={() => setShowPinTooltip(false)}
+              >
+                {!pin ? '****' : pin}
+              </a>
             </Tooltip>
           </Typography>
 

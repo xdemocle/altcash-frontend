@@ -11,15 +11,17 @@ import {
   Typography
 } from '@mui/material';
 import clsx from 'clsx';
-import { Router, useRouter } from 'next/router';
+import cryptoRandomString from 'crypto-random-string';
+import { useRouter } from 'next/router';
 import { FC, FormEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import {
   MIN_AMOUNT_EXTRA,
+  ORDER_NUMBER_PREFIX,
   PERCENTAGE_FEE,
   PERCENTAGE_FEE_PAYMENT
 } from '../../common/constants';
-import { getPaystackConfig } from '../../common/utils';
+import { getPaystackConfig, isServer } from '../../common/utils';
 import { Coin, Ticker } from '../../graphql/types';
 import useMultiplier from '../../hooks/use-multiplier';
 import NumberFormatCustom from './number-format-custom';
@@ -34,9 +36,10 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const classes = useStyles();
   const router = useRouter();
   const [bulbColor, setBulbColor] = useState('green');
-  const [orderNumber, setOrderNumber] = useState('');
+  const [orderInfo, setOrderInfo] = useState('');
+  const [triggerConfirmationOrder, setTriggerConfirmationOrder] =
+    useState(false);
   const [gridReverse, setGridReverse] = useState(false);
-  const [gotoConfirmationOrder, setGotoConfirmationOrder] = useState(false);
   const [formDisabled, setFormDisabled] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [localCurrency, setLocalCurrency] = useState(0);
@@ -49,8 +52,11 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
 
     setFormDisabled(true);
 
-    // new order to backend with reference
-    setOrderNumber('ALT' + Math.floor(Math.random() * 99999));
+    const pin = cryptoRandomString({ length: 4, characters: '1234567890' });
+    const orderNumber = cryptoRandomString({ length: 10, type: 'numeric' });
+
+    // POST new order to backend
+    setOrderInfo(ORDER_NUMBER_PREFIX + orderNumber + '/' + pin);
 
     // store all in localStorage to repopulate the transaction
     if (localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA) {
@@ -60,14 +66,34 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
 
   const onPaymentSuccess = (reference: unknown) => {
     console.debug('onPaymentSuccess', reference);
-    // update order to backend with reference
-    setGotoConfirmationOrder(true);
+    // UPDATE update order to backend with provider payment reference
+    setTriggerConfirmationOrder(true);
     setFormDisabled(false);
   };
+
+  useEffect(() => {
+    if (triggerConfirmationOrder) {
+      gotoConfirmationOrder();
+      setTriggerConfirmationOrder(false);
+    }
+  }, [triggerConfirmationOrder]);
 
   const onPaymentClose = () => {
     console.debug('onPaymentClose');
     setFormDisabled(false);
+  };
+
+  const gotoConfirmationOrder = () => {
+    if (!isServer()) {
+      const orderNumberRawArray = orderInfo.split('/');
+      let slashedString = `${coin.symbol}/${orderNumberRawArray[0]}/${cryptoCurrency}/${totalAmount}`;
+
+      if (orderNumberRawArray[1]) {
+        slashedString = `${slashedString}/${orderNumberRawArray[1]}`;
+      }
+
+      router.push(`/order/${window.btoa(slashedString)}`);
+    }
   };
 
   const onClickReverse = () => {
@@ -96,14 +122,6 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
       setLocalCurrency(cryptoCurrency * multiplier);
     }
   }, [gridReverse, cryptoCurrency, multiplier]);
-
-  useEffect(() => {
-    if (gotoConfirmationOrder) {
-      router.push(
-        `/order/${coin.symbol}/${orderNumber}/${cryptoCurrency}/${totalAmount}`
-      );
-    }
-  }, [gotoConfirmationOrder]);
 
   return (
     <form
