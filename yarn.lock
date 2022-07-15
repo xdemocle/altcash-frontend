@@ -2611,11 +2611,6 @@ next@^12.2.0:
     "@next/swc-win32-ia32-msvc" "12.2.0"
     "@next/swc-win32-x64-msvc" "12.2.0"
 
-nextjs-google-analytics-gtm@^1.1.12:
-  version "1.1.12"
-  resolved "https://registry.npmjs.org/nextjs-google-analytics-gtm/-/nextjs-google-analytics-gtm-1.1.12.tgz#3764437d6b124a5f9fd56d48af0b24641364c0e0"
-  integrity sha512-/F/Ave5qDF8lJZXvQGs6MZ2hoI/ouzXJ+MJGUf660+8RVWom2yOsfrbsIqHSd/8hpR0QG/8fnUc1Qr3ZxccrdA==
-
 node-releases@^2.0.5:
   version "2.0.5"
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.5.tgz#280ed5bc3eba0d96ce44897d8aee478bfb3d9666"

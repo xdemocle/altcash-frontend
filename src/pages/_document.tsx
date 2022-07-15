@@ -8,7 +8,6 @@ import Document, {
   NextScript,
   DocumentContext
 } from 'next/document';
-import { GoogleAnalytics } from 'nextjs-google-analytics-gtm';
 import * as React from 'react';
 import createEmotionCache from '../common/createEmotionCache';
 import { theme } from '../common/theme';
@@ -40,7 +39,23 @@ export default function MyDocument(props: any) {
         />
         {/* Inject MUI styles first to match with the prepend: true configuration. */}
         {(props as any).emotionStyleTags}
-        <GoogleAnalytics />
+        {/* Global Site Tag (gtag.js) - Google Analytics */}
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
+          `
+          }}
+        />
       </Head>
       <body className="root">
         <Main />

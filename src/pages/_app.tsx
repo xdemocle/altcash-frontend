@@ -5,7 +5,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import type { NextWebVitalsMetric } from 'next/app';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import { event, usePagesViews } from 'nextjs-google-analytics-gtm';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import CookieConsent from 'react-cookie-consent';
 import { persistCacheInstance } from '../common/apollo/apollo-cache';
@@ -22,6 +22,7 @@ import DefaultLayout from '../containers/default-layout';
 // import AuthProvider from '../context/auth';
 import GlobalProvider from '../context/global';
 import UserCoinFavouritesProvider from '../context/user-coin-favourites';
+import * as ga from '../lib/ga';
 import '../styles/global.css';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -31,9 +32,23 @@ function MyApp({
   emotionCache = clientSideEmotionCache,
   pageProps
 }: AppProps & { emotionCache: EmotionCache }) {
-  usePagesViews();
-
+  const router = useRouter();
   const [loaded, setLoaded] = useState(isServer() ? true : false);
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      ga.pageview(url);
+    };
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   useEffect(() => {
     const loadCache = async () => {
@@ -130,15 +145,15 @@ function MyApp({
 //   return { ...appProps }
 // }
 
-export function reportWebVitals(metric: NextWebVitalsMetric) {
-  const { id, name, label, value } = metric;
+// export function reportWebVitals(metric: NextWebVitalsMetric) {
+//   const { id, name, label, value } = metric;
 
-  event(name, {
-    category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
-    value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
-    label: id, // id unique to current page load
-    nonInteraction: true // avoids affecting bounce rate.
-  });
-}
+//   event(name, {
+//     category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+//     value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+//     label: id, // id unique to current page load
+//     nonInteraction: true // avoids affecting bounce rate.
+//   });
+// }
 
 export default MyApp;
