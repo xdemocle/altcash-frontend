@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@apollo/client@3.6.9":
+"@apollo/client@3.6.9", "@apollo/client@^3.2.4":
   version "3.6.9"
   resolved "https://registry.npmjs.org/@apollo/client/-/client-3.6.9.tgz#ad0ee2e3a3c92dbed4acd6917b6158a492739d94"
   integrity sha512-Y1yu8qa2YeaCUBVuw08x8NHenFi0sw2I3KCu7Kw9mDSu86HmmtHJkCAifKVrN2iPgDTW/BbP3EpSV8/EQCcxZA==
@@ -1030,6 +1030,13 @@ anymatch@~3.1.2:
   dependencies:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
+
+apollo-link-queue@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/apollo-link-queue/-/apollo-link-queue-3.1.0.tgz#58cdc7cc3833b3db9959d384c4f3e584dcfa6b49"
+  integrity sha512-9zu6MZHKBN2iChhfnvmqSaqnAnhS5taKVS+fzJDEPfxXF2K1S5P84ykOyWr2LuBLOSm6/eDWkE1kIuClPIeI9A==
+  dependencies:
+    "@apollo/client" "^3.2.4"
 
 apollo3-cache-persist@0.14.0:
   version "0.14.0"
@@ -2604,6 +2611,11 @@ next@^12.2.0:
     "@next/swc-win32-ia32-msvc" "12.2.0"
     "@next/swc-win32-x64-msvc" "12.2.0"
 
+nextjs-google-analytics-gtm@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.npmjs.org/nextjs-google-analytics-gtm/-/nextjs-google-analytics-gtm-1.1.12.tgz#3764437d6b124a5f9fd56d48af0b24641364c0e0"
+  integrity sha512-/F/Ave5qDF8lJZXvQGs6MZ2hoI/ouzXJ+MJGUf660+8RVWom2yOsfrbsIqHSd/8hpR0QG/8fnUc1Qr3ZxccrdA==
+
 node-releases@^2.0.5:
   version "2.0.5"
   resolved "https://registry.npmjs.org/node-releases/-/node-releases-2.0.5.tgz#280ed5bc3eba0d96ce44897d8aee478bfb3d9666"
@@ -2868,11 +2880,6 @@ react-google-recaptcha@^2.1.0:
   dependencies:
     prop-types "^15.5.0"
     react-async-script "^1.1.1"
-
-react-gtm-module@^2.0.11:
-  version "2.0.11"
-  resolved "https://registry.npmjs.org/react-gtm-module/-/react-gtm-module-2.0.11.tgz#14484dac8257acd93614e347c32da9c5ac524206"
-  integrity sha512-8gyj4TTxeP7eEyc2QKawEuQoAZdjKvMY4pgWfycGmqGByhs17fR+zEBs0JUDq4US/l+vbTl+6zvUIx27iDo/Vw==
 
 react-is@^16.13.1, react-is@^16.7.0:
   version "16.13.1"

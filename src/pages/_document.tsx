@@ -8,21 +8,12 @@ import Document, {
   NextScript,
   DocumentContext
 } from 'next/document';
+import { GoogleAnalytics } from 'nextjs-google-analytics-gtm';
 import * as React from 'react';
-import TagManager from 'react-gtm-module';
 import createEmotionCache from '../common/createEmotionCache';
 import { theme } from '../common/theme';
 
 export default function MyDocument(props: any) {
-  React.useEffect(() => {
-    const tagManagerArgs = {
-      gtmId: 'G-BGCLZHPN2P',
-      auth: 'dev'
-    };
-
-    TagManager.initialize(tagManagerArgs);
-  }, []);
-
   return (
     <Html lang="en">
       <Head>
@@ -49,6 +40,7 @@ export default function MyDocument(props: any) {
         />
         {/* Inject MUI styles first to match with the prepend: true configuration. */}
         {(props as any).emotionStyleTags}
+        <GoogleAnalytics />
       </Head>
       <body className="root">
         <Main />
