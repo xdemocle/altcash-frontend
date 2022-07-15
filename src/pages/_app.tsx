@@ -22,7 +22,7 @@ import DefaultLayout from '../containers/default-layout';
 // import AuthProvider from '../context/auth';
 import GlobalProvider from '../context/global';
 import UserCoinFavouritesProvider from '../context/user-coin-favourites';
-import * as ga from '../lib/ga';
+import * as ga from '../libs/ga';
 import '../styles/global.css';
 
 const clientSideEmotionCache = createEmotionCache();
