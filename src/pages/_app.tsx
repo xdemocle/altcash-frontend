@@ -2,8 +2,10 @@ import { ApolloProvider } from '@apollo/client';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+import type { NextWebVitalsMetric } from 'next/app';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import { event, usePagesViews } from 'nextjs-google-analytics-gtm';
 import { useEffect, useState } from 'react';
 import CookieConsent from 'react-cookie-consent';
 import { persistCacheInstance } from '../common/apollo/apollo-cache';
@@ -29,6 +31,8 @@ function MyApp({
   emotionCache = clientSideEmotionCache,
   pageProps
 }: AppProps & { emotionCache: EmotionCache }) {
+  usePagesViews();
+
   const [loaded, setLoaded] = useState(isServer() ? true : false);
 
   useEffect(() => {
@@ -125,5 +129,16 @@ function MyApp({
 //
 //   return { ...appProps }
 // }
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  const { id, name, label, value } = metric;
+
+  event(name, {
+    category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+    value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+    label: id, // id unique to current page load
+    nonInteraction: true // avoids affecting bounce rate.
+  });
+}
 
 export default MyApp;
