@@ -1,7 +1,7 @@
 import { each, filter, find, isUndefined } from 'lodash';
-import { Coin, DataSources, MissingMarket } from '../types';
+import { Market, DataSources, MissingMarket } from '../types';
 
-const queryCoins = async (
+const queryMarkets = async (
   _: unknown,
   {
     limit,
@@ -15,32 +15,31 @@ const queryCoins = async (
     symbols: string;
   },
   { dataSources }: { dataSources: DataSources }
-): Promise<Coin[]> => {
-  let markets = await dataSources.coinsAPI.getAllMarkets();
+): Promise<Market[]> => {
+  let markets = await dataSources.marketsAPI.getAllMarkets();
   const names = await dataSources.namesAPI.getAll();
   const missingNames: string[] = [];
   const missingNamesArr: MissingMarket[] = [];
 
   // Add names
-  each(markets, (coin) => {
+  each(markets, (market) => {
     const nameCoin = find(names, (name) => {
-      return name.symbol === coin.baseCurrencySymbol;
+      return name.symbol === market.baseAsset;
     });
 
     if (!nameCoin) {
-      if (missingNames.indexOf(coin.baseCurrencySymbol) === -1) {
-        missingNames.push(coin.baseCurrencySymbol);
+      if (missingNames.indexOf(market.baseAsset) === -1) {
+        missingNames.push(market.baseAsset);
       }
     } else {
-      coin.name = nameCoin.name;
+      market.name = nameCoin.name;
     }
 
-    coin.id = coin.baseCurrencySymbol;
-    coin.symbol = coin.symbol.replace('-BTC', '');
+    market.id = market.symbol = market.baseAsset;
   });
 
   // Order by name
-  markets.sort((a: Coin, b: Coin) => {
+  markets.sort((a: Market, b: Market) => {
     // ignore upper and lowercase
     const nameA = a.name && a.name.toUpperCase();
     const nameB = b.name && b.name.toUpperCase();
@@ -64,7 +63,7 @@ const queryCoins = async (
     });
   });
 
-  if (!!missingNamesArr.length) {
+  if (missingNamesArr.length > 0) {
     // eslint-disable-next-line no-console
     console.log('missingNamesArr', JSON.stringify(missingNamesArr));
   }
@@ -77,7 +76,7 @@ const queryCoins = async (
       markets = [];
     } else {
       markets = filter(markets, (coin) => {
-        return symbols.split('|').includes(coin.baseCurrencySymbol);
+        return symbols.split('|').includes(coin.baseAsset);
       });
     }
   } else if (term && term.length) {
@@ -86,7 +85,7 @@ const queryCoins = async (
     markets = filter(markets, (coin) => {
       return (
         (coin.name && coin.name.toLowerCase().search(term) !== -1) ||
-        coin.baseCurrencySymbol.toLowerCase().search(term.toLowerCase()) !== -1
+        coin.baseAsset.toLowerCase().search(term.toLowerCase()) !== -1
       );
     });
   }
@@ -99,17 +98,17 @@ const queryCoins = async (
   return markets;
 };
 
-const queryCoin = async (
+const queryMarket = async (
   _: unknown,
   { id }: { id: string },
   { dataSources }: { dataSources: DataSources }
-): Promise<Coin> => {
-  const response = await dataSources.coinsAPI.getMarket(id);
+): Promise<Market> => {
+  const response = await dataSources.marketsAPI.getMarket(id);
   const names = await dataSources.namesAPI.getAll();
 
   // Add names
   const nameMarket = find(names, (name) => {
-    return name.symbol === response.baseCurrencySymbol;
+    return name.symbol === response.baseAsset;
   });
 
   if (nameMarket) {
@@ -117,7 +116,7 @@ const queryCoin = async (
   }
 
   // Add the id for client caching purpouse
-  response.id = response.symbol = response.baseCurrencySymbol;
+  response.id = response.symbol = response.baseAsset;
 
   return response;
 };
@@ -126,8 +125,8 @@ const queryCoin = async (
 // schema. This resolver retrieves books from the "books" array above.
 const resolvers = {
   Query: {
-    coins: queryCoins,
-    coin: queryCoin
+    markets: queryMarkets,
+    market: queryMarket
   }
 };
 

@@ -1,4 +1,7 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useMutation } from '@apollo/client';
 import { SwapHoriz, SwapVert } from '@mui/icons-material';
 import {
   Box,
@@ -11,24 +14,23 @@ import {
   Typography
 } from '@mui/material';
 import clsx from 'clsx';
-import cryptoRandomString from 'crypto-random-string';
 import { useRouter } from 'next/router';
-import { FC, FormEvent, useEffect, useState } from 'react';
+import { FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import {
   MIN_AMOUNT_EXTRA,
-  ORDER_NUMBER_PREFIX,
   PERCENTAGE_FEE,
   PERCENTAGE_FEE_PAYMENT
 } from '../../common/constants';
 import { getPaystackConfig, isServer } from '../../common/utils';
-import { Coin, Ticker } from '../../graphql/types';
+import { CREATE_ORDER, UPDATE_ORDER } from '../../graphql/mutations';
+import { Market, OrderParams, Ticker } from '../../graphql/types';
 import useMultiplier from '../../hooks/use-multiplier';
 import NumberFormatCustom from './number-format-custom';
 import useStyles from './use-styles';
 
 interface CoinBuyProps {
-  coin: Coin;
+  coin: Market;
   ticker: Ticker;
 }
 
@@ -46,30 +48,121 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const [cryptoCurrency, setCryptoCurrency] = useState(0);
   const { multiplier } = useMultiplier(ticker);
   const initializePayment = usePaystackPayment(getPaystackConfig(totalAmount));
+  const [createOrder, { error: errorCreateOrder }] = useMutation(CREATE_ORDER);
+  const [updateOrder, { error: errorUpdateOrder }] = useMutation(UPDATE_ORDER);
 
-  const onSubmitHandler = (e: FormEvent<HTMLFormElement>) => {
+  console.debug(errorCreateOrder, errorUpdateOrder);
+
+  const updateOrderHandler = async (input: OrderParams) => {
+    const id = orderInfo.split('/')[0];
+
+    // UPDATE new order to backend with payment reference
+    const { data } = await updateOrder({
+      variables: {
+        id,
+        input
+      }
+    });
+
+    return data;
+  };
+
+  const updateOrderWithReference = async (reference: string) => {
+    // UPDATE new order to backend with payment reference
+    const data = await updateOrderHandler({
+      isPaid: true,
+      reference: JSON.stringify(reference)
+    });
+
+    console.debug('updateOrderWithReference', data);
+  };
+
+  const updateOrderCancelled = async () => {
+    // UPDATE new order to backend to cancel it
+    const data = await updateOrderHandler({
+      isCancelled: true
+    });
+
+    console.debug('updateOrderCancelled', data);
+  };
+
+  const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setFormDisabled(true);
 
-    const pin = cryptoRandomString({ length: 4, characters: '1234567890' });
-    const orderNumber = cryptoRandomString({ length: 10, type: 'numeric' });
-
     // POST new order to backend
-    setOrderInfo(ORDER_NUMBER_PREFIX + orderNumber + '/' + pin);
+    if (!orderInfo.length) {
+      try {
+        const { data } = await createOrder({
+          variables: {
+            amount: String(cryptoCurrency),
+            total: String(totalAmount),
+            symbol: coin.symbol
+          }
+        });
 
-    // store all in localStorage to repopulate the transaction
-    if (localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA) {
-      initializePayment(onPaymentSuccess, onPaymentClose);
+        setOrderInfo(
+          data.createOrder._id +
+            '/' +
+            data.createOrder.amount +
+            '/' +
+            data.createOrder.total +
+            '/' +
+            data.createOrder.pin
+        );
+      } catch (error) {
+        setOrderInfo('');
+        setFormDisabled(false);
+      }
     }
   };
 
-  const onPaymentSuccess = (reference: unknown) => {
+  const onPaymentSuccess = (reference: string) => {
     console.debug('onPaymentSuccess', reference);
     // UPDATE update order to backend with provider payment reference
+    updateOrderWithReference(reference);
     setTriggerConfirmationOrder(true);
+  };
+
+  const onPaymentClose = () => {
+    console.debug('onPaymentClose');
+    updateOrderCancelled();
+    setOrderInfo('');
     setFormDisabled(false);
   };
+
+  const gotoConfirmationOrder = () => {
+    if (!isServer()) {
+      const orderNumberRawArray = orderInfo.split('/');
+      let slashedString = `${coin.symbol}/${orderNumberRawArray[0]}/${orderNumberRawArray[1]}/${orderNumberRawArray[2]}`;
+
+      // For the pin
+      if (orderNumberRawArray[3]) {
+        slashedString = `${slashedString}/${orderNumberRawArray[3]}`;
+      }
+
+      router.push(`/orders/${window.btoa(slashedString)}`);
+    }
+  };
+
+  const onClickReverse = () => {
+    setGridReverse(!gridReverse);
+  };
+
+  const onFocusLocalCurrencyHandler = (e: SyntheticEvent | Event) => {
+    // @ts-ignore:next-line
+    e?.target?.select();
+  };
+
+  useEffect(() => {
+    if (orderInfo.length > 0) {
+      // store all in localStorage to repopulate the transaction
+      if (localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA) {
+        initializePayment(onPaymentSuccess, onPaymentClose);
+      }
+    }
+  }, [orderInfo]);
 
   useEffect(() => {
     if (triggerConfirmationOrder) {
@@ -77,28 +170,6 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
       setTriggerConfirmationOrder(false);
     }
   }, [triggerConfirmationOrder]);
-
-  const onPaymentClose = () => {
-    console.debug('onPaymentClose');
-    setFormDisabled(false);
-  };
-
-  const gotoConfirmationOrder = () => {
-    if (!isServer()) {
-      const orderNumberRawArray = orderInfo.split('/');
-      let slashedString = `${coin.symbol}/${orderNumberRawArray[0]}/${cryptoCurrency}/${totalAmount}`;
-
-      if (orderNumberRawArray[1]) {
-        slashedString = `${slashedString}/${orderNumberRawArray[1]}`;
-      }
-
-      router.push(`/order/${window.btoa(slashedString)}`);
-    }
-  };
-
-  const onClickReverse = () => {
-    setGridReverse(!gridReverse);
-  };
 
   useEffect(() => {
     setBulbColor('yellow');
@@ -166,6 +237,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               }}
               value={localCurrency}
               onChange={(e) => setLocalCurrency(Number(e.target.value))}
+              onFocus={onFocusLocalCurrencyHandler}
               disabled={gridReverse || formDisabled}
             />
           </Grid>
@@ -230,6 +302,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               }}
               value={cryptoCurrency}
               onChange={(e) => setCryptoCurrency(Number(e.target.value))}
+              onFocus={onFocusLocalCurrencyHandler}
               disabled={!gridReverse || formDisabled}
             />
           </Grid>
@@ -248,6 +321,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
             </Button>
           </div>
         </Box>
+
         <Box className={classes.boxBuyLed}>
           <div className={`led-${bulbColor}`}></div>
         </Box>

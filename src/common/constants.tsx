@@ -47,5 +47,3 @@ export const BUY_TAB_ALL = 1;
 export const BUY_TAB_FAVOURITE = 2;
 
 export type PaystackCurrency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
-
-export const ORDER_NUMBER_PREFIX = 'ALT';

@@ -10,7 +10,7 @@ const useMultiplier = (ticker: Ticker) => {
 
   useEffect(() => {
     const newMultiplier = Number(
-      btcToRandPrice(ticker.askRate, bitcoinRandPrice)
+      btcToRandPrice(Number(ticker.price), bitcoinRandPrice)
     );
 
     if (!isNaN(newMultiplier)) {

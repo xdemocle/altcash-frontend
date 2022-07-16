@@ -3,9 +3,9 @@ import { gql } from '@apollo/client';
 // https://www.apollographql.com/docs/react/v2/caching/cache-interaction/#the-connection-directive
 // @connection(key: "feed", filter: ["type"])
 
-export const GET_COINS = gql`
-  query Coins($offset: Int, $limit: Int, $term: String, $symbols: String) {
-    coins(offset: $offset, limit: $limit, term: $term, symbols: $symbols) {
+export const GET_MARKETS = gql`
+  query Markets($offset: Int, $limit: Int, $term: String, $symbols: String) {
+    markets(offset: $offset, limit: $limit, term: $term, symbols: $symbols) {
       id
       name
       symbol
@@ -14,40 +14,17 @@ export const GET_COINS = gql`
   }
 `;
 
-export const GET_COIN = gql`
-  query Coin($id: String) {
-    coin(id: $id) {
+export const GET_MARKET = gql`
+  query Market($id: String) {
+    market(id: $id) {
       id
       symbol
-      baseCurrencySymbol
-      quoteCurrencySymbol
+      baseAsset
+      quoteAsset
       minTradeSize
       precision
       status
-      createdAt
       name
-    }
-  }
-`;
-
-export const GET_SUMMARIES = gql`
-  query Summaries {
-    summaries {
-      id
-      symbol
-      high
-      percentChange
-    }
-  }
-`;
-
-export const GET_SUMMARY = gql`
-  query Summary($id: String) {
-    summary(id: $id) {
-      id
-      symbol
-      high
-      percentChange
     }
   }
 `;
@@ -56,10 +33,7 @@ export const GET_TICKERS = gql`
   query Tickers {
     tickers {
       id
-      # symbol
-      # lastTradeRate
-      # bidRate
-      askRate
+      price
     }
   }
 `;
@@ -68,17 +42,14 @@ export const GET_TICKER = gql`
   query Ticker($id: String) {
     ticker(id: $id) {
       id
-      # symbol
-      # lastTradeRate
-      # bidRate
-      askRate
+      price
     }
   }
 `;
 
 export const GET_PAGE_DATA = gql`
   query PageData($id: String) {
-    coin(id: $id) {
+    market(id: $id) {
       id
       symbol
       baseCurrencySymbol
@@ -97,14 +68,11 @@ export const GET_PAGE_DATA = gql`
       volume
       quoteVolume
       percentChange
-      updatedAt
     }
 
     ticker(id: $id) {
       id
-      lastTradeRate
-      bidRate
-      askRate
+      price
     }
   }
 `;
@@ -150,6 +118,51 @@ export const GET_PAIR = gql`
       pair
       last_trade
       timestamp
+    }
+  }
+`;
+
+export const GET_ORDERS = gql`
+  query getOrders {
+    getOrders {
+      _id
+      amount
+      total
+      isPaid
+      isPending
+      isWithdrawn
+      wallet
+      reference
+      email
+      pin
+      timestamp
+    }
+  }
+`;
+
+export const GET_ORDER = gql`
+  query getOrder($id: String) {
+    getOrder(id: $id) {
+      _id
+      amount
+      total
+      isPaid
+      isPending
+      isWithdrawn
+      wallet
+      reference
+      email
+      pin
+      timestamp
+    }
+  }
+`;
+
+export const GET_ORDER_IS_PENDING = gql`
+  query getOrder($id: String) {
+    getOrder(id: $id) {
+      _id
+      isPending
     }
   }
 `;

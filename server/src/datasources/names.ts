@@ -15,7 +15,6 @@ class NamesAPI extends DataSource {
     for (const [key, value] of Object.entries(names)) {
       arr.push({
         id: key,
-        bittrexId: value.id,
         symbol: key,
         name: value.name,
         slug: value.slug,

@@ -1,16 +1,16 @@
 import { List } from '@mui/material';
-import { Coin } from '../../graphql/types';
+import { Market } from '../../graphql/types';
 import CoinItem from '../coin-item';
 
 type Props = {
-  coins: Coin[];
+  markets: Market[];
 };
 
-const CoinsListMap = ({ coins }: Props) => {
+const CoinsListMap = ({ markets }: Props) => {
   return (
     <List>
-      {coins.map((coin: Coin, ix: number) => {
-        return coin && <CoinItem key={`${coin.name}${ix}`} coin={coin} />;
+      {markets.map((market: Market, ix: number) => {
+        return market && <CoinItem key={`${market.name}${ix}`} coin={market} />;
       })}
     </List>
   );

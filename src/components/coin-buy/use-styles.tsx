@@ -51,7 +51,7 @@ const useStyles = makeStyles(
       width: '100%',
       [breakpoints.up('md')]: {
         position: 'absolute',
-        bottom: '1.5rem',
+        top: '3.3rem',
         right: '1.5rem',
         width: '25%'
       }

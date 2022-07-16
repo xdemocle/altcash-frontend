@@ -6,12 +6,12 @@ const queryTickers = async (
   { symbols }: { symbols: string },
   { dataSources }: { dataSources: DataSources }
 ): Promise<Ticker[]> => {
-  let tickers = await dataSources.coinsAPI.getAllTickers();
+  let tickers = await dataSources.marketsAPI.getAllTickers();
 
   // Search feature or symbols one
   if (!isUndefined(symbols)) {
     tickers = filter(tickers, (coin) => {
-      return symbols.split('|').includes(coin.symbol);
+      return symbols.split('|').includes(coin.id);
     });
   }
 
@@ -23,10 +23,10 @@ const queryTicker = async (
   { id }: { id: string },
   { dataSources }: { dataSources: DataSources }
 ): Promise<Ticker> => {
-  const response = await dataSources.coinsAPI.getTicker(id);
+  const response = await dataSources.marketsAPI.getTicker(id);
 
   // Add the id for client caching purpouse
-  response.id = response.symbol = response.symbol.replace('-BTC', '');
+  response.id = response.id.replace('BTC', '');
 
   return response;
 };

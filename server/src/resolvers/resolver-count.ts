@@ -8,8 +8,8 @@ const queryCount = async (
   { dataSources }: { dataSources: DataSources }
 ): Promise<Count[]> => {
   const counts = [];
-  const markets = await dataSources.coinsAPI.getAllMarkets();
-  const activeMarkets = filter(markets, { status: 'ONLINE' });
+  const markets = await dataSources.marketsAPI.getAllMarkets();
+  const activeMarkets = filter(markets, { status: 'TRADING' });
 
   counts.push({
     name: 'markets',

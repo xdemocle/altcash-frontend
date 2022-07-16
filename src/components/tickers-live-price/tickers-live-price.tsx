@@ -8,7 +8,7 @@ const TickersLivePrice = () => {
     pollInterval: 30000
   });
 
-  // console.log('summaries', data)
+  // console.log('TickersLivePrice', data);
 
   return <Fragment />;
 };

@@ -12,14 +12,14 @@ import {
 import clsx from 'clsx';
 import Link from 'next/link';
 import { Fragment, SyntheticEvent } from 'react';
-import { Coin } from '../../graphql/types';
+import { Market } from '../../graphql/types';
 import useUserCoinFavourites from '../../hooks/use-user-coin-favourites';
 import CoinSVG from '../coin-svg';
 import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';
 
 type Props = {
-  coin: Coin;
+  coin: Market;
 };
 
 const CoinItem = ({ coin }: Props) => {
@@ -58,7 +58,7 @@ const CoinItem = ({ coin }: Props) => {
             <ListItemText
               primary={coin.name || coin.id}
               secondary={`${coin.symbol.toUpperCase()} ${
-                coin.status !== 'ONLINE' ? ' / ' + coin.status : ''
+                coin.status !== 'TRADING' ? ' / ' + coin.status : ''
               }`}
               className={classes.column}
             />

@@ -19,16 +19,16 @@ import {
 import TopBarSearch from '../../components/top-bar-search';
 import CoinsList from '../../containers/coins-list';
 import CoinsUserList from '../../containers/coins-user-list';
-import { GET_COINS, GET_META_COIN_LOGO } from '../../graphql/queries';
-import { Coin } from '../../graphql/types';
+import { GET_MARKETS, GET_META_COIN_LOGO } from '../../graphql/queries';
+import { Market } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
 import useStyles from '../../styles/buy-use-styles';
 
 interface BuyTabPageProps {
-  coins: Coin[];
+  markets: Market[];
 }
 
-const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
+const BuyTabPage: NextPage<BuyTabPageProps> = ({ markets }) => {
   const router = useRouter();
   const classes = useStyles();
   const { tab: tabNumber, setTab } = useGlobal();
@@ -110,35 +110,35 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ coins }) => {
       </Paper>
 
       {tab === 'featured' && (
-        <CoinsUserList coins={coins} predefined={symbolsFeatured} />
+        <CoinsUserList markets={markets} predefined={symbolsFeatured} />
       )}
-      {tab === 'all' && <CoinsList coins={coins} />}
-      {tab === 'favourite' && <CoinsUserList coins={coins} />}
+      {tab === 'all' && <CoinsList markets={markets} />}
+      {tab === 'favourite' && <CoinsUserList markets={markets} />}
     </div>
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { tab: 'featured' } },
-      { params: { tab: 'all' } },
-      { params: { tab: 'favourite' } }
-    ],
-    fallback: true
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       { params: { tab: 'featured' } },
+//       { params: { tab: 'all' } },
+//       { params: { tab: 'favourite' } }
+//     ],
+//     fallback: true
+//   };
+// }
 
-export async function getStaticProps() {
-  const { data } = await apolloClient.query({
-    query: GET_COINS
-  });
+// export async function getStaticProps() {
+//   const { data } = await apolloClient.query({
+//     query: GET_MARKETS
+//   });
 
-  return {
-    props: {
-      coins: data.coins
-    }
-  };
-}
+//   return {
+//     props: {
+//       markets: data.markets
+//     }
+//   };
+// }
 
 export default BuyTabPage;

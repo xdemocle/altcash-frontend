@@ -21,7 +21,7 @@ export type Metadata = {
   urls: MetadataUrls;
 };
 
-export interface Coin {
+export interface Market {
   minTradeSize: number;
   id: string;
   name: string;
@@ -30,8 +30,36 @@ export interface Coin {
 }
 
 export interface Ticker {
-  askRate: number;
-  bidRate: number;
   id: string;
-  lastTradeRate: number;
+  price: string;
+}
+
+export interface Order {
+  _id: string;
+  amount: string;
+  total: string;
+  symbol: string;
+  email?: string;
+  pin?: string;
+  isPaid?: boolean;
+  isPending?: boolean;
+  isWithdrawn?: boolean;
+  isCancelled?: boolean;
+  wallet?: string;
+  reference: string;
+  timestamp: string;
+}
+
+export interface OrderParams {
+  amount?: string;
+  total?: string;
+  symbol?: string;
+  email?: string;
+  pin?: string;
+  isPaid?: boolean;
+  isPending?: boolean;
+  isWithdrawn?: boolean;
+  isCancelled?: boolean;
+  wallet?: string;
+  reference?: string;
 }

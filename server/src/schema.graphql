@@ -1,24 +1,22 @@
-directive @cacheControl(
-  maxAge: Int
-  scope: CacheControlScope
-) on OBJECT | FIELD_DEFINITION
-
 enum CacheControlScope {
   PUBLIC
   PRIVATE
 }
 
-type Coin {
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+  inheritMaxAge: Boolean
+) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
+
+type Market {
   id: String!
   symbol: String!
-  baseCurrencySymbol: String!
-  quoteCurrencySymbol: String!
-  minTradeSize: Float
-  precision: Float
-  status: String
-  notice: String
-  createdAt: String
+  baseAsset: String!
+  quoteAsset: String!
   name: String
+  status: String
+  minTradeSize: Float
 }
 
 type Summary {
@@ -29,15 +27,11 @@ type Summary {
   volume: Float
   quoteVolume: Float
   percentChange: Float
-  updatedAt: String
 }
 
 type Ticker {
   id: String!
-  symbol: String!
-  lastTradeRate: Float
-  bidRate: Float
-  askRate: Float
+  price: String!
 }
 
 type Metadata @cacheControl(maxAge: 604800) {
@@ -78,18 +72,55 @@ type Pair {
   timestamp: Float
 }
 
+type Order {
+  _id: ID
+  amount: String
+  total: String
+  symbol: String
+  email: String
+  pin: String
+  isPaid: Boolean
+  isPending: Boolean
+  isWithdrawn: Boolean
+  isCancelled: Boolean
+  wallet: String
+  reference: String
+  timestamp: String
+}
+
+input OrderInput {
+  amount: String
+  total: String
+  symbol: String
+  email: String
+  pin: String
+  isPaid: Boolean
+  isPending: Boolean
+  isWithdrawn: Boolean
+  isCancelled: Boolean
+  wallet: String
+  reference: String
+}
+
 # The "Query" type is special: it lists all of the available queries that
 # clients can execute, along with the return type for each. In this
 type Query {
-  coins(offset: Int, limit: Int, term: String, symbols: String): [Coin!]
-  coin(id: String): Coin!
+  markets(offset: Int, limit: Int, term: String, symbols: String): [Market!]
+  market(id: String): Market!
   metaCoin(id: String): Metadata!
   metaCoinAll: [Metadata!]
   metaExperiment: [Metadata!]
-  summaries(symbols: String): [Summary!]
+  metaInfo: [Metadata!]
   summary(id: String): Summary!
   tickers(symbols: String): [Ticker!]
   ticker(id: String): Ticker!
   count: [Count!]
   pair(pair: String): Pair!
+  getOrders: [Order!]
+  getOrder(id: String): Order
+}
+
+type Mutation {
+  createOrder(amount: String, total: String, symbol: String): Order!
+  updateOrder(id: String, input: OrderInput): Order!
 }

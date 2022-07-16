@@ -1,3 +1,5 @@
+import { Document } from 'mongoose';
+
 export interface MetadataUrls {
   website: string[];
   twitter: string[];
@@ -21,11 +23,11 @@ export interface Metadata {
   urls?: MetadataUrls;
 }
 
-export interface Coin {
+export interface Market {
   id: string;
   symbol: string;
-  baseCurrencySymbol: string;
-  quoteCurrencySymbol: string;
+  baseAsset: string;
+  quoteAsset: string;
   minTradeSize: number;
   precision: number;
   status: string;
@@ -35,6 +37,7 @@ export interface Coin {
 }
 
 export interface Summary {
+  [x: string]: number;
   id: string;
   symbol: string;
   high: number;
@@ -42,15 +45,11 @@ export interface Summary {
   volume: number;
   quoteVolume: number;
   percentChange: number;
-  updatedAt: string;
 }
 
 export interface Ticker {
   id: string;
-  symbol: string;
-  lastTradeRate: number;
-  bidRate: number;
-  askRate: number;
+  price: string;
 }
 
 export interface Count {
@@ -73,15 +72,76 @@ export interface Pair {
   timestamp: number;
 }
 
+export interface Order extends Document {
+  amount: string;
+  total: string;
+  symbol: string;
+  email?: string;
+  pin?: string;
+  isPaid?: boolean;
+  isPending?: boolean;
+  isWithdrawn?: boolean;
+  isCancelled?: boolean;
+  wallet?: string;
+  reference: string;
+  timestamp: string;
+}
+
+export interface OrderParams {
+  amount?: string;
+  total?: string;
+  symbol?: string;
+  email?: string;
+  pin?: string;
+  isPaid?: boolean;
+  isPending?: boolean;
+  isWithdrawn?: boolean;
+  isCancelled?: boolean;
+  wallet?: string;
+  reference?: string;
+}
+
+export interface UpdateOrderParams {
+  email?: string;
+  isPaid?: boolean;
+  isPending?: boolean;
+  isWithdrawn?: boolean;
+  isCancelled?: boolean;
+  wallet?: string;
+  reference?: string;
+}
+
+export interface OrderQueue extends Document {
+  orderId: string;
+  timestamp: string;
+}
+
+export interface OrderQueueParams {
+  orderId: string;
+  transactionId?: string;
+  isExecuted?: boolean;
+  isFilled?: boolean;
+}
+
+export interface UpdateOrderQueueParams {
+  orderId?: string;
+  transactionId?: string;
+  isExecuted?: boolean;
+  isFilled?: boolean;
+}
+
 export declare abstract class DataSource {
-  getAllMarkets(): Coin[];
-  getMarket(id: string): Coin;
+  getAllMarkets(): Market[];
+  getMarket(id: string): Market;
   getTicker(id: string): Ticker;
   getPair(pair: string): Pair;
   getAllTickers(): Ticker[];
-  getAllSummaries(): Summary[];
   getSummary(id: string): Summary;
   getCoin(id: string): Metadata;
+  getOrders(): Order[];
+  getOrder(id: string): Order;
+  createOrder(amount: string, total: string, symbol: string): Order;
+  updateOrder(id: string, input: OrderParams): Order;
   getAll(): Metadata[];
   missingData(): Metadata[];
 }

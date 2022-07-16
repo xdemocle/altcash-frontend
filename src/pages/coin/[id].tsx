@@ -46,7 +46,7 @@ const CoinPage: NextPage = () => {
 
   const { data: metadata } = useQuery(GET_META_COIN, {
     // We refresh data list at least at reload
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-and-network',
     variables: {
       id: coinId
     }
@@ -212,14 +212,14 @@ const CoinPage: NextPage = () => {
               className={classes.column}
             />
           </ListItem>
-          <ListItem divider>
+          {/* <ListItem divider>
             <ListItemText primary="Last update" className={classes.column} />
             <ListItemText
               primary={<Moment>{dataSummary.updatedAt}</Moment>}
               secondary="Page data refresh automatically"
               className={classes.column}
             />
-          </ListItem>
+          </ListItem> */}
         </List>
 
         {metadata && metaCoin.description && (
@@ -297,7 +297,7 @@ export async function getStaticPaths() {
     query: GET_META_COIN_LOGO
   });
 
-  // Get the paths we want to pre-render based on posts
+  // Get the paths we want to pre-render
   const paths = data?.metaCoinAll?.map((coin: Metadata) => ({
     params: { id: coin.symbol.toLowerCase() }
   }));

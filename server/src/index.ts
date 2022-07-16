@@ -8,26 +8,33 @@ import responseCachePlugin from 'apollo-server-plugin-response-cache';
 import express from 'express';
 import http from 'http';
 import mongoose from 'mongoose';
+import cron from 'node-cron';
 import { join } from 'path';
-import CoinsAPI from './datasources/coins';
+import BinanceAPI from './datasources/binance';
 import MetadataAPI from './datasources/metadata';
 import MybitxAPI from './datasources/mybitx';
 import NamesAPI from './datasources/names';
-import resolverCoin from './resolvers/resolver-coins';
+import OrdersAPI from './datasources/orders';
+import OrdersQueueAPI from './datasources/orders-queue';
+import OrderModel from './models/orders';
+import OrderQueueModel from './models/orders-queue';
 import resolverCount from './resolvers/resolver-count';
+import resolverMarkets from './resolvers/resolver-markets';
 import resolverMeta from './resolvers/resolver-meta';
+import resolverOrders from './resolvers/resolver-orders';
 import resolverPair from './resolvers/resolver-pair';
-import resolverSummaries from './resolvers/resolver-summaries';
 import resolverTickers from './resolvers/resolver-tickers';
 
 // We connect mongoose to our local mongodb database
-mongoose.connect(
-  `${process.env.MONGODB_URI || 'mongodb://localhost:27017/altstack'}`
-  // {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true
-  // }
-);
+const connectMongo = async () => {
+  await mongoose.connect(
+    `${process.env.MONGODB_URI || 'mongodb://localhost:27017/altstack'}`
+  );
+};
+
+connectMongo()
+  .then(() => console.debug('🎉 connected to MongoDB database successfully'))
+  .catch((error) => console.error(error));
 
 // A schema is a collection of type definitions (hence "typeDefs")
 // that together define the "shape" of queries that are executed against
@@ -45,19 +52,20 @@ async function startApolloServer() {
   const server = new ApolloServer({
     typeDefs: mergeTypeDefs([typeDefs]),
     resolvers: mergeResolvers([
-      resolverCoin,
+      resolverMarkets,
       resolverCount,
       resolverMeta,
       resolverPair,
-      resolverSummaries,
-      resolverTickers
+      resolverTickers,
+      resolverOrders
     ]),
     // context: accountsGraphQL.context,
     dataSources: () => ({
-      coinsAPI: new CoinsAPI(),
+      marketsAPI: new BinanceAPI(),
       metadataAPI: new MetadataAPI(),
       namesAPI: new NamesAPI(),
-      mybitxAPI: new MybitxAPI()
+      mybitxAPI: new MybitxAPI(),
+      ordersAPI: new OrdersAPI(OrderModel)
     }),
     cache: new RedisCache(
       process.env.REDIS_URL || {
@@ -71,16 +79,6 @@ async function startApolloServer() {
       responseCachePlugin(),
       ApolloServerPluginDrainHttpServer({ httpServer })
     ]
-    // cacheControl: {
-    //   defaultMaxAge: 29
-    // }
-    // cors: {
-    //   origin: '*',
-    //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    //   preflightContinue: false,
-    //   optionsSuccessStatus: 204,
-    //   credentials: true
-    // }
   });
 
   await server.start();
@@ -90,6 +88,16 @@ async function startApolloServer() {
   await new Promise<void>((resolve) =>
     httpServer.listen({ port: 4000 }, resolve)
   );
+
+  // Start crons
+  cron.schedule('*/5 * * * * *', async () => {
+    const ordersApi = new OrdersAPI(OrderModel);
+    const ordersQueueApi = new OrdersQueueAPI(OrderQueueModel);
+
+    ordersQueueApi.importAndCheckOrders(
+      await ordersApi.checkPendingPaidOrders()
+    );
+  });
 
   // eslint-disable-next-line no-console
   console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);

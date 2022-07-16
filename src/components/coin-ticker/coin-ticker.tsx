@@ -1,10 +1,10 @@
 import { useQuery } from '@apollo/client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import { GET_TICKER, GET_PAIR } from '../../graphql/queries';
-import { Coin } from '../../graphql/types';
+import { Market } from '../../graphql/types';
 
 type Props = {
-  coin: Coin;
+  coin: Market;
 };
 
 const CoinTicker = ({ coin }: Props) => {
@@ -33,8 +33,8 @@ const CoinTicker = ({ coin }: Props) => {
 
   return (
     <span>
-      {dataTicker.askRate && bitcoinRandPrice
-        ? btcToRandPriceWithSymbol(dataTicker.askRate, bitcoinRandPrice)
+      {dataTicker.price && bitcoinRandPrice
+        ? btcToRandPriceWithSymbol(dataTicker.price, bitcoinRandPrice)
         : 'n/d'}
     </span>
   );

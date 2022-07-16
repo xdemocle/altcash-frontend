@@ -1,7 +1,8 @@
 import { RESTDataSource } from 'apollo-datasource-rest';
 import { each, filter } from 'lodash';
+import { Order } from '../types';
 
-class CoinsAPI extends RESTDataSource {
+class BittrexAPI extends RESTDataSource {
   constructor() {
     super();
     this.baseURL = 'https://api.bittrex.com/v3/';
@@ -73,6 +74,28 @@ class CoinsAPI extends RESTDataSource {
     return await this.get(`markets/${marketSymbol}/ticker`);
   }
 
+  async ping(): Promise<Record<string, string>> {
+    return await this.get('ping');
+  }
+
+  // TODO
+  async postOrder(order: Order): Promise<Record<string, string>> {
+    const exchangeOrder = {
+      marketSymbol: order.symbol,
+      direction: 'string',
+      type: 'string',
+      quantity: 'number (double)',
+      ceiling: 'number (double)',
+      limit: 'number (double)',
+      timeInForce: 'string',
+      clientOrderId: 'string (uuid)',
+      useAwards: 'boolean'
+    };
+
+    // return await this.post('orders', exchangeOrder);
+    return exchangeOrder;
+  }
+
   // get baseURL() {
   //   if (this.context.env === 'development') {
   //     return 'https://movies-api-dev.example.com/'
@@ -82,4 +105,4 @@ class CoinsAPI extends RESTDataSource {
   // }
 }
 
-export default CoinsAPI;
+export default BittrexAPI;

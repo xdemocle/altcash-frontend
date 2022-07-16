@@ -1,8 +1,10 @@
+import { Box } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { isServer } from '../../common/utils';
 import CardConfirmationOrder from '../../components/coin-buy/card-confirmation-order';
+import CardEmailForm from '../../components/coin-buy/card-email-form';
 import Loader from '../../components/loader';
 import RootStyled from '../../styled/root';
 
@@ -37,6 +39,10 @@ const Order: NextPage = () => {
       ) : (
         <Loader />
       )}
+
+      <Box sx={{ marginTop: '2.5rem' }}>
+        <CardEmailForm orderId={orderNumber} />
+      </Box>
     </RootStyled>
   );
 };

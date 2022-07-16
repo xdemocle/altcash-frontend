@@ -6,27 +6,27 @@ import { COINS_PER_PAGE } from '../../common/constants';
 import { isServer } from '../../common/utils';
 import CoinsListMap from '../../components/coins-list-map';
 import Loader from '../../components/loader';
-import { GET_COINS, GET_COUNT } from '../../graphql/queries';
-import { Coin } from '../../graphql/types';
+import { GET_MARKETS, GET_COUNT } from '../../graphql/queries';
+import { Market } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
 import useStyles from './use-styles';
 
 interface CoinsListProps {
-  coins: Coin[];
+  markets: Market[];
 }
 
-const CoinsList = ({ coins }: CoinsListProps) => {
+const CoinsList = ({ markets }: CoinsListProps) => {
   const classes = useStyles();
   const { coinListPage, coinPageNeedle, setCoinListPage } = useGlobal();
   const { data: dataCount } = useQuery(GET_COUNT);
-  const { loading, error, data, networkStatus } = useQuery(GET_COINS, {
+  const { loading, error, data, networkStatus } = useQuery(GET_MARKETS, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',
     variables: {
       term: coinPageNeedle
     }
   });
-  const dataCoins = data?.coins;
+  const dataCoins = data?.markets;
 
   const getListSlice = (limit: number) => {
     const list = dataCoins ? clone(dataCoins) : [];
@@ -45,7 +45,7 @@ const CoinsList = ({ coins }: CoinsListProps) => {
   };
 
   const hidePagination = coinPageNeedle && !!coinPageNeedle.length;
-  const coinsList = isServer() ? coins : getListSlice(COINS_PER_PAGE);
+  const coinsList = isServer() ? markets : getListSlice(COINS_PER_PAGE);
   const coinsTotal =
     dataCount && dataCount.count
       ? find(dataCount.count, { name: 'markets' }).count
@@ -69,7 +69,7 @@ const CoinsList = ({ coins }: CoinsListProps) => {
       )}
 
       {(networkStatus !== 4 || isServer()) && coinsList && (
-        <CoinsListMap coins={coinsList} />
+        <CoinsListMap markets={coinsList} />
       )}
 
       {!isServer() && !hidePagination && (
