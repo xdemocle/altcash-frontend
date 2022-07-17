@@ -31,8 +31,8 @@ class Mailjet {
           },
           To: [
             {
-              Email: 'hello@altcash.co.za',
-              Name: 'Webmaster Altcash.co.za'
+              Email: 'hello@rocco.me',
+              Name: 'Webmaster'
             }
           ],
           Subject: subject,

@@ -5,10 +5,6 @@ import names from '../data/names.json';
 import { Metadata } from '../types';
 
 class NamesAPI extends DataSource {
-  // constructor() {
-  //   super()
-  // }
-
   getAll(): Metadata[] {
     const arr = [];
 
@@ -23,8 +19,15 @@ class NamesAPI extends DataSource {
       });
     }
 
-    each(missings, (missing) => {
-      arr.push(missing);
+    each(missings, (missing: Metadata) => {
+      arr.push({
+        id: missing.symbol,
+        symbol: missing.symbol,
+        name: missing.name,
+        slug: missing.slug,
+        description: missing.description,
+        logo: missing.logo
+      });
     });
 
     return arr;

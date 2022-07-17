@@ -26,7 +26,7 @@ const queryTicker = async (
   const response = await dataSources.marketsAPI.getTicker(id);
 
   // Add the id for client caching purpouse
-  response.id = response.id.replace('BTC', '');
+  response.id = response.symbol.replace('BTC', '');
 
   return response;
 };

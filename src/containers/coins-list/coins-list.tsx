@@ -18,7 +18,9 @@ interface CoinsListProps {
 const CoinsList = ({ markets }: CoinsListProps) => {
   const classes = useStyles();
   const { coinListPage, coinPageNeedle, setCoinListPage } = useGlobal();
-  const { data: dataCount } = useQuery(GET_COUNT);
+  const { data: dataCount } = useQuery(GET_COUNT, {
+    fetchPolicy: 'cache-and-network'
+  });
   const { loading, error, data, networkStatus } = useQuery(GET_MARKETS, {
     // We refresh data list at least at reload
     fetchPolicy: 'cache-and-network',

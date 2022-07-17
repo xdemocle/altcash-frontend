@@ -1,6 +1,6 @@
 export const REFRESH_BTCZAR_LIVE_PRICE = 25000; // 22 * 1000 = 22 seconds
 
-export const PERCENTAGE_FEE = 3.5;
+export const PERCENTAGE_FEE = 15;
 
 export const PERCENTAGE_FEE_PAYMENT = 2.9;
 

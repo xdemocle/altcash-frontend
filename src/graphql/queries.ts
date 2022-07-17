@@ -52,12 +52,10 @@ export const GET_PAGE_DATA = gql`
     market(id: $id) {
       id
       symbol
-      baseCurrencySymbol
-      quoteCurrencySymbol
+      baseAsset
+      quoteAsset
       minTradeSize
-      precision
       status
-      createdAt
       name
     }
 

@@ -15,7 +15,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
-import Moment from 'react-moment';
+// import Moment from 'react-moment';
 import { apolloClient } from '../../common/apollo/apollo-client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import CoinBuy from '../../components/coin-buy';
@@ -59,7 +59,7 @@ const CoinPage: NextPage = () => {
     }
   });
 
-  const dataCoin = data ? data.coin : {};
+  const dataCoin = data ? data.market : {};
   const dataSummary = data ? data.summary : { quoteVolume: 0, volume: 0 };
   const dataTicker = data ? data.ticker : {};
   const metaCoin = metadata ? metadata.metaCoin : {};
@@ -136,14 +136,14 @@ const CoinPage: NextPage = () => {
             />
             <ListItemText
               primary={`${btcToRandPriceWithSymbol(
-                dataTicker.bidRate,
+                dataTicker.price,
                 bitcoinRandPrice
               )}`}
-              secondary={`${dataTicker.bidRate} BTC`}
+              secondary={`${dataTicker.price} BTC`}
               className={classes.column}
             />
           </ListItem>
-          <ListItem divider>
+          {/* <ListItem divider>
             <ListItemText
               primary="Last Trade Price"
               className={classes.column}
@@ -156,7 +156,7 @@ const CoinPage: NextPage = () => {
               secondary={`${dataTicker.lastTradeRate} BTC`}
               className={classes.column}
             />
-          </ListItem>
+          </ListItem> */}
           <ListItem divider>
             <ListItemText primary="Price Change" className={classes.column} />
             <ListItemText

@@ -25,7 +25,7 @@ class BinanceAPI extends RESTDataSource {
     const marketSymbol = `${symbol}BTC`.toUpperCase();
     const response = await this.get(`exchangeInfo?symbol=${marketSymbol}`);
 
-    return response;
+    return response.symbols[0];
   }
 
   async getAllTickers(): Promise<Record<string, string>> {
@@ -47,7 +47,7 @@ class BinanceAPI extends RESTDataSource {
   async getTicker(symbol: string): Promise<Record<string, string>> {
     const marketSymbol = `${symbol}BTC`.toUpperCase();
 
-    return await this.get(`markets/${marketSymbol}/ticker`);
+    return await this.get(`ticker/price?symbol=${marketSymbol}`);
   }
 
   async getSummary(symbol: string): Promise<Record<string, string>> {

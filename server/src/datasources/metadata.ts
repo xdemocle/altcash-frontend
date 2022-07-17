@@ -17,8 +17,13 @@ class MetadataAPI extends RESTDataSource {
   }
 
   async getCoin(symbol: string): Promise<Metadata> {
-    const response = await this.get(`cryptocurrency/info?symbol=${symbol}`);
-    return response.data;
+    const response = await this.get(
+      `cryptocurrency/info?symbol=${symbol.toLowerCase()}`
+    );
+    return (
+      response.data[symbol.toUpperCase()] &&
+      response.data[symbol.toUpperCase()][0]
+    );
   }
 
   async missingData(): Promise<Metadata[]> {

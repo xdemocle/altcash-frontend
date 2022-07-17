@@ -19,7 +19,6 @@ if (!isServer()) {
 export const apolloClient = new ApolloClient({
   ssrMode: isServer(),
   cache,
-  // uri: process.env.NEXT_PUBLIC_GRAPHQL_SERVER + '/graphql',
   connectToDevTools: true,
   link: ApolloLink.from([
     new RetryLink(),

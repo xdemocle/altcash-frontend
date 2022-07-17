@@ -22,7 +22,7 @@ const queryMarkets = async (
   const missingNamesArr: MissingMarket[] = [];
 
   // Add names
-  each(markets, (market) => {
+  each(markets, async (market) => {
     const nameCoin = find(names, (name) => {
       return name.symbol === market.baseAsset;
     });
@@ -36,13 +36,17 @@ const queryMarkets = async (
     }
 
     market.id = market.symbol = market.baseAsset;
+
+    market.minTradeSize = Number(
+      find(market.filters, { filterType: 'LOT_SIZE' }).minQty
+    );
   });
 
   // Order by name
   markets.sort((a: Market, b: Market) => {
     // ignore upper and lowercase
-    const nameA = a.name && a.name.toUpperCase();
-    const nameB = b.name && b.name.toUpperCase();
+    const nameA = a.symbol && a.symbol.toUpperCase();
+    const nameB = b.symbol && b.symbol.toUpperCase();
 
     if (nameA < nameB) {
       return -1;
@@ -85,7 +89,7 @@ const queryMarkets = async (
     markets = filter(markets, (coin) => {
       return (
         (coin.name && coin.name.toLowerCase().search(term) !== -1) ||
-        coin.baseAsset.toLowerCase().search(term.toLowerCase()) !== -1
+        coin.symbol.toLowerCase().search(term.toLowerCase()) !== -1
       );
     });
   }
@@ -103,22 +107,29 @@ const queryMarket = async (
   { id }: { id: string },
   { dataSources }: { dataSources: DataSources }
 ): Promise<Market> => {
-  const response = await dataSources.marketsAPI.getMarket(id);
-  const names = await dataSources.namesAPI.getAll();
+  const market = await dataSources.marketsAPI.getMarket(id);
+  let metaCoin = {
+    name: ''
+  };
 
-  // Add names
-  const nameMarket = find(names, (name) => {
-    return name.symbol === response.baseAsset;
-  });
-
-  if (nameMarket) {
-    response.name = nameMarket.name;
+  try {
+    metaCoin = await dataSources.metadataAPI.getCoin(market.baseAsset);
+  } catch (error) {
+    console.debug('queryMarkets', error);
   }
 
   // Add the id for client caching purpouse
-  response.id = response.symbol = response.baseAsset;
-
-  return response;
+  return {
+    id: market.baseAsset,
+    symbol: market.baseAsset,
+    baseAsset: market.baseAsset,
+    quoteAsset: market.quoteAsset,
+    minTradeSize: Number(
+      find(market.filters, { filterType: 'LOT_SIZE' }).minQty
+    ),
+    status: market.status,
+    name: metaCoin.name
+  };
 };
 
 // Resolvers define the technique for fetching the types defined in the

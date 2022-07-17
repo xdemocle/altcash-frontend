@@ -14,6 +14,7 @@ import {
   Typography
 } from '@mui/material';
 import clsx from 'clsx';
+import { isUndefined } from 'lodash';
 import { useRouter } from 'next/router';
 import { FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
@@ -51,7 +52,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const [createOrder, { error: errorCreateOrder }] = useMutation(CREATE_ORDER);
   const [updateOrder, { error: errorUpdateOrder }] = useMutation(UPDATE_ORDER);
 
-  console.debug(errorCreateOrder, errorUpdateOrder);
+  // console.debug('CoinBuy', errorCreateOrder, errorUpdateOrder);
 
   const updateOrderHandler = async (input: OrderParams) => {
     const id = orderInfo.split('/')[0];
@@ -172,8 +173,10 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   }, [triggerConfirmationOrder]);
 
   useEffect(() => {
-    setBulbColor('yellow');
-    setTimeout(() => setBulbColor('green'), 3000);
+    if (coin.status === 'TRADING') {
+      setBulbColor('yellow');
+      setTimeout(() => setBulbColor('green'), 3000);
+    }
   }, [multiplier]);
 
   useEffect(() => {
@@ -184,6 +187,8 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
     setTotalAmount(
       localCurrency +
         (PERCENTAGE_FEE_PAYMENT / 100) * localCurrency +
+        // Minimum Rand fee for payment provider fixed cost
+        1 +
         (PERCENTAGE_FEE / 100) * localCurrency
     );
   }, [gridReverse, localCurrency, multiplier]);
@@ -193,6 +198,12 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
       setLocalCurrency(cryptoCurrency * multiplier);
     }
   }, [gridReverse, cryptoCurrency, multiplier]);
+
+  useEffect(() => {
+    if (coin.status !== 'TRADING') {
+      setBulbColor('red');
+    }
+  }, [coin]);
 
   return (
     <form
@@ -281,10 +292,10 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               id="gridRightInput"
               name="cryptoCurrency"
               fullWidth
-              helperText={`Min: ${(coin && coin.minTradeSize
+              helperText={`Min: ${(coin && !isUndefined(coin.minTradeSize)
                 ? coin.minTradeSize
                 : 0
-              ).toFixed(2)} ${coin.symbol}`}
+              ).toFixed(6)} ${coin.symbol}`}
               variant="outlined"
               inputProps={{
                 maxLength: '25',
@@ -315,7 +326,11 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               color="primary"
               type="submit"
               className={classes.buyButton}
-              disabled={cryptoCurrency <= coin.minTradeSize || formDisabled}
+              disabled={
+                cryptoCurrency <= coin.minTradeSize ||
+                formDisabled ||
+                bulbColor === 'red'
+              }
             >
               Buy Now
             </Button>
@@ -364,10 +379,10 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
             name="percentageFeePayment"
             onChange={() => null}
             decimalScale={2}
-            value={(PERCENTAGE_FEE_PAYMENT / 100) * localCurrency}
+            value={(PERCENTAGE_FEE_PAYMENT / 100) * localCurrency + 1}
           />{' '}
           +<br />
-          (altcash fee) R
+          (altcash fee) R{' '}
           <NumberFormatCustom
             displayType="text"
             name="percentageFeeAltcash"

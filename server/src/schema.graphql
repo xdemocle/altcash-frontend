@@ -9,8 +9,8 @@ directive @cacheControl(
   inheritMaxAge: Boolean
 ) on FIELD_DEFINITION | OBJECT | INTERFACE | UNION
 
-type Market {
-  id: String!
+type Market @cacheControl(maxAge: 3600) {
+  id: String
   symbol: String!
   baseAsset: String!
   quoteAsset: String!
@@ -19,7 +19,7 @@ type Market {
   minTradeSize: Float
 }
 
-type Summary {
+type Summary @cacheControl(maxAge: 3600) {
   id: String!
   symbol: String!
   high: Float

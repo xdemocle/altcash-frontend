@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Document } from 'mongoose';
 
 export interface MetadataUrls {
@@ -24,20 +25,18 @@ export interface Metadata {
 }
 
 export interface Market {
+  [x: string]: any;
+  symbols?: any;
   id: string;
   symbol: string;
   baseAsset: string;
   quoteAsset: string;
   minTradeSize: number;
-  precision: number;
   status: string;
-  notice: string;
-  createdAt: string;
   name: string;
 }
 
 export interface Summary {
-  [x: string]: number;
   id: string;
   symbol: string;
   high: number;
@@ -45,10 +44,12 @@ export interface Summary {
   volume: number;
   quoteVolume: number;
   percentChange: number;
+  [x: string]: string | number;
 }
 
 export interface Ticker {
   id: string;
+  symbol: string;
   price: string;
 }
 
