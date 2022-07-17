@@ -118,27 +118,27 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ markets }) => {
   );
 };
 
-// export async function getStaticPaths() {
-//   return {
-//     paths: [
-//       { params: { tab: 'featured' } },
-//       { params: { tab: 'all' } },
-//       { params: { tab: 'favourite' } }
-//     ],
-//     fallback: true
-//   };
-// }
+export async function getStaticPaths() {
+  return {
+    paths: [
+      { params: { tab: 'featured' } },
+      { params: { tab: 'all' } },
+      { params: { tab: 'favourite' } }
+    ],
+    fallback: true
+  };
+}
 
-// export async function getStaticProps() {
-//   const { data } = await apolloClient.query({
-//     query: GET_MARKETS
-//   });
+export async function getStaticProps() {
+  const { data } = await apolloClient.query({
+    query: GET_MARKETS
+  });
 
-//   return {
-//     props: {
-//       markets: data.markets
-//     }
-//   };
-// }
+  return {
+    props: {
+      markets: data.markets
+    }
+  };
+}
 
 export default BuyTabPage;
