@@ -3,7 +3,7 @@ name: Altcash backend app
 on:
   push:
     branches:
-      - master
+      - main
       - production
     paths:
       - 'server/**'
@@ -24,12 +24,12 @@ jobs:
         shell: bash
 
       - name: Deploy backend app to Heroku
-        if: github.ref == 'refs/heads/master'
+        if: github.ref == 'refs/heads/main'
         run: |
           cd server
           git init
           git remote add deployment https://heroku:${{secrets.HEROKU_API_KEY}}@git.heroku.com/altcash-backend-staging.git
           git add -f .
           git commit -m "[skip CI]"
-          git push -f deployment master:main
+          git push -f deployment main
         shell: bash
