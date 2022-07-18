@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, no-console */
-import Mailjet from './mailjet';
+import Sendgrid from './sendgrid';
 
 class Logger {
-  sender = new Mailjet();
+  sender = new Sendgrid();
 
   error(error: any) {
     const subject = 'Logger - error';
@@ -20,11 +20,11 @@ class Logger {
     const request = this.sender.post(message, subject);
 
     request
-      .then((result) => {
-        console.log('Logger - request response: ', JSON.stringify(result.body));
+      .then((response) => {
+        console.log('Logger - request response: ', JSON.stringify(response));
       })
-      .catch((err: { statusCode: any }) => {
-        console.log('Logger - request error: ', err.statusCode);
+      .catch((err: any) => {
+        console.log('Logger - request error: ', err);
       });
 
     return request;

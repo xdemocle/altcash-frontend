@@ -16,6 +16,7 @@
     "@graphql-tools/graphql-file-loader": "^7.3.15",
     "@graphql-tools/load": "^7.5.14",
     "@graphql-tools/merge": "^8.2.14",
+    "@sendgrid/mail": "^7.7.0",
     "@types/lodash": "^4.14.182",
     "@types/node": "^18.0.0",
     "@types/node-cron": "^3.0.2",
