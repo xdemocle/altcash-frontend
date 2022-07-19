@@ -9,7 +9,6 @@
     "build": "next build",
     "start": "next start",
     "export": "next export",
-    "server": "cd server && yarn dev",
     "fix-code": "prettier --write $PWD/'src/**/*.{jsx,ts,tsx}'",
     "lint": "eslint ./src/ --ext .jsx,.ts,.tsx",
     "node-app-host": "node server 80"
