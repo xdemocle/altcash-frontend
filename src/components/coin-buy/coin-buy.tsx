@@ -52,7 +52,9 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const [createOrder, { error: errorCreateOrder }] = useMutation(CREATE_ORDER);
   const [updateOrder, { error: errorUpdateOrder }] = useMutation(UPDATE_ORDER);
 
-  // console.debug('CoinBuy', errorCreateOrder, errorUpdateOrder);
+  if (errorCreateOrder || errorUpdateOrder) {
+    console.debug('Mutations', errorCreateOrder, errorUpdateOrder);
+  }
 
   const updateOrderHandler = async (input: OrderParams) => {
     const id = orderInfo.split('/')[0];
@@ -152,8 +154,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   };
 
   const onFocusLocalCurrencyHandler = (e: SyntheticEvent | Event) => {
-    // @ts-ignore:next-line
-    e?.target?.select();
+    (e?.target as HTMLInputElement).select();
   };
 
   useEffect(() => {
