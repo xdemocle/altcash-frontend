@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client';
 import { SwapHoriz, SwapVert } from '@mui/icons-material';
@@ -18,6 +16,7 @@ import { isUndefined } from 'lodash';
 import { useRouter } from 'next/router';
 import { FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
+import ReactPlaceholder from 'react-placeholder';
 import {
   MIN_AMOUNT_EXTRA,
   MIN_AMOUNT_MULTIPLIER,
@@ -234,11 +233,16 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               id="gridLeftInput"
               name="localCurrency"
               fullWidth
-              helperText={`Min: R ${(coin && coin.minTradeSize
-                ? coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
-                  MIN_AMOUNT_EXTRA
-                : 0
-              ).toFixed(2)}`}
+              helperText={
+                <ReactPlaceholder type="textRow" ready={!!coin}>
+                  Min: R{' '}
+                  {(coin && coin.minTradeSize
+                    ? coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
+                      MIN_AMOUNT_EXTRA
+                    : 0
+                  ).toFixed(2)}
+                </ReactPlaceholder>
+              }
               variant="outlined"
               inputProps={{
                 maxLength: '25',
@@ -297,10 +301,16 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               id="gridRightInput"
               name="cryptoCurrency"
               fullWidth
-              helperText={`Min: ${(coin && !isUndefined(coin.minTradeSize)
-                ? coin.minTradeSize * MIN_AMOUNT_MULTIPLIER
-                : 0
-              ).toFixed(6)} ${coin.symbol}`}
+              helperText={
+                <ReactPlaceholder type="textRow" ready={!!coin}>
+                  Min:{' '}
+                  {(coin && !isUndefined(coin.minTradeSize)
+                    ? coin.minTradeSize * MIN_AMOUNT_MULTIPLIER
+                    : 0
+                  ).toFixed(6)}{' '}
+                  {coin.symbol}
+                </ReactPlaceholder>
+              }
               variant="outlined"
               inputProps={{
                 maxLength: '25',
