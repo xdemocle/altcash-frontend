@@ -20,6 +20,7 @@ import { FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import {
   MIN_AMOUNT_EXTRA,
+  MIN_AMOUNT_MULTIPLIER,
   PERCENTAGE_FEE,
   PERCENTAGE_FEE_PAYMENT
 } from '../../common/constants';
@@ -158,8 +159,11 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
 
   useEffect(() => {
     if (orderInfo.length > 0) {
-      // store all in localStorage to repopulate the transaction
-      if (localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA) {
+      if (
+        localCurrency >
+        coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
+          MIN_AMOUNT_EXTRA
+      ) {
         initializePayment(onPaymentSuccess, onPaymentClose);
       }
     }
@@ -231,13 +235,14 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               name="localCurrency"
               fullWidth
               helperText={`Min: R ${(coin && coin.minTradeSize
-                ? coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA
+                ? coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
+                  MIN_AMOUNT_EXTRA
                 : 0
               ).toFixed(2)}`}
               variant="outlined"
               inputProps={{
                 maxLength: '25',
-                min: coin.minTradeSize * multiplier
+                min: coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER
               }}
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -293,7 +298,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               name="cryptoCurrency"
               fullWidth
               helperText={`Min: ${(coin && !isUndefined(coin.minTradeSize)
-                ? coin.minTradeSize
+                ? coin.minTradeSize * MIN_AMOUNT_MULTIPLIER
                 : 0
               ).toFixed(6)} ${coin.symbol}`}
               variant="outlined"
@@ -327,7 +332,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               type="submit"
               className={classes.buyButton}
               disabled={
-                cryptoCurrency <= coin.minTradeSize ||
+                cryptoCurrency <= coin.minTradeSize * MIN_AMOUNT_MULTIPLIER ||
                 formDisabled ||
                 bulbColor === 'red'
               }
@@ -345,8 +350,9 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
       <Card
         className={clsx(
           classes.innerCard,
-          localCurrency > coin.minTradeSize * multiplier + MIN_AMOUNT_EXTRA &&
-            classes.innerCardOpen
+          localCurrency >
+            coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
+              MIN_AMOUNT_EXTRA && classes.innerCardOpen
         )}
       >
         <div className={classes.innerCardRoot}>
