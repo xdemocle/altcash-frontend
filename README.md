@@ -1,6 +1,6 @@
 # altcash-fullstack
 
-Showcase of React+Apollo+GraphQL+ApolloServer Full-Stack Application.
+A showcase of Next.js + React + Typescript + Apollo + GraphQL, Full-Stack Application.
 
 ## Available Scripts
 
@@ -30,13 +30,13 @@ Your app is ready to be deployed!
 
 Copy the below and paste it in a new file in root of the project called _.env_
 
-```
+```sh
 NEXT_PUBLIC_GRAPHQL_SERVER=https://altcash-backend-staging.herokuapp.com
 ```
 
 Run:
 
-```
+```sh
 yarn install
 yarn start
 ```
