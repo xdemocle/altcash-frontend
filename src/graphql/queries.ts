@@ -21,8 +21,9 @@ export const GET_MARKET = gql`
       symbol
       baseAsset
       quoteAsset
+      quotePrecision
       minTradeSize
-      precision
+      stepSize
       status
       name
     }
@@ -54,7 +55,9 @@ export const GET_PAGE_DATA = gql`
       symbol
       baseAsset
       quoteAsset
+      quotePrecision
       minTradeSize
+      stepSize
       status
       name
     }

@@ -46,7 +46,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const [formDisabled, setFormDisabled] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [localCurrency, setLocalCurrency] = useState(0);
-  const [cryptoCurrency, setCryptoCurrency] = useState(0);
+  const [cryptoCurrency, setCryptoCurrencyValue] = useState(0);
   const { multiplier } = useMultiplier(ticker);
   const initializePayment = usePaystackPayment(getPaystackConfig(totalAmount));
   const [createOrder, { error: errorCreateOrder }] = useMutation(CREATE_ORDER);
@@ -55,6 +55,17 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   if (errorCreateOrder || errorUpdateOrder) {
     console.debug('Mutations', errorCreateOrder, errorUpdateOrder);
   }
+
+  const setCryptoCurrency = (value: number) => {
+    const step = coin.stepSize <= 1 ? coin.stepSize + 1 : 0;
+    const valueRounded = Number(value).toFixed(step);
+    const finalValue = Number(
+      Number(valueRounded).toFixed(coin.quotePrecision)
+    );
+
+    setCryptoCurrencyValue(finalValue);
+    // setLocalCurrency(finalValue / multiplier);
+  };
 
   const updateOrderHandler = async (input: OrderParams) => {
     const id = orderInfo.split('/')[0];
@@ -209,6 +220,9 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
     }
   }, [coin]);
 
+  const minTradeAmount =
+    coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER + MIN_AMOUNT_EXTRA;
+
   return (
     <form
       noValidate
@@ -237,17 +251,15 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               helperText={
                 <ReactPlaceholder type="textRow" ready={!!coin}>
                   Min: R{' '}
-                  {(coin && coin.minTradeSize
-                    ? coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
-                      MIN_AMOUNT_EXTRA
-                    : 0
-                  ).toFixed(2)}
+                  {(coin && coin.minTradeSize ? minTradeAmount : 0).toFixed(2)}
                 </ReactPlaceholder>
               }
               variant="outlined"
               inputProps={{
                 maxLength: '25',
-                min: coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER
+                min: Number(
+                  (coin && coin.minTradeSize ? minTradeAmount : 0).toFixed(2)
+                )
               }}
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -309,7 +321,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
                     ? coin.minTradeSize * MIN_AMOUNT_MULTIPLIER
                     : 0
                   ).toFixed(6)}{' '}
-                  {coin.symbol}
+                  {coin.symbol} / Step: {coin.stepSize}
                 </ReactPlaceholder>
               }
               variant="outlined"
@@ -343,7 +355,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               type="submit"
               className={classes.buyButton}
               disabled={
-                cryptoCurrency <= coin.minTradeSize * MIN_AMOUNT_MULTIPLIER ||
+                cryptoCurrency <= minTradeAmount ||
                 formDisabled ||
                 bulbColor === 'red'
               }

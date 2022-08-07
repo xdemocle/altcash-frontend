@@ -22,11 +22,13 @@ export type Metadata = {
 };
 
 export interface Market {
-  minTradeSize: number;
   id: string;
+  symbol: string;
   name: string;
   status: string;
-  symbol: string;
+  quotePrecision: number;
+  minTradeSize: number;
+  stepSize: number;
 }
 
 export interface Ticker {
