@@ -21,6 +21,7 @@ import {
   MIN_AMOUNT_EXTRA,
   MIN_AMOUNT_MULTIPLIER,
   PERCENTAGE_FEE,
+  PERCENTAGE_FEE_EXCHANGE,
   PERCENTAGE_FEE_PAYMENT
 } from '../../common/constants';
 import { getPaystackConfig, isServer } from '../../common/utils';
@@ -57,14 +58,11 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   }
 
   const setCryptoCurrency = (value: number) => {
-    const step = coin.stepSize <= 1 ? coin.stepSize + 1 : 0;
-    const valueRounded = Number(value).toFixed(step);
-    const finalValue = Number(
-      Number(valueRounded).toFixed(coin.quotePrecision)
-    );
+    const step = coin.stepSize < 1 ? coin.stepSize + 1 : 0;
+    const valueRounded = Number(value.toFixed(step));
+    const finalValue = valueRounded - valueRounded * PERCENTAGE_FEE_EXCHANGE;
 
-    setCryptoCurrencyValue(finalValue);
-    // setLocalCurrency(finalValue / multiplier);
+    setCryptoCurrencyValue(Number(finalValue.toFixed(coin.quotePrecision)));
   };
 
   const updateOrderHandler = async (input: OrderParams) => {
@@ -164,8 +162,12 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
     setGridReverse(!gridReverse);
   };
 
-  const onFocusLocalCurrencyHandler = (e: SyntheticEvent | Event) => {
+  const onFocusInputHandler = (e: SyntheticEvent | Event) => {
     (e?.target as HTMLInputElement).select();
+  };
+
+  const onBlurLocalCurrencyHandler = () => {
+    // setLocalCurrency(cryptoCurrency * multiplier);
   };
 
   useEffect(() => {
@@ -250,16 +252,13 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               fullWidth
               helperText={
                 <ReactPlaceholder type="textRow" ready={!!coin}>
-                  Min: R{' '}
-                  {(coin && coin.minTradeSize ? minTradeAmount : 0).toFixed(2)}
+                  Min: R {(minTradeAmount || 0).toFixed(2)}
                 </ReactPlaceholder>
               }
               variant="outlined"
               inputProps={{
                 maxLength: '25',
-                min: Number(
-                  (coin && coin.minTradeSize ? minTradeAmount : 0).toFixed(2)
-                )
+                min: Number((minTradeAmount || 0).toFixed(2))
               }}
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -268,10 +267,13 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
                   <InputAdornment position="start">R</InputAdornment>
                 )
               }}
-              value={localCurrency}
-              onChange={(e) => setLocalCurrency(Number(e.target.value))}
-              onFocus={onFocusLocalCurrencyHandler}
+              value={localCurrency.toFixed(2)}
+              onChange={(e) => {
+                !gridReverse && setLocalCurrency(Number(e.target.value));
+              }}
+              onFocus={onFocusInputHandler}
               disabled={gridReverse || formDisabled}
+              onBlur={onBlurLocalCurrencyHandler}
             />
           </Grid>
 
@@ -340,8 +342,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
                 )
               }}
               value={cryptoCurrency}
-              onChange={(e) => setCryptoCurrency(Number(e.target.value))}
-              onFocus={onFocusLocalCurrencyHandler}
+              onFocus={onFocusInputHandler}
               disabled={!gridReverse || formDisabled}
             />
           </Grid>
@@ -355,7 +356,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               type="submit"
               className={classes.buyButton}
               disabled={
-                cryptoCurrency <= minTradeAmount ||
+                localCurrency <= minTradeAmount ||
                 formDisabled ||
                 bulbColor === 'red'
               }

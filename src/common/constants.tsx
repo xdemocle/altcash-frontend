@@ -4,6 +4,8 @@ export const PERCENTAGE_FEE = 15;
 
 export const PERCENTAGE_FEE_PAYMENT = 2.9;
 
+export const PERCENTAGE_FEE_EXCHANGE = 0.01;
+
 export const MIN_AMOUNT_EXTRA = 1;
 
 export const MIN_AMOUNT_MULTIPLIER = 15;
