@@ -62,10 +62,10 @@ const CoinsList = ({ markets }: CoinsListProps) => {
         <Typography variant="subtitle1">No results...</Typography>
       )}
 
-      {!isServer() && loading && (!coinsList || networkStatus === 4) && (
+      {!isServer() && loading && !coinsList.length && (
         <Loader
           text={
-            <Typography variant="subtitle2">Loading coins list...</Typography>
+            <Typography variant="subtitle1">Loading coins list...</Typography>
           }
         />
       )}
