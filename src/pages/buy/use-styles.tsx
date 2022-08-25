@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
 import { green } from '@mui/material/colors';
 import { makeStyles } from '@mui/styles';
-import { strPxRem } from '../common/utils';
+import { strPxRem } from '../../common/utils';
 
 const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   root: {

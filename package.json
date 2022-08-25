@@ -1,6 +1,6 @@
 {
-  "name": "altcash-fullstack",
-  "description": "A showcase of Next.js + React + Typescript + Apollo + GraphQL, Full-Stack Application.",
+  "name": "altcash-frontend",
+  "description": "A showcase of Next.js + React + Typescript + Apollo + GraphQL.",
   "version": "0.1.28",
   "license": "ISC",
   "author": "Rocco R. <im@rocco.me>",
