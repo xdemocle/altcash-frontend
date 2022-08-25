@@ -8,7 +8,12 @@ const BottomBar = () => {
 
   return (
     <AppBarStyled color="secondary">
-      <Typography variant="body1" color="inherit" align="right">
+      <Typography
+        variant="body1"
+        color="inherit"
+        align="right"
+        sx={{ textTransform: 'capitalize' }}
+      >
         {data &&
           data.count &&
           data.count.map(
