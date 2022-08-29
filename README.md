@@ -31,7 +31,7 @@ Your app is ready to be deployed!
 Copy the below and paste it in a new file in root of the project called _.env_
 
 ```sh
-NEXT_PUBLIC_GRAPHQL_SERVER=https://altcash-backend-staging.herokuapp.com
+NEXT_PUBLIC_GRAPHQL_SERVER=http://197.81.132.186:4000
 ```
 
 Run:
