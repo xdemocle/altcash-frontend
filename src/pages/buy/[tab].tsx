@@ -22,7 +22,7 @@ import CoinsUserList from '../../containers/coins-user-list';
 import { GET_MARKETS, GET_META_COIN_LOGO } from '../../graphql/queries';
 import { Market } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
-import useStyles from './use-styles';
+import useStyles from '../../styles/buy-use-styles';
 
 interface BuyTabPageProps {
   markets: Market[];

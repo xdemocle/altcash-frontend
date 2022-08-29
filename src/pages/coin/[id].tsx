@@ -28,7 +28,7 @@ import {
   GET_META_COIN_LOGO
 } from '../../graphql/queries';
 import { Metadata } from '../../graphql/types';
-import useStyles from './use-styles';
+import useStyles from '../../styles/coin-use-styles';
 
 const CoinPage: NextPage = () => {
   const classes = useStyles();
