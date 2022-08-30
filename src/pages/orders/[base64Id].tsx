@@ -3,9 +3,9 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { isServer } from '../../common/utils';
-import CardConfirmationOrder from '../../components/coin-buy/card-confirmation-order';
-import CardEmailForm from '../../components/coin-buy/card-email-form';
-import Loader from '../../components/loader';
+import Loader from '../../components/molecules/loader';
+import CardConfirmationOrder from '../../components/templates/coin-buy/card-confirmation-order';
+import CardEmailForm from '../../components/templates/coin-buy/card-email-form';
 import RootStyled from '../../styled/root';
 
 const Order: NextPage = () => {

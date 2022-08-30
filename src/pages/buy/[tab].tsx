@@ -15,10 +15,9 @@ import {
   BUY_TAB_FEATURED,
   SYMBOLS_FEATURED
 } from '../../common/constants';
-// import HeaderFabButtons from '../../components/header-fab-buttons';
-import TopBarSearch from '../../components/top-bar-search';
-import CoinsList from '../../containers/coins-list';
-import CoinsUserList from '../../containers/coins-user-list';
+import TopBarSearch from '../../components/organisms/top-bar-search';
+import CoinsList from '../../components/templates/coins-list';
+import CoinsUserList from '../../components/templates/coins-user-list';
 import { GET_MARKETS, GET_META_COIN_LOGO } from '../../graphql/queries';
 import { Market } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
@@ -81,7 +80,6 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ markets }) => {
         Altcoins
       </Typography>
 
-      {/* <HeaderFabButtons /> */}
       <TopBarSearch />
 
       <Paper className={classes.paper}>

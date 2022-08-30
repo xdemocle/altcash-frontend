@@ -18,9 +18,9 @@ import { Fragment } from 'react';
 // import Moment from 'react-moment';
 import { apolloClient } from '../../common/apollo/apollo-client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
-import CoinBuy from '../../components/coin-buy';
-import CoinSVG from '../../components/coin-svg';
-import LinkExtBlank from '../../components/link-ext-blank';
+import CoinSVG from '../../components/atoms/coin-svg';
+import LinkExtBlank from '../../components/atoms/link-ext-blank';
+import CoinBuy from '../../components/templates/coin-buy';
 import {
   GET_PAGE_DATA,
   GET_META_COIN,

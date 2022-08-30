@@ -6,7 +6,7 @@ import {
   BUY_TAB_FAVOURITE,
   BUY_TAB_FEATURED
 } from '../../common/constants';
-import Loader from '../../components/loader';
+import Loader from '../../components/molecules/loader';
 import useGlobal from '../../hooks/use-global';
 import RootCenteredStyled from '../../styled/root-centered';
 
