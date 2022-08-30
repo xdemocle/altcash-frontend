@@ -3,10 +3,10 @@ import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { isServer } from '../../common/utils';
+import RootStyled from '../../components/atoms/root';
 import Loader from '../../components/molecules/loader';
-import CardConfirmationOrder from '../../components/templates/coin-buy/card-confirmation-order';
-import CardEmailForm from '../../components/templates/coin-buy/card-email-form';
-import RootStyled from '../../styled/root';
+import CardConfirmationOrder from '../../components/organisms/card-confirmation-order';
+import CardEmailForm from '../../components/organisms/card-email-form';
 
 const Order: NextPage = () => {
   const router = useRouter();

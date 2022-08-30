@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import Bottombar from '../../components/bottom-bar';
+import Bottombar from '../../organisms/bottom-bar';
 import useStyles from './use-styles';
 
 interface Props {

@@ -13,7 +13,7 @@ export const strPxRem = (px: string) => {
   return Number(px.replace('px', ''));
 };
 
-export const persistUserCoinFavourites = (coins: string[]) => {
+export const persistFavourites = (coins: string[]) => {
   if (isServer()) return;
   window.localStorage.setItem('userCoinFavourites', JSON.stringify(coins));
 };

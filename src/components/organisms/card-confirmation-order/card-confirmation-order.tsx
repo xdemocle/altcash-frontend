@@ -2,10 +2,10 @@
 import { useLazyQuery } from '@apollo/client';
 import { Alert, Box, Card, Snackbar, Tooltip, Typography } from '@mui/material';
 import { FC, useEffect, useState } from 'react';
-import { GET_ORDER_IS_PENDING } from '../../graphql/queries';
-import { Market } from '../../graphql/types';
-import Loader from '../loader';
-import NumberFormatCustom from './number-format-custom';
+import { GET_ORDER_IS_PENDING } from '../../../graphql/queries';
+import { Market } from '../../../graphql/types';
+import NumberFormatCustom from '../../atoms/number-format-custom';
+import Loader from '../../molecules/loader';
 import useStyles from './use-styles';
 
 interface CardConfirmationOrderProps {

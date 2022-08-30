@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import {
   Alert,
   Box,
@@ -8,9 +8,9 @@ import {
   Snackbar,
   TextField
 } from '@mui/material';
-import { FC, FormEvent, useEffect, useState } from 'react';
-import { UPDATE_ORDER } from '../../graphql/mutations';
-import { OrderParams } from '../../graphql/types';
+import { FC, FormEvent, useState } from 'react';
+import { UPDATE_ORDER } from '../../../graphql/mutations';
+import { OrderParams } from '../../../graphql/types';
 import useStyles from './use-styles';
 
 interface CardEmailFormProps {
@@ -61,9 +61,6 @@ const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
             <form noValidate method="POST" onSubmit={onSubmitHandler}>
               <Grid container gap={2}>
                 <Grid item xs={12} md={8}>
-                  {/* <InputLabel htmlFor="email" className={classes.gridTitle}>
-                  Your e-mail
-                </InputLabel> */}
                   <TextField
                     id="email"
                     name="email"

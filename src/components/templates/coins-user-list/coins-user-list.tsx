@@ -4,10 +4,9 @@ import { isUndefined } from 'lodash';
 import { isServer } from '../../../common/utils';
 import { GET_MARKETS } from '../../../graphql/queries';
 import { Market } from '../../../graphql/types';
-import useUserCoinFavourites from '../../../hooks/use-user-coin-favourites';
+import useFavourites from '../../../hooks/use-favourites';
 import Loader from '../../molecules/loader';
 import CoinItem from '../../organisms/coin-item';
-import useStyles from './use-styles';
 
 interface CoinsUserListProps {
   predefined?: string[];
@@ -15,8 +14,7 @@ interface CoinsUserListProps {
 }
 
 const CoinsUserList = ({ predefined, markets }: CoinsUserListProps) => {
-  const classes = useStyles();
-  const { userCoinFavourites } = useUserCoinFavourites();
+  const { userCoinFavourites } = useFavourites();
   const { loading, data, networkStatus } = useQuery(GET_MARKETS, {
     variables: {
       symbols: predefined ? predefined.join('|') : userCoinFavourites.join('|')
@@ -28,7 +26,7 @@ const CoinsUserList = ({ predefined, markets }: CoinsUserListProps) => {
   const coinsList = isServer() ? markets : dataCoins;
 
   return (
-    <div className={classes.root}>
+    <div>
       {!isServer() && coinsList && !coinsList.length && networkStatus === 7 && (
         <Typography variant="subtitle1">
           No{' '}

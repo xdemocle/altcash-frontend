@@ -13,7 +13,7 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { Fragment, SyntheticEvent } from 'react';
 import { Market } from '../../../graphql/types';
-import useUserCoinFavourites from '../../../hooks/use-user-coin-favourites';
+import useFavourites from '../../../hooks/use-favourites';
 import CoinSVG from '../../atoms/coin-svg';
 import CoinTicker from '../coin-ticker';
 import useStyles from './use-styles';
@@ -25,11 +25,8 @@ type Props = {
 const CoinItem = ({ coin }: Props) => {
   const classes = useStyles();
   const showBuy = useMediaQuery('(min-width:600px)');
-  const {
-    addUserCoinFavourites,
-    removeUserCoinFavourites,
-    userCoinFavourites
-  } = useUserCoinFavourites();
+  const { addFavourites, removeFavourites, userCoinFavourites } =
+    useFavourites();
 
   if (!coin) {
     return null;
@@ -39,9 +36,9 @@ const CoinItem = ({ coin }: Props) => {
     e.preventDefault();
 
     if (userCoinFavourites.includes(coin.symbol as never)) {
-      removeUserCoinFavourites(coin.symbol);
+      removeFavourites(coin.symbol);
     } else {
-      addUserCoinFavourites(coin.symbol);
+      addFavourites(coin.symbol);
     }
   };
 

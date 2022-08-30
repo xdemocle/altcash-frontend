@@ -28,7 +28,7 @@ import { getPaystackConfig, isServer } from '../../../common/utils';
 import { CREATE_ORDER, UPDATE_ORDER } from '../../../graphql/mutations';
 import { Market, OrderParams, Ticker } from '../../../graphql/types';
 import useMultiplier from '../../../hooks/use-multiplier';
-import NumberFormatCustom from './number-format-custom';
+import NumberFormatCustom from '../../atoms/number-format-custom';
 import useStyles from './use-styles';
 
 interface CoinBuyProps {

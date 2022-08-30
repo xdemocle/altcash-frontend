@@ -1,7 +1,6 @@
-import type { NextPage } from 'next';
-import RootStyled from '../../styled/root';
+import RootStyled from '../../atoms/root';
 
-const Support: NextPage = () => {
+const Support = () => {
   return (
     <RootStyled>
       <h1 className="display-3">Support</h1>

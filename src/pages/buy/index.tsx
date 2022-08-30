@@ -6,9 +6,9 @@ import {
   BUY_TAB_FAVOURITE,
   BUY_TAB_FEATURED
 } from '../../common/constants';
+import RootCenteredStyled from '../../components/atoms/root-centered';
 import Loader from '../../components/molecules/loader';
 import useGlobal from '../../hooks/use-global';
-import RootCenteredStyled from '../../styled/root-centered';
 
 const CustomBuyRouter: NextPage = () => {
   const router = useRouter();
