@@ -14,7 +14,14 @@ import {
 import clsx from 'clsx';
 import { isUndefined } from 'lodash';
 import { useRouter } from 'next/router';
-import { FC, FormEvent, SyntheticEvent, useEffect, useState } from 'react';
+import {
+  FC,
+  FormEvent,
+  SyntheticEvent,
+  useCallback,
+  useEffect,
+  useState
+} from 'react';
 import { usePaystackPayment } from 'react-paystack';
 import ReactPlaceholder from 'react-placeholder';
 import {
@@ -28,6 +35,7 @@ import { getPaystackConfig, isServer } from '../../../common/utils';
 import { CREATE_ORDER, UPDATE_ORDER } from '../../../graphql/mutations';
 import { Market, OrderParams, Ticker } from '../../../graphql/types';
 import useMultiplier from '../../../hooks/use-multiplier';
+import useRound from '../../../hooks/use-round';
 import NumberFormatCustom from '../../atoms/number-format-custom';
 import useStyles from './use-styles';
 
@@ -39,6 +47,7 @@ interface CoinBuyProps {
 const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const classes = useStyles();
   const router = useRouter();
+  const { getRound } = useRound();
   const [bulbColor, setBulbColor] = useState('green');
   const [orderInfo, setOrderInfo] = useState('');
   const [triggerConfirmationOrder, setTriggerConfirmationOrder] =
@@ -58,11 +67,8 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   }
 
   const setCryptoCurrency = (value: number) => {
-    const step = coin.stepSize < 1 ? coin.stepSize + 1 : 0;
-    const valueRounded = Number(value.toFixed(step));
-    const finalValue = valueRounded - valueRounded * PERCENTAGE_FEE_EXCHANGE;
-
-    setCryptoCurrencyValue(Number(finalValue.toFixed(coin.quotePrecision)));
+    const valueRounded = getRound(value, coin.stepSize);
+    setCryptoCurrencyValue(Number(valueRounded.toFixed(coin.quotePrecision)));
   };
 
   const updateOrderHandler = async (input: OrderParams) => {
@@ -167,7 +173,9 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   };
 
   const onBlurLocalCurrencyHandler = () => {
-    // setLocalCurrency(cryptoCurrency * multiplier);
+    if (localCurrency !== cryptoCurrency / multiplier) {
+      setLocalCurrency(cryptoCurrency * multiplier);
+    }
   };
 
   useEffect(() => {
@@ -211,19 +219,16 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   }, [gridReverse, localCurrency, multiplier]);
 
   useEffect(() => {
-    if (gridReverse && localCurrency !== cryptoCurrency / multiplier) {
-      setLocalCurrency(cryptoCurrency * multiplier);
-    }
-  }, [gridReverse, cryptoCurrency, multiplier]);
-
-  useEffect(() => {
     if (coin.status !== 'TRADING') {
       setBulbColor('red');
     }
   }, [coin]);
 
-  const minTradeAmount =
-    coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER + MIN_AMOUNT_EXTRA;
+  const minTradeAmount = useCallback(() => {
+    return (
+      coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER + MIN_AMOUNT_EXTRA
+    );
+  }, [coin.minTradeSize])();
 
   return (
     <form
