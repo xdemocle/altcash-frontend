@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMutation } from '@apollo/client';
-import { SwapHoriz, SwapVert } from '@mui/icons-material';
+import { ArrowForward, ArrowDownward } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -12,13 +12,12 @@ import {
   Typography
 } from '@mui/material';
 import clsx from 'clsx';
-import { isUndefined } from 'lodash';
 import { useRouter } from 'next/router';
 import {
   FC,
   FormEvent,
   SyntheticEvent,
-  useCallback,
+  useMemo,
   useEffect,
   useState
 } from 'react';
@@ -27,13 +26,13 @@ import ReactPlaceholder from 'react-placeholder';
 import {
   MIN_AMOUNT_EXTRA,
   MIN_AMOUNT_MULTIPLIER,
-  PERCENTAGE_FEE,
-  PERCENTAGE_FEE_EXCHANGE,
+  PERCENTAGE_FEE, // PERCENTAGE_FEE_EXCHANGE,
   PERCENTAGE_FEE_PAYMENT
 } from '../../../common/constants';
 import { getPaystackConfig, isServer } from '../../../common/utils';
 import { CREATE_ORDER, UPDATE_ORDER } from '../../../graphql/mutations';
 import { Market, OrderParams, Ticker } from '../../../graphql/types';
+import useGlobal from '../../../hooks/use-global';
 import useMultiplier from '../../../hooks/use-multiplier';
 import useRound from '../../../hooks/use-round';
 import NumberFormatCustom from '../../atoms/number-format-custom';
@@ -48,11 +47,12 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   const classes = useStyles();
   const router = useRouter();
   const { getRound } = useRound();
+  const { bitcoinRandPrice } = useGlobal();
+  const [notional, setNotional] = useState(0);
   const [bulbColor, setBulbColor] = useState('green');
   const [orderInfo, setOrderInfo] = useState('');
   const [triggerConfirmationOrder, setTriggerConfirmationOrder] =
     useState(false);
-  const [gridReverse, setGridReverse] = useState(false);
   const [formDisabled, setFormDisabled] = useState(false);
   const [totalAmount, setTotalAmount] = useState(0);
   const [localCurrency, setLocalCurrency] = useState(0);
@@ -131,9 +131,10 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
         );
       } catch (error) {
         setOrderInfo('');
-        setFormDisabled(false);
       }
     }
+
+    setFormDisabled(false);
   };
 
   const onPaymentSuccess = (reference: string) => {
@@ -162,10 +163,6 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
 
       router.push(`/orders/${window.btoa(slashedString)}`);
     }
-  };
-
-  const onClickReverse = () => {
-    setGridReverse(!gridReverse);
   };
 
   const onFocusInputHandler = (e: SyntheticEvent | Event) => {
@@ -205,9 +202,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
   }, [multiplier]);
 
   useEffect(() => {
-    if (!gridReverse) {
-      setCryptoCurrency(localCurrency / multiplier);
-    }
+    setCryptoCurrency(localCurrency / multiplier);
 
     setTotalAmount(
       localCurrency +
@@ -216,19 +211,25 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
         1 +
         (PERCENTAGE_FEE / 100) * localCurrency
     );
-  }, [gridReverse, localCurrency, multiplier]);
+  }, [localCurrency, multiplier]);
 
   useEffect(() => {
-    if (coin.status !== 'TRADING') {
+    if (coin?.minNotional && bitcoinRandPrice) {
+      setNotional(coin.minNotional * bitcoinRandPrice);
+    }
+
+    if (coin?.status !== 'TRADING') {
       setBulbColor('red');
     }
-  }, [coin]);
+  }, [coin, bitcoinRandPrice]);
 
-  const minTradeAmount = useCallback(() => {
-    return (
-      coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER + MIN_AMOUNT_EXTRA
-    );
-  }, [coin.minTradeSize])();
+  const minTradeAmount = useMemo(
+    () =>
+      coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
+      MIN_AMOUNT_EXTRA +
+      notional,
+    [coin.minTradeSize, notional]
+  );
 
   return (
     <form
@@ -238,9 +239,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
       onSubmit={onSubmitHandler}
     >
       <Card className={classes.root}>
-        <div
-          className={clsx(classes.grid, gridReverse ? classes.gridReverse : '')}
-        >
+        <div className={classes.grid}>
           <Grid
             item
             xs={12}
@@ -273,39 +272,24 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
                 )
               }}
               value={localCurrency.toFixed(2)}
-              onChange={(e) => {
-                !gridReverse && setLocalCurrency(Number(e.target.value));
-              }}
+              onChange={(e) => setLocalCurrency(Number(e.target.value))}
               onFocus={onFocusInputHandler}
-              disabled={gridReverse || formDisabled}
+              disabled={formDisabled}
               onBlur={onBlurLocalCurrencyHandler}
             />
           </Grid>
 
-          <Grid
-            item
-            xs={12}
-            md={1}
-            className={classes.gridItem}
-            sx={{ minWidth: '10%' }}
-          >
-            <div className={classes.flex}>
-              <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-                <SwapHoriz
-                  color="primary"
-                  className={classes.arrow}
-                  onClick={onClickReverse}
-                />
-              </Box>
-              <Box sx={{ display: { xs: 'block', md: 'none' } }}>
-                <SwapVert
-                  color="primary"
-                  className={clsx(classes.arrow, classes.arrowMobile)}
-                  onClick={onClickReverse}
-                />
-              </Box>
-            </div>
-          </Grid>
+          <div className={classes.flex}>
+            <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+              <ArrowForward color="primary" className={classes.arrow} />
+            </Box>
+            <Box sx={{ display: { xs: 'block', md: 'none' } }}>
+              <ArrowDownward
+                color="primary"
+                className={clsx(classes.arrow, classes.arrowMobile)}
+              />
+            </Box>
+          </div>
 
           <Grid
             item
@@ -323,23 +307,13 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               fullWidth
               helperText={
                 <ReactPlaceholder type="textRow" ready={!!coin}>
-                  Min:{' '}
-                  {(coin && !isUndefined(coin.minTradeSize)
-                    ? coin.minTradeSize * MIN_AMOUNT_MULTIPLIER
-                    : 0
-                  ).toFixed(6)}{' '}
-                  {coin.symbol} / Step: {coin.stepSize}
+                  Step: {coin.stepSize}
                 </ReactPlaceholder>
               }
               variant="outlined"
-              inputProps={{
-                maxLength: '25',
-                min: coin.minTradeSize
-                // max: 10,
-              }}
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                inputComponent: NumberFormatCustom as any,
+                // inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">
                     {coin.symbol || ''}
@@ -348,7 +322,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               }}
               value={cryptoCurrency}
               onFocus={onFocusInputHandler}
-              disabled={!gridReverse || formDisabled}
+              disabled
             />
           </Grid>
         </div>

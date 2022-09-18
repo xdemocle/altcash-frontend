@@ -21,14 +21,6 @@ const useStyles = makeStyles(
         flexDirection: 'row'
       }
     },
-    gridReverse: {
-      flexDirection: 'column-reverse',
-      justifyContent: 'flex-end',
-      [breakpoints.up('md')]: {
-        flexDirection: 'row-reverse',
-        justifyContent: 'flex-end'
-      }
-    },
     gridItem: {
       paddingRight: 0,
       [breakpoints.up('md')]: {
@@ -87,7 +79,6 @@ const useStyles = makeStyles(
       }
     },
     arrow: {
-      cursor: 'pointer',
       width: '2rem !important',
       height: '2rem !important'
     },

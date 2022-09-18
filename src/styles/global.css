@@ -591,3 +591,19 @@ a:not(.MuiButton-root):not(.MuiListItemButton-root):not(.MuiIconButton-root):hov
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #304701 0 -1px 9px, #89FF00 0 2px 12px;
 }
+
+.float-animation {
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0px);
+  }
+  50% {
+    transform: translatey(-15px);
+  }
+  100% {
+    transform: translatey(0px);
+  }
+}

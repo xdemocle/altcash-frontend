@@ -21,6 +21,14 @@ const useStyles = makeStyles(
         flexDirection: 'row'
       }
     },
+    gridReverse: {
+      flexDirection: 'column-reverse',
+      justifyContent: 'flex-end',
+      [breakpoints.up('md')]: {
+        flexDirection: 'row-reverse',
+        justifyContent: 'flex-end'
+      }
+    },
     gridItem: {
       paddingRight: 0,
       [breakpoints.up('md')]: {
@@ -113,12 +121,7 @@ const useStyles = makeStyles(
     },
     confirmationLoader: {
       marginTop: '1rem',
-      marginBottom: '1rem',
-      textAlign: 'center',
-      height: '10rem',
-      alignItems: 'center',
-      display: 'flex',
-      justifyContent: 'center'
+      marginBottom: '1rem'
     },
     confirmationGrid: {
       display: 'flex',
@@ -130,46 +133,10 @@ const useStyles = makeStyles(
         flexDirection: 'row'
       }
     },
-    confirmationGridCol: {
-      width: '100%',
-      marginTop: '2.5rem',
-      '&:first-child': {
-        marginTop: '0'
-      },
-      [breakpoints.up('md')]: {
-        marginTop: '0',
-        width: '49%'
-      }
-    },
-    confirmationGridCard: {
-      padding: '2rem',
-      height: '20rem'
-    },
     confirmationSeparator: {
-      height: '0',
-      borderWidth: '0 0 0.1rem',
-      borderStyle: 'solid',
+      height: 1,
+      border: '0.0625rem solid',
       borderColor: palette.primary.main
-    },
-    confirmationLoaderText: {
-      marginTop: '1rem',
-      marginLeft: '1rem'
-    },
-    logs: {
-      padding: '0.1rem 0.5rem',
-      fontSize: '0.75rem',
-      fontWeight: '900',
-      height: '3.5rem',
-      background: '#f9f7f7',
-      overflow: 'auto'
-    },
-    orderReference: {
-      fontWeight: '200',
-      marginTop: '0.25rem',
-      width: '100%',
-      maxWidth: '25rem',
-      whiteSpace: 'nowrap',
-      overflow: 'hidden'
     }
   })
 );

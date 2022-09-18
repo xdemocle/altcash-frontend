@@ -1,8 +1,6 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useLazyQuery } from '@apollo/client';
 import { Alert, Box, Card, Snackbar, Tooltip, Typography } from '@mui/material';
-import { FC, useEffect, useState } from 'react';
-import { GET_ORDER_IS_PENDING } from '../../../graphql/queries';
+import Image from 'next/image';
+import { FC, useState } from 'react';
 import { Market } from '../../../graphql/types';
 import NumberFormatCustom from '../../atoms/number-format-custom';
 import Loader from '../../molecules/loader';
@@ -14,6 +12,9 @@ interface CardConfirmationOrderProps {
   totalAmount: number;
   orderNumber: string;
   pin?: string;
+  waitingOrderConfirmation?: boolean;
+  orderReferences?: string[];
+  hasErrors?: boolean;
 }
 
 const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
@@ -21,20 +22,14 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
   cryptoCurrency,
   totalAmount,
   orderNumber,
-  pin
+  pin,
+  waitingOrderConfirmation,
+  orderReferences,
+  hasErrors
 }) => {
   const classes = useStyles();
-  const [waitingOrderConfirmation, setOrderConfirmation] = useState(false);
   const [showPinTooltip, setShowPinTooltip] = useState(false);
   const [showPinAlert, setShowPinAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [getOrderFunc, { error: errorAlert }] = useLazyQuery(
-    GET_ORDER_IS_PENDING,
-    {
-      fetchPolicy: 'network-only',
-      variables: { id: orderNumber }
-    }
-  );
 
   const onClickPinHandler = () => {
     setShowPinTooltip(true);
@@ -52,37 +47,25 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
     setShowPinAlert(false);
   };
 
-  const onCloseErrorAlertHandler = () => {
-    setShowErrorAlert(false);
-  };
+  const transformReference = (originalReference: string) => {
+    const reference = JSON.parse(originalReference);
 
-  // Simulate order confirmation succeeded
-  useEffect(() => {
-    const onIntervalOrderHandler = async () => {
-      const {
-        data: { getOrder }
-      } = await getOrderFunc();
-      if (getOrder.isPending !== true) {
-        setOrderConfirmation(true);
-      }
-    };
-
-    const intervalId = setInterval(onIntervalOrderHandler, 5000);
-
-    return () => window.clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    if (errorAlert) {
-      setShowErrorAlert(true);
+    if (!reference.status) {
+      return JSON.stringify(reference);
     }
-  }, [errorAlert]);
+
+    return JSON.stringify({
+      status: reference.status,
+      executedQty: reference.executedQty,
+      origQty: reference.origQty
+    });
+  };
 
   return (
     <>
-      <Card className={classes.root}>
-        <Box className={classes.confirmationGrid}>
-          <Box>
+      <Box className={classes.confirmationGrid}>
+        <Box className={classes.confirmationGridCol}>
+          <Card className={classes.confirmationGridCard}>
             <h2 className={classes.confirmationTitle}>Payment received</h2>
 
             {pin && (
@@ -136,19 +119,63 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
               />{' '}
               ZAR
             </Typography>
-          </Box>
+          </Card>
+        </Box>
 
-          <Box>
-            {!waitingOrderConfirmation ? (
+        <Box className={classes.confirmationGridCol}>
+          <Card className={classes.confirmationGridCard}>
+            {!waitingOrderConfirmation && !hasErrors ? (
               <Box className={classes.confirmationLoader}>
                 <Loader text="Waiting for the exchange order..." centered />
               </Box>
+            ) : hasErrors ? (
+              <Box className={`${classes.confirmationLoader} float-animation`}>
+                <Image
+                  src="/assets/error-illustration.png"
+                  width="128"
+                  height="128"
+                  alt="error-illustration.png"
+                />
+                <div className={classes.confirmationLoaderText}>
+                  Order with problems.
+                  <br />
+                  Please, contact Support.
+                </div>
+              </Box>
             ) : (
-              <Box className={classes.confirmationLoader}>Order confirmed</Box>
+              <Box className={`${classes.confirmationLoader} float-animation`}>
+                <Image
+                  src="/assets/transparent-yellow-dollar-coins-illustration.png"
+                  width="200"
+                  height="130"
+                  alt="transparent-yellow-dollar-coins-illustration.png"
+                />
+                <div className={classes.confirmationLoaderText}>
+                  Order confirmed and coins allocated.
+                </div>
+              </Box>
             )}
-          </Box>
+
+            <hr className={classes.confirmationSeparator} />
+
+            <Box>
+              <Box className={classes.logs}>
+                Order logs:
+                {orderReferences?.map((reference, ix) => (
+                  <div
+                    key={ix}
+                    className={classes.orderReference}
+                    title={transformReference(reference)}
+                  >
+                    {transformReference(reference)}
+                  </div>
+                ))}
+              </Box>
+            </Box>
+          </Card>
         </Box>
-      </Card>
+      </Box>
+
       <Snackbar
         open={showPinAlert}
         autoHideDuration={6000}
@@ -160,15 +187,6 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
           sx={{ width: '100%' }}
         >
           Your PIN is: {pin}
-        </Alert>
-      </Snackbar>
-      <Snackbar
-        open={showErrorAlert}
-        autoHideDuration={6000}
-        onClose={onCloseErrorAlertHandler}
-      >
-        <Alert severity="error" sx={{ width: '100%' }}>
-          Error from the server or you are offline!
         </Alert>
       </Snackbar>
     </>

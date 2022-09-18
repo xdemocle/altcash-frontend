@@ -13,21 +13,23 @@ import { UPDATE_ORDER } from '../../../graphql/mutations';
 import { OrderParams } from '../../../graphql/types';
 import useStyles from './use-styles';
 
-interface CardEmailFormProps {
+interface CardWithdrawalFormProps {
   orderId: string;
+  symbol: string;
 }
 
-const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
+const CardWithdrawalForm: FC<CardWithdrawalFormProps> = ({
+  orderId,
+  symbol
+}) => {
   const classes = useStyles();
   const [formDisabled, setFormDisabled] = useState(false);
-  const [emailValue, setEmailValue] = useState('');
-  const [showEmailSent, setShowEmailSent] = useState(false);
+  const [addressValue, setAddressValue] = useState('');
+  const [showAddressSent, setShowAddressSent] = useState(false);
   const [updateOrder, { error: errorUpdateOrder }] = useMutation(UPDATE_ORDER);
 
-  // console.debug(errorUpdateOrder);
-
   const updateOrderHandler = async (input: OrderParams) => {
-    // UPDATE new order to backend with payment reference
+    // UPDATE new order to backend with wallet
     const { data } = await updateOrder({
       variables: {
         id: orderId,
@@ -41,13 +43,13 @@ const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
   const onSubmitHandler = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    updateOrderHandler({ email: emailValue });
+    updateOrderHandler({ wallet: addressValue });
 
     setFormDisabled(true);
   };
 
   const onCloseAlertHandler = () => {
-    setShowEmailSent(false);
+    setShowAddressSent(false);
     setFormDisabled(false);
   };
 
@@ -56,30 +58,22 @@ const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
       <Card className={classes.root}>
         <Box className={classes.confirmationGrid}>
           <Box sx={{ width: '100%' }}>
-            <h2 className={classes.confirmationTitle}>Send order to E-Mail</h2>
+            <h2 className={classes.confirmationTitle}>
+              Withdraw to your {symbol} Wallet
+            </h2>
 
             <form noValidate method="POST" onSubmit={onSubmitHandler}>
               <Grid container gap={2}>
                 <Grid item xs={12} md={8}>
                   <TextField
-                    id="email"
-                    name="email"
-                    type="email"
-                    placeholder="Insert your e-mail"
+                    id="walletAddress"
+                    name="walletAddress"
+                    type="text"
+                    placeholder={`Insert your ${symbol} wallet's address`}
                     fullWidth
                     variant="outlined"
-                    inputProps={{
-                      maxLength: '25'
-                    }}
-                    // InputProps={{
-                    //   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    //   inputComponent: NumberFormatCustom as any,
-                    //   startAdornment: (
-                    //     <InputAdornment position="start">R</InputAdornment>
-                    //   )
-                    // }}
-                    value={emailValue}
-                    onChange={(e) => setEmailValue(e.target.value)}
+                    value={addressValue}
+                    onChange={(e) => setAddressValue(e.target.value)}
                   />
                 </Grid>
 
@@ -91,24 +85,22 @@ const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
                     className={classes.buyButton}
                     disabled={formDisabled}
                   >
-                    Send order copy
+                    Widthdraw
                   </Button>
                 </Grid>
               </Grid>
             </form>
-
-            {/* <hr className={classes.confirmationSeparator} /> */}
           </Box>
         </Box>
       </Card>
 
       <Snackbar
-        open={showEmailSent}
+        open={showAddressSent}
         autoHideDuration={6000}
         onClose={onCloseAlertHandler}
       >
         <Alert severity="success" sx={{ width: '100%' }}>
-          Email sent correctly
+          Address sent correctly
         </Alert>
       </Snackbar>
 
@@ -118,11 +110,11 @@ const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
         onClose={onCloseAlertHandler}
       >
         <Alert severity="error" sx={{ width: '100%' }}>
-          Error updating order!
+          Withdrawal problems, try again...
         </Alert>
       </Snackbar>
     </>
   );
 };
 
-export default CardEmailForm;
+export default CardWithdrawalForm;

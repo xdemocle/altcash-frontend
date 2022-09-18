@@ -23,6 +23,7 @@ export const GET_MARKET = gql`
       quoteAsset
       quotePrecision
       minTradeSize
+      minNotional
       stepSize
       status
       name
@@ -57,6 +58,7 @@ export const GET_PAGE_DATA = gql`
       quoteAsset
       quotePrecision
       minTradeSize
+      minNotional
       stepSize
       status
       name
@@ -123,23 +125,23 @@ export const GET_PAIR = gql`
   }
 `;
 
-export const GET_ORDERS = gql`
-  query getOrders {
-    getOrders {
-      _id
-      amount
-      total
-      isPaid
-      isPending
-      isWithdrawn
-      wallet
-      reference
-      email
-      pin
-      timestamp
-    }
-  }
-`;
+// export const GET_ORDERS = gql`
+//   query getOrders {
+//     getOrders {
+//       _id
+//       amount
+//       total
+//       isPaid
+//       isPending
+//       isWithdrawn
+//       wallet
+//       reference
+//       email
+//       pin
+//       timestamp
+//     }
+//   }
+// `;
 
 export const GET_ORDER = gql`
   query getOrder($id: String) {
@@ -154,6 +156,8 @@ export const GET_ORDER = gql`
       reference
       email
       pin
+      orderReferences
+      hasErrors
       timestamp
     }
   }
@@ -164,6 +168,17 @@ export const GET_ORDER_IS_PENDING = gql`
     getOrder(id: $id) {
       _id
       isPending
+      orderReferences
+      hasErrors
+    }
+  }
+`;
+
+export const GET_CAN_TRADE = gql`
+  query Query {
+    canTrade {
+      canTrade
+      msg
     }
   }
 `;

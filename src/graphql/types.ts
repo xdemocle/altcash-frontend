@@ -28,6 +28,7 @@ export interface Market {
   status: string;
   quotePrecision: number;
   minTradeSize: number;
+  minNotional: number;
   stepSize: number;
 }
 
@@ -49,6 +50,8 @@ export interface Order {
   isCancelled?: boolean;
   wallet?: string;
   reference: string;
+  orderReferences: string[];
+  hasErrors: boolean;
   timestamp: string;
 }
 
@@ -64,4 +67,6 @@ export interface OrderParams {
   isCancelled?: boolean;
   wallet?: string;
   reference?: string;
+  orderReferences?: string[];
+  hasErrors?: boolean;
 }
