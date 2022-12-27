@@ -68,9 +68,17 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
           href="/buy"
           className={clsx(
             classes.listItem,
-            router.pathname == '/buy/[tab]' ? 'active' : ''
+            router.pathname == '/buy' ||
+              router.pathname == '/buy/[tab]' ||
+              router.pathname == '/coin/[id]'
+              ? 'active'
+              : ''
           )}
-          selected={router.pathname == '/buy/[tab]'}
+          selected={
+            router.pathname == '/buy' ||
+            router.pathname == '/buy/[tab]' ||
+            router.pathname == '/coin/[id]'
+          }
           onClick={(e: SyntheticEvent) => navTo(e, '/buy')}
         >
           <ListItemIcon>
