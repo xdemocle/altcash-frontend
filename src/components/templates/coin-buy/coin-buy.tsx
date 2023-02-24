@@ -182,7 +182,7 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
         coin.minTradeSize * multiplier * MIN_AMOUNT_MULTIPLIER +
           MIN_AMOUNT_EXTRA
       ) {
-        initializePayment(onPaymentSuccess, onPaymentClose);
+        initializePayment(onPaymentSuccess as () => void, onPaymentClose);
       }
     }
   }, [orderInfo]);
