@@ -99,6 +99,7 @@ const CoinPage: NextPage = () => {
         >
           {dataCoin.name || coinId}
         </Typography>
+
         <div className={classes.pageAvatar}>
           {loading && (
             <CircularProgress className={classes.progress} size="4rem" />
@@ -143,20 +144,6 @@ const CoinPage: NextPage = () => {
               className={classes.column}
             />
           </ListItem>
-          {/* <ListItem divider>
-            <ListItemText
-              primary="Last Trade Price"
-              className={classes.column}
-            />
-            <ListItemText
-              primary={`${btcToRandPriceWithSymbol(
-                dataTicker.lastTradeRate,
-                bitcoinRandPrice
-              )}`}
-              secondary={`${dataTicker.lastTradeRate} BTC`}
-              className={classes.column}
-            />
-          </ListItem> */}
           <ListItem divider>
             <ListItemText primary="Price Change" className={classes.column} />
             <ListItemText
@@ -212,14 +199,6 @@ const CoinPage: NextPage = () => {
               className={classes.column}
             />
           </ListItem>
-          {/* <ListItem divider>
-            <ListItemText primary="Last update" className={classes.column} />
-            <ListItemText
-              primary={<Moment>{dataSummary.updatedAt}</Moment>}
-              secondary="Page data refresh automatically"
-              className={classes.column}
-            />
-          </ListItem> */}
         </List>
 
         {metadata && metaCoin.description && (

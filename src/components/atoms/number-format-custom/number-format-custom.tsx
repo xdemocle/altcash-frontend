@@ -1,7 +1,8 @@
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 
 interface NumberFormatCustomProps {
-  inputRef?: (instance: NumberFormat<number> | null) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  inputRef?: any;
   onChange: (event: { target: { name: string; value: string } }) => void;
   name: string;
   value: number;
@@ -19,7 +20,7 @@ const NumberFormatCustom = ({
   ...other
 }: NumberFormatCustomProps) => {
   return (
-    <NumberFormat
+    <NumericFormat
       {...other}
       value={value}
       displayType={displayType}
@@ -34,7 +35,7 @@ const NumberFormatCustom = ({
         });
       }}
       thousandSeparator
-      isNumericString
+      valueIsNumericString
     />
   );
 };

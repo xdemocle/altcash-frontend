@@ -262,8 +262,11 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               variant="outlined"
               inputProps={{
                 maxLength: '25',
-                min: Number((minTradeAmount || 0).toFixed(2))
+                min: Number((minTradeAmount || 0).toFixed(2)),
+                inputMode: 'numeric',
+                pattern: '[0-9]*'
               }}
+              type="number"
               InputProps={{
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 inputComponent: NumberFormatCustom as any,
@@ -312,8 +315,6 @@ const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
               }
               variant="outlined"
               InputProps={{
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                // inputComponent: NumberFormatCustom as any,
                 endAdornment: (
                   <InputAdornment position="start">
                     {coin.symbol || ''}

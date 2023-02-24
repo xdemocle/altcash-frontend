@@ -46,7 +46,7 @@ const CoinItem = ({ coin }: Props) => {
 
   return (
     <Fragment>
-      <Link href={`/coin/${coin.id.toLowerCase()}`}>
+      <Link legacyBehavior href={`/coin/${coin.id.toLowerCase()}`}>
         <a style={{ textDecoration: 'none' }}>
           <ListItemButton className={classes.listItem}>
             <ListItemIcon>
