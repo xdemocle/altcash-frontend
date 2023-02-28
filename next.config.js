@@ -1,5 +1,6 @@
 module.exports = {
   reactStrictMode: true,
+  staticPageGenerationTimeout: 1000,
   images: {
     domains: [
       's2.coinmarketcap.com',
