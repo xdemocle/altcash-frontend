@@ -271,28 +271,28 @@ const CoinPage: NextPage = () => {
 
 export default CoinPage;
 
-export async function getStaticPaths() {
-  const { data } = await apolloClient.query({
-    query: GET_META_COIN_LOGO
-  });
+// export async function getStaticPaths() {
+//   const { data } = await apolloClient.query({
+//     query: GET_META_COIN_LOGO
+//   });
 
-  // Get the paths we want to pre-render
-  const paths = data?.metaCoinAll?.map((coin: Metadata) => ({
-    params: { id: coin.symbol.toLowerCase() }
-  }));
+//   // Get the paths we want to pre-render
+//   const paths = data?.metaCoinAll?.map((coin: Metadata) => ({
+//     params: { id: coin.symbol.toLowerCase() }
+//   }));
 
-  // We'll pre-render only these paths at build time.
-  return { paths, fallback: true };
-}
+//   // We'll pre-render only these paths at build time.
+//   return { paths, fallback: true };
+// }
 
-export async function getStaticProps() {
-  const { data } = await apolloClient.query({
-    query: GET_META_COIN_LOGO
-  });
+// export async function getStaticProps() {
+//   const { data } = await apolloClient.query({
+//     query: GET_META_COIN_LOGO
+//   });
 
-  return {
-    props: {
-      metaCoinAll: data.metaCoinAll
-    }
-  };
-}
+//   return {
+//     props: {
+//       metaCoinAll: data.metaCoinAll
+//     }
+//   };
+// }
