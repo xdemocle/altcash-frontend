@@ -8,7 +8,7 @@ import { Paper, Tab, Tabs, Typography } from '@mui/material';
 import type { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { apolloClient } from '../../common/apollo/apollo-client';
+// import { apolloClient } from '../../common/apollo/apollo-client';
 import {
   BUY_TAB_ALL,
   BUY_TAB_FAVOURITE,
@@ -18,7 +18,7 @@ import {
 import TopBarSearch from '../../components/organisms/top-bar-search';
 import CoinsList from '../../components/templates/coins-list';
 import CoinsUserList from '../../components/templates/coins-user-list';
-import { GET_MARKETS, GET_META_COIN_LOGO } from '../../graphql/queries';
+import { GET_META_COIN_LOGO } from '../../graphql/queries';
 import { Market } from '../../graphql/types';
 import useGlobal from '../../hooks/use-global';
 import useStyles from '../../styles/buy-use-styles';
@@ -116,27 +116,27 @@ const BuyTabPage: NextPage<BuyTabPageProps> = ({ markets }) => {
   );
 };
 
-export async function getStaticPaths() {
-  return {
-    paths: [
-      { params: { tab: 'featured' } },
-      { params: { tab: 'all' } },
-      { params: { tab: 'favourite' } }
-    ],
-    fallback: true
-  };
-}
+// export async function getStaticPaths() {
+//   return {
+//     paths: [
+//       { params: { tab: 'featured' } },
+//       { params: { tab: 'all' } },
+//       { params: { tab: 'favourite' } }
+//     ],
+//     fallback: true
+//   };
+// }
 
-export async function getStaticProps() {
-  const { data } = await apolloClient.query({
-    query: GET_MARKETS
-  });
+// export async function getStaticProps() {
+//   const { data } = await apolloClient.query({
+//     query: GET_MARKETS
+//   });
 
-  return {
-    props: {
-      markets: data.markets
-    }
-  };
-}
+//   return {
+//     props: {
+//       markets: data.markets
+//     }
+//   };
+// }
 
 export default BuyTabPage;

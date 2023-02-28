@@ -16,7 +16,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 // import Moment from 'react-moment';
-import { apolloClient } from '../../common/apollo/apollo-client';
+// import { apolloClient } from '../../common/apollo/apollo-client';
 import { btcToRandPriceWithSymbol } from '../../common/currency';
 import CoinSVG from '../../components/atoms/coin-svg';
 import LinkExtBlank from '../../components/atoms/link-ext-blank';
@@ -24,10 +24,9 @@ import CoinBuy from '../../components/templates/coin-buy';
 import {
   GET_PAGE_DATA,
   GET_META_COIN,
-  GET_PAIR,
-  GET_META_COIN_LOGO
+  GET_PAIR // GET_META_COIN_LOGO
 } from '../../graphql/queries';
-import { Metadata } from '../../graphql/types';
+// import { Metadata } from '../../graphql/types';
 import useStyles from '../../styles/coin-use-styles';
 
 const CoinPage: NextPage = () => {
