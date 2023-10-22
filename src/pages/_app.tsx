@@ -1,8 +1,8 @@
 import { ApolloProvider } from '@apollo/client';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { ErrorBoundary, HighlightInit } from '@highlight-run/next/client';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
+import { Analytics } from '@vercel/analytics/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,10 +10,6 @@ import { useEffect, useState } from 'react';
 import CookieConsent from 'react-cookie-consent';
 import { persistCacheInstance } from '../common/apollo/apollo-cache';
 import { apolloClient } from '../common/apollo/apollo-client';
-import {
-  HIGHLIGHT_NEXTJS_APP,
-  HIGHLIGHT_PROJECT_ID
-} from '../common/constants';
 import createEmotionCache from '../common/createEmotionCache';
 import * as ga from '../common/ga';
 import { theme } from '../common/theme';
@@ -83,16 +79,7 @@ function MyApp({
 
   return (
     <>
-      <HighlightInit
-        projectId={HIGHLIGHT_PROJECT_ID}
-        serviceName={HIGHLIGHT_NEXTJS_APP}
-        tracingOrigins
-        networkRecording={{
-          enabled: true,
-          recordHeadersAndBody: true,
-          urlBlocklist: []
-        }}
-      />
+      <Analytics />
 
       <CacheProvider value={emotionCache}>
         <GlobalProvider>
@@ -116,9 +103,7 @@ function MyApp({
                   <TickersLivePrice />
 
                   <DefaultLayout>
-                    <ErrorBoundary>
-                      <Component {...pageProps} />
-                    </ErrorBoundary>
+                    <Component {...pageProps} />
                   </DefaultLayout>
 
                   <CookieConsent

@@ -49,9 +49,3 @@ export const BUY_TABS_DEFAULT = 0;
 export const BUY_TAB_FEATURED = 0;
 export const BUY_TAB_ALL = 1;
 export const BUY_TAB_FAVOURITE = 2;
-
-export type PaystackCurrency = 'NGN' | 'GHS' | 'USD' | 'ZAR';
-
-export const HIGHLIGHT_NEXTJS_APP = 'altcash-frontend-staging';
-
-export const HIGHLIGHT_PROJECT_ID = 'ng2owjnd';

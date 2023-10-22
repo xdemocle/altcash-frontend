@@ -1,9 +1,6 @@
 import { PaystackProps } from 'react-paystack/dist/types';
-import {
-  PaystackCurrency,
-  PAYSTACK_EMAIL,
-  PAYSTACK_PUBLICK_KEY
-} from './constants';
+import { PAYSTACK_EMAIL, PAYSTACK_PUBLICK_KEY } from './constants';
+import { PaystackCurrency } from './types';
 
 export const svgCoinPathHelper = (name: string) => {
   return require(`cryptocurrency-icons/svg/color/${name}.svg`);
