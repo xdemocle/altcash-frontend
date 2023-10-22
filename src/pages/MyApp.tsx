@@ -1,6 +1,6 @@
 import { ApolloProvider } from '@apollo/client';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import { ErrorBoundary, HighlightInit } from '@highlight-run/next/client';
+import { HighlightInit } from '@highlight-run/next/client';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import type { AppProps } from 'next/app';
@@ -10,11 +10,7 @@ import { useEffect, useState } from 'react';
 import CookieConsent from 'react-cookie-consent';
 import { persistCacheInstance } from '../common/apollo/apollo-cache';
 import { apolloClient } from '../common/apollo/apollo-client';
-import {
-  HIGHLIGHT_NEXTJS_APP,
-  HIGHLIGHT_PROJECT_ID
-} from '../common/constants';
-import createEmotionCache from '../common/createEmotionCache';
+import { HIGHLIGHT_NEXTJS_APP } from '../common/constants';
 import * as ga from '../common/ga';
 import { theme } from '../common/theme';
 import { isServer } from '../common/utils';
@@ -24,11 +20,9 @@ import TickersLivePrice from '../components/molecules/tickers-live-price';
 import DefaultLayout from '../components/templates/default-layout';
 import UserCoinFavouritesProvider from '../context/favourites';
 import GlobalProvider from '../context/global';
-import '../styles/global.css';
+import { clientSideEmotionCache } from './_app';
 
-const clientSideEmotionCache = createEmotionCache();
-
-function MyApp({
+export function MyApp({
   Component,
   emotionCache = clientSideEmotionCache,
   pageProps
@@ -40,7 +34,6 @@ function MyApp({
     const handleRouteChange = (url: string) => {
       ga.pageview(url);
     };
-
     //When the component is mounted, subscribe to router changes
     //and log those page views
     router.events.on('routeChangeComplete', handleRouteChange);
@@ -116,9 +109,7 @@ function MyApp({
                   <TickersLivePrice />
 
                   <DefaultLayout>
-                    <ErrorBoundary>
-                      <Component {...pageProps} />
-                    </ErrorBoundary>
+                    <Component {...pageProps} />
                   </DefaultLayout>
 
                   <CookieConsent
@@ -149,28 +140,3 @@ function MyApp({
     </>
   );
 }
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
-
-// export function reportWebVitals(metric: NextWebVitalsMetric) {
-//   const { id, name, label, value } = metric;
-
-//   event(name, {
-//     category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
-//     value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
-//     label: id, // id unique to current page load
-//     nonInteraction: true // avoids affecting bounce rate.
-//   });
-// }
-
-export default MyApp;
