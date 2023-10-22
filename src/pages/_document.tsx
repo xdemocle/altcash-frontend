@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/ban-ts-comment */
 import createEmotionServer from '@emotion/server/create-instance';
-import newrelic from 'newrelic';
 import { AppType } from 'next/dist/shared/lib/utils';
 import Document, {
   Html,
@@ -27,11 +26,6 @@ export default function MyDocument(props: any) {
             }}
           />
         )}
-
-        <script
-          type="text/javascript"
-          dangerouslySetInnerHTML={{ __html: props.browserTimingHeader }}
-        />
 
         <link rel="shortcut icon" href="/favicon.ico" />
         <meta name="theme-color" content={theme.palette.primary.main} />
@@ -154,13 +148,8 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     />
   ));
 
-  const browserTimingHeader = newrelic.getBrowserTimingHeader({
-    hasToRemoveScriptWrapper: true
-  });
-
   return {
     ...initialProps,
-    emotionStyleTags,
-    browserTimingHeader
+    emotionStyleTags
   };
 };
