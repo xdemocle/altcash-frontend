@@ -1,24 +1,50 @@
 import { Box } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import ClientOnly from '../../atoms/client-only';
 import TopNav from '../../molecules/top-nav';
 import Bottombar from '../../organisms/bottom-bar';
 import BottomNav from '../../organisms/bottom-nav';
 import Sidebar from '../../organisms/sidebar';
-import useStyles from './use-styles';
+
+const AppFrame = styled('div')(({ theme }) => ({
+  zIndex: 1,
+  position: 'relative',
+  width: '100%',
+  minHeight: '100vh',
+  margin: '0 auto'
+}));
+
+const Inner = styled('div')(({ theme }) => ({
+  display: 'flex',
+  paddingTop: '4rem',
+  [theme.breakpoints.up('sm')]: {
+    paddingTop: '0'
+  }
+}));
+
+const Content = styled('main')(({ theme }) => ({
+  position: 'relative',
+  flexGrow: 1,
+  minHeight: 'calc(100vh - 36px)',
+  paddingBottom: theme.typography.pxToRem(36),
+  backgroundColor: '#f4f5f4',
+  [theme.breakpoints.only('xs')]: {
+    minHeight: 'calc(100vh - 56px)',
+    paddingBottom: theme.typography.pxToRem(56)
+  }
+}));
 
 interface DefaultLayoutProps {
   children: React.ReactNode;
 }
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.appFrame}>
-      <div className={classes.inner}>
+    <AppFrame>
+      <Inner>
         <Sidebar />
-        <main className={classes.content}>{children}</main>
-      </div>
+        <Content>{children}</Content>
+      </Inner>
 
       <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
         <TopNav />
@@ -31,7 +57,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
       <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
         <BottomNav />
       </Box>
-    </div>
+    </AppFrame>
   );
 };
 

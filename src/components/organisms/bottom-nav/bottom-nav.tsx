@@ -7,10 +7,8 @@ import {
 import { BottomNavigation, BottomNavigationAction } from '@mui/material';
 import { useRouter } from 'next/router';
 import { useState, ChangeEvent } from 'react';
-import useStyles from './use-styles';
 
 const SimpleBottomNavigation = () => {
-  const classes = useStyles();
   const router = useRouter();
   const [pathname, setPathname] = useState(router.pathname);
 
@@ -23,7 +21,11 @@ const SimpleBottomNavigation = () => {
     <BottomNavigation
       value={pathname}
       onChange={handleChange}
-      className={classes.root}
+      sx={{
+        position: 'fixed',
+        bottom: 0,
+        width: '100%'
+      }}
       showLabels
     >
       <BottomNavigationAction label="Home" icon={<Home />} value="/" />

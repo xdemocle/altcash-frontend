@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: '#e3e4e9'
@@ -16,7 +16,7 @@ const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
   inner: {
     display: 'flex',
     paddingTop: '4rem',
-    [breakpoints.up('sm')]: {
+    [theme.breakpoints.up('sm')]: {
       paddingTop: '0'
     }
   },
@@ -24,11 +24,11 @@ const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
     position: 'relative',
     flexGrow: 1,
     minHeight: 'calc(100vh - 36px)',
-    paddingBottom: typography.pxToRem(36),
+    paddingBottom: theme.typography.pxToRem(36),
     backgroundColor: '#f4f5f4',
-    [breakpoints.only('xs')]: {
+    [theme.breakpoints.only('xs')]: {
       minHeight: 'calc(100vh - 56px)',
-      paddingBottom: typography.pxToRem(56)
+      paddingBottom: theme.typography.pxToRem(56)
     }
   }
 }));

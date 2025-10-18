@@ -1,5 +1,5 @@
 import { Theme } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 
 const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
   root: {

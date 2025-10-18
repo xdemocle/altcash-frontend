@@ -1,21 +1,21 @@
 import { Theme } from '@mui/material';
 import { green } from '@mui/material/colors';
-import { makeStyles } from '@mui/styles';
+import { makeStyles } from 'tss-react/mui';
 import { strPxRem } from '../common/utils';
 
-const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     position: 'relative',
     maxWidth: '64rem',
-    paddingTop: typography.pxToRem(strPxRem(spacing(2))),
-    marginLeft: typography.pxToRem(strPxRem(spacing(2))),
-    paddingBottom: typography.pxToRem(strPxRem(spacing(2))),
-    marginRight: typography.pxToRem(strPxRem(spacing(2))),
-    [breakpoints.up('sm')]: {
-      paddingTop: typography.pxToRem(strPxRem(spacing(2))),
-      marginLeft: typography.pxToRem(strPxRem(spacing(5))),
-      paddingBottom: typography.pxToRem(strPxRem(spacing(5))),
-      marginRight: typography.pxToRem(strPxRem(spacing(5)))
+    paddingTop: theme.typography.pxToRem(strPxRem(theme.spacing(2))),
+    marginLeft: theme.typography.pxToRem(strPxRem(theme.spacing(2))),
+    paddingBottom: theme.typography.pxToRem(strPxRem(theme.spacing(2))),
+    marginRight: theme.typography.pxToRem(strPxRem(theme.spacing(2))),
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.typography.pxToRem(strPxRem(theme.spacing(2))),
+      marginLeft: theme.typography.pxToRem(strPxRem(theme.spacing(5))),
+      paddingBottom: theme.typography.pxToRem(strPxRem(theme.spacing(5))),
+      marginRight: theme.typography.pxToRem(strPxRem(theme.spacing(5)))
     }
   },
   title: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
     margin: '0 auto'
   },
   rightIcon: {
-    marginLeft: strPxRem(spacing(1))
+    marginLeft: strPxRem(theme.spacing(1))
   },
   buttonProgress: {
     color: green[500],
@@ -39,7 +39,7 @@ const useStyles = makeStyles(({ breakpoints, typography, spacing }: Theme) => ({
   bottomListWrapper: {
     position: 'relative',
     textAlign: 'center',
-    margin: strPxRem(spacing(1))
+    margin: strPxRem(theme.spacing(1))
   },
   paper: {
     margin: '1rem 0'
