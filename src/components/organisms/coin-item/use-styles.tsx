@@ -1,6 +1,7 @@
+import { Theme } from '@emotion/react';
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   column: {
     maxWidth: '35%',
     textDecoration: 'none !important'

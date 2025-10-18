@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles(({ breakpoints, typography }: Theme) => ({
+const useStyles = makeStyles()(({ breakpoints, typography }: Theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: '#e3e4e9'

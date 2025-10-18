@@ -3,7 +3,7 @@ import { green } from '@mui/material/colors';
 import { makeStyles } from 'tss-react/mui';
 import { strPxRem } from '../../../common/utils';
 
-const useStyles = makeStyles(({ spacing }: Theme) => ({
+const useStyles = makeStyles()(({ spacing }: Theme) => ({
   buttonLoadMore: {
     margin: '0 auto'
   },

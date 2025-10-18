@@ -84,15 +84,15 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
   };
 
   return (
-    <StyledList component="nav">
+    <StyledList as="nav">
       <Tooltip
         title="Homepage"
         placement="right"
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
         <StyledListItemButton
-          component={'a'}
-          href="/"
+          // component="a"
+          // href="/"
           selected={router.pathname == '/'}
           className={clsx(router.pathname == '/' ? 'active' : '')}
           onClick={(e: SyntheticEvent) => navTo(e, '/')}
@@ -110,8 +110,8 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
         <StyledListItemButton
-          component={'a'}
-          href="/buy"
+          as="a"
+          // href="/buy"
           className={clsx(
             router.pathname == '/buy' ||
               router.pathname == '/buy/[tab]' ||
@@ -139,8 +139,8 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
         <StyledListItemButton
-          component={'a'}
-          href="/about"
+          as="a"
+          // href="/about"
           selected={router.pathname == '/about'}
           className={clsx(router.pathname == '/about' ? 'active' : '')}
           onClick={(e: SyntheticEvent) => navTo(e, '/about')}
@@ -158,8 +158,8 @@ const MainLinks = ({ isSidebarOpen }: Props) => {
         enterDelay={isSidebarOpen ? 2000 : 50}
       >
         <StyledListItemButton
-          component={'a'}
-          href="/support"
+          as="a"
+          // href="/support"
           selected={router.pathname == '/support'}
           className={clsx(router.pathname == '/support' ? 'active' : '')}
           onClick={(e: SyntheticEvent) => navTo(e, '/support')}

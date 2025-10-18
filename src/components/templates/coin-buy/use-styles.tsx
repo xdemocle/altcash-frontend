@@ -3,7 +3,7 @@ import { green, grey } from '@mui/material/colors';
 import { makeStyles } from 'tss-react/mui';
 import { strPxRem } from '../../../common/utils';
 
-const useStyles = makeStyles(
+const useStyles = makeStyles()(
   ({ breakpoints, palette, typography, spacing }: Theme) => ({
     root: {
       position: 'relative',

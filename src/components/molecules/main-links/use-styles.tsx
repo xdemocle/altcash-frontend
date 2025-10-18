@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()((theme: Theme) => ({
+const useStyles = makeStyles()(({ palette }: Theme) => ({
   nav: {
     position: 'relative',
     height: 'calc(100% - 6rem)',
