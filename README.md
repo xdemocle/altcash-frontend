@@ -1,4 +1,6 @@
-# altcash-fullstack
+# altcash-frontend
+
+Moved to <https://github.com/xdemocle/altcash-webapp>
 
 A showcase of Next.js + React + Typescript + Apollo + GraphQL, Full-Stack Application.
 
