@@ -1,7 +1,7 @@
 import { Theme } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 
-const useStyles = makeStyles()(({ breakpoints, typography }: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: '#e3e4e9'
@@ -13,7 +13,7 @@ const useStyles = makeStyles()(({ breakpoints, typography }: Theme) => ({
     width: '100%',
     minHeight: '100vh',
     margin: '0 auto',
-    [breakpoints.up('xl')]: {
+    [theme.breakpoints.up('xl')]: {
       padding: '3rem 6rem 6rem 6rem',
       height: 'calc(100vh - 12rem)',
       maxWidth: '100rem'
@@ -21,7 +21,7 @@ const useStyles = makeStyles()(({ breakpoints, typography }: Theme) => ({
   },
   inner: {
     display: 'flex',
-    [breakpoints.up('xl')]: {
+    [theme.breakpoints.up('xl')]: {
       overflow: 'hidden',
       minHeight: 'calc(100vh - 9rem)',
       maxHeight: 'calc(100vh - 9rem)',
@@ -34,13 +34,13 @@ const useStyles = makeStyles()(({ breakpoints, typography }: Theme) => ({
     flexGrow: 1,
     overflow: 'hidden',
     minHeight: 'calc(100vh - 36px)',
-    paddingBottom: typography.pxToRem(36),
+    paddingBottom: theme.typography.pxToRem(36),
     backgroundColor: '#f4f5f4',
-    [breakpoints.only('xs')]: {
+    [theme.breakpoints.only('xs')]: {
       minHeight: 'calc(100vh - 56px)',
-      paddingBottom: typography.pxToRem(56)
+      paddingBottom: theme.typography.pxToRem(56)
     },
-    [breakpoints.up('xl')]: {
+    [theme.breakpoints.up('xl')]: {
       overflowY: 'auto',
       minHeight: 'auto'
     }

@@ -22,7 +22,7 @@ const CardWithdrawalForm: FC<CardWithdrawalFormProps> = ({
   orderId,
   symbol
 }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [formDisabled, setFormDisabled] = useState(false);
   const [addressValue, setAddressValue] = useState('');
   const [showAddressSent, setShowAddressSent] = useState(false);

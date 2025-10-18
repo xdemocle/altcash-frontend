@@ -18,7 +18,7 @@ interface CardEmailFormProps {
 }
 
 const CardEmailForm: FC<CardEmailFormProps> = ({ orderId }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [formDisabled, setFormDisabled] = useState(false);
   const [emailValue, setEmailValue] = useState('');
   const [showEmailSent, setShowEmailSent] = useState(false);

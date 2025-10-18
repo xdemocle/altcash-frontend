@@ -3,12 +3,12 @@ import { green } from '@mui/material/colors';
 import { makeStyles } from 'tss-react/mui';
 import { strPxRem } from '../../../common/utils';
 
-const useStyles = makeStyles()(({ spacing }: Theme) => ({
+const useStyles = makeStyles()((theme: Theme) => ({
   buttonLoadMore: {
     margin: '0 auto'
   },
   rightIcon: {
-    marginLeft: strPxRem(spacing(1))
+    marginLeft: strPxRem(theme.spacing(1))
   },
   buttonProgress: {
     color: green[100],
@@ -21,7 +21,7 @@ const useStyles = makeStyles()(({ spacing }: Theme) => ({
   bottomListWrapper: {
     position: 'relative',
     textAlign: 'center',
-    margin: strPxRem(spacing(1))
+    margin: strPxRem(theme.spacing(1))
   },
   pagination: {
     textAlign: 'center',

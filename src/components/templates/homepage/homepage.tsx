@@ -5,7 +5,7 @@ import { Parallax } from 'react-parallax';
 import useStyles from './use-styles';
 
 const Homepage = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <div className={classes.root}>

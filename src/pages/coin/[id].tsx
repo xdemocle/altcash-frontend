@@ -30,7 +30,7 @@ import {
 import useStyles from '../../styles/coin-use-styles';
 
 const CoinPage: NextPage = () => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const router = useRouter();
   const { id } = router.query;
   const coinId = String(id).toUpperCase();

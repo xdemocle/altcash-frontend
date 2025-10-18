@@ -23,7 +23,7 @@ type Props = {
 };
 
 const CoinItem = ({ coin }: Props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const showBuy = useMediaQuery('(min-width:600px)');
   const { addFavourites, removeFavourites, userCoinFavourites } =
     useFavourites();

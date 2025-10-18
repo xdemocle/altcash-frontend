@@ -29,7 +29,7 @@ interface BuyTabPageProps {
 
 const BuyTabPage: NextPage<BuyTabPageProps> = ({ markets }) => {
   const router = useRouter();
-  const classes = useStyles();
+  const { classes } = useStyles();
   const { tab: tabNumber, setTab } = useGlobal();
   const tab = router.query.tab;
   const symbolsFeatured = SYMBOLS_FEATURED.sort();

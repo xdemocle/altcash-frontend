@@ -13,7 +13,7 @@ type Props = {
 };
 
 const CoinSVG = ({ coinSymbol, size }: Props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   let symbol = coinSymbol.toLowerCase();
   let imgCoinPath = '';
   let svgCoinPath = null;

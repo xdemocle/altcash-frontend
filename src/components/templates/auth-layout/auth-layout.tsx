@@ -7,7 +7,7 @@ interface Props {
 }
 
 const AuthLayout = ({ children }: Props) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
 
   return (
     <div className={classes.appFrame}>

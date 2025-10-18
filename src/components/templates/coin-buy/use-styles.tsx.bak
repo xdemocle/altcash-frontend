@@ -4,10 +4,10 @@ import { makeStyles } from 'tss-react/mui';
 import { strPxRem } from '../../../common/utils';
 
 const useStyles = makeStyles()(
-  (theme: Theme) => ({
+  ({ breakpoints, palette, typography, spacing }: Theme) => ({
     root: {
       position: 'relative',
-      padding: theme.typography.pxToRem(strPxRem(spacing(3))),
+      padding: typography.pxToRem(strPxRem(spacing(3))),
       display: 'grid'
     },
     grid: {
@@ -15,7 +15,7 @@ const useStyles = makeStyles()(
       justifyContent: 'space-between',
       width: '100%',
       flexDirection: 'column',
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         width: '75%',
         paddingRight: '2.5%',
         flexDirection: 'row'
@@ -23,16 +23,16 @@ const useStyles = makeStyles()(
     },
     gridItem: {
       paddingRight: 0,
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         padding: 0
-        // paddingRight: theme.typography.pxToRem(strPxRem(spacing(2)))
+        // paddingRight: typography.pxToRem(strPxRem(spacing(2)))
       }
     },
     gridTitle: {
       display: 'block',
       color: grey[600],
       fontSize: '.9rem',
-      marginBottom: theme.typography.pxToRem(strPxRem(spacing(1)))
+      marginBottom: typography.pxToRem(strPxRem(spacing(1)))
     },
     symbol: {
       color: green[700]
@@ -41,7 +41,7 @@ const useStyles = makeStyles()(
       display: 'flex',
       alignItems: 'end',
       width: '100%',
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         position: 'absolute',
         top: '3.3rem',
         right: '1.5rem',
@@ -57,9 +57,9 @@ const useStyles = makeStyles()(
       marginLeft: 0,
       marginTop: '2.5rem',
       width: '100%',
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         paddingBottom: '1.45rem',
-        marginLeft: theme.typography.pxToRem(strPxRem(spacing(2))),
+        marginLeft: typography.pxToRem(strPxRem(spacing(2))),
         marginTop: 0
       }
     },
@@ -73,7 +73,7 @@ const useStyles = makeStyles()(
       alignItems: 'center',
       marginTop: '0',
       height: 'auto',
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         marginTop: '31px',
         height: '56px'
       }
@@ -104,11 +104,11 @@ const useStyles = makeStyles()(
     },
     confirmationTitle: {
       marginTop: 0,
-      color: theme.palette.primary.main
+      color: palette.primary.main
     },
     confirmationTitleRed: {
       marginTop: 0,
-      color: theme.palette.error.main
+      color: palette.error.main
     },
     confirmationLoader: {
       marginTop: '1rem',
@@ -120,14 +120,14 @@ const useStyles = makeStyles()(
       width: '100%',
       flexDirection: 'column',
       alignItems: 'center',
-      [theme.breakpoints.up('md')]: {
+      [breakpoints.up('md')]: {
         flexDirection: 'row'
       }
     },
     confirmationSeparator: {
       height: 1,
       border: '0.0625rem solid',
-      borderColor: theme.palette.primary.main
+      borderColor: palette.primary.main
     }
   })
 );

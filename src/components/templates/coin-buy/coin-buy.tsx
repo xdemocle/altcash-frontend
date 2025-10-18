@@ -44,7 +44,7 @@ interface CoinBuyProps {
 }
 
 const CoinBuy: FC<CoinBuyProps> = ({ coin, ticker }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const router = useRouter();
   const { getRound } = useRound();
   const { bitcoinRandPrice } = useGlobal();

@@ -27,7 +27,7 @@ const CardConfirmationOrder: FC<CardConfirmationOrderProps> = ({
   orderReferences,
   hasErrors
 }) => {
-  const classes = useStyles();
+  const { classes } = useStyles();
   const [showPinTooltip, setShowPinTooltip] = useState(false);
   const [showPinAlert, setShowPinAlert] = useState(false);
 
