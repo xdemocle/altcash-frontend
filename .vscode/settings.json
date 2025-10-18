@@ -1,15 +1,31 @@
 {
   "editor.rulers": [100, 120],
-  "eslint.validate": ["javascript"],
-  "files.trimTrailingWhitespace": true,
-  "search.exclude": {
-    "**/node_modules": true
+  "eslint.enable": true,
+  "eslint.codeActionsOnSave.mode": "problems",
+  "eslint.validate": [
+    "typescript",
+    "typescriptreact",
+    "javascript",
+    "javascriptreact"
+  ],
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.sortImports": "always",
+    "source.addMissingImports.ts": "always",
+    "source.fixAll.ts": "always",
+    "source.fixAll.eslint": "never",
+    "source.removeUnusedImports": "never",
+    "source.removeUnusedVariables": "never"
   },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.wordWrap": "off",
-  "editor.autoIndent": "keep",
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  }
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "json.schemas": [
+    {
+      "fileMatch": ["package.json"],
+      "url": "https://www.schemastore.org/schemas/json/package.json"
+    }
+  ]
 }
